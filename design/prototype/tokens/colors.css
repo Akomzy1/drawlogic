@@ -1,0 +1,111 @@
+/* Base palette — values verbatim from the Drawlogic export (DESIGN.md / react/globals.css).
+   Neutrals are warm (red-shifted), which gives the canvas its warm grey tint. */
+:root{
+  --color-white:#ffffff;
+  --color-neutral-lightest:#f2f2f2;
+  --color-neutral-lighter:#dad9d9;
+  --color-neutral-light:#b6b4b4;
+  --color-neutral:#868282;
+  --color-neutral-dark:#555050;
+  --color-neutral-darker:#251e1e;
+  --color-neutral-darkest:#0d0505;
+
+  /* Technical blue — the one action/link accent. */
+  --color-blue-lightest:#e8f3ff;
+  --color-blue-lighter:#d2e8ff;
+  --color-blue-light:#61b1ff;
+  --color-blue:#1e90ff;
+  --color-blue-dark:#1873cc;
+  --color-blue-darker:#0c3966;
+  --color-blue-darkest:#092b4c;
+
+  /* Safety amber — reserved for flags and verify states. */
+  --color-amber-lightest:#fffbe5;
+  --color-amber-lighter:#fff7cc;
+  --color-amber-light:#ffe34c;
+  --color-amber:#ffd700;
+  --color-amber-dark:#ccac00;
+  --color-amber-darker:#665600;
+  --color-amber-darkest:#4c4000;
+
+  --color-teal-lightest:#e8f7f6;
+  --color-teal-lighter:#d2efee;
+  --color-teal-light:#62c9c3;
+  --color-teal:#20b2aa;
+  --color-teal-dark:#198e88;
+  --color-teal-darker:#0c4744;
+  --color-teal-darkest:#093533;
+
+  --color-red-lightest:#fff0f0;
+  --color-red-lighter:#ffe1e1;
+  --color-red-light:#ff9797;
+  --color-red:#ff6b6b;
+  --color-red-dark:#cc5555;
+  --color-red-darker:#662a2a;
+  --color-red-darkest:#4c2020;
+
+  /* Added for the provenance system — the export has no green or violet.
+     Hues chosen to sit with the export's saturation, contrast-checked on the canvas. */
+  --color-green-lightest:#e9f6ee;
+  --color-green-lighter:#cfe9da;
+  --color-green-light:#5cba83;
+  --color-green:#1f9d57;
+  --color-green-dark:#197c45;
+  --color-green-darker:#134d2d;
+  --color-green-darkest:#0d3721;
+
+  --color-violet-lightest:#f1edfd;
+  --color-violet-lighter:#e0d8fa;
+  --color-violet-light:#9b86e8;
+  --color-violet:#6c4fd8;
+  --color-violet-dark:#553cb0;
+  --color-violet-darker:#342369;
+  --color-violet-darkest:#261a4d;
+
+  /* Alphas, from the export's color-mix ramps. */
+  --alpha-ink-5:color-mix(in srgb,var(--color-neutral-darkest),transparent 95%);
+  --alpha-ink-10:color-mix(in srgb,var(--color-neutral-darkest),transparent 90%);
+  --alpha-ink-15:color-mix(in srgb,var(--color-neutral-darkest),transparent 85%);
+  --alpha-ink-20:color-mix(in srgb,var(--color-neutral-darkest),transparent 80%);
+  --alpha-ink-30:color-mix(in srgb,var(--color-neutral-darkest),transparent 70%);
+  --alpha-ink-50:color-mix(in srgb,var(--color-neutral-darkest),transparent 50%);
+  --alpha-white-10:color-mix(in srgb,var(--color-white),transparent 90%);
+  --alpha-white-20:color-mix(in srgb,var(--color-white),transparent 80%);
+  --alpha-white-30:color-mix(in srgb,var(--color-white),transparent 70%);
+  --alpha-white-60:color-mix(in srgb,var(--color-white),transparent 40%);
+}
+
+/* Semantic aliases — use these, not the base palette. */
+:root{
+  --canvas:#faf9f9;                        /* near-white, warm grey tint */
+  --surface:var(--color-white);
+  --surface-sunken:var(--color-neutral-lightest);
+  --surface-tint:var(--color-blue-lightest);
+  --surface-tint-strong:var(--color-blue-lighter);
+  --surface-ink:var(--color-neutral-darkest);
+  --surface-grey:var(--color-neutral-dark);
+
+  --text-primary:var(--color-neutral-darkest);
+  --text-secondary:var(--color-neutral-dark);
+  --text-muted:var(--color-neutral);
+  --text-inverse:var(--color-white);
+  --text-inverse-secondary:var(--alpha-white-60);
+
+  --accent:var(--color-blue);
+  --accent-hover:var(--color-blue-dark);
+  --accent-ink:var(--color-blue-darker);   /* accent as text on light: AA */
+  --accent-quiet:var(--color-blue-lightest);
+
+  --flag:var(--color-amber);
+  --flag-ink:var(--color-amber-darker);    /* amber as text on light: AA */
+  --flag-quiet:var(--color-amber-lightest);
+
+  --border:var(--alpha-ink-15);
+  --border-strong:var(--alpha-ink-30);
+  --border-inverse:var(--alpha-white-20);
+  --divider:var(--alpha-ink-10);
+
+  --link:var(--accent-ink);
+  --link-hover:var(--color-blue);
+  --focus-ring:var(--color-blue);
+}

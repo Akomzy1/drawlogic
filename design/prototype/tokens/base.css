@@ -1,0 +1,22 @@
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--canvas);color:var(--text-primary);font-family:var(--font-sans);font-size:var(--text-body-pro);font-weight:var(--font-weight-regular);line-height:var(--leading-body);font-variant-numeric:var(--numeric-tabular);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-sans);font-weight:var(--font-weight-medium);letter-spacing:var(--tracking-heading);margin:0;text-wrap:balance}
+h1{font-size:var(--text-h1);line-height:var(--leading-tight)}
+h2{font-size:var(--text-h2);line-height:var(--leading-tight)}
+h3{font-size:var(--text-h3);line-height:var(--leading-tight)}
+h4{font-size:var(--text-h4);line-height:var(--leading-heading)}
+h5{font-size:var(--text-h5);line-height:var(--leading-heading)}
+h6{font-size:var(--text-h6);line-height:var(--leading-heading)}
+p{margin:0}
+code,kbd,pre,samp{font-family:var(--font-mono);font-size:0.9em;line-height:var(--leading-mono)}
+a{color:var(--link);text-decoration:underline;text-underline-offset:2px;transition:color var(--duration-base) var(--ease-in-out)}
+a:hover{color:var(--link-hover)}
+:where(.scheme-ink,.scheme-grey) a{color:var(--color-blue-light)}
+:where(.scheme-ink,.scheme-grey) a:hover{color:var(--color-white)}
+button:not(:disabled),[role="button"]:not(:disabled){cursor:pointer}
+:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
+.dl-icon{font-family:var(--font-icon);font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;direction:ltr;font-variation-settings:"FILL" 0,"wght" 300,"GRAD" 0,"opsz" 24;-webkit-font-feature-settings:"liga";-webkit-font-smoothing:antialiased}
+.dl-container{margin-inline:auto;max-width:var(--container-xxl)}
+.dl-section{padding-inline:var(--page-gutter);padding-block:var(--section-y)}
+@media (min-width:768px){.dl-section{padding-block:var(--section-y-md)}}
+@media (min-width:992px){.dl-section{padding-block:var(--section-y-lg)}}

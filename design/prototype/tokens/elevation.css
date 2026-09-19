@@ -1,0 +1,14 @@
+/* The export's cards are outlined, not shadowed — style: "outlined", borderWidth 1px.
+   Shadow is therefore reserved for things that genuinely float over content. */
+:root{
+  --border-width:1px;
+  --border-width-strong:2px;
+  --divider-width:1px;
+
+  --elevation-flat:none;                                  /* cards, panels, reports */
+  --elevation-raised:0 1px 2px var(--alpha-ink-5);        /* hover lift on interactive cards */
+  --elevation-overlay:0 8px 24px var(--alpha-ink-10);     /* dropdown, popover */
+  --elevation-dialog:0 24px 64px var(--alpha-ink-20);     /* dialog only */
+
+  --blur-chrome:10px;   /* export: backdrop-blur-[10px] on secondary buttons + sticky nav */
+}

@@ -1,0 +1,126 @@
+<!-- @dsCard group="App" viewport="1280x900" name="Screen index" subtitle="Every approved screen in the order of the two hero journeys, with the fidelity note. The binding entry point for the build." -->
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Drawlogic — Screen index</title>
+<link rel="stylesheet" href="../styles.css">
+<style>
+body{background:var(--canvas);color:var(--text-primary);font-size:var(--text-regular)}
+a{color:var(--link)}a:hover{color:var(--link-hover)}
+.wrap{max-width:64rem;margin-inline:auto;padding:var(--space-8) 5% var(--space-16);display:grid;gap:var(--space-8)}
+.mono{font-family:var(--font-mono);font-size:var(--text-tiny);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--text-muted)}
+/* Masthead */
+.mast{display:grid;gap:var(--space-3)}
+.mast .brand{display:flex;align-items:center;gap:var(--space-3)}
+.mast h1{font-size:var(--text-h2);font-weight:var(--font-weight-medium);line-height:var(--leading-tight);letter-spacing:var(--tracking-heading);margin:0}
+.mast p{margin:0;font-size:var(--text-medium);color:var(--text-secondary);max-width:46rem;text-wrap:pretty}
+/* Fidelity note — the binding statement, drawn as a record not a banner */
+.fidelity{display:grid;grid-template-columns:1.25rem minmax(0,1fr);gap:var(--space-2) var(--space-3);padding:var(--space-4) var(--space-5);background:var(--surface-ink);color:var(--color-white);border-radius:var(--radius-drawing)}
+.fidelity .g{font-family:var(--font-mono);text-align:center;line-height:1.5}
+.fidelity p{margin:0;font-size:var(--text-medium);font-weight:var(--font-weight-medium);line-height:var(--leading-snug);text-wrap:pretty}
+.fidelity small{display:block;margin-top:var(--space-2);font-family:var(--font-mono);font-size:var(--text-tiny);line-height:1.6;color:var(--color-neutral-lighter);text-transform:none;letter-spacing:0}
+/* Journey */
+.journey{display:grid;gap:var(--space-5)}
+.jhead{display:grid;gap:var(--space-2);padding-bottom:var(--space-3);border-bottom:var(--stroke-medium) solid var(--border-strong)}
+.jhead .row{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--space-2) var(--space-4)}
+.jhead h2{font-size:var(--text-h4);font-weight:var(--font-weight-medium);line-height:var(--leading-snug);margin:0}
+.jhead .tag{font-family:var(--font-mono);font-size:var(--text-tiny);letter-spacing:var(--tracking-label);text-transform:uppercase;padding:0.125rem 0.5rem;border:var(--stroke-thin) solid var(--border-strong);border-radius:var(--radius-drawing);color:var(--text-secondary)}
+.jhead p{margin:0;font-size:var(--text-small);color:var(--text-secondary);max-width:46rem;text-wrap:pretty}
+/* Steps */
+.steps{margin:0;padding:0;list-style:none;display:grid;gap:var(--space-3);counter-reset:s}
+.steps>li{counter-increment:s}
+.step{display:grid;grid-template-columns:2.25rem minmax(0,1fr) auto;gap:var(--space-3) var(--space-4);align-items:start;padding:var(--space-4);background:var(--surface);border:var(--border-width) solid var(--border);border-radius:var(--radius-form);text-decoration:none;color:inherit;transition:border-color var(--duration-fast),background var(--duration-fast)}
+.step:hover{border-color:var(--border-strong);background:var(--alpha-ink-5);color:inherit}
+.step .n{font-family:var(--font-mono);font-size:var(--text-small);color:var(--text-muted);padding-top:0.125rem}
+.step .n::before{content:counter(s,decimal-leading-zero)}
+.step .t{min-width:0;display:grid;gap:0.25rem}
+.step .t b{font-size:var(--text-medium);font-weight:var(--font-weight-medium);line-height:var(--leading-snug)}
+.step .t span{font-size:var(--text-small);line-height:var(--leading-snug);color:var(--text-secondary);text-wrap:pretty}
+.step .t code{font-family:var(--font-mono);font-size:var(--text-tiny);color:var(--text-muted)}
+.step .go{font-family:var(--font-mono);font-size:var(--text-tiny);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--text-muted);white-space:nowrap;padding-top:0.25rem}
+.step:hover .go{color:var(--accent-ink)}
+/* Supporting screens */
+.support{display:grid;gap:var(--space-4)}
+.support h2{font-size:var(--text-h5);font-weight:var(--font-weight-medium);margin:0}
+.support ul{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:var(--space-2)}
+.support a{display:flex;align-items:baseline;gap:var(--space-2);padding:var(--space-3);border:var(--border-width) solid var(--border);border-radius:var(--radius-form);background:var(--surface);text-decoration:none;color:inherit;font-size:var(--text-small)}
+.support a:hover{border-color:var(--border-strong);background:var(--alpha-ink-5);color:inherit}
+.support a i{font-style:normal;font-family:var(--font-mono);font-size:var(--text-tiny);color:var(--text-muted)}
+/* Footer */
+.foot{padding-top:var(--space-5);border-top:var(--border-width) solid var(--border);display:grid;gap:var(--space-2)}
+.foot p{margin:0;font-size:var(--text-small);line-height:var(--leading-snug);color:var(--text-secondary);max-width:46rem;text-wrap:pretty}
+@media (max-width:40rem){.step{grid-template-columns:1.75rem minmax(0,1fr)}.step .go{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="mast">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><line x1="2" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1"></line><line x1="16" y1="2" x2="16" y2="30" stroke="currentColor" stroke-width="1"></line><circle cx="16" cy="16" r="7" fill="none" stroke="currentColor" stroke-width="1.5"></circle></svg>
+      <span class="mono">Drawlogic · screen index</span>
+    </div>
+    <h1>Every screen, in journey order</h1>
+    <p>Two hero journeys run end to end. Each step below opens the approved screen for that step.</p>
+  </header>
+
+  <div class="fidelity">
+    <span class="g" aria-hidden="true">⚠</span>
+    <p>These screens are the binding source of truth for the Drawlogic build. Structural and visual decisions here are approved, not open choices.
+      <small>Deviations need a decision recorded before they are built. Where a screen and a written spec disagree, the screen wins.</small>
+    </p>
+  </div>
+
+  <section class="journey" aria-labelledby="ja">
+    <div class="jhead">
+      <div class="row">
+        <span class="tag">Journey A</span>
+        <h2 id="ja">Idea to a signed, rendered drawing</h2>
+      </div>
+      <p>The full arc: anyone can start, only a professional can issue. Nine screens, no shortcut past the signing gate.</p>
+    </div>
+    <ol class="steps">
+      <li><a class="step" href="app/idea-home.html"><span class="n" aria-hidden="true"></span><span class="t"><b>Idea home</b><span>The prompt box as the hero, in everyday words.</span><code>app/idea-home.html</code></span><span class="go">Open →</span></a></li>
+      <li><a class="step" href="app/idea-results.html"><span class="n" aria-hidden="true"></span><span class="t"><b>Idea results</b><span>Three options labelled by what differs, under the CONCEPT — NOT FOR CONSTRUCTION watermark.</span><code>app/idea-results.html</code></span><span class="go">Open →</span></a></li>
+      <li><a class="step" href="app/promote.html"><span class="n" aria-hidden="true"></span><span class="t"><b>Promote to Draft</b><span>The handover dialog. Confirm &amp; generate stays disabled until the gaps are filled.</span><code>app/promote.html</code></span><span class="go">Open →</span></a></li>
+      <li><a class="step" href="app/promote.html#icard"><span class="n" aria-hidden="true"></span><span class="t"><b>Interpretation card</b><span>What was read, what was assumed, what is missing — before anything is drawn.</span><code>app/promote.html · card, full width</code></span><span class="go">Open →</span></a></li>
+      <li><a class="step" href="app/draft-workspace.html"><span class="n" aria-hidden="true"></span><span class="t"><b>Draft workspace</b><span>Instruction history with per-change Undo; the live 1:10 detail with the provenance layer.</span><code>app/draft-workspace.html</code></span><span class="go">Open →</span></a></li>
+      <li><a class="step" href="app/check-panel.html"><span class="n" aria-hidden="true"></span><span class="t"><b>Standards Report panel</b><span>41 checks grouped by category, three flags with a reason and an auto-fix, and the checks not performed.</span><code>app/check-panel.html</code></span><span class="go">Open →</span></a></li>
+      <li><a class="step" href="app/export.html"><span class="n" aria-hidden="true"></span><span class="t"><b>Export dialog</b><span>Format and title-block choice, with the A1 sheet previewed as it will issue.</span><code>app/export.html</code></span><span class="go">Open →</span></a></li>
+      <li><a class="step" href="app/sign.html"><span class="n" aria-hidden="true"></span><span class="t"><b>Signer's view</b><span>The signing gate: four conditions, then a second factor. UNSIGNED until all four clear.</span><code>app/sign.html</code></span><span class="go">Open →</span></a></li>
+      <li><a class="step" href="app/render.html"><span class="n" aria-hidden="true"></span><span class="t"><b>Render Studio</b><span>Drawing to built view, the same hash carried on both.</span><code>app/render.html</code></span><span class="go">Open →</span></a></li>
+      <li><a class="step" href="app/preview-video.html"><span class="n" aria-hidden="true"></span><span class="t"><b>Preview video</b><span>Still, move, clip — labelled a generated preview, with its source hash and the model that made it.</span><code>app/preview-video.html</code></span><span class="go">Open →</span></a></li>
+    </ol>
+  </section>
+
+  <section class="journey" aria-labelledby="jb">
+    <div class="jhead">
+      <div class="row">
+        <span class="tag">Journey B</span>
+        <h2 id="jb">Developer: a plot to a registered professional</h2>
+      </div>
+      <p>The self-serve door for a developer who owns land and needs a submission. Three screens, ending at what a local authority actually requires.</p>
+    </div>
+    <ol class="steps">
+      <li><a class="step" href="app/idea-site.html"><span class="n" aria-hidden="true"></span><span class="t"><b>Idea site plan</b><span>Idea mode on a real plot: traced boundary, terrain section, setbacks read from the profile.</span><code>app/idea-site.html</code></span><span class="go">Open →</span></a></li>
+      <li><a class="step" href="app/signers.html"><span class="n" aria-hidden="true"></span><span class="t"><b>Find a signer</b><span>Filter by jurisdiction and discipline, then the request panel — scope, fee, sent in Draft mode.</span><code>app/signers.html</code></span><span class="go">Open →</span></a></li>
+      <li><a class="step" href="app/lagos-readiness.html"><span class="n" aria-hidden="true"></span><span class="t"><b>Lagos readiness</b><span>The EPPPS checklist as a ledger, with the statutory seal kept separate from the verification record.</span><code>app/lagos-readiness.html</code></span><span class="go">Open →</span></a></li>
+    </ol>
+  </section>
+
+  <section class="support">
+    <h2>Supporting screens</h2>
+    <ul>
+      <li><a href="app/shell.html"><span>App shell</span><i>frame</i></a></li>
+      <li><a href="app/profiles.html"><span>Profiles</span><i>browse + author</i></a></li>
+      <li><a href="app/settings.html"><span>Settings</span><i>5 sections</i></a></li>
+      <li><a href="website/index.html"><span>Marketing site</span><i>11 pages</i></a></li>
+    </ul>
+  </section>
+
+  <footer class="foot">
+    <p>This is an automated design-rule check. It is not a statement of legal compliance.</p>
+    <p>Your drawings are never used for training.</p>
+  </footer>
+
+</div>
+</body></html>
