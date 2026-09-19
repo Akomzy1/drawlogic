@@ -1,0 +1,376 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&display=block");
+/* Drawlogic design tokens — flattened from styles.css + tokens/*.css. Fonts live in ./fonts/. */
+
+/* ---- fonts ---- */
+/* Source Sans 3 — bundled woff2 from the Drawlogic export (fonts/).
+   IBM Plex Mono + Material Symbols Outlined — CDN substitutions, see readme.md > SUBSTITUTIONS. */
+
+@font-face{font-family:"Source Sans 3";font-style:normal;font-weight:300;font-display:swap;src:url("fonts/source-sans-3-300.woff2") format("woff2")}
+@font-face{font-family:"Source Sans 3";font-style:normal;font-weight:400;font-display:swap;src:url("fonts/source-sans-3-400.woff2") format("woff2")}
+@font-face{font-family:"Source Sans 3";font-style:normal;font-weight:500;font-display:swap;src:url("fonts/source-sans-3-500.woff2") format("woff2")}
+@font-face{font-family:"Source Sans 3";font-style:normal;font-weight:600;font-display:swap;src:url("fonts/source-sans-3-600.woff2") format("woff2")}
+@font-face{font-family:"Source Sans 3";font-style:normal;font-weight:700;font-display:swap;src:url("fonts/source-sans-3-700.woff2") format("woff2")}
+
+/* ---- colors ---- */
+/* Base palette — values verbatim from the Drawlogic export (DESIGN.md / react/globals.css).
+   Neutrals are warm (red-shifted), which gives the canvas its warm grey tint. */
+:root{
+  --color-white:#ffffff;
+  --color-neutral-lightest:#f2f2f2;
+  --color-neutral-lighter:#dad9d9;
+  --color-neutral-light:#b6b4b4;
+  --color-neutral:#868282;
+  --color-neutral-dark:#555050;
+  --color-neutral-darker:#251e1e;
+  --color-neutral-darkest:#0d0505;
+
+  /* Technical blue — the one action/link accent. */
+  --color-blue-lightest:#e8f3ff;
+  --color-blue-lighter:#d2e8ff;
+  --color-blue-light:#61b1ff;
+  --color-blue:#1e90ff;
+  --color-blue-dark:#1873cc;
+  --color-blue-darker:#0c3966;
+  --color-blue-darkest:#092b4c;
+
+  /* Safety amber — reserved for flags and verify states. */
+  --color-amber-lightest:#fffbe5;
+  --color-amber-lighter:#fff7cc;
+  --color-amber-light:#ffe34c;
+  --color-amber:#ffd700;
+  --color-amber-dark:#ccac00;
+  --color-amber-darker:#665600;
+  --color-amber-darkest:#4c4000;
+
+  --color-teal-lightest:#e8f7f6;
+  --color-teal-lighter:#d2efee;
+  --color-teal-light:#62c9c3;
+  --color-teal:#20b2aa;
+  --color-teal-dark:#198e88;
+  --color-teal-darker:#0c4744;
+  --color-teal-darkest:#093533;
+
+  --color-red-lightest:#fff0f0;
+  --color-red-lighter:#ffe1e1;
+  --color-red-light:#ff9797;
+  --color-red:#ff6b6b;
+  --color-red-dark:#cc5555;
+  --color-red-darker:#662a2a;
+  --color-red-darkest:#4c2020;
+
+  /* Added for the provenance system — the export has no green or violet.
+     Hues chosen to sit with the export's saturation, contrast-checked on the canvas. */
+  --color-green-lightest:#e9f6ee;
+  --color-green-lighter:#cfe9da;
+  --color-green-light:#5cba83;
+  --color-green:#1f9d57;
+  --color-green-dark:#197c45;
+  --color-green-darker:#134d2d;
+  --color-green-darkest:#0d3721;
+
+  --color-violet-lightest:#f1edfd;
+  --color-violet-lighter:#e0d8fa;
+  --color-violet-light:#9b86e8;
+  --color-violet:#6c4fd8;
+  --color-violet-dark:#553cb0;
+  --color-violet-darker:#342369;
+  --color-violet-darkest:#261a4d;
+
+  /* Alphas, from the export's color-mix ramps. */
+  --alpha-ink-5:color-mix(in srgb,var(--color-neutral-darkest),transparent 95%);
+  --alpha-ink-10:color-mix(in srgb,var(--color-neutral-darkest),transparent 90%);
+  --alpha-ink-15:color-mix(in srgb,var(--color-neutral-darkest),transparent 85%);
+  --alpha-ink-20:color-mix(in srgb,var(--color-neutral-darkest),transparent 80%);
+  --alpha-ink-30:color-mix(in srgb,var(--color-neutral-darkest),transparent 70%);
+  --alpha-ink-50:color-mix(in srgb,var(--color-neutral-darkest),transparent 50%);
+  --alpha-white-10:color-mix(in srgb,var(--color-white),transparent 90%);
+  --alpha-white-20:color-mix(in srgb,var(--color-white),transparent 80%);
+  --alpha-white-30:color-mix(in srgb,var(--color-white),transparent 70%);
+  --alpha-white-60:color-mix(in srgb,var(--color-white),transparent 40%);
+}
+
+/* Semantic aliases — use these, not the base palette. */
+:root{
+  --canvas:#faf9f9;                        /* near-white, warm grey tint */
+  --surface:var(--color-white);
+  --surface-sunken:var(--color-neutral-lightest);
+  --surface-tint:var(--color-blue-lightest);
+  --surface-tint-strong:var(--color-blue-lighter);
+  --surface-ink:var(--color-neutral-darkest);
+  --surface-grey:var(--color-neutral-dark);
+
+  --text-primary:var(--color-neutral-darkest);
+  --text-secondary:var(--color-neutral-dark);
+  --text-muted:var(--color-neutral);
+  --text-inverse:var(--color-white);
+  --text-inverse-secondary:var(--alpha-white-60);
+
+  --accent:var(--color-blue);
+  --accent-hover:var(--color-blue-dark);
+  --accent-ink:var(--color-blue-darker);   /* accent as text on light: AA */
+  --accent-quiet:var(--color-blue-lightest);
+
+  --flag:var(--color-amber);
+  --flag-ink:var(--color-amber-darker);    /* amber as text on light: AA */
+  --flag-quiet:var(--color-amber-lightest);
+
+  --border:var(--alpha-ink-15);
+  --border-strong:var(--alpha-ink-30);
+  --border-inverse:var(--alpha-white-20);
+  --divider:var(--alpha-ink-10);
+
+  --link:var(--accent-ink);
+  --link-hover:var(--color-blue);
+  --focus-ring:var(--color-blue);
+}
+
+/* ---- provenance ---- */
+/* PROVENANCE COLOUR SYSTEM — the brand's signature.
+   Six sources, six hues, fixed meaning. Never carries meaning alone:
+   always paired with a label, and with the ⚠ glyph on flag/verify states.
+   Each source gets three roles:
+     -fill  the chip/line colour (swatches, drawn elements, 3px rails)
+     -quiet the tint background behind a chip or row
+     -ink   the text colour, AA on --canvas and on -quiet */
+:root{
+  --prov-user-fill:var(--color-green);
+  --prov-user-quiet:var(--color-green-lightest);
+  --prov-user-ink:var(--color-green-darker);
+
+  --prov-project-fill:var(--color-blue);
+  --prov-project-quiet:var(--color-blue-lightest);
+  --prov-project-ink:var(--color-blue-darker);
+
+  --prov-reference-fill:var(--color-violet);
+  --prov-reference-quiet:var(--color-violet-lightest);
+  --prov-reference-ink:var(--color-violet-darker);
+
+  --prov-inferred-fill:var(--color-amber);
+  --prov-inferred-quiet:var(--color-amber-lightest);
+  --prov-inferred-ink:var(--color-amber-darker);
+
+  --prov-verify-fill:var(--color-red);
+  --prov-verify-quiet:var(--color-red-lightest);
+  --prov-verify-ink:var(--color-red-darker);
+
+  --prov-autofix-fill:var(--color-teal);
+  --prov-autofix-quiet:var(--color-teal-lightest);
+  --prov-autofix-ink:var(--color-teal-darker);
+}
+
+/* ---- typography ---- */
+/* Sizes verbatim from the export (react/globals.css), except the two mobile
+   body sizes raised to meet the brand note's 16px body minimum — see readme.md. */
+:root{
+  --font-sans:"Source Sans 3",-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --font-icon:"Material Symbols Outlined";
+
+  --font-weight-light:300;
+  --font-weight-regular:400;
+  --font-weight-medium:500;   /* headline weight — never heavier */
+  --font-weight-semibold:600;
+  --font-weight-bold:700;     /* mono stamp labels only */
+
+  --text-h1:2.75rem;
+  --text-h2:2.5rem;
+  --text-h3:2rem;
+  --text-h4:1.5rem;
+  --text-h5:1.25rem;
+  --text-h6:1.125rem;
+  --text-large:1.125rem;
+  --text-medium:1rem;
+  --text-regular:1rem;        /* export: 0.75rem — raised to the 16px floor */
+  --text-small:0.875rem;      /* export: 0.75rem — raised */
+  --text-tiny:0.75rem;        /* labels and units only, never prose */
+
+  --leading-tight:1.2;        /* h1–h3 */
+  --leading-snug:1.3;
+  --leading-heading:1.4;      /* h4–h6 */
+  --leading-body:1.6;
+  --leading-mono:1.5;
+
+  --tracking-heading:0.01em;  /* export: letter-spacing 1% */
+  --tracking-label:0.06em;    /* eyebrow / mono labels, uppercase */
+  --tracking-mono:0;
+
+  /* Two body scales. Idea-mode pages run one step larger than professional pages. */
+  --text-body-idea:var(--text-large);
+  --text-body-pro:var(--text-medium);
+
+  /* Numbers are content: mm, m², %, £/$/₦ all set with tabular figures. */
+  --numeric-tabular:tabular-nums; /* @kind other */
+}
+@media (min-width:992px){
+  :root{
+    --text-h1:4.5rem;
+    --text-h2:3.25rem;
+    --text-h3:2.75rem;
+    --text-h4:2.25rem;
+    --text-h5:1.75rem;
+    --text-h6:1.375rem;
+    --text-large:1.375rem;
+    --text-medium:1.125rem;
+    --text-regular:1rem;
+    --text-small:0.875rem;
+    --text-tiny:0.75rem;
+  }
+}
+
+/* ---- spacing ---- */
+:root{
+  --space-1:0.25rem;
+  --space-2:0.5rem;
+  --space-3:0.75rem;
+  --space-4:1rem;
+  --space-5:1.25rem;
+  --space-6:1.5rem;
+  --space-8:2rem;
+  --space-10:2.5rem;
+  --space-12:3rem;
+  --space-16:4rem;
+  --space-18:4.5rem;   /* export: --spacing-18 */
+  --space-20:5rem;
+  --space-24:6rem;
+  --space-28:7rem;
+  --space-30:7.5rem;   /* export: --spacing-30 */
+
+  /* Section rhythm: the export's py-16 / md:py-24 / lg:py-28 with px-[5%] gutters. */
+  --section-y:var(--space-16);
+  --section-y-md:var(--space-24);
+  --section-y-lg:var(--space-28);
+  --page-gutter:5%;
+
+  --container-xxs:20rem;
+  --container-xs:25rem;
+  --container-sm:30rem;
+  --container-md:35rem;
+  --container-lg:48rem;
+  --container-xl:64rem;
+  --container-xxl:80rem;   /* page container */
+
+  --breakpoint-sm:480px;
+  --breakpoint-md:768px;
+  --breakpoint-lg:992px;
+
+  --hit-min:44px;          /* minimum touch target */
+}
+
+/* ---- radius ---- */
+/* Radii verbatim from the export. Two families coexist by design:
+   marketing chrome is soft (pill buttons, 16px cards); anything that
+   represents a drawing, stamp, report or code block is square-cornered. */
+:root{
+  --radius-button:6.25rem;
+  --radius-badge:6.25rem;
+  --radius-tag:6.25rem;
+  --radius-card:1rem;
+  --radius-image:1rem;
+  --radius-form:0.75rem;      /* export: min(6.25rem, 0.75rem) */
+  --radius-checkbox:0.25rem;
+  --radius-carousel:6.25rem;
+
+  /* Drawing-native surfaces. */
+  --radius-drawing:2px;       /* stamp, report, title block, code block, chip on a drawing */
+  --radius-none:0;
+}
+
+/* ---- elevation ---- */
+/* The export's cards are outlined, not shadowed — style: "outlined", borderWidth 1px.
+   Shadow is therefore reserved for things that genuinely float over content. */
+:root{
+  --border-width:1px;
+  --border-width-strong:2px;
+  --divider-width:1px;
+
+  --elevation-flat:none;                                  /* cards, panels, reports */
+  --elevation-raised:0 1px 2px var(--alpha-ink-5);        /* hover lift on interactive cards */
+  --elevation-overlay:0 8px 24px var(--alpha-ink-10);     /* dropdown, popover */
+  --elevation-dialog:0 24px 64px var(--alpha-ink-20);     /* dialog only */
+
+  --blur-chrome:10px;   /* export: backdrop-blur-[10px] on secondary buttons + sticky nav */
+}
+
+/* ---- motion ---- */
+/* Minimal motion. One hero interaction per page at most; no parallax, no bounce. */
+:root{
+  --ease-standard:cubic-bezier(0.4,0,0.2,1); /* @kind other */
+  --ease-out:ease-out; /* @kind other */
+  --ease-in-out:ease-in-out; /* @kind other */
+
+  --duration-fast:120ms; /* @kind other */
+  --duration-base:200ms; /* @kind other */   /* export: button transition-all duration-200 ease-in-out */
+  --duration-panel:300ms; /* @kind other */  /* dropdown / accordion */
+  --duration-reveal:600ms; /* @kind other */ /* export: tabs 0.6s var(--ease-standard) */
+
+  --transition-control:all var(--duration-base) var(--ease-in-out);
+  --transition-reveal:opacity var(--duration-reveal) var(--ease-standard);
+}
+@media (prefers-reduced-motion:reduce){
+  :root{--duration-fast:0ms /* @kind other */;--duration-base:0ms /* @kind other */;--duration-panel:0ms /* @kind other */;--duration-reveal:0ms /* @kind other */}
+}
+
+/* ---- drawing ---- */
+/* DRAWING-NATIVE FOUNDATIONS
+   The illustration language is the technical drawing itself: thin lines,
+   dimension ticks, section hatching, revision marks, title blocks.
+   Added by the brand note — the export has no equivalent. */
+:root{
+  --drawing-paper:var(--color-white);
+  --drawing-ink:var(--color-neutral-darker);
+  --drawing-ink-faint:var(--color-neutral-light);
+
+  /* Line weights, the way a drawing set uses them. */
+  --stroke-fine:0.5px;      /* hatching, grid, hidden detail */
+  --stroke-thin:1px;        /* dimension lines, leaders, chip rules */
+  --stroke-medium:1.5px;    /* visible edges, outlines */
+  --stroke-heavy:2.5px;     /* cut line, section profile */
+
+  --drawing-grid:12px;      /* pitch of the paper grid */
+  --drawing-grid-color:var(--alpha-ink-10);
+  --drawing-tick:6px;       /* dimension tick length */
+
+  /* Backgrounds. Apply on drawing frames, never on prose sections. */
+  --pattern-grid:repeating-linear-gradient(to right,var(--drawing-grid-color) 0 var(--stroke-fine),transparent var(--stroke-fine) var(--drawing-grid)),repeating-linear-gradient(to bottom,var(--drawing-grid-color) 0 var(--stroke-fine),transparent var(--stroke-fine) var(--drawing-grid));
+  --pattern-hatch:repeating-linear-gradient(45deg,var(--alpha-ink-20) 0 var(--stroke-fine),transparent var(--stroke-fine) 5px);
+  --pattern-hatch-dense:repeating-linear-gradient(45deg,var(--alpha-ink-30) 0 1px,transparent 1px 3px);
+
+  --concept-watermark-color:var(--alpha-ink-20);
+  --concept-watermark-angle:-24deg; /* @kind other */
+}
+
+/* ---- schemes ---- */
+/* Section colour schemes. The export ships four backgrounds; these are the same
+   four, named by what they mean and re-ordered light-first per the brand note
+   ("light neutral canvas, generous whitespace"). Legacy mapping in readme.md.
+   Use at most two schemes per page besides the canvas. */
+.scheme-canvas{--scheme-bg:var(--canvas);--scheme-text:var(--text-primary);--scheme-text-secondary:var(--text-secondary);--scheme-border:var(--border);--scheme-surface:var(--surface);background-color:var(--scheme-bg);color:var(--scheme-text)}
+.scheme-tint{--scheme-bg:var(--surface-tint);--scheme-text:var(--text-primary);--scheme-text-secondary:var(--text-secondary);--scheme-border:var(--border);--scheme-surface:var(--surface);background-color:var(--scheme-bg);color:var(--scheme-text)}
+.scheme-tint-strong{--scheme-bg:var(--surface-tint-strong);--scheme-text:var(--text-primary);--scheme-text-secondary:var(--text-secondary);--scheme-border:var(--border);--scheme-surface:var(--surface);background-color:var(--scheme-bg);color:var(--scheme-text)}
+.scheme-ink{--scheme-bg:var(--surface-ink);--scheme-text:var(--text-inverse);--scheme-text-secondary:var(--text-inverse-secondary);--scheme-border:var(--border-inverse);--scheme-surface:var(--color-neutral-darker);background-color:var(--scheme-bg);color:var(--scheme-text)}
+.scheme-grey{--scheme-bg:var(--surface-grey);--scheme-text:var(--text-inverse);--scheme-text-secondary:var(--alpha-white-60);--scheme-border:var(--border-inverse);--scheme-surface:var(--color-neutral-darker);background-color:var(--scheme-bg);color:var(--scheme-text)}
+
+/* ---- base ---- */
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--canvas);color:var(--text-primary);font-family:var(--font-sans);font-size:var(--text-body-pro);font-weight:var(--font-weight-regular);line-height:var(--leading-body);font-variant-numeric:var(--numeric-tabular);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-sans);font-weight:var(--font-weight-medium);letter-spacing:var(--tracking-heading);margin:0;text-wrap:balance}
+h1{font-size:var(--text-h1);line-height:var(--leading-tight)}
+h2{font-size:var(--text-h2);line-height:var(--leading-tight)}
+h3{font-size:var(--text-h3);line-height:var(--leading-tight)}
+h4{font-size:var(--text-h4);line-height:var(--leading-heading)}
+h5{font-size:var(--text-h5);line-height:var(--leading-heading)}
+h6{font-size:var(--text-h6);line-height:var(--leading-heading)}
+p{margin:0}
+code,kbd,pre,samp{font-family:var(--font-mono);font-size:0.9em;line-height:var(--leading-mono)}
+a{color:var(--link);text-decoration:underline;text-underline-offset:2px;transition:color var(--duration-base) var(--ease-in-out)}
+a:hover{color:var(--link-hover)}
+:where(.scheme-ink,.scheme-grey) a{color:var(--color-blue-light)}
+:where(.scheme-ink,.scheme-grey) a:hover{color:var(--color-white)}
+button:not(:disabled),[role="button"]:not(:disabled){cursor:pointer}
+:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
+.dl-icon{font-family:var(--font-icon);font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;direction:ltr;font-variation-settings:"FILL" 0,"wght" 300,"GRAD" 0,"opsz" 24;-webkit-font-feature-settings:"liga";-webkit-font-smoothing:antialiased}
+.dl-container{margin-inline:auto;max-width:var(--container-xxl)}
+.dl-section{padding-inline:var(--page-gutter);padding-block:var(--section-y)}
+@media (min-width:768px){.dl-section{padding-block:var(--section-y-md)}}
+@media (min-width:992px){.dl-section{padding-block:var(--section-y-lg)}}

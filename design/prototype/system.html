@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Drawlogic — System</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+body{font-size:var(--text-regular)}
+a{color:var(--link)}a:hover{color:var(--link-hover)}
+.wrap{display:grid;grid-template-columns:12rem minmax(0,1fr);gap:var(--space-8);max-width:80rem;margin-inline:auto;padding:var(--space-8) 4% var(--space-16)}
+.toc{position:sticky;top:var(--space-8);align-self:start;display:grid;gap:var(--space-1);font-size:var(--text-small)}
+.toc a{display:flex;gap:var(--space-2);padding:0.375rem 0.5rem;border-radius:var(--radius-checkbox);color:var(--text-secondary);text-decoration:none}
+.toc a:hover{background:var(--alpha-ink-5);color:var(--text-primary)}
+.toc a .n{font-family:var(--font-mono);font-size:var(--text-tiny);color:var(--text-muted);width:1.25rem}
+.toc .k{font-size:var(--text-tiny);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--text-muted);font-weight:600;padding:0 0.5rem;margin-bottom:var(--space-2)}
+main{display:grid;gap:var(--space-12);min-width:0}
+.mono{font-family:var(--font-mono);font-size:var(--text-tiny);color:var(--text-muted)}
+.lbl{font-size:var(--text-tiny);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--text-secondary);font-weight:600}
+.mast{display:grid;gap:var(--space-4);padding-bottom:var(--space-8);border-bottom:var(--stroke-medium) solid var(--border-strong)}
+.mast h1{font-size:var(--text-h2);font-weight:500;line-height:1.15}
+.mast p{max-width:46rem;color:var(--text-secondary);font-size:var(--text-medium)}
+.mast .brand{display:flex;align-items:center;gap:0.5rem;font-weight:500;font-size:1.25rem;letter-spacing:-0.01em}
+.read{display:grid;grid-template-columns:1.25rem minmax(0,1fr);gap:var(--space-3);padding:var(--space-4) var(--space-5);border:var(--stroke-medium) solid var(--border-strong);border-radius:var(--radius-drawing);background:var(--surface);max-width:46rem;font-size:var(--text-small);color:var(--text-secondary)}
+.read .g{font-family:var(--font-mono);color:var(--text-primary);text-align:center}
+.read b{color:var(--text-primary);font-weight:600}
+.cmp{display:grid;gap:var(--space-5);scroll-margin-top:var(--space-6)}
+.cmp header{display:grid;gap:var(--space-2);padding-bottom:var(--space-3);border-bottom:var(--border-width) solid var(--border-strong)}
+.cmp h2{font-size:var(--text-h4);font-weight:500;display:flex;align-items:baseline;gap:var(--space-3)}
+.cmp h2 .n{font-family:var(--font-mono);font-size:var(--text-small);color:var(--text-muted);font-weight:400}
+.cmp header p{color:var(--text-secondary);max-width:46rem}
+.used{display:flex;flex-wrap:wrap;gap:0.375rem var(--space-3);font-family:var(--font-mono);font-size:var(--text-tiny);color:var(--text-muted)}
+.used span::before{content:"· "}.used span:first-child::before{content:"Used on · "}
+.states{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,14rem),1fr));gap:var(--space-4)}
+.states.wide{grid-template-columns:repeat(auto-fill,minmax(min(100%,20rem),1fr))}
+.states.one{grid-template-columns:minmax(0,1fr)}
+.st{display:grid;grid-template-rows:auto minmax(0,1fr);gap:var(--space-3);padding:var(--space-4);background:var(--surface);border:var(--border-width) solid var(--border);border-radius:var(--radius-drawing);min-width:0}
+.st.ink{background:var(--surface-ink);color:var(--text-inverse);border-color:var(--surface-ink)}
+.st.ink .lb{color:var(--alpha-white-60)}
+.st.paper{background:var(--drawing-paper) var(--pattern-grid)}
+.st .lb{font-family:var(--font-mono);font-size:var(--text-tiny);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--text-muted);display:flex;justify-content:space-between;gap:var(--space-2)}
+.st .lb i{font-style:normal;text-transform:none;letter-spacing:0;color:var(--text-muted)}
+.st .demo{display:flex;flex-wrap:wrap;gap:var(--space-3);align-items:center;align-content:start;min-width:0}
+.st .demo.col{flex-direction:column;align-items:stretch}
+.rules{display:grid;gap:var(--space-2);margin:0;padding:0;list-style:none;font-size:var(--text-small);color:var(--text-secondary);max-width:46rem}
+.rules li{display:grid;grid-template-columns:1.25rem minmax(0,1fr);gap:var(--space-2)}
+.rules li::before{content:"—";font-family:var(--font-mono);color:var(--text-muted)}
+.rules li.no::before{content:"✕";color:var(--prov-verify-ink)}
+.rules li.yes::before{content:"✓";color:var(--prov-user-ink)}
+.decide{display:grid;grid-template-columns:1.25rem minmax(0,1fr);gap:var(--space-3);padding:var(--space-4) var(--space-5);border:var(--stroke-thin) solid var(--flag);background:var(--flag-quiet);border-radius:var(--radius-drawing);font-size:var(--text-small);max-width:46rem}
+.decide .g{color:var(--flag-ink);font-family:var(--font-mono)}
+.decide b{font-weight:600}
+/* ---- 1 Button ---- */
+.btn{display:inline-flex;align-items:center;gap:var(--space-2);min-height:2.5rem;padding:0 1.125rem;border:var(--border-width) solid var(--border-strong);border-radius:var(--radius-button);background:var(--surface);color:var(--text-primary);font:inherit;font-size:var(--text-small);font-weight:var(--font-weight-medium);cursor:pointer;text-decoration:none;white-space:nowrap;transition:var(--transition-control)}
+.btn:hover,.btn.is-hover{background:var(--alpha-ink-5)}
+.btn.is-focus{outline:2px solid var(--focus-ring);outline-offset:2px}
+.btn .dl-icon{font-size:1.125rem;color:var(--text-secondary)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--color-white)}
+.btn.primary:hover,.btn.primary.is-hover{background:var(--accent-hover);border-color:var(--accent-hover)}
+.btn.primary .dl-icon{color:currentColor}
+.btn.ghost{border-color:transparent;color:var(--text-secondary)}
+.btn.inverse{background:var(--alpha-white-10);border-color:var(--border-inverse);color:var(--color-white)}
+.btn.inverse:hover,.btn.inverse.is-hover{background:var(--color-neutral-lighter);color:var(--text-primary);border-color:var(--color-neutral-lighter)}
+.btn.sm{min-height:2rem;padding:0 0.875rem;font-size:var(--text-tiny)}
+.btn[disabled],.btn[aria-disabled="true"]{opacity:0.5;pointer-events:none}
+.btn.loading{position:relative;color:transparent;pointer-events:none}
+.btn.loading::after{content:"";position:absolute;left:1rem;right:1rem;top:50%;height:2px;background:var(--alpha-white-30);border-radius:1px;overflow:hidden}
+.btn.loading::before{content:"";position:absolute;left:1rem;top:calc(50% - 1px);width:1.5rem;height:2px;background:var(--color-white);border-radius:1px;animation:sweep 1.2s linear infinite;z-index:1}
+.btn.loading.secondary::before{background:var(--text-primary)}.btn.loading.secondary::after{background:var(--alpha-ink-10)}
+@keyframes sweep{from{transform:translateX(0)}to{transform:translateX(calc(100% + 3.5rem))}}
+@media (prefers-reduced-motion:reduce){.btn.loading::before{animation:none}}
+.why{display:grid;grid-template-columns:1.1rem minmax(0,1fr);gap:0.375rem;font-size:var(--text-tiny);color:var(--flag-ink);line-height:1.4;max-width:16rem}
+/* ---- 2 Provenance chip ---- */
+.pchip{display:inline-flex;align-items:center;gap:0.25rem;padding:0.0625rem 0.5rem 0.0625rem 0.375rem;font-family:var(--font-sans);font-size:var(--text-tiny);font-weight:var(--font-weight-semibold);line-height:1.5;border:var(--stroke-thin) solid;border-radius:var(--radius-badge);white-space:nowrap}
+.pchip.square{border-radius:var(--radius-drawing)}
+.pchip .dl-icon{font-size:0.875rem}
+.pchip .conf{font-family:var(--font-mono);font-weight:400;opacity:0.8;margin-left:0.125rem}
+.pchip[data-src="user"]{background:var(--prov-user-quiet);color:var(--prov-user-ink);border-color:var(--prov-user-fill)}
+.pchip[data-src="project"]{background:var(--prov-project-quiet);color:var(--prov-project-ink);border-color:var(--prov-project-fill)}
+.pchip[data-src="reference"]{background:var(--prov-reference-quiet);color:var(--prov-reference-ink);border-color:var(--prov-reference-fill)}
+.pchip[data-src="inferred"]{background:var(--prov-inferred-quiet);color:var(--prov-inferred-ink);border-color:var(--prov-inferred-fill)}
+.pchip[data-src="verify"]{background:var(--prov-verify-quiet);color:var(--prov-verify-ink);border-color:var(--prov-verify-fill)}
+.pchip[data-src="autofix"]{background:var(--prov-autofix-quiet);color:var(--prov-autofix-ink);border-color:var(--prov-autofix-fill)}
+.pdot{display:inline-flex;align-items:center;gap:0.375rem;font-size:var(--text-small);color:var(--text-secondary)}
+.pdot i{width:0.625rem;height:0.625rem;border-radius:var(--radius-drawing);display:inline-block}
+/* ---- 3 Rule row / 4 Flag row ---- */
+.rows{margin:0;padding:0;list-style:none;display:grid;width:100%;border:var(--border-width) solid var(--border);border-radius:var(--radius-drawing);background:var(--surface)}
+.rows li{display:grid;grid-template-columns:1.25rem minmax(0,1fr);gap:var(--space-2);padding:var(--space-3) var(--space-3);border-bottom:var(--divider-width) solid var(--divider)}
+.rows li:last-child{border-bottom:0}
+.rows .gl{font-family:var(--font-mono);font-size:var(--text-small);line-height:1.45;text-align:center;color:var(--prov-user-ink)}
+.rows li[data-state="flag"]{background:var(--flag-quiet);border-left:var(--stroke-medium) solid var(--flag)}
+.rows li[data-state="flag"] .gl{color:var(--flag-ink)}
+.rows li[data-state="verify"]{background:var(--prov-verify-quiet);border-left:var(--stroke-medium) solid var(--prov-verify-fill)}
+.rows li[data-state="verify"] .gl{color:var(--prov-verify-ink)}
+.rows li[data-state="none"] .gl,.rows li[data-state="others"] .gl,.rows li[data-state="running"] .gl{color:var(--text-muted)}
+.rows li[data-state="none"] .ti,.rows li[data-state="running"] .ti{color:var(--text-secondary)}
+.rows li[data-state="autofix"] .gl{color:var(--prov-autofix-ink)}
+.rows li[data-state="input"]{border-left:var(--stroke-medium) solid var(--flag)}
+.rw{display:grid;gap:0.25rem;min-width:0}
+.ti{font-size:var(--text-small);line-height:var(--leading-snug);display:flex;flex-wrap:wrap;align-items:baseline;gap:0.25rem 0.5rem}
+.de{font-size:var(--text-tiny);color:var(--text-secondary);line-height:1.45}
+.de s{color:var(--text-muted)}
+.rule{display:inline-flex;align-items:center;gap:0.25rem;padding:0.0625rem 0.375rem;border:var(--stroke-thin) solid var(--border);border-radius:var(--radius-drawing);background:var(--surface-sunken);font-family:var(--font-mono);font-size:var(--text-tiny);color:var(--text-secondary);text-decoration:none}
+.rule:hover{border-color:var(--border-strong);background:var(--surface);color:var(--text-primary)}
+.prog{height:2px;background:var(--alpha-ink-10);border-radius:1px;overflow:hidden;margin-top:0.25rem;max-width:12rem}
+.prog i{display:block;height:100%;width:38%;background:var(--text-muted)}
+.acts{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-top:var(--space-2)}
+.fl .rw{gap:var(--space-2)}
+.fl .clause{font-family:var(--font-mono);font-size:var(--text-tiny);color:var(--text-secondary);padding-left:var(--space-3);border-left:var(--stroke-thin) solid var(--border-strong);line-height:1.5}
+.note{display:grid;gap:0.25rem}
+.note textarea{font:inherit;font-size:var(--text-small);padding:0.5rem 0.625rem;border:var(--border-width) solid var(--border-strong);border-radius:var(--radius-drawing);resize:none;background:var(--surface);min-height:3.25rem}
+.pill{display:inline-flex;align-items:center;gap:0.25rem;padding:0.0625rem 0.5rem;border-radius:var(--radius-badge);border:var(--border-width) solid;font-size:var(--text-tiny);font-weight:600;line-height:1.5}
+.pill.ok{background:var(--prov-user-quiet);color:var(--prov-user-ink);border-color:var(--color-green-lighter)}
+.pill.ch{background:var(--prov-autofix-quiet);color:var(--prov-autofix-ink);border-color:var(--color-teal-lighter)}
+.pill.rj{background:var(--surface-sunken);color:var(--text-secondary);border-color:var(--border)}
+/* ---- 5 Coverage chip ---- */
+.chip{display:inline-flex;align-items:center;gap:0.375rem;min-height:1.75rem;padding:0 0.375rem 0 0.5rem;border:var(--border-width) solid var(--border-strong);border-radius:var(--radius-drawing);font-family:var(--font-mono);font-size:0.8125rem;color:var(--text-primary);background:var(--surface);white-space:nowrap;max-width:100%;overflow:hidden;cursor:pointer}
+.chip:hover{background:var(--alpha-ink-5)}
+.chip .dl-icon{font-size:1rem;flex:none}
+.chip .caret{color:var(--text-muted)}
+.chip[data-s="signed"] .dl-icon:first-child{color:var(--prov-user-ink)}
+.chip[data-s="unsigned"] .dl-icon:first-child{color:var(--flag-ink)}
+.chip[data-s="running"] .dl-icon:first-child{color:var(--text-muted)}
+.chip[data-s="stale"]{border-color:var(--prov-verify-fill)}.chip[data-s="stale"] .dl-icon:first-child{color:var(--prov-verify-ink)}
+.chip .txt{overflow:hidden;text-overflow:ellipsis;min-width:0}
+.cov{width:100%;padding:var(--space-3);border:var(--border-width) solid var(--border);border-radius:var(--radius-drawing);font-size:var(--text-small);line-height:var(--leading-snug);display:grid;gap:0.25rem;background:var(--surface)}
+.cov .lb2{font-family:var(--font-mono);font-size:var(--text-tiny);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--flag-ink)}
+/* ---- 6 Stamp ---- */
+.stamp{width:100%;border:var(--stroke-medium) solid var(--text-primary);border-radius:var(--radius-drawing);background:var(--surface);font-family:var(--font-mono);font-size:var(--text-tiny);line-height:1.5;color:var(--text-primary);display:grid}
+.stamp .sh{display:flex;align-items:center;gap:var(--space-3);padding:var(--space-3) var(--space-4);border-bottom:var(--stroke-thin) solid var(--text-primary)}
+.stamp .sh b{font-weight:700;letter-spacing:var(--tracking-label);text-transform:uppercase;font-size:var(--text-tiny)}
+.stamp .sh .mk{width:28px;height:28px;flex:none}
+.stamp dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:0.125rem var(--space-3);padding:var(--space-3) var(--space-4)}
+.stamp dt{color:var(--text-muted)}.stamp dd{margin:0}
+.stamp .np{padding:var(--space-3) var(--space-4);border-top:var(--stroke-thin) solid var(--text-primary);background:var(--surface-sunken)}
+.stamp .np b{display:block;letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--flag-ink);font-weight:600}
+.stamp .legal{padding:var(--space-2) var(--space-4);border-top:var(--stroke-thin) solid var(--border-strong);color:var(--text-secondary);font-size:0.6875rem}
+.stamp[data-s="signed"]{border-color:var(--prov-user-ink)}.stamp[data-s="signed"] .sh{border-color:var(--prov-user-ink)}.stamp[data-s="signed"] .sh b{color:var(--prov-user-ink)}
+.stamp[data-s="concept"] .sh b{color:var(--flag-ink)}
+.stamp[data-s="student"] .sh b{color:var(--color-green-darker)}
+/* ---- 7 Tooltip ---- */
+.tipwrap{position:relative;display:inline-flex;padding-top:3rem}
+.tip{position:absolute;left:0;top:0;width:max-content;background:var(--surface-ink);color:var(--text-inverse);font-size:var(--text-tiny);line-height:1.45;padding:0.375rem 0.625rem;border-radius:var(--radius-drawing);box-shadow:var(--elevation-overlay);max-width:16rem;display:flex;flex-direction:column;align-items:flex-start;gap:0.25rem;white-space:normal}
+.tip .src{align-self:stretch}
+.tip .row2{display:flex;align-items:center;gap:0.5rem}
+.tip .src{font-family:var(--font-mono);color:var(--alpha-white-60);border-top:var(--stroke-thin) solid var(--alpha-white-20);padding-top:0.25rem;margin-top:0.125rem}
+.tip kbd{color:var(--alpha-white-60);border-color:var(--alpha-white-30);font-size:0.6875rem;padding:0 0.25rem;border:1px solid;border-radius:2px}
+.tip::after{content:"";position:absolute;left:0.75rem;bottom:-5px;border:5px solid transparent;border-top-color:var(--surface-ink);border-bottom:0}
+.term{border-bottom:1px dotted var(--text-muted);cursor:help}
+/* ---- 8 Assumption row ---- */
+.arow{width:100%;display:grid;grid-template-columns:7rem minmax(0,1fr) auto;gap:var(--space-3);align-items:start;padding:var(--space-3) 0;border-bottom:var(--divider-width) solid var(--divider);font-size:var(--text-small)}
+.arow .obj{color:var(--text-secondary)}
+.arow .val{display:grid;gap:0.25rem}.arow .val em{font-style:normal;font-size:var(--text-tiny);color:var(--text-secondary)}
+.confbar{display:flex;align-items:center;gap:0.5rem;font-family:var(--font-mono);font-size:var(--text-tiny);color:var(--text-muted)}
+.confbar .track{width:5rem;height:0.25rem;background:var(--alpha-ink-10);border-radius:1px;overflow:hidden}
+.confbar .fill{height:100%;background:var(--prov-inferred-fill)}
+/* ---- 9 Input ---- */
+.field{display:grid;gap:0.375rem;width:100%;max-width:18rem}
+.field label{font-size:var(--text-small);color:var(--text-secondary)}
+.field .in{display:flex;align-items:center;border:var(--border-width) solid var(--border-strong);border-radius:var(--radius-form);background:var(--surface);min-height:2.5rem;padding:0 0.75rem;gap:0.5rem}
+.field .in input{flex:1;min-width:0;border:0;outline:0;background:none;font:inherit;font-size:var(--text-small);color:var(--text-primary)}
+.field .in .unit{font-family:var(--font-mono);font-size:var(--text-tiny);color:var(--text-muted)}
+.field .in.is-focus{border-color:var(--accent);outline:2px solid var(--focus-ring);outline-offset:1px}
+.field.miss .in{border-color:var(--flag)}.field.err .in{border-color:var(--prov-verify-fill)}
+.field.dis{opacity:0.5}
+.field .msg{display:grid;grid-template-columns:1.1rem minmax(0,1fr);gap:0.375rem;font-size:var(--text-tiny);line-height:1.4}
+.field.miss .msg{color:var(--flag-ink)}.field.err .msg{color:var(--prov-verify-ink)}
+.prompt{width:100%;border:var(--stroke-heavy) solid var(--border-strong);border-radius:var(--radius-form);background:var(--surface);padding:var(--space-3) var(--space-4);display:grid;gap:var(--space-3)}
+.prompt textarea{border:0;outline:0;resize:none;font:inherit;font-size:var(--text-large);line-height:1.4;min-height:3.5rem;background:none;color:var(--text-primary)}
+.prompt .row{display:flex;justify-content:space-between;align-items:center;gap:var(--space-3);flex-wrap:wrap}
+/* ---- 10 Segmented & switch ---- */
+.seg{display:inline-flex;padding:2px;border:var(--border-width) solid var(--border);border-radius:var(--radius-button);background:var(--surface-sunken)}
+.seg button{min-height:1.875rem;padding:0 0.875rem;border:0;background:none;border-radius:var(--radius-button);color:var(--text-secondary);font:inherit;font-size:var(--text-small);font-weight:var(--font-weight-medium);cursor:pointer;transition:var(--transition-control)}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--text-primary);box-shadow:var(--elevation-raised)}
+.seg[aria-disabled="true"]{opacity:0.5;pointer-events:none}
+.tog{display:inline-flex;align-items:center;gap:var(--space-2);min-height:2.25rem;padding:0 var(--space-3);border:var(--border-width) solid var(--border);border-radius:var(--radius-button);background:var(--surface);font:inherit;font-size:var(--text-small);color:var(--text-primary);cursor:pointer}
+.tog .sw{width:1.75rem;height:0.875rem;border-radius:1rem;background:var(--color-neutral-light);position:relative;transition:background var(--duration-base) var(--ease-in-out)}
+.tog .sw::after{content:"";position:absolute;top:1px;left:1px;width:0.75rem;height:0.75rem;border-radius:50%;background:var(--color-white);transition:transform var(--duration-base) var(--ease-in-out)}
+.tog[aria-pressed="true"] .sw{background:var(--accent)}.tog[aria-pressed="true"] .sw::after{transform:translateX(0.875rem)}
+.tog[disabled]{opacity:0.5;pointer-events:none}
+/* ---- 11 Status line ---- */
+.sysline{width:100%;display:grid;grid-template-columns:1.125rem minmax(0,1fr);gap:var(--space-3);padding:var(--space-3) var(--space-4);border:var(--stroke-thin) solid;border-radius:var(--radius-drawing);font-size:var(--text-small);line-height:var(--leading-snug)}
+.sysline .g{font-family:var(--font-mono);text-align:center}
+.sysline i{font-style:normal;display:block;color:var(--text-secondary);margin-top:0.125rem;font-size:var(--text-tiny)}
+.sysline b{font-weight:600}
+.sysline[data-tone="flag"]{background:var(--flag-quiet);border-color:var(--color-amber-lighter)}.sysline[data-tone="flag"] .g{color:var(--flag-ink)}
+.sysline[data-tone="verify"]{background:var(--prov-verify-quiet);border-color:var(--color-red-lighter)}.sysline[data-tone="verify"] .g{color:var(--prov-verify-ink)}
+.sysline[data-tone="done"]{background:var(--prov-user-quiet);border-color:var(--color-green-lighter)}.sysline[data-tone="done"] .g{color:var(--prov-user-ink)}
+.sysline[data-tone="autofix"]{background:var(--prov-autofix-quiet);border-color:var(--color-teal-lighter)}.sysline[data-tone="autofix"] .g{color:var(--prov-autofix-ink)}
+.sysline[data-tone="quiet"]{background:var(--surface-sunken);border-color:var(--border)}.sysline[data-tone="quiet"] .g{color:var(--text-muted)}
+/* ---- 12 Watermark ---- */
+.tile{position:relative;width:100%;aspect-ratio:4/3;background:var(--drawing-paper) var(--pattern-grid);border:var(--border-width) solid var(--border-strong);border-radius:var(--radius-drawing);overflow:hidden;display:grid;place-items:center}
+.tile .plan{width:55%;height:55%;border:var(--stroke-medium) solid var(--drawing-ink)}
+.tile .wmk{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+.tile .wmk span{font-family:var(--font-mono);font-weight:700;font-size:1rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--concept-watermark-color);transform:rotate(var(--concept-watermark-angle));white-space:nowrap;border:2px solid var(--concept-watermark-color);padding:0.375rem 0.75rem}
+.uns{font-family:var(--font-mono);font-size:var(--text-tiny);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--flag-ink);border:var(--stroke-thin) solid var(--flag);background:var(--flag-quiet);padding:0.25rem 0.5rem;border-radius:var(--radius-drawing)}
+.stu{font-family:var(--font-mono);font-size:var(--text-tiny);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--color-green-darker);border:var(--stroke-thin) solid var(--color-green-darker);padding:0.25rem 0.5rem;border-radius:var(--radius-drawing)}
+.mk{display:block;flex:none}
+@media (max-width:52rem){.wrap{grid-template-columns:minmax(0,1fr);gap:var(--space-6)}.toc{position:static;grid-template-columns:repeat(auto-fill,minmax(10rem,1fr))}.toc .k{grid-column:1/-1}}
+</style>
+</head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="dm" viewBox="0 0 32 32"><line x1="2" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1"></line><line x1="16" y1="2" x2="16" y2="30" stroke="currentColor" stroke-width="1"></line><circle cx="16" cy="16" r="10" fill="none" stroke="currentColor" stroke-width="1"></circle><circle cx="16" cy="16" r="4" fill="#1e90ff"></circle></symbol></svg>
+
+<div class="wrap">
+<nav class="toc" aria-label="Components">
+  <div class="k">12 components</div>
+  <a href="#button"><span class="n">01</span>Button</a>
+  <a href="#pchip"><span class="n">02</span>Provenance chip</a>
+  <a href="#rule"><span class="n">03</span>Rule row</a>
+  <a href="#flag"><span class="n">04</span>Flag row</a>
+  <a href="#coverage"><span class="n">05</span>Coverage chip</a>
+  <a href="#stamp"><span class="n">06</span>Verification stamp</a>
+  <a href="#tooltip"><span class="n">07</span>Tooltip</a>
+  <a href="#assumption"><span class="n">08</span>Assumption row</a>
+  <a href="#input"><span class="n">09</span>Input field</a>
+  <a href="#controls"><span class="n">10</span>Segmented and switch</a>
+  <a href="#status"><span class="n">11</span>Status line</a>
+  <a href="#watermark"><span class="n">12</span>Watermark and marks</a>
+  <div class="k" style="margin-top:var(--space-4)">Elsewhere</div>
+  <a href="index.html"><span class="n">→</span>Screen index</a>
+  <a href="Brand Assets.html"><span class="n">→</span>Brand assets</a>
+</nav>
+
+<main>
+<header class="mast">
+  <div class="brand"><svg class="mk" width="28" height="28"><use href="#dm"></use></svg>Drawlogic</div>
+  <h1>System — the 12 components, in every state.</h1>
+  <p>The screens show components assembled into one view at one moment. This page is the other axis: each component alone, in each state it can be in. Build the component once from here; the screens are then guaranteed to agree.</p>
+  <div class="read"><span class="g">i</span><span><b>Read first.</b> Several states below never appear on a screen — a rule while it runs, a check on an unsigned rule, a flag after it is accepted. They are decided here so they are not improvised in code. Tokens are shared in <code>styles.css</code>; nothing on this page defines a colour, size or radius of its own.</span></div>
+</header>
+
+<section class="cmp" id="button">
+  <header><h2><span class="n">01</span>Button</h2><p>Four variants, one shape. Pill radius from the export. Colour changes on hover; nothing moves or scales. A disabled button is always paired with the reason it is disabled.</p><div class="used"><span>draft-workspace</span><span>check-panel</span><span>sign</span><span>export</span><span>promote</span></div></header>
+  <div class="states">
+    <div class="st"><div class="lb">Primary <i>default · hover · focus</i></div><div class="demo"><button class="btn primary">Confirm &amp; generate</button><button class="btn primary is-hover">Confirm &amp; generate</button><button class="btn primary is-focus">Confirm &amp; generate</button></div></div>
+    <div class="st"><div class="lb">Secondary <i>default · hover · icon</i></div><div class="demo"><button class="btn">Export DXF</button><button class="btn is-hover">Export DXF</button><button class="btn"><span class="dl-icon">download</span>Export DXF</button></div></div>
+    <div class="st"><div class="lb">Ghost <i>default · hover · small</i></div><div class="demo"><button class="btn ghost">Generate anyway</button><button class="btn ghost is-hover">Generate anyway</button><button class="btn ghost sm">Generate anyway</button></div></div>
+    <div class="st ink"><div class="lb">Inverse <i>on ink · hover</i></div><div class="demo"><button class="btn inverse">Start for free</button><button class="btn inverse is-hover">Start for free</button></div></div>
+    <div class="st"><div class="lb">Loading <i>primary · secondary</i></div><div class="demo"><button class="btn primary loading">Confirm &amp; generate</button><button class="btn loading secondary">Export DXF</button></div></div>
+    <div class="st"><div class="lb">Disabled <i>with reason — always</i></div><div class="demo col"><div><button class="btn primary" disabled>Sign and issue</button></div><div class="why"><span aria-hidden="true">⚠</span><span>2 flags need a decision and the Standards Report has not been opened.</span></div></div></div>
+  </div>
+  <ul class="rules"><li>Sentence case. No Title Case On Buttons. No exclamation marks.</li><li class="no">Never scale, shrink or bounce on press. Colour change only.</li><li class="no">Never disabled without a ⚠ line saying why, next to it.</li><li>Loading replaces the label with a linear sweep. It never spins. Reduced motion freezes it.</li><li>Amber is never a button. Blue is the only action colour.</li></ul>
+</section>
+
+<section class="cmp" id="pchip">
+  <header><h2><span class="n">02</span>Provenance chip</h2><p>Where a value came from. Six sources with fixed hue meaning, used the same way on the interpretation card, the assumptions panel, the drawing and the export. Colour never carries the meaning alone: every chip has a glyph and a word.</p><div class="used"><span>promote</span><span>draft-workspace</span><span>check-panel</span><span>export</span><span>idea-results</span></div></header>
+  <div class="states">
+    <div class="st"><div class="lb">Six sources</div><div class="demo"><span class="pchip" data-src="user"><span class="dl-icon">person</span>User supplied</span><span class="pchip" data-src="project"><span class="dl-icon">folder</span>Project data</span><span class="pchip" data-src="reference"><span class="dl-icon">layers</span>Reference-derived</span><span class="pchip" data-src="inferred"><span class="dl-icon">auto_awesome</span>AI inferred</span><span class="pchip" data-src="verify"><span class="dl-icon">warning</span>Requires verification</span><span class="pchip" data-src="autofix"><span class="dl-icon">build</span>Auto-fix</span></div></div>
+    <div class="st"><div class="lb">With confidence <i>inferred only</i></div><div class="demo"><span class="pchip" data-src="inferred"><span class="dl-icon">auto_awesome</span>AI inferred<span class="conf">0.78</span></span><span class="pchip" data-src="inferred"><span class="dl-icon">auto_awesome</span>AI inferred<span class="conf">0.41</span></span></div></div>
+    <div class="st paper"><div class="lb">On a drawing <i>square corners</i></div><div class="demo"><span class="pchip square" data-src="user"><span class="dl-icon">person</span>User supplied</span><span class="pchip square" data-src="inferred"><span class="dl-icon">auto_awesome</span>AI inferred<span class="conf">0.78</span></span><span class="pchip square" data-src="verify"><span class="dl-icon">warning</span>Requires verification</span></div></div>
+    <div class="st"><div class="lb">As a legend</div><div class="demo col" style="gap:0.375rem"><span class="pdot"><i style="background:var(--prov-user-fill)"></i>User supplied</span><span class="pdot"><i style="background:var(--prov-project-fill)"></i>Project data</span><span class="pdot"><i style="background:var(--prov-reference-fill)"></i>Reference-derived</span><span class="pdot"><i style="background:var(--prov-inferred-fill)"></i>AI inferred</span><span class="pdot"><i style="background:var(--prov-verify-fill)"></i>Requires verification</span><span class="pdot"><i style="background:var(--prov-autofix-fill)"></i>Auto-fix</span></div></div>
+  </div>
+  <ul class="rules"><li>Pill on the website and in panels; square (<code>--radius-drawing</code>) when it sits on a drawing, a stamp or an export.</li><li>Confidence is shown on inferred values only, mono, two decimals. It is never shown as a percentage.</li><li class="no">Never recolour a source. Never add a seventh.</li><li>In Idea mode the six words are the plain versions: "You told me", "From your project", "From the reference", "I assumed", "Check with a professional", "I fixed".</li></ul>
+</section>
+
+<section class="cmp" id="rule">
+  <header><h2><span class="n">03</span>Rule row</h2><p>One rule in the Standards Report. The glyph is the state, and it survives print and PDF, which an icon does not. Rows are flags or not; a row never says pass or fail.</p><div class="used"><span>check-panel</span><span>sign</span><span>export</span><span>lagos-readiness</span></div></header>
+  <div class="states one">
+    <div class="st" style="padding:0;border:0;background:none"><ul class="rows">
+      <li data-state="pass"><span class="gl" aria-hidden="true">✓</span><div class="rw"><div class="ti"><span>Head height at stair landing</span><a class="rule" href="#">ADK-K1.2</a></div><div class="de">2 050 mm measured · 2 000 mm required</div></div></li>
+      <li data-state="flag"><span class="gl" aria-hidden="true">⚠</span><div class="rw"><div class="ti"><span>Parapet upstand below minimum</span><a class="rule" href="#">ADK-C6.4</a></div><div class="de">120 mm drawn · 150 mm required above the finished roof</div></div></li>
+      <li data-state="none"><span class="gl" aria-hidden="true">—</span><div class="rw"><div class="ti"><span>Structural adequacy of the beam</span><a class="rule" href="#">not checked</a></div><div class="de">Outside this profile. Listed under Checks not performed.</div></div></li>
+      <li data-state="others"><span class="gl" aria-hidden="true">○</span><div class="rw"><div class="ti"><span>Fire stopping at the cavity closer</span><a class="rule" href="#">ADK-B3.1</a></div><div class="de">Supplied by others — fire engineer's drawing FE-104 rev B</div></div></li>
+      <li data-state="running"><span class="gl" aria-hidden="true">·</span><div class="rw"><div class="ti"><span>Thermal bridging at the parapet</span><a class="rule" href="#">ADK-L1.9</a></div><div class="de">Running · 12 of 41</div><div class="prog"><i></i></div></div></li>
+      <li data-state="autofix"><span class="gl" aria-hidden="true">✓</span><div class="rw"><div class="ti"><span>Insulation continuity at the upstand</span><a class="rule" href="#">ADK-L1.4</a><span class="pchip square" data-src="autofix"><span class="dl-icon">build</span>Auto-fix applied</span></div><div class="de"><s>100 mm PIR</s> → 120 mm PIR · you can revert</div></div></li>
+      <li data-state="input"><span class="gl" aria-hidden="true">?</span><div class="rw"><div class="ti"><span>Guarding height at the roof edge</span><a class="rule" href="#">ADK-K3.1</a></div><div class="de">I need the roof use before I can check this.</div><div class="acts"><div class="seg" role="group"><button aria-pressed="false">Maintenance only</button><button aria-pressed="false">Accessible roof</button></div></div></div></li>
+      <li data-state="verify"><span class="gl" aria-hidden="true">⚠</span><div class="rw"><div class="ti"><span>Setback from the rear boundary</span><a class="rule" href="#">LAG-P2.1</a><span class="pchip square" data-src="verify"><span class="dl-icon">warning</span>Rule unsigned</span></div><div class="de">The rule passed, but it has no signer yet. An unsigned rule flags until it is signed. It never shows ✓.</div></div></li>
+    </ul></div>
+  </div>
+  <div class="decide"><span class="g">⚠</span><span><b>Decided here, not in code:</b> a check against a rule that has not been signed by a professional can never render ✓, whatever the result. It renders as a red-edged ⚠ with the "Rule unsigned" chip, it is counted as a flag in every tally, and it appears in the stamp's flag count.</span></div>
+  <ul class="rules"><li>Glyphs: ✓ pass, ⚠ flag, — not checked, ○ supplied by others, · running, ? needs input.</li><li>The rule ID is a mono chip and a link to the clause. It is never hidden on mobile.</li><li class="no">Never "pass" or "fail" as words. Never a green row background; only flags get a tint.</li><li>Running rows never spin. A 2 px bar and a count.</li></ul>
+</section>
+
+<section class="cmp" id="flag">
+  <header><h2><span class="n">04</span>Flag row</h2><p>A rule row opened for a decision. The signer accepts, changes or rejects. Accepting needs a note; the note is part of the audit record.</p><div class="used"><span>sign</span><span>check-panel</span></div></header>
+  <div class="states wide">
+    <div class="st" style="padding:0;border:0;background:none"><ul class="rows"><li data-state="flag" class="fl"><span class="gl" aria-hidden="true">⚠</span><div class="rw"><div class="ti"><span>Parapet upstand below minimum</span><a class="rule" href="#">ADK-C6.4</a></div><div class="de">120 mm drawn · 150 mm required above the finished roof</div><div class="clause">"The upstand shall be not less than 150 mm above the finished roof surface." — UK-ADK v2024.3, C6.4</div><div class="acts"><button class="btn sm">Accept</button><button class="btn sm">Change</button><button class="btn sm ghost">Reject</button></div></div></li></ul><div class="mono" style="padding-top:var(--space-2)">open</div></div>
+    <div class="st" style="padding:0;border:0;background:none"><ul class="rows"><li data-state="flag" class="fl"><span class="gl" aria-hidden="true">⚠</span><div class="rw"><div class="ti"><span>Parapet upstand below minimum</span><a class="rule" href="#">ADK-C6.4</a></div><div class="note"><textarea placeholder="Why is this acceptable here?"></textarea><div class="why"><span aria-hidden="true">⚠</span><span>A note is required to accept a flag. It goes on the record with your name.</span></div></div><div class="acts"><button class="btn sm primary" disabled>Accept with note</button><button class="btn sm ghost">Back</button></div></div></li></ul><div class="mono" style="padding-top:var(--space-2)">accepting · note required</div></div>
+    <div class="st" style="padding:0;border:0;background:none"><ul class="rows"><li data-state="pass" class="fl"><span class="gl" aria-hidden="true">✓</span><div class="rw"><div class="ti"><span>Parapet upstand below minimum</span><a class="rule" href="#">ADK-C6.4</a><span class="pill ok">Accepted</span></div><div class="de">"Existing parapet retained; height agreed with building control 12 Aug." — J. Smith, ARB 087412 · 14:22</div></div></li></ul><div class="mono" style="padding-top:var(--space-2)">accepted</div></div>
+    <div class="st" style="padding:0;border:0;background:none"><ul class="rows"><li data-state="autofix" class="fl"><span class="gl" aria-hidden="true">✓</span><div class="rw"><div class="ti"><span>Parapet upstand below minimum</span><a class="rule" href="#">ADK-C6.4</a><span class="pill ch">Changed</span></div><div class="de"><s>120 mm</s> → 150 mm · re-checked · J. Smith · 14:25</div></div></li></ul><div class="mono" style="padding-top:var(--space-2)">changed</div></div>
+    <div class="st" style="padding:0;border:0;background:none"><ul class="rows"><li data-state="none" class="fl"><span class="gl" aria-hidden="true">✕</span><div class="rw"><div class="ti"><span style="text-decoration:line-through;color:var(--text-muted)">Parapet upstand below minimum</span><a class="rule" href="#">ADK-C6.4</a><span class="pill rj">Rejected</span></div><div class="de">"Rule does not apply: roof is not accessible." — J. Smith · 14:27 · the rule stays in the report as rejected</div></div></li></ul><div class="mono" style="padding-top:var(--space-2)">rejected</div></div>
+  </div>
+  <ul class="rules"><li>Accept, Change, Reject — always in that order, always all three.</li><li>Accepted and rejected flags keep the rule in the report with the note and the signer's name. Nothing is deleted.</li><li class="no">Never accept without a note. The button stays disabled until the note has text.</li></ul>
+</section>
+
+<section class="cmp" id="coverage">
+  <header><h2><span class="n">05</span>Coverage chip</h2><p>The profile stack in the top bar: which jurisdiction, discipline and office rules the drawing is being checked against, and whether they are signed. Opens the coverage panel with Checks not performed.</p><div class="used"><span>shell</span><span>draft-workspace</span><span>check-panel</span><span>promote</span><span>sign</span></div></header>
+  <div class="states">
+    <div class="st"><div class="lb">Signed</div><div class="demo"><button class="chip" data-s="signed"><span class="dl-icon">verified_user</span><span class="txt">GB-ENG Residential v1.3 · Tier 1 · signed</span><span class="dl-icon caret">keyboard_arrow_down</span></button></div></div>
+    <div class="st"><div class="lb">Unsigned <i>default for a new drawing</i></div><div class="demo"><button class="chip" data-s="unsigned"><span class="dl-icon">verified_user</span><span class="txt">GB-ENG Residential v1.3 · Tier 1 · unsigned</span><span class="dl-icon caret">keyboard_arrow_down</span></button></div></div>
+    <div class="st"><div class="lb">Running</div><div class="demo"><button class="chip" data-s="running"><span class="dl-icon">verified_user</span><span class="txt">GB-ENG Residential v1.3 · checking 12 / 41</span><span class="dl-icon caret">keyboard_arrow_down</span></button></div></div>
+    <div class="st"><div class="lb">Stale profile</div><div class="demo"><button class="chip" data-s="stale"><span class="dl-icon">warning</span><span class="txt">GB-ENG Residential v1.2 · v1.3 available</span><span class="dl-icon caret">keyboard_arrow_down</span></button></div></div>
+    <div class="st"><div class="lb">Generic <i>conventions only</i></div><div class="demo"><button class="chip" data-s="unsigned"><span class="dl-icon">public</span><span class="txt">Generic — anywhere · conventions only · no local rules</span><span class="dl-icon caret">keyboard_arrow_down</span></button></div></div>
+    <div class="st"><div class="lb">Coverage panel <i>in the popover</i></div><div class="demo"><div class="cov"><span>Coverage: 41 rules · 3 profiles.</span><span class="lb2">Checks not performed</span><span>Structural design, fire engineering, drainage design.</span></div></div></div>
+  </div>
+  <ul class="rules"><li>Mono type: this is the record, not the website.</li><li>The icon carries the signing state: green signed, amber unsigned, muted while running, red when the profile is out of date.</li><li class="yes">The coverage panel always lists Checks not performed. It is a feature, not a footnote.</li><li class="no">Never "compliant with", never "approved for". "Checked against".</li></ul>
+</section>
+
+<section class="cmp" id="stamp">
+  <header><h2><span class="n">06</span>Verification stamp</h2><p>The block that goes on every issued sheet and every export. Square corners, mono, ink frame. It refuses to look right without the Checks not performed line.</p><div class="used"><span>sign</span><span>export</span><span>check-panel</span><span>idea-results</span></div></header>
+  <div class="states wide">
+    <div class="st" style="padding:0;border:0;background:none"><div class="stamp" data-s="unsigned"><div class="sh"><svg class="mk" viewBox="0 0 32 32"><use href="#dm"></use></svg><b style="color:var(--flag-ink)">Unsigned — professional verification required</b></div><dl><dt>Checked against</dt><dd>UK-ADK v2024.3 · Studio North v6</dd><dt>Checks</dt><dd>41 performed · 3 flagged · 4 not performed</dd><dt>Unverified elements</dt><dd>2</dd><dt>Drawing</dt><dd>A-201 rev C · sha256:9f2c…41ab</dd><dt>Issued</dt><dd>2026-09-15 14:22 UTC</dd></dl><div class="np"><b>Checks not performed</b>Structural adequacy, acoustic performance, party wall matters, fire engineering.</div><div class="legal">This is an automated design-rule check. It is not a statement of legal compliance.</div></div><div class="mono" style="padding-top:var(--space-2)">unsigned</div></div>
+    <div class="st" style="padding:0;border:0;background:none"><div class="stamp" data-s="signed"><div class="sh"><svg class="mk" viewBox="0 0 32 32"><use href="#dm"></use></svg><b>Reviewed and signed under responsible charge</b></div><dl><dt>Signer</dt><dd>Jo Smith · ARB 087412 · Tier 1</dd><dt>Checked against</dt><dd>UK-ADK v2024.3 · Studio North v6</dd><dt>Checks</dt><dd>41 performed · 3 flagged, 3 decided · 4 not performed</dd><dt>Drawing</dt><dd>A-201 rev D · sha256:1c88…e07f</dd><dt>Signed</dt><dd>2026-09-16 09:03 UTC · 2FA</dd></dl><div class="np"><b>Checks not performed</b>Structural adequacy, acoustic performance, party wall matters, fire engineering.</div><div class="legal">This is an automated design-rule check. It is not a statement of legal compliance.</div></div><div class="mono" style="padding-top:var(--space-2)">signed</div></div>
+    <div class="st" style="padding:0;border:0;background:none"><div class="stamp" data-s="concept"><div class="sh"><svg class="mk" viewBox="0 0 32 32"><use href="#dm"></use></svg><b>Concept — not for construction</b></div><dl><dt>Mode</dt><dd>Idea · no jurisdiction profile</dd><dt>Sources</dt><dd>3 you told me · 5 I assumed</dd><dt>Checks</dt><dd>None performed</dd><dt>Concept</dt><dd>Kitchen into the garden · option 3 · sha256:77a0…b2c4</dd></dl><div class="np"><b>Checks not performed</b>All. Concepts are not checked against any rule. Promote to Draft to check.</div><div class="legal">This is a concept. It is not a statement of legal compliance.</div></div><div class="mono" style="padding-top:var(--space-2)">concept · idea mode</div></div>
+    <div class="st" style="padding:0;border:0;background:none"><div class="stamp" data-s="student"><div class="sh"><svg class="mk" viewBox="0 0 32 32"><use href="#dm"></use></svg><b>Student — educational use</b></div><dl><dt>Exercise</dt><dd>EX-03 · UCL Bartlett Year 1</dd><dt>Provenance</dt><dd>71% student-supplied · 29% inferred</dd><dt>Critique</dt><dd>5 raised · 4 addressed · 2 revisions</dd><dt>Generate anyway</dt><dd>Not used</dd><dt>Drawing</dt><dd>EX-03/02 rev 2 · sha256:8a41…07be</dd></dl><div class="np"><b>Checks not performed</b>All. Learn mode runs critique, not rule checks.</div><div class="legal">Not for construction. Sketches are never used for training.</div></div><div class="mono" style="padding-top:var(--space-2)">student · learn mode</div></div>
+  </div>
+  <ul class="rules"><li class="yes">Every state carries Checks not performed and the automated-check sentence, verbatim.</li><li>Only the signed state uses green, and only on the frame and the title line.</li><li class="no">Never "approved", "compliant", "stamped". Never a signature image; the signer is a name, a registry number and a time.</li></ul>
+</section>
+
+<section class="cmp" id="tooltip">
+  <header><h2><span class="n">07</span>Tooltip</h2><p>Ink on canvas, square corners, one or two lines. In Idea mode it is where the technical term lives; in Draft mode it is where the source lives.</p><div class="used"><span>idea-results</span><span>draft-workspace</span><span>check-panel</span><span>settings</span></div></header>
+  <div class="states">
+    <div class="st"><div class="lb">Plain</div><div class="demo"><span class="tipwrap"><span class="tip">Send to a signer</span><button class="btn sm"><span class="dl-icon">verified_user</span>Find a signer</button></span></div></div>
+    <div class="st"><div class="lb">With shortcut</div><div class="demo"><span class="tipwrap"><span class="tip"><span class="row2">Search projects, drawings, rules <kbd>⌘K</kbd></span></span><button class="btn sm"><span class="dl-icon">search</span>Search</button></span></div></div>
+    <div class="st"><div class="lb">With source <i>draft mode</i></div><div class="demo"><span class="tipwrap" style="padding-top:5rem"><span class="tip">Floor-to-ceiling 2 700 mm<span class="src">AI inferred · 0.74 · from the reference section</span></span><span class="pchip" data-src="inferred"><span class="dl-icon">auto_awesome</span>AI inferred<span class="conf">0.74</span></span></span></div></div>
+    <div class="st"><div class="lb">Term on hover <i>idea mode</i></div><div class="demo"><span class="tipwrap" style="padding-top:4.5rem"><span class="tip">Plot coverage 42%<span class="src">the technical term</span></span><span style="font-size:var(--text-large)">The building takes up <span class="term">about two-fifths of the plot</span>.</span></span></div></div>
+  </div>
+  <ul class="rules"><li>Appears on hover and on focus, after 120 ms. Disappears on blur. No animation.</li><li>Plain text only, up to two lines. Anything longer is a popover.</li><li class="no">Never the only place a meaning lives. Every tooltip repeats something visible elsewhere.</li></ul>
+</section>
+
+<section class="cmp" id="assumption">
+  <header><h2><span class="n">08</span>Assumption row</h2><p>One line of the interpretation card: object, value, source. The product speaks in first person here because the interpretation is something it is accountable for.</p><div class="used"><span>promote</span><span>draft-workspace</span><span>idea-results</span><span>idea-site</span></div></header>
+  <div class="states one">
+    <div class="st"><div class="lb">States <i>supplied · inferred · missing · confirmed · rejected</i></div><div class="demo col" style="gap:0">
+      <div class="arow"><span class="obj">Parapet height</span><div class="val"><span>900 mm above roof</span></div><span class="pchip" data-src="user"><span class="dl-icon">person</span>User supplied</span></div>
+      <div class="arow"><span class="obj">Insulation</span><div class="val"><span>120 mm PIR</span><em>I assumed this from the warm-roof build-up. Change it if you know otherwise.</em><span class="confbar"><span class="track"><span class="fill" style="width:78%"></span></span>0.78</span></div><span class="pchip" data-src="inferred"><span class="dl-icon">auto_awesome</span>AI inferred</span></div>
+      <div class="arow"><span class="obj">Roof membrane</span><div class="val"><div class="field miss"><div class="in"><input placeholder="e.g. two-layer bituminous, torch-on"></div><div class="msg"><span aria-hidden="true">⚠</span><span>Missing — I need this before I draw.</span></div></div></div><span class="pchip" data-src="verify"><span class="dl-icon">warning</span>Needs input</span></div>
+      <div class="arow"><span class="obj">Insulation</span><div class="val"><span>120 mm PIR</span><em>Confirmed by you at 14:20. Was inferred at 0.78.</em></div><span class="pchip" data-src="user"><span class="dl-icon">check</span>Confirmed</span></div>
+      <div class="arow" style="border-bottom:0"><span class="obj">Ceiling height</span><div class="val"><span><s style="color:var(--text-muted)">2 700 mm</s> 2 400 mm</span><em>You changed this. The concept had 2 700 mm inferred.</em></div><span class="pchip" data-src="user"><span class="dl-icon">person</span>User supplied</span></div>
+    </div></div>
+  </div>
+  <ul class="rules"><li>"I assumed", "I need this", "I fixed". Never "we assumed".</li><li>A confirmed inference becomes user-supplied and says it was inferred. The history is never erased.</li><li>A missing value blocks generation. The Confirm button stays disabled until nothing is missing.</li></ul>
+</section>
+
+<section class="cmp" id="input">
+  <header><h2><span class="n">09</span>Input field</h2><p>Form radius, 1 px border, 2 px on the prompt box because it is the most important element on the site. Messages are a glyph and a sentence, never a colour alone.</p><div class="used"><span>idea-home</span><span>promote</span><span>settings</span><span>site-boundary</span></div></header>
+  <div class="states">
+    <div class="st"><div class="lb">Default · focus</div><div class="demo col"><div class="field"><label>Rear setback</label><div class="in"><input placeholder="3 000"><span class="unit">mm</span></div></div><div class="field"><label>Rear setback</label><div class="in is-focus"><input value="3 0"><span class="unit">mm</span></div></div></div></div>
+    <div class="st"><div class="lb">Filled · disabled</div><div class="demo col"><div class="field"><label>Rear setback</label><div class="in"><input value="3 000"><span class="unit">mm</span></div></div><div class="field dis"><label>Rear setback</label><div class="in"><input value="3 000" disabled><span class="unit">mm</span></div><div class="msg" style="color:var(--text-secondary)"><span aria-hidden="true">—</span><span>Set by the profile. Change the profile to change it.</span></div></div></div></div>
+    <div class="st"><div class="lb">Missing · error</div><div class="demo col"><div class="field miss"><label>Roof membrane</label><div class="in"><input placeholder="e.g. two-layer bituminous"></div><div class="msg"><span aria-hidden="true">⚠</span><span>Missing — I need this before I draw.</span></div></div><div class="field err"><label>Rear setback</label><div class="in"><input value="-300"><span class="unit">mm</span></div><div class="msg"><span aria-hidden="true">⚠</span><span>A setback cannot be negative.</span></div></div></div></div>
+    <div class="st" style="grid-column:1/-1"><div class="lb">Prompt box <i>2 px · idea mode · 44 px controls</i></div><div class="demo"><div class="prompt"><textarea placeholder="Describe the building you have in mind, or drop a sketch or photo."></textarea><div class="row"><span class="mono" style="display:inline-flex;align-items:center;gap:0.375rem"><span class="dl-icon" style="font-size:1rem">location_on</span>London, UK · change</span><div style="display:flex;gap:var(--space-2)"><button class="btn" style="min-height:var(--hit-min)"><span class="dl-icon">add_photo_alternate</span>Add a sketch</button><button class="btn primary" style="min-height:var(--hit-min)">Show me options</button></div></div></div></div></div>
+  </div>
+  <ul class="rules"><li>Units sit inside the field, mono, right. Numbers use thin-space grouping: 3 000.</li><li>Missing is amber with ⚠; error is red with ⚠. Both say what to do.</li><li>Focus is the 2 px blue ring at 2 px offset, on everything.</li></ul>
+</section>
+
+<section class="cmp" id="controls">
+  <header><h2><span class="n">10</span>Segmented and switch</h2><p>The mode toggle and the on/off switch. Colour and position change; nothing animates beyond the 200 ms slide.</p><div class="used"><span>shell</span><span>check-panel</span><span>learn-critique</span><span>learn-compare</span><span>settings</span></div></header>
+  <div class="states">
+    <div class="st"><div class="lb">Mode <i>idea · learn · draft</i></div><div class="demo col" style="align-items:start"><div class="seg" role="group"><button aria-pressed="true">Idea</button><button aria-pressed="false">Learn</button><button aria-pressed="false">Draft</button></div><div class="seg" role="group"><button aria-pressed="false">Idea</button><button aria-pressed="true">Learn</button><button aria-pressed="false">Draft</button></div><div class="seg" role="group"><button aria-pressed="false">Idea</button><button aria-pressed="false">Learn</button><button aria-pressed="true">Draft</button></div></div></div>
+    <div class="st"><div class="lb">Two options · disabled</div><div class="demo col" style="align-items:start"><div class="seg" role="group"><button aria-pressed="true">Side by side</button><button aria-pressed="false">Overlay</button></div><div class="seg" role="group" aria-disabled="true"><button aria-pressed="true">Idea</button><button aria-pressed="false">Draft</button></div><div class="why"><span aria-hidden="true">⚠</span><span>Draft mode needs an Individual plan or above.</span></div></div></div>
+    <div class="st"><div class="lb">Switch <i>on · off · disabled</i></div><div class="demo col" style="align-items:start"><button class="tog" aria-pressed="true"><span class="sw"></span>Show provenance</button><button class="tog" aria-pressed="false"><span class="sw"></span>Show provenance</button><button class="tog" aria-pressed="false" disabled><span class="sw"></span>Auto-fix</button></div></div>
+  </div>
+  <ul class="rules"><li>The pressed segment is white on sunken grey with the raised shadow. Nothing else on the page gets that shadow.</li><li>Switch on is blue. There is no green switch.</li><li class="no">Never disabled without the reason beside it.</li></ul>
+</section>
+
+<section class="cmp" id="status">
+  <header><h2><span class="n">11</span>Status line</h2><p>A one-line message with a glyph. Five tones, each with a fixed glyph. It sits inline in panels and dialogs; it is not a toast and it does not float.</p><div class="used"><span>check-panel</span><span>settings</span><span>export</span><span>sign</span></div></header>
+  <div class="states wide">
+    <div class="st" style="padding:0;border:0;background:none"><div class="demo col"><div class="sysline" data-tone="quiet"><span class="g" aria-hidden="true">—</span><span><b>Changing residency migrates existing data.</b><i>The migration runs within 24 hours; the workspace stays available.</i></span></div></div></div>
+    <div class="st" style="padding:0;border:0;background:none"><div class="demo col"><div class="sysline" data-tone="flag"><span class="g" aria-hidden="true">⚠</span><span><b>3 flags need a decision before signing.</b><i>Accept with a note, change the drawing, or reject with a reason.</i></span></div></div></div>
+    <div class="st" style="padding:0;border:0;background:none"><div class="demo col"><div class="sysline" data-tone="verify"><span class="g" aria-hidden="true">⚠</span><span><b>2 elements require verification.</b><i>Their source could not be established. A professional must confirm them.</i></span></div></div></div>
+    <div class="st" style="padding:0;border:0;background:none"><div class="demo col"><div class="sysline" data-tone="done"><span class="g" aria-hidden="true">✓</span><span><b>Signed and issued.</b><i>A-201 rev D · 09:03 UTC · the hash is on the sheet.</i></span></div></div></div>
+    <div class="st" style="padding:0;border:0;background:none"><div class="demo col"><div class="sysline" data-tone="autofix"><span class="g" aria-hidden="true">✓</span><span><b>1 auto-fix applied.</b><i>Insulation 100 → 120 mm. You can revert it from the change list.</i></span></div></div></div>
+  </div>
+  <ul class="rules"><li>Glyphs are fixed per tone: — quiet, ⚠ flag, ⚠ verify, ✓ done, ✓ auto-fix.</li><li>Bold sentence first, then the detail in a smaller line. Full stops.</li><li class="no">Never a toast, never auto-dismissed, never an exclamation mark.</li></ul>
+</section>
+
+<section class="cmp" id="watermark">
+  <header><h2><span class="n">12</span>Watermark and marks</h2><p>The fixed labels that travel with a drawing, and the Datum mark at the sizes the app uses. Watermarks are mono, uppercase, rotated −24°, at 20% ink. They print.</p><div class="used"><span>idea-results</span><span>idea-site</span><span>render</span><span>learn-compare</span><span>export</span></div></header>
+  <div class="states">
+    <div class="st paper" style="padding:var(--space-3)"><div class="lb">Concept <i>every idea-mode image</i></div><div class="tile"><div class="plan"></div><div class="wmk"><span>Concept — not for construction</span></div></div></div>
+    <div class="st paper" style="padding:var(--space-3)"><div class="lb">Student <i>every learn-mode image</i></div><div class="tile"><div class="plan"></div><div class="wmk"><span style="color:var(--color-green-darker);border-color:var(--color-green-darker);opacity:0.35">Student — educational use</span></div></div></div>
+    <div class="st"><div class="lb">Labels <i>inline, on headers and exports</i></div><div class="demo col" style="align-items:start"><span class="uns">Unsigned — professional verification required</span><span class="stu">Student — educational use</span><span class="uns" style="color:var(--text-muted);border-color:var(--border-strong);background:var(--surface-sunken)">Concept — not for construction</span></div></div>
+    <div class="st"><div class="lb">Datum mark <i>16 · 24 · 32 · never smaller</i></div><div class="demo" style="align-items:flex-end;gap:var(--space-5);color:var(--text-primary)"><svg class="mk" width="16" height="16"><use href="#dm"></use></svg><svg class="mk" width="24" height="24"><use href="#dm"></use></svg><svg class="mk" width="32" height="32"><use href="#dm"></use></svg><span class="mono">strokes 1 unit · centre always #1e90ff</span></div></div>
+  </div>
+  <ul class="rules"><li>The watermark is drawn on the image, not laid over it in the UI, so it survives a screenshot and a print.</li><li class="no">Never remove, fade or shrink the watermark to fit a layout. The image gets smaller; the watermark does not.</li><li>The mark is never rotated, contained, recoloured or set below 16 px. See <a href="Brand Assets.html">Brand assets</a>.</li></ul>
+</section>
+</main>
+</div>
+</body></html>
