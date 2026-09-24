@@ -1,45 +1,37 @@
-# AGENTS.md — Drawlogic (instructions for Codex)
+# AGENTS.md — Drawlogic (instructions for Codex, running GPT-6 Astra)
 
-You are one of two agents on this repository. **You own `engine/`.** Claude Code owns `trust/`, `app/`, `profiles/`, `fixtures/` and CI. `contracts/` is owned by neither and changes only by pull request. Read `CLAUDE.md` too — it describes the same ownership from the other side.
+You are one of two agents on this repository. As of 22 September 2026 (PRD §8A) **you build `engine/render/`, `engine/geo/`, `engine/providers/`, `engine/3d/` and `site/`, and you are the examiner for everything Claude Code builds** — `engine/core/`, `trust/`, `app/`, `profiles/`. **The agent that builds a module never writes the tests that gate it.** Read `CLAUDE.md` too.
 
 ## Read before doing anything
-1. `docs/PRD.md` — sections 4.1–4.2 of the concept (pipeline), 6 (principles), 7.3 (Draft), 7.4 (Check), 7.6 (Render), 5A (3D and studio render), 5A.1a (generative video), Appendices A–B.
-2. `docs/CONTRACTS.md` and everything in `contracts/`. Your code must produce and consume exactly these shapes.
-3. `skills/drawlogic-trust-rules/SKILL.md` — product rules your code must satisfy even though the trust spine enforces them.
-4. `docs/BUILD_PROMPTS.md` — the sequence and the gates.
-5. `fixtures/` — the golden inputs and expected outputs your code must reproduce. They are written by Claude Code *before* you build; treat them as the spec. If a fixture looks wrong, do not edit it — open an issue with the reason.
+1. `docs/PRD.md` (v0.2.8) — §6 principles, §7.4 Check, §7.6 Render, §5A (3D, generative video, narration), FR-06–09 construction defaults, **§8A model allocation**, Appendices A–B.
+2. `docs/CONTRACTS.md` and `contracts/`. Your code produces and consumes exactly these shapes.
+3. `skills/drawlogic-trust-rules/SKILL.md` — the rules your tests must enforce on Claude Code's modules, and your own code must satisfy.
+4. `docs/BUILD_PROMPTS.md` — the sequence and gates.
+5. `docs/DECISIONS.md` — stop on any OPEN decision you need.
 
 ## Ownership
-| Path | Owner | Your obligation |
+| Path | Builder | Examiner |
 |---|---|---|
-| `engine/` | **Codex** | All of it. |
-| `contracts/` | nobody | Propose changes by PR with rationale; never edit directly. |
-| `trust/`, `app/`, `profiles/`, `fixtures/` | Claude Code | **Do not edit.** Your tests may import fixtures read-only. |
+| `engine/render/` (SVG/DXF/PDF, line-art/depth/material-map artefacts), `engine/geo/`, `engine/providers/` (render: diffusion, generative_video, raytraced, voice; geo tiles/terrain/OSM), `engine/3d/` (Stage 3 extrusion, IFC, Blender pipeline), `site/` | **You** | Claude Code (`fixtures/render/`, drift, label and banned-word tests) |
+| `engine/core/`, `trust/`, `app/`, `profiles/` | Claude Code — **do not edit** | **You**: `fixtures/core/` golden DDL, resolved DDL and check results; property tests (solver conservation, determinism, no ✓ without verified+signed rule, provenance preserved, engineering values never invented, construction defaults by jurisdiction, narration facts traceable); gate state-machine and audit-chain tests; journey tests |
+| `contracts/` | Claude Code drafts; PR-only | You review every contract PR |
 
-## What the engine is
-Python 3.12, FastAPI, deterministic where the PRD says deterministic. Modules:
-- `engine/ddl/` — parse, validate against `contracts/ddl.schema.json`, versioning, diffs.
-- `engine/solver/` — constraint solver (dimensions are constraints; conflicts surfaced, never silently resolved). Use `shapely`/`networkx`; do not hand-roll topology.
-- `engine/rules/` — rule runtime executing `profiles/*` config. Pure function of (resolved DDL, profile stack) → check result. **Never** returns ✓ for a rule whose `state != verified`. Always emits `checks_not_performed`.
-- `engine/render/` — SVG (browser), DXF via `ezdxf`, PDF via Cairo; line-art + depth + material map artefacts keyed by `material_id`. Later: IFC via `ifcopenshell`.
-- `engine/interpret/` — interpreter (vision + text → interpretation card payload) and compiler (confirmed card → DDL) via the LLM provider interface. Output every object with `source` and `confidence`. Missing engineering values → `blocked` list, never a guess.
-- `engine/providers/` — adapters behind `contracts/providers`: LLM (Claude tiered), image (diffusion, conditioned on line-art/depth/material map), `generative_video` (Higgsfield API launch backend), `raytraced` (stub until Stage 3). No provider-specific code outside its adapter.
-- `engine/geo/` — basemap/terrain/OSM fetchers behind a licensed-tile adapter (Mapbox/Esri; never Google tiles). Outputs carry imagery date, resolution, boundary source.
+As examiner, write fixtures and tests **before** Claude Code builds the module, derived from the PRD — not from Claude Code's implementation. If an implementation choice makes a test awkward, the test does not bend; open an issue.
 
-## Rules that apply to your code
-- Determinism: same input + same profile version → byte-identical check result and DDL. Tests assert it.
-- Fail-closed: no rule coverage → ⚠ `no_rule`, never pass. Unverified rule → ⚠ `unverified`, never pass.
-- Never invent engineering values: loads, ratings, member sizes, cable sizes, fire periods. If absent, return `blocked` with the specific request.
-- Provenance is mandatory: reject any DDL object without `source` and `confidence`.
-- Renders: every job records the source drawing hash; diffusion jobs compute the edge-overlay fidelity score and fail below threshold (`contracts/render.thresholds.json`); generative video carries no fidelity score and the fixed preview label from `contracts/copy.json`.
-- No banned words in any string the engine emits (`contracts/copy.json`).
+## Your build rules
+- Python 3.12, FastAPI; deterministic where the PRD says deterministic.
+- Renders: condition diffusion on the drawing's own line-art/depth/material map; material map built from `construction_defaults` (FR-57a), never from building-type text; edge-overlay fidelity score with fail-and-retry below `contracts/render.thresholds.json`; every job records the source drawing hash and revision.
+- Generative video (Higgsfield API, `generative_video`): start from a geometry-locked still; start+end frame pinning where supported; fixed preview label from `contracts/copy.json`; no fidelity score; moderation failure → retry another model → surface as failed.
+- Voice (`voice`): script comes from `engine/core` narration output only; you never generate or edit narration text.
+- Geo: Mapbox/Esri tiles only (never Google tiles); imagery date, resolution, boundary source and DEM resolution carried as provenance.
+- Stage 3 Blender: headless deterministic scripts driven by the IFC model and material library; no runtime agent chooses geometry.
+- No provider-specific code outside its adapter. No banned words in any emitted string.
+- Model calls, if any, go through `contracts/providers` with IDs from `contracts/models.json`.
 
 ## Working discipline
-- Work only in the `drawlogic-engine` worktree on branch `ddl-engine`. Integrate to `main` by PR.
-- Make the fixtures pass; do not change the fixtures.
-- Property-based tests for the solver and rules (`hypothesis`). Golden-file tests against `fixtures/`.
-- Commit messages: `engine:` prefix.
-- If a task needs a decision in `docs/DECISIONS.md`, stop and ask; do not default.
+- Worktree `drawlogic-engine` on branch `ddl-engine`; integrate to `main` by PR.
+- Your own modules: make Claude Code's render fixtures pass without editing them.
+- Commit prefixes: `render:`, `geo:`, `providers:`, `3d:`, `site:`, `exam:` (for tests you write as examiner).
 
 ## Done means
-Fixtures and property tests green · deterministic across two runs · contract untouched or PR proposed · no provider code outside adapters.
+Examiner's tests green · deterministic across two runs where required · contract untouched or PR proposed · no provider code outside adapters · PROVIDERS.md checks ticked before enabling any provider.

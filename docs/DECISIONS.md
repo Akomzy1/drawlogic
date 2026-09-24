@@ -16,5 +16,8 @@ Status: OPEN unless marked. Decided items record date and answer.
 | 10 | Learn mode available to non-students as "Teach me first" toggle | **DECIDED 19 Sept 2026** — yes |
 | 11 | Basemap provider (Mapbox vs Esri) and tile metering rate | OPEN |
 | 12 | Nigeria pricing fixed in NGN for 12 months at the v0.2 table | OPEN — proposed ₦6k/20k/75k/450k |
+| 13 | Reference-interpretation model (Opus 5.5 vs Sonnet 5 vs GPT-6 Astra) | OPEN — eval-decided in Prompt 9; provisional default Opus 5.5 |
+| 14 | Agent allocation: Claude Code builds contracts, engine/core, trust, app, profiles; Codex builds render, geo, providers, 3d, site; each examines the other | **APPLIED 22 Sept 2026** (PRD §8A.3) — revert here if not wanted |
+| 15 | Runtime routing defaults per PRD §8A.1 (Haiku 4.5 / Sonnet 5 / Opus 5.5) | **APPLIED 22 Sept 2026** — revisit on eval results and each model release |
 
 Process: an agent that hits an OPEN decision stops, states which one, and proposes at most two options. Tokunbo decides; the row is updated in the same PR as the work.

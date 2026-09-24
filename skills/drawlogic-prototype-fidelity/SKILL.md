@@ -14,7 +14,7 @@ Located in `design/prototype/`. If this folder is missing or a screen you need i
 | File | Screen | Mode |
 |---|---|---|
 | `tokens.css`, `system.html` | **Read first.** Tokens and the 12 components with states | — |
-| `shell.html` | App frame, rail, top bar, mode toggle, coverage chip | both |
+| `shell.html` | App frame, rail, top bar, mode toggle, coverage chip, New project modal (discipline live/roadmap chips, jurisdiction resolution, author-a-profile link) | both |
 | `idea-home.html` | Prompt box hero, examples, recent ideas | Idea |
 | `idea-results.html` | Options, numbers, render, assumptions panel, export menu | Idea |
 | `learn-critique.html` | Inspiration, graded critique, locked worked answers, Generate lock | Learn |
@@ -50,6 +50,7 @@ Open the file for the screen you are building. Building the Check panel from the
 - **Render Studio:** every variant shows the source drawing hash; diffusion tiles show a fidelity score; Preview video tiles show the preview label and **no** fidelity score; Studio (ray-traced) is greyed with "Stage 3" until it ships.
 - **Site context:** the boundary source (traced vs survey) and imagery date are visible on the screen, not only in a tooltip.
 - **Plan gates** render as shown in `settings.html` — a gated feature is visible and locked, never hidden.
+- **Disciplines and jurisdictions are never hidden either.** Roadmap disciplines are selectable with the roadmap note; an uncovered jurisdiction resolves to Generic with the "no local rules claimed" line and an "Author a profile" link, in the New project modal, Browse and Settings.
 
 ## What "matching the prototype" means
 - Structure over decoration: section order, panel split, component boundaries carry through.

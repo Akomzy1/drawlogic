@@ -1,43 +1,48 @@
-# CLAUDE.md — Drawlogic (instructions for Claude Code)
+# CLAUDE.md — Drawlogic (instructions for Claude Code, running Claude Opus 5.5)
 
-You are one of two agents on this repository. **You own `trust/`, `app/`, `profiles/`, `fixtures/` and CI.** Codex owns `engine/`. `contracts/` is owned by neither and changes only by pull request. Read `AGENTS.md` too — it is Codex's file and describes the same ownership from the other side.
+You are one of two agents on this repository. As of 22 September 2026 (PRD §8A) **you build `contracts/` (initial draft), `engine/core/`, `trust/`, `app/` and `profiles/`.** Codex (GPT-6 Astra) builds `engine/render/`, `engine/geo/`, `engine/providers/`, `engine/3d/` and `site/`. **The agent that builds a module never writes the tests that gate it**: Codex writes the golden fixtures and property tests for your modules; you write them for Codex's. Read `AGENTS.md` too.
 
 ## Read before doing anything
-1. `docs/PRD.md` (Drawlogic PRD v0.2.5) — the product. Sections 6 (principles), 7.5 (trust spine), 7.11 (signing), 7.12 (Learn mode), 5A.3 (3D hooks), Appendices A–C.
-2. `docs/CONTRACTS.md` and every file in `contracts/` — the interfaces between engine and trust.
-3. `design/prototype/` — the approved screens. **The build must match the prototype.** Load `skills/drawlogic-prototype-fidelity/SKILL.md` before touching anything in `app/`.
-4. `skills/drawlogic-trust-rules/SKILL.md` — the non-negotiable product rules, enforced by tests.
-5. `docs/BUILD_PROMPTS.md` — the sequence. Do not skip ahead.
+1. `docs/PRD.md` (v0.2.8) — §6 principles, §7.5 trust spine, §7.11 signing, §7.12 Learn mode, §5A (3D, generative video, narration), **§8A model allocation**, Appendices A–C.
+2. `docs/CONTRACTS.md` and `contracts/` — the interfaces. `contracts/models.json` is the only place model IDs and effort levels live.
+3. `design/prototype/` and `skills/drawlogic-prototype-fidelity/SKILL.md` before any `app/` work. **The build must match the prototype.**
+4. `skills/drawlogic-trust-rules/SKILL.md` — non-negotiable product rules, enforced by tests.
+5. `docs/BUILD_PROMPTS.md` — the sequence and gates. Do not skip ahead.
 6. `docs/DECISIONS.md` — open decisions. Never resolve one by assumption; stop and ask.
 
 ## Ownership
-| Path | Owner | Notes |
+| Path | Builder | Examiner |
 |---|---|---|
-| `contracts/` | nobody | JSON Schemas, TS types, Python models, example files, `copy.json`. Change by PR only; propose, don't edit. |
-| `engine/` | Codex | DDL parse/validate, constraint solver, rule engine runtime, renderers (SVG/DXF/PDF), interpreter/compiler LLM adapters, render providers. **Do not edit.** If something is wrong, write a failing test in `trust/tests/engine/` and open an issue. |
-| `trust/` | Claude Code | Provenance service, rule-state enforcement, stamp generation, signing gate, signer verification, audit log, **golden tests for engine output**. |
-| `app/` | Claude Code | Next.js 15 app, shadcn/ui + Tailwind, all screens. Built strictly to `design/prototype/`. |
-| `profiles/` | Claude Code | Generic, GB-ENG residential, US-IBC base, NG-LA profiles as versioned config with test cases. Content is authored here; the runtime that executes it is in `engine/`. |
-| `fixtures/` | Claude Code | Golden DDL, expected check results, expected stamps, eval-set manifests. |
-| `docs/` | shared | PRD, contracts index, build prompts, decisions, testing. |
+| `contracts/` | You draft (Prompt 0); PR-only after approval | Codex reviews |
+| `engine/core/` — `ddl/`, `solver/`, `rules/`, `interpret/` (interpreter, compiler, critique, narration, profile drafting) | **You** | Codex (`fixtures/core/`, property tests) |
+| `trust/` | **You** | Codex (`trust/tests/` gate and rule tests) |
+| `app/`, `profiles/` | **You** | Codex (journey tests, profile test cases) |
+| `engine/render/`, `engine/geo/`, `engine/providers/`, `engine/3d/`, `site/` | Codex — **do not edit** | You (`fixtures/render/`, drift and banned-word tests) |
+| `docs/` | shared | — |
+
+Never edit a test file that gates your own module. If you believe a Codex-written fixture is wrong, open an issue citing the PRD clause; do not change it.
 
 ## Stack
-Next.js 15 (App Router), TypeScript, shadcn/ui + Tailwind (tokens from prototype only), Supabase (Postgres/Auth/Storage, RLS per workspace), Inngest for jobs, Claude API tiered (Haiku routing · Sonnet interpretation/compile · Opus check explanations and conflict resolution) behind a provider interface, Stripe + Paystack, Resend, PostHog, Sentry, Vercel. Engine is Python 3.12 / FastAPI (Codex). Never call an LLM or image/video provider directly — always through `contracts/providers`.
+Next.js 15, TypeScript, shadcn/ui + Tailwind (prototype tokens only), Supabase (RLS per workspace), Inngest, Stripe + Paystack, Resend, PostHog, Sentry, Vercel. `engine/` is Python 3.12 / FastAPI. All model calls go through `contracts/providers`; model IDs and effort come from `contracts/models.json` (defaults in PRD §8A.1: Haiku 4.5 routing; Sonnet 5 Idea and Learn; Opus 5.5 Promote, Draft compile, explanations, profile drafting via Batch, narration; reference interpretation eval-decided).
 
-## Rules you enforce (see trust-rules skill for the full list)
-- Config is law; generator/examiner separation; fail-closed; never invent engineering values; question-first in Draft, assumptions-visible in Idea; honest stamps; user data never trained on; simple in front, rigorous behind.
-- Banned words in any UI, export or copy: `contracts/copy.json` → `banned`. A test fails the build on any hit.
-- A ✓ can only come from a rule with `state: verified` and a signer. Anything else is ⚠ or —.
-- Every DDL object has `source` and `confidence`; an object without them is invalid.
-- The stamp always includes `checks_not_performed`, even when empty.
+## Claude API rules for code you write (Opus 5.5 documentation, 22 Sept 2026)
+- No forced tool use — `tool_choice` `any`/`tool` errors. Use structured outputs or strict tool use with `tool_choice: auto` and the schemas in `contracts/`.
+- Thinking is always on; never send `thinking.type: disabled` or a manual budget. Set `effort` explicitly per call from `models.json`; leave `max_tokens` headroom.
+- Select content blocks by `type`, never by position; pass `thinking` blocks back unmodified in tool loops.
+- Conversations are append-only. Change profile, mode or context via mid-conversation system messages, never by editing the system prompt or tools (a changed prefix before a replayed thinking block is a 400 on accounts created after 31 Aug 2026). Never switch models inside a thread; start a new thread seeded from the DDL.
+- Handle `stop_reason: refusal` with the configured fallback; log it; never alter output silently.
+- Cache the stable prefix (profile stack, schemas, pack vocabulary, typical details); 512-token minimum.
+- Batch API for profile drafting and nightly evals.
+
+## Rules you enforce (full list in the trust-rules skill)
+Config is law; generator/examiner separation at runtime and in code; fail-closed; never invent engineering values; question-first in Draft, assumptions visible in Idea, critique-first in Learn; honest stamps and labels; construction defaults from the jurisdiction; narration only from DDL facts; user data never trained on; simple in front, rigorous behind. Banned words from `contracts/copy.json` fail the build.
 
 ## Working discipline
-- Work only in the `drawlogic-trust` worktree on branch `trust-spine`. Integrate to `main` by PR.
-- Golden tests first: for every engine behaviour you depend on, write the fixture and expected output in `fixtures/` and the test in `trust/tests/engine/` before Codex builds it. Mocks of the engine live in `trust/mocks/`.
-- Prototype fidelity: every screen PR includes a side-by-side (prototype file vs rendered route) in the PR description and a checklist from the fidelity skill.
-- Never announce completion without running the tests. Never mark a Standards Report row ✓ in a fixture unless the rule is verified in the profile.
-- If a task needs a decision listed in `docs/DECISIONS.md`, stop and ask Tokunbo. Do not pick a default.
-- Commit messages: `trust:`, `app:`, `profiles:`, `fixtures:`, `ci:` prefixes.
+- Worktree `drawlogic-trust` on branch `trust-spine`; integrate to `main` by PR.
+- For your modules: Codex's fixtures are the spec — make them pass without editing them. For Codex's modules: write fixtures and tests first, before Codex builds.
+- Every `app/` PR includes a prototype side-by-side and the fidelity checklist.
+- Run the tests before announcing completion. Stop on any OPEN decision.
+- Commit prefixes: `core:`, `trust:`, `app:`, `profiles:`, `fixtures:`, `ci:`.
 
-## What "done" means for any task
-Tests green in CI · fixtures updated · no banned words · prototype checklist attached (for `app/`) · contract untouched (or a PR proposing the change, with reasons).
+## Done means
+Examiner's tests green in CI · deterministic where the PRD says deterministic · no banned words · prototype checklist attached (for `app/`) · contract untouched or a PR proposing the change.

@@ -11,7 +11,7 @@ These rules come from PRD v0.2.5 §6 and §7.5. They are enforced by tests in `t
 Conventions, rules, symbol sets, required-constraint lists, document references and typical details live in versioned profiles under `profiles/`. Nothing jurisdiction- or discipline-specific is hard-coded. **Test:** grep for jurisdiction/discipline literals in `engine/` and `app/` fails outside profile loaders.
 
 ## 2. Generator / examiner separation
-LLMs propose DDL and edits. The deterministic solver and rule engine validate. The generator never grades its own work. **Test:** no module in `engine/interpret/` imports `engine/rules/` results to alter its own output.
+LLMs propose DDL and edits. The deterministic solver and rule engine validate. The generator never grades its own work — and the same holds for code: the agent that builds a module never writes the tests that gate it (PRD §8A.3; Codex examines Claude Code's modules and vice versa). No model ID is hard-coded; all come from `contracts/models.json`. **Test:** no module in `engine/interpret/` imports `engine/rules/` results to alter its own output.
 
 ## 3. Fail-closed
 - No rule coverage → ⚠ `no_rule`, never ✓.
@@ -46,5 +46,11 @@ Diffusion renders are conditioned on the drawing's own line-art/depth/material m
 ## 12. Simple in front, rigorous behind
 Idea and Learn use plain language with technical terms on hover; the professional machinery appears after Promote to Draft. Adding consumer simplicity never removes a professional control. **Test:** UI snapshot tests assert gate controls exist and are disabled (not absent) on all tiers.
 
-## 13. Decisions are not defaults
+## 13. Construction defaults come from the jurisdiction
+Materials and construction methods not stated by the user come from the active jurisdiction profile's `construction_defaults` (Generic resolves by country/climate region, marked `ai_inferred` + `verify`), are recorded as `source: profile` and listed as assumptions. Render prompts are assembled from the material map, never from building-type free text. **Test:** a NG-LA project with no material instruction never yields a brick cavity wall in DDL, typical details or renders; GB-ENG never yields sandcrete block by default.
+
+## 13a. Narration is a stamp read aloud
+Every spoken fact in a property film traces to a DDL element and its source; `ai_inferred`/`verify` facts are hedged or omitted, never stated as certain. The script generator has no path to invent a fact absent from the model. **Test:** narration fixtures assert every segment carries a source id; a segment with no matching DDL element fails generation.
+
+## 14. Decisions are not defaults
 `docs/DECISIONS.md` lists open decisions. No agent resolves one by assumption. Stop and ask.

@@ -13,11 +13,16 @@ drawlogic/                    main — integration
 │   ├── PROTOTYPE_PROMPTS.md  DESIGN_HANDOFF.md  PROVIDERS.md  DESIGN_GAPS.md
 ├── design/prototype/         approved screens (tokens.css, system.html, 18 screens, index.html)
 ├── contracts/                schemas, types, examples, copy.json — PR only
-├── engine/                   Codex — Python 3.12 / FastAPI
-├── trust/                    Claude Code — TS; provenance, stamp, gate, audit, golden tests, mocks
+├── engine/                   Python 3.12 / FastAPI
+│   ├── core/                 Claude Code builds (ddl, solver, rules, interpret, profiles, providers/llm) · Codex examines
+│   ├── render/ geo/ 3d/      Codex builds · Claude Code examines
+│   └── providers/            Codex builds render, video, voice, geo adapters
+├── trust/                    Claude Code builds (provenance, stamp, gate, audit) · Codex writes trust/tests/
 ├── app/                      Claude Code — Next.js 15
 ├── profiles/                 generic/, gb-eng-residential/, us-ibc-base/, ng-la/ (+ tests)
-├── fixtures/                 golden DDL, check results, stamps, eval manifests
+├── fixtures/core/            Codex (examiner) — golden DDL, check results, stamps
+├── fixtures/render/          Claude Code (examiner) — render goldens, drift fixtures
+├── fixtures/eval/            shared — eval manifests and reports
 └── .github/workflows/        ci.yml (layers 1–5), nightly-eval.yml
 ```
 

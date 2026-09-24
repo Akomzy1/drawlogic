@@ -5,7 +5,7 @@
 | **Status** | Draft for review |
 | **Owner** | Tokunbo Akomolede (AkomzyAi Consulting Ltd) |
 | **Date** | 15 September 2026 (v0.1: 14 September 2026) |
-| **Changes in v0.2** | Adds Idea mode for non-professionals (homeowners, developers, small-business designers); Promote-to-Draft bridge; consumer pricing tier; site-feasibility pulled forward into Stage 2 for Lagos; personas, flows, principles, risks and decisions updated accordingly. v0.2.1 (15 Sept): Find-a-signer reframed as a responsible-charge marketplace (FR-99, 7.11, Decision 8). v0.2.2 (16 Sept): Stage 3 extension — 3D model and studio render (5A, FR-120–127) and four Stage 1 TRD hooks (5A.3). v0.2.3 (16 Sept): site context from geodata (FR-102–106). v0.2.4 (18 Sept): Preview video via generative-video backend (FR-55, FR-127 amended, FR-128–131). v0.2.5 (19 Sept): Learn mode — critique-before-generation student version, also available as a toggle in Idea mode (7.12, FR-140–149; FR-82 replaced) |
+| **Changes in v0.2** | Adds Idea mode for non-professionals (homeowners, developers, small-business designers); Promote-to-Draft bridge; consumer pricing tier; site-feasibility pulled forward into Stage 2 for Lagos; personas, flows, principles, risks and decisions updated accordingly. v0.2.1 (15 Sept): Find-a-signer reframed as a responsible-charge marketplace (FR-99, 7.11, Decision 8). v0.2.2 (16 Sept): Stage 3 extension — 3D model and studio render (5A, FR-120–127) and four Stage 1 TRD hooks (5A.3). v0.2.3 (16 Sept): site context from geodata (FR-102–106). v0.2.4 (18 Sept): Preview video via generative-video backend (FR-55, FR-127 amended, FR-128–131). v0.2.5 (19 Sept): Learn mode — critique-before-generation student version, also available as a toggle in Idea mode (7.12, FR-140–149; FR-82 replaced). v0.2.6 (21 Sept): construction and material defaults are jurisdiction data — no brick cavity walls on a Lagos project unless the user says so (FR-06–09, FR-57a). v0.2.7 (22 Sept): narrated property film — script generated from the DDL with provenance in the narration, Stage 3 with the Studio walkthrough (FR-132–135). v0.2.8 (22 Sept): AI model allocation re-set for Claude Opus 5.5 — runtime routing, Opus 5.5 integration rules, build-time builder/examiner split between Claude Code and Codex (§8A) |
 | **Inputs** | Concept doc (universal, multi-discipline, v2); Competitive analysis & innovation strategy (Sept 2026 research report); Tokunbo's standard build methodology |
 | **Next artefacts** | TRD (DDL schema, profile schema, rule engine) → MVP scope → user flow → design system → DB schema → monetisation → launch → acquisition → growth |
 
@@ -149,6 +149,11 @@ It is *not* marketed as "AI that edits or renders drawings" — natural-language
 - FR-124 (P2) **Fidelity by construction.** Studio renders are ray-traced from the model, so the diffusion drift check does not apply; the render's model hash is the guarantee. Diffusion renders remain for Idea mode and fast professional variants.
 - FR-125 (P2) **Hand-off exports.** GLB/FBX with materials and IFC so users can open the model in Twinmotion, Lumion, D5, Unreal or their BIM tool. Marketed as export, never as integration.
 - FR-126 (P2) **Speckle sync** (optional, demand-gated) for two-way exchange with Revit/ArchiCAD teams.
+- **Narrated property film.** For estate agents, developers and sellers: a walkthrough with a spoken explainer generated from the drawing, not from a prompt. See FR-132–135 below.
+- FR-132 (P2) **Script from the DDL.** A narration script is generated from the resolved model — room names, areas, orientation, storey heights, materials, what is existing vs proposed — with every spoken fact traced to a DDL element and its `source`. The script generator never invents a fact absent from the model.
+- FR-133 (P2) **Provenance in the narration.** Any fact whose element is `ai_inferred` or `verify: true` is spoken with a hedge ("the ceiling height shown is assumed at 2.7 metres") or omitted; the script carries the same fail-closed discipline as the Standards Report. Facts from `user` or `reference` elements are spoken as stated.
+- FR-134 (P2) **Voice and sync.** Text-to-speech via a voice provider behind the provider abstraction (engine type `voice`), synced to the Studio camera path so each room's narration plays as the camera enters it; language and units from the project profile. Output: MP4 with narration, burned or soft subtitles from the script, the model and drawing hashes in the metadata; an optional presenter overlay is a separate, clearly labelled add-on. Proposed (unbuilt) properties carry the "Illustrative" caption throughout.
+- FR-135 (P1, Stage 2 interim) **Narrated property story.** Before the Studio walkthrough ships, the same DDL-driven, provenance-aware script narrates a stitched sequence of geometry-locked stills and Preview video clips (FR-55). Not labelled a walkthrough; positioned as a listing story for estate agents and developers, and the natural product for the Property Potential use case.
 - FR-127 (P2, amended v0.2.4) **Generative video is preview-grade.** Generative video (Idea-mode teasers and Preview video for paid tiers, FR-55) is capped at 10 seconds per clip, always starts from a geometry-locked Drawlogic still, and is never sold as cinematic output or as a substitute for the Studio render tier (FR-123). Only ray-traced Studio output may be described as a flythrough or walkthrough of the model.
 
 **5A.1a Generative-video backend (Stage 2, precedes 5A)**
@@ -203,6 +208,12 @@ Priority: **P0** = Stage 1 must-have · **P1** = Stage 1 should-have / Stage 2 �
 - FR-04 (P0) Every project displays its **coverage statement**: profiles in use, tier of each, signer of each, checks available vs not available.
 - FR-05 (P1) Project memory: confirmed interpretations and user corrections persist per project and per workspace (the equivalent of SWAPP's "workflow memory", scoped to conventions and decisions, not drawings).
 
+**Construction and material defaults (jurisdiction data, never prompt-dependent)**
+- FR-06 (P0) Every jurisdiction profile carries a `construction_defaults` block: typical wall build-ups, frame type, roof types, floor construction, window and door systems, external and internal finishes, and the typical-details library keyed to those methods. Examples: NG-LA — sandcrete block walls with cement render and paint, reinforced concrete frame and slabs, aluminium sliding windows, long-span aluminium roofing sheets or concrete flat roof with parapet, ceramic/porcelain floor tiles; GB-ENG — brick outer leaf / cavity / block inner leaf, timber trussed pitched roof with concrete or clay tiles, uPVC or aluminium windows, plasterboard and skim.
+- FR-07 (P0) Whenever a material or construction method is not stated by the user, the compiler (Draft and Idea), the typical-details library and the Render Studio material map take the value from the active jurisdiction profile's `construction_defaults`, record it as `source: profile` with the profile version, and list it in the assumptions panel or interpretation card in plain language ("I assumed sandcrete block walls with cement render — the usual construction in Lagos"). A user statement always overrides the default and becomes `source: user`.
+- FR-08 (P0) The Generic profile resolves construction defaults by country and climate region where no signed jurisdiction profile exists (e.g. West Africa coastal → block-and-render, RC frame; Gulf → block, RC frame, external insulation and render; Northern Europe → brick or timber frame). These are recorded as `ai_inferred` with reduced confidence and `verify: true`, and in Draft mode the interpretation card asks the user to confirm them before generation.
+- FR-09 (P0) Standards hierarchy for materials: the project jurisdiction's construction defaults govern; a client or office profile can override them only where it explicitly declares a material default, and the override is shown as such. A UK client standard attached to a Lagos project does not silently change the walls to brick cavity construction. **Test:** a Lagos project with no material instruction never yields a brick cavity wall build-up in DDL, typical details or renders; a Banbury project never yields sandcrete block by default.
+
 ### 7.2 Input and interpretation
 - FR-10 (P0) Inputs: free text; sketch canvas; upload of PDF, DXF, PNG/JPG; site photo. Voice (P1, via transcription) — a differentiator no competitor ships, cheap to add once text works.
 - FR-11 (P0) Reference ingestion: DXF parsed to DDL objects with `source: reference`; PDF/image interpreted by vision model with per-object confidence.
@@ -246,6 +257,7 @@ Priority: **P0** = Stage 1 must-have · **P1** = Stage 1 should-have / Stage 2 �
 
 ### 7.7 Export
 - FR-57 (P0) DXF (layers, blocks, dims, text preserved), PDF (vector, title block, stamp), SVG.
+- FR-57a (P0) Render Studio material defaults come from `construction_defaults` (FR-06–09), never from the image model's priors: the material map passed as conditioning names the profile's materials explicitly, and the render prompt is assembled from the material map, not from free text about the building type.
 - FR-58 (P2) DWG via licensed library; IFC via ifcopenshell.
 - FR-59 (P0) Free-tier exports carry a visible "AI-assisted — professional verification required" stamp and Drawlogic title block; paid tiers substitute the practice title block and QA block.
 
@@ -334,6 +346,51 @@ Principle: teach before you draw. For a verified student account the compiler do
 - **Localisation.** Annotation language and units from profile; UI English at launch, Yoruba/French/Arabic UI candidates Stage 3.
 
 ---
+
+## 8A. AI model allocation (v0.2.8, 22 September 2026)
+
+**Principle.** Models are components behind `contracts/providers`, configured in `contracts/models.json`, never hard-coded. The DDL, constraint solver and rule engine are deterministic code and call no model at runtime — "which model runs the rule engine" is a build-time question (who writes the code), not a runtime one. Every generated image, clip or voice comes from a render/voice provider, never from a language model. Allocation is re-decided by the eval harness (TESTING.md) each quarter and on each major model release.
+
+**8A.1 Runtime routing (defaults at 22 Sept 2026)**
+
+| Task | Default model | Effort | Rationale |
+|---|---|---|---|
+| Routing, classification, plain-language rewrites, tooltips | Claude Haiku 4.5 | — | Cheapest; latency |
+| Idea mode: interpretation, options, assumptions (DDL-first) | Claude Sonnet 5 | low–medium | < 30 s and consumer-tier economics |
+| Learn mode: inspiration and critique | Claude Sonnet 5 | medium | Cited, graded critique on the free student tier |
+| **Promote to Draft** (assumptions → interpretation-card questions) | Claude Opus 5.5 | medium | The funnel's integrity point; provenance must survive |
+| Draft interpretation from references (PDF/image/sketch/photo → card) | **Eval-decided**; provisional Claude Opus 5.5 | high | Candidates Opus 5.5, Sonnet 5, GPT-6 Astra; Opus 5.5 provisional because Anthropic reports sharper reading of diagrams and layout-dependent visuals |
+| Draft compile (card → DDL), natural-language edits | Claude Opus 5.5 | medium | Structured output against the DDL schema |
+| Check explanations, standards-hierarchy conflicts | Claude Opus 5.5 | medium | Reasoning over rule text; never decides pass/fail |
+| Profile drafting from regulatory documents | Claude Opus 5.5 via Batch API | high | Long documents; not latency-bound; half price |
+| Narration scripts (FR-132–135) | Claude Opus 5.5 | medium | Fail-closed facts from DDL |
+| Stills, video, voice | Render/voice providers (5A.1a, FR-134) | — | Pixels and audio are never an LLM output |
+| Stage 3 Blender scene assembly | Deterministic scripts, no runtime agent | — | Scripts are written at build time (8A.3) |
+
+GPT-6 Astra is a runtime candidate only for reference interpretation, and only if it wins the eval and OpenAI's API terms exclude training on inputs (PROVIDERS.md). Claude Fable 5.1 is an eval ceiling reference, not a production default, at $10/$50.
+
+Indicative cost per Idea concept with a cached ~30k-token prefix (profile stack, schema, pack vocabulary): about $0.06 on Sonnet 5 and $0.12 on Opus 5.5 — acceptable for Promote and Draft, not as the default under a $14/month tier. Estimates, to be replaced by eval measurements.
+
+**8A.2 Claude Opus 5.5 integration rules (from Anthropic's Opus 5.5 documentation)**
+- **No forced tool use.** `tool_choice` `any`/`tool` returns an error. All structured outputs — interpretation payload, DDL diffs, critique points, narration segments — use structured outputs or strict tool use with `tool_choice: auto`, with the schemas in `contracts/`.
+- **Thinking is always on; effort is the control.** Default effort is `medium`; every call sets effort explicitly from `models.json` and leaves `max_tokens` headroom for thinking.
+- **Thinking blocks are bound to the model and to an unchanged prefix.** For accounts created after 31 August 2026 a changed system prompt or tools before a replayed thinking block returns an error. Workspace conversations are therefore append-only; profile, mode or drawing-context changes enter as mid-conversation system messages; a thread never switches model mid-conversation — a model change starts a new thread seeded from the DDL, which is the source of truth anyway.
+- **Refusals are handled, never hidden.** `stop_reason: refusal` triggers the configured fallback; the event is logged and surfaced; output is never silently altered.
+- **Caching is designed in.** Profile stack, schemas, pack vocabulary and typical details form a stable cached prefix (512-token minimum; Opus 5.5 cache reads $0.20 per million).
+- **Compaction on demand** for long Draft workspace sessions.
+
+**8A.3 Build-time allocation (which agent writes which code)**
+
+| Area | Builder | Examiner (writes the gating tests) |
+|---|---|---|
+| `contracts/` | Claude Code (drafts; PR-only thereafter) | Codex reviews |
+| `engine/core/` — DDL, solver, rule runtime, interpret, critique, narration, profile drafting | **Claude Code (Opus 5.5)** | **Codex** — golden fixtures and property tests |
+| `trust/` — provenance, stamp, gate, audit, verification | Claude Code | Codex — trust-rule and gate tests |
+| `app/`, `profiles/` | Claude Code | Codex — journey and profile tests |
+| `engine/render/`, `engine/geo/`, `engine/providers/` (render, video, voice, geo adapters), `engine/3d/` (Stage 3 extrusion and Blender pipeline) | **Codex (GPT-6 Astra)** | Claude Code — render fixtures, drift tests |
+| `site/` (marketing) | Codex | Claude Code — banned-words and accessibility tests |
+
+Rule: the agent that builds a module never writes the tests that gate it. This is generator/examiner separation applied to code as well as to runtime output.
 
 ## 9. Key user flows
 

@@ -1,6 +1,6 @@
 # BUILD_PROMPTS.md — sequenced build prompts
 
-Run in order. Each prompt names its owner (CC = Claude Code in `drawlogic-trust`; CX = Codex in `drawlogic-engine`), its inputs, deliverables and gate. Do not start a prompt whose gate predecessor is red. Every prompt implicitly begins: *"Read CLAUDE.md/AGENTS.md, load the two skills, read docs/PRD.md sections named, check docs/DECISIONS.md; stop on any OPEN decision you need."*
+Run in order. Updated 22 Sept 2026 for PRD §8A: Claude Code (Opus 5.5) builds contracts, `engine/core/`, `trust/`, `app/`, `profiles/`; Codex (GPT-6 Astra) builds `engine/render/`, `engine/geo/`, `engine/providers/`, `engine/3d/`, `site/`; **whoever builds a module, the other agent writes its gating tests first**. Each prompt names its builder, its examiner (CC = Claude Code in `drawlogic-trust`; CX = Codex in `drawlogic-engine`), its inputs, deliverables and gate. Do not start a prompt whose gate predecessor is red. Every prompt implicitly begins: *"Read CLAUDE.md/AGENTS.md, load the two skills, read docs/PRD.md sections named, check docs/DECISIONS.md; stop on any OPEN decision you need."*
 
 ---
 
@@ -16,37 +16,37 @@ git init on main; add ../drawlogic-trust (trust-spine) and ../drawlogic-engine (
 ```
 Gate: CI green on an empty repo; prototype files present.
 
-## Prompt 2 — Fixtures and golden tests (CC) · before any engine code
+## Prompt 2 — Core fixtures and golden tests (builder CX as examiner of core) · before any core code
 ```
-From contracts/examples and the twelve architecture detail types in PRD §7.3 FR-23, write fixtures/: for each detail type a valid DDL, its resolved DDL after the solver, and its expected check result against Generic + GB-ENG residential v0.1 (mark every expected ✓ only where the rule will be verified — otherwise ⚠ unverified). Add three Idea-mode fixtures (kitchen extension, restaurant, Lekki site) with expected assumptions lists, and two Learn-mode fixtures with expected critique points (each with reason and why-text). Write trust/tests/engine/ golden tests that load fixtures and call the engine through trust/mocks/ interfaces. Tests must fail now (engine absent).
+From the PRD (not from any implementation), contracts/examples and the twelve architecture detail types in PRD §7.3 FR-23, write fixtures/core/: for each detail type a valid DDL, its resolved DDL after the solver, and its expected check result against Generic + GB-ENG residential v0.1 (mark every expected ✓ only where the rule will be verified — otherwise ⚠ unverified). Add three Idea-mode fixtures (kitchen extension, restaurant, Lekki site) with expected assumptions lists, and two Learn-mode fixtures with expected critique points (each with reason and why-text). Add property tests (hypothesis) for solver constraint conservation, determinism across two runs, fail-closed rule evaluation (no ✓ without verified+signed rule), provenance preserved through solving, engineering values never invented, and FR-09 construction defaults by jurisdiction. Tests call engine/core through its FastAPI contract. They must fail now (core absent). Also write trust/tests/ gate state-machine and audit hash-chain tests from PRD §7.11 and §7.5. In parallel, CC writes fixtures/render/ for Codex's renderers (SVG/DXF structure goldens for the twelve details, drifted-image fixture, preview-label fixture).
 ```
 Gate: fixtures validate; golden tests exist and fail for the right reason.
 
-## Prompt 3 — Profiles v0.1 (CC)
+## Prompt 3 — Profiles v0.1 (builder CC · examiner CX writes profile test cases)
 ```
-Author profiles/generic/ (conventions keyed by region: units, sheets, layer standard, symbol set; good-practice checks: geometry closure, dimension chain integrity, legend/symbol consistency, missing annotation, thermal-line drawn, drainage path drawn) and profiles/gb-eng-residential/ v0.1 (conventions; required-constraint lists for the twelve detail types, Draft and Idea variants; rules with document refs to Approved Documents L, F, C, B, M and relevant BS/PAS, every rule with a plain-language why; typical details; coverage statement). All rules state: unverified until a signer record is added. Add profile tests. Stub profiles/us-ibc-base/ and profiles/ng-la/ with conventions only and an explicit "no rules yet" coverage statement.
+Author profiles/generic/ (conventions keyed by region: units, sheets, layer standard, symbol set; good-practice checks: geometry closure, dimension chain integrity, legend/symbol consistency, missing annotation, thermal-line drawn, drainage path drawn) and profiles/gb-eng-residential/ v0.1 (conventions; required-constraint lists for the twelve detail types, Draft and Idea variants; rules with document refs to Approved Documents L, F, C, B, M and relevant BS/PAS, every rule with a plain-language why; typical details; construction_defaults per FR-06; coverage statement). All rules state: unverified until a signer record is added. Add profile tests, including the FR-09 material-default test. Stub profiles/us-ibc-base/ and profiles/ng-la/ with conventions and construction_defaults (NG-LA: sandcrete block + render, RC frame, aluminium windows, long-span sheet or concrete flat roof) and an explicit "no rules yet" coverage statement. Generic: construction defaults keyed by country/climate region.
 ```
 Gate: profiles validate against contracts/profile.schema.json; coverage statements generated.
 
-## Prompt 4 — DDL parse/validate + solver (CX)
+## Prompt 4 — DDL parse/validate + solver (builder CC in engine/core · examiner CX)
 ```
 Implement engine/ddl/ (parse, validate, version, diff, hash) and engine/solver/ (constraints as first-class; sum/equality/offset/min/max; conflict surfacing, never silent resolution; shapely/networkx for topology). Make fixtures/ golden tests for resolved DDL pass. Property tests: constraint conservation, determinism across runs, provenance preserved through solving. Expose POST /ddl/validate and /ddl/resolve.
 ```
 Gate: solver goldens green; property tests green.
 
-## Prompt 5 — Renderers (CX)
+## Prompt 5 — Renderers (builder CX · examiner CC via fixtures/render)
 ```
 Implement engine/render/: SVG (line weights, hatching, dimension ticks, leaders, layers) driven by profile conventions; DXF via ezdxf preserving layers/blocks/dims/text; PDF via Cairo with title block and stamp block placeholder; artefacts: line-art, depth map, material map keyed by material_id. Golden tests compare SVG/DXF structure (not pixels) for the twelve details. Expose /render/{svg,dxf,pdf,artefacts}.
 ```
 Gate: renderer goldens green; DXF opens in a reference CAD viewer (attach screenshot).
 
-## Prompt 6 — Rule engine runtime (CX)
+## Prompt 6 — Rule engine runtime (builder CC in engine/core · examiner CX)
 ```
 Implement engine/rules/: load profile stacks (jurisdiction → regional → client → office → manufacturer), evaluate rules as pure functions over resolved DDL, emit contracts/check-result (status, reason codes fail|unverified|no_rule|needs_input, checks_not_performed always present, blocked list, auto_fix availability). Never ✓ without state=verified and a signer. Deterministic auto_fix application returning a DDL diff with source=auto_fix. Make fixtures/ check-result goldens pass. Property test: no ✓ without verified+signed rule. Expose /check and /check/autofix.
 ```
 Gate: check goldens green; fail-closed property test green.
 
-## Prompt 7 — Trust spine core (CC)
+## Prompt 7 — Trust spine core (builder CC · examiner CX)
 ```
 Implement trust/: provenance service (enforces source/confidence on every object; verify flag thresholding from profile); rule-state enforcement wrapper over engine /check (rejects any ✓ lacking verified+signer as a hard error and logs it); stamp generator from contracts/stamp.schema.json + copy.json; hash-chained audit log (Supabase table + verification function); export assembler that injects the stamp and watermarks (concept, student, Free tier). Tests per trust-rules skill §3, §5, §7, §8.
 ```
@@ -58,9 +58,9 @@ Load the fidelity skill. Port design/prototype/tokens.css into tailwind.config.t
 ```
 Gate: fidelity checklist complete for five screens; snapshots green.
 
-## Prompt 9 — Interpreter and compiler (CX)
+## Prompt 9 — Interpreter, compiler and model routing (builder CC in engine/core · examiner CX)
 ```
-Implement engine/interpret/: interpreter (text/sketch/PDF/image/photo → contracts/interpretation payload with per-object source and confidence, missing[], blocked[]; Draft vs Idea vs Learn required-constraint variants from profile); compiler (confirmed card → DDL). Providers behind contracts/providers/llm.ts (Claude tiered) with a second adapter slot for provider comparison. Build the eval harness in fixtures/eval/ (manifest format, metrics: recall/precision, dimension accuracy, ECE, card acceptance) and run it on the seed set. Never emit an engineering value that was not supplied.
+Implement engine/interpret/: interpreter (text/sketch/PDF/image/photo → contracts/interpretation payload with per-object source and confidence, missing[], blocked[]; Draft vs Idea vs Learn required-constraint variants from profile); compiler (confirmed card → DDL). Providers behind contracts/providers/llm.ts with model IDs and effort from contracts/models.json (PRD §8A.1). Follow §8A.2: structured outputs or strict tool use with tool_choice auto (no forced tool use), explicit effort per call, append-only threads with mid-conversation system messages, no model switch within a thread, refusal fallback logged. Cache the stable prefix. Adapters for Claude (Opus 5.5, Sonnet 5, Haiku 4.5) and an OpenAI adapter for GPT-6 Astra as an eval candidate only. Build the eval harness in fixtures/eval/ (manifest format, metrics: recall/precision, dimension accuracy, ECE, card acceptance) and run it on the seed set across Opus 5.5, Sonnet 5 and GPT-6 Astra for reference interpretation, reporting cost and latency per drawing alongside accuracy; write the result into DECISIONS.md row 13. Never emit an engineering value that was not supplied.
 ```
 Gate: interpretation fixtures green; eval report produced; blocked-values test green.
 
@@ -76,7 +76,7 @@ Implement trust/gate (state machine per contracts/signing-gate.schema.json), 2FA
 ```
 Gate: gate state-machine tests green; sign route matches prototype.
 
-## Prompt 12 — Render providers and fidelity (CX)
+## Prompt 12 — Render providers and fidelity (builder CX · examiner CC)
 ```
 Implement engine/providers/render/: diffusion adapter (conditioned on line-art/depth/material map; region edits for material swaps; provider per Decision 6), edge-overlay fidelity scorer against contracts/render.thresholds.json with fail-and-retry, Higgsfield adapter for generative_video (image-to-video; start+end frame where supported; label from copy.json; no fidelity score; moderation-failure retry then fail), raytraced stub returning not_available. Every job records source drawing hash and revision; outdated detection. Expose /render/still, /render/preview-video.
 ```
@@ -88,16 +88,16 @@ Build render.html and preview-video.html routes to the prototype: engine selecto
 ```
 Gate: fidelity checklist; no fidelity score on preview tiles (test).
 
-## Prompt 14 — Learn mode (CC + CX)
+## Prompt 14 — Learn mode (builder CC · examiner CX writes Learn fixtures first)
 ```
-CX: engine/interpret/critique — given a student sketch/description and profile, return inspiration (principles + partial diagrams from typical details) and graded critique points (green/amber/red, reason, source or "general good practice — not a verified check", why-text, tutor-discuss tag for judgement items), plus a compare payload (differences between original and generated with resolved critique point ids). Never a copy-ready detail at the inspiration step.
+CC: engine/core/interpret/critique (Sonnet 5 per §8A.1) — given a student sketch/description and profile, return inspiration (principles + partial diagrams from typical details) and graded critique points (green/amber/red, reason, source or "general good practice — not a verified check", why-text, tutor-discuss tag for judgement items), plus a compare payload (differences between original and generated with resolved critique point ids). Never a copy-ready detail at the inspiration step.
 CC: Learn flow in trust (generation lock until one revision cycle; logged "Generate anyway"; integrity summary computed from provenance and critique state; student watermark), and learn-critique / learn-compare routes to the prototype, plus the "Teach me first" toggle on idea-results. Learn fixtures green.
 ```
 Gate: journey C runs end to end; integrity export fields present.
 
-## Prompt 15 — Profiles UI: marketplace and Authoring Studio (CC + CX)
+## Prompt 15 — Profiles UI: marketplace and Authoring Studio (builder CC · examiner CX)
 ```
-CX: engine/profiles — validate authored profiles; AI-assisted rule drafting from an uploaded document (every drafted rule state=unverified); profile diff and version bump.
+CC: engine/core/profiles — validate authored profiles; AI-assisted rule drafting from an uploaded document via Opus 5.5 on the Batch API (every drafted rule state=unverified); profile diff and version bump.
 CC: profiles.html routes to the prototype (browse with tier/signer badges; Authoring Studio with unverified highlighting, structured rule editor, signing with credential confirmation, versioning, publish private/link/marketplace with 70/30 note). Marketplace listing model in Supabase; Stripe Connect payout stub.
 ```
 Gate: an authored profile round-trips through engine validation and appears in browse.
