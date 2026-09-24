@@ -2,7 +2,7 @@
 
 Purpose: nothing gets built silently. Any screen, section or component that the approved prototype or marketing design does not cover — or covers differently from PRD v0.2.5 — is listed here with its status, and goes back through the design pipeline (Claude Design → approval → prototype export) before it is built.
 
-Precedence: `docs/PRD.md` wins on content and rules; the approved prototype wins on layout and visuals.
+Precedence: one repo-wide rule, defined in `skills/drawlogic-prototype-fidelity/SKILL.md` ("Prototype ↔ PRD precedence") and applying to `app/` and `site/`. In short: `docs/PRD.md` wins on content and rules; the approved prototype wins on layout and visuals; mismatches are recorded here.
 
 ## Known gaps at 19 September 2026 (statuses checked against the prototype 24 September 2026)
 

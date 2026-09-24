@@ -1,6 +1,6 @@
 ---
 name: drawlogic-prototype-fidelity
-description: Use this skill whenever building, editing or reviewing any UI code in the Drawlogic repository — pages, routes, components, layouts, styling, Tailwind config or design tokens in app/ — and before writing any screen from a feature description. Triggers on any mention of screens, pages, components, layout, styling, tokens, Idea mode, Draft workspace, Check panel, Render Studio, Learn mode, marketplace, signing, or "build the frontend for X". It enforces that the approved prototype files in design/prototype/ are the binding source of truth for Drawlogic's UI. Do not skip it by assuming general frontend practice or shadcn defaults are sufficient — the structural and visual decisions are already made and approved.
+description: Use this skill whenever building, editing or reviewing any UI code in the Drawlogic repository — pages, routes, components, layouts, styling, Tailwind config or design tokens in app/ or site/ (the marketing site) — and before writing any screen or marketing page from a feature description or brief. Triggers on any mention of screens, pages, components, layout, styling, tokens, Idea mode, Draft workspace, Check panel, Render Studio, Learn mode, marketplace, signing, marketing site, landing page, Home, Pricing, or "build the frontend for X". It enforces that the approved prototype files in design/prototype/ are the binding source of truth for Drawlogic's UI — the app screens for app/ and marketing-site.html for site/. Do not skip it by assuming general frontend practice or shadcn defaults are sufficient — the structural and visual decisions are already made and approved.
 ---
 
 # Drawlogic Prototype Fidelity
@@ -33,6 +33,7 @@ Located in `design/prototype/`. If this folder is missing or a screen you need i
 | `lagos-readiness.html` | EPPPS checklist split "Drawlogic produces / you provide" | Draft |
 | `settings.html` | Roles, profile stack, data, billing, audit log, plan gates | — |
 | `index.html` | Journeys A/B/C and the fidelity statement | — |
+| `marketing-site.html` | The marketing site: every page and section of `site/` | Site |
 
 Open the file for the screen you are building. Building the Check panel from the Draft workspace's components is not fidelity.
 
@@ -58,8 +59,24 @@ Open the file for the screen you are building. Building the Check panel from the
 - Distinct panels stay distinct: the assumptions panel, the critique panel and the Standards Report are three different components with different affordances. Do not merge them into one generic list.
 - Copy is part of the design. Plain language in Idea and Learn; precise in Draft. The tooltip pattern ("coverage" on hover of "how much of the plot the building takes up") is required, not optional.
 
-## Known prototype ↔ PRD precedence
-`docs/PRD.md` wins on content and rules; the prototype wins on layout and visuals. If the prototype shows a value that contradicts the PRD (a price, a credit cost, a tier feature), build the PRD value and record the mismatch in the PR.
+## Prototype ↔ PRD precedence (the single repo-wide rule)
+This is the one precedence rule for the repository. It applies to `app/` and `site/`; `design/prototype/index.html` and `docs/DESIGN_GAPS.md` point here rather than restating it.
+
+- **`docs/PRD.md` wins on content and rules:** prices, credit costs, tier features, copy rules, labels, what a stamp or report shows, live vs roadmap.
+- **The prototype wins on layout and visuals:** section order, structure, components, spacing, tokens, imagery, motion.
+
+Where they disagree, build the PRD value in the prototype's layout, record the mismatch in `docs/DESIGN_GAPS.md`, and name it in the PR. Never resolve a mismatch that touches an OPEN decision in `docs/DECISIONS.md` — stop and ask.
+
+## The marketing site (`site/`)
+`site/` is built to `design/prototype/marketing-site.html` with the same force as `app/` is built to the app screens. The prototype is a bundled page: open it in a browser and use its page navigation to reach each marketing page.
+
+- **Pages and sections:** every page in the prototype exists on the site, with its sections in the prototype's order and the prototype's structure, components, spacing, tokens and motion. Copy matches the prototype except where the PRD governs the value (see precedence).
+- **Assets:** only approved assets listed in `site/public/media/manifest.json`, referenced by the path in the manifest and matching its recorded hash. No asset is used from outside the manifest.
+- **Labels:** every generated still carries "Illustrative — generated from a Drawlogic drawing"; every generated video also carries "Generated preview — not a model render". Roadmap disciplines and jurisdictions keep their roadmap tag.
+- **Honesty strips** (liability wording, "Your drawings are never used for training", concept and preview labels) are real DOM text — never baked into an image, canvas or CSS pseudo-content.
+- **Motion:** every animation has a `prefers-reduced-motion` path that leaves all content visible and nothing autoplaying.
+- **Not covered by the prototype:** a `docs/DESIGN_GAPS.md` entry before it is built.
+- **Tests:** `site/tests/` (TESTING.md layer 5a) is written by Claude Code as examiner; the builder never edits it.
 
 ## When the prototype doesn't cover something
 1. Never invent a component and ship it silently. Flag it: "The prototype doesn't cover X — here is an approach consistent with the tokens; it has not been design-approved."
@@ -78,10 +95,11 @@ Open the file for the screen you are building. Building the Check panel from the
 ## Mobile
 Idea and Learn screens are mobile-first (that audience arrives from social). The prompt box must be the first element on a phone. Draft screens may assume tablet/desktop but must not break at 375 px. Verify every PR at 375, 768 and 1280.
 
-## PR checklist (paste into every app/ PR)
-- [ ] Prototype file named; side-by-side screenshot attached
+## PR checklist (paste into every app/ and site/ PR)
+- [ ] Prototype file named (for `site/`, the marketing page and sections); side-by-side screenshots attached at 375 / 768 / 1280
 - [ ] Tokens only (build fails on unapproved colour)
 - [ ] All binding behaviours for this screen verified
 - [ ] Banned-words test green
 - [ ] 375 / 768 / 1280 verified
-- [ ] Gaps recorded in `docs/DESIGN_GAPS.md`
+- [ ] Gaps and PRD mismatches recorded in `docs/DESIGN_GAPS.md`
+- [ ] `site/` only: assets from the manifest, labels and honesty strips as DOM text, reduced-motion path, `site/tests/` green

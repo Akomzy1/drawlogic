@@ -17,7 +17,8 @@ You are one of two agents on this repository. As of 22 September 2026 (PRD §8A)
 | `engine/core/` — `ddl/`, `solver/`, `rules/`, `interpret/` (interpreter, compiler, critique, narration, profile drafting) | **You** | Codex (`fixtures/core/`, property tests) |
 | `trust/` | **You** | Codex (`trust/tests/` gate and rule tests) |
 | `app/`, `profiles/` | **You** | Codex (journey tests, profile test cases) |
-| `engine/render/`, `engine/geo/`, `engine/providers/`, `engine/3d/`, `site/` | Codex — **do not edit** | You (`fixtures/render/`, drift and banned-word tests) |
+| `engine/render/`, `engine/geo/`, `engine/providers/`, `engine/3d/` | Codex — **do not edit** | You (`fixtures/render/`, drift and banned-word tests) |
+| `site/` (marketing) | Codex — **do not edit** outside `site/tests/` | **You**: `site/tests/` — fidelity to `design/prototype/marketing-site.html` under the fidelity skill (TESTING.md layer 5a), written from the prototype and PRD before Codex builds; failures go to Codex as issues |
 | `docs/` | shared | — |
 
 Never edit a test file that gates your own module. If you believe a Codex-written fixture is wrong, open an issue citing the PRD clause; do not change it.

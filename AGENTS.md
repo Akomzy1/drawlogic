@@ -12,7 +12,8 @@ You are one of two agents on this repository. As of 22 September 2026 (PRD §8A)
 ## Ownership
 | Path | Builder | Examiner |
 |---|---|---|
-| `engine/render/` (SVG/DXF/PDF, line-art/depth/material-map artefacts), `engine/geo/`, `engine/providers/` (render: diffusion, generative_video, raytraced, voice; geo tiles/terrain/OSM), `engine/3d/` (Stage 3 extrusion, IFC, Blender pipeline), `site/` | **You** | Claude Code (`fixtures/render/`, drift, label and banned-word tests) |
+| `engine/render/` (SVG/DXF/PDF, line-art/depth/material-map artefacts), `engine/geo/`, `engine/providers/` (render: diffusion, generative_video, raytraced, voice; geo tiles/terrain/OSM), `engine/3d/` (Stage 3 extrusion, IFC, Blender pipeline) | **You** | Claude Code (`fixtures/render/`, drift, label and banned-word tests) |
+| `site/` (marketing) — built to `design/prototype/marketing-site.html` under `skills/drawlogic-prototype-fidelity/SKILL.md` | **You** | Claude Code (`site/tests/`: visual fidelity, section order, copy, asset manifest, labels, reduced motion, banned words, Lighthouse, WCAG 2.2 AA) |
 | `engine/core/`, `trust/`, `app/`, `profiles/` | Claude Code — **do not edit** | **You**: `fixtures/core/` golden DDL, resolved DDL and check results; property tests (solver conservation, determinism, no ✓ without verified+signed rule, provenance preserved, engineering values never invented, construction defaults by jurisdiction, narration facts traceable); gate state-machine and audit-chain tests; journey tests |
 | `contracts/` | Claude Code drafts; PR-only | You review every contract PR |
 
@@ -25,6 +26,7 @@ As examiner, write fixtures and tests **before** Claude Code builds the module, 
 - Voice (`voice`): script comes from `engine/core` narration output only; you never generate or edit narration text.
 - Geo: Mapbox/Esri tiles only (never Google tiles); imagery date, resolution, boundary source and DEM resolution carried as provenance.
 - Stage 3 Blender: headless deterministic scripts driven by the IFC model and material library; no runtime agent chooses geometry.
+- `site/`: load `skills/drawlogic-prototype-fidelity/SKILL.md` before any change. Build every page to `design/prototype/marketing-site.html` — section order, structure, components, tokens — with PRD values where the two disagree. Use only approved assets listed in `site/public/media/manifest.json`. Anything the prototype does not cover gets a `docs/DESIGN_GAPS.md` entry before it is built. Every `site/` PR attaches prototype vs build side-by-sides at 375, 768 and 1280 and the fidelity checklist. `site/tests/` is Claude Code's; never edit it.
 - No provider-specific code outside its adapter. No banned words in any emitted string.
 - Model calls, if any, go through `contracts/providers` with IDs from `contracts/models.json`.
 
