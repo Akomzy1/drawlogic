@@ -19,6 +19,10 @@ Located in `design/prototype/`. If this folder is missing or a screen you need i
 | `idea-results.html` | Options, numbers, render, assumptions panel, export menu | Idea |
 | `learn-critique.html` | Inspiration, graded critique, locked worked answers, Generate lock | Learn |
 | `learn-compare.html` | Sketch vs generated, feedback report, reflection, integrity export | Learn |
+| `learn-share.html` | Share card after marking: not-yet-marked / marked / under-18 states, card formats, disclosed reward | Learn |
+| `portfolio.html` | Opt-in portfolio: owner / public / under-18 / deleted, per-item remove | Learn |
+| `referrals.html` | Invite classmates, credits, ambassador disclosure | Learn |
+| `challenges.html` | Monthly brief, entry, opt-in public gallery, under-18 state | Learn |
 | `idea-site.html` | Site context panel, massing options over basemap, flags, cost band (FR-151) and uncovered-location state (FR-159) | Idea |
 | `site-boundary.html` | Boundary polygon, survey-plan override, geodata provenance | Idea |
 | `promote.html` | Promote modal → interpretation card | Idea→Draft |
@@ -46,6 +50,7 @@ Open the file for the screen you are building. Building the Check panel from the
 - **Verification stamp** renders exactly the fields and closing sentence in `contracts/copy.json`. It never contains a banned word.
 - **Signing gate:** the Sign control is disabled until every gate item is complete; the disabled state is visible, not hidden.
 - **Idea mode:** Concept watermark on every image and export; no DXF in the export menu; "CAD export available after Promote to Draft" note present; the cost band is shown greyed with a "Stage 2" tag and its tooltip until Stage 2 ships (PRD §5B), never as figures.
+- **Student reach (PRD FR-165–172):** sharing is optional everywhere ("Sharing is optional. It never changes what you can use on your plan."); the share action is disabled with "Available after your work is marked." until marked; a rewarded share carries a locked disclosure label; public features show a disabled under-18 state; nothing is gated on posting, following or tagging.
 - **Learn mode:** Generate is locked until a revision cycle; "Generate anyway" is present, secondary, with its tooltip; worked answers locked until an attempt.
 - **Render Studio:** every variant shows the source drawing hash; diffusion tiles show a fidelity score; Preview video tiles show the preview label and **no** fidelity score; Studio (ray-traced) is greyed with "Stage 3" until it ships. Every render, clip and Idea render tile shows its material basis per material and as a summary line, and "colour approximate" where the colour check flags it (PRD FR-163/164); no "exact match", "exact colour" or "true colour".
 - **Site context:** the boundary source (traced vs survey) and imagery date are visible on the screen, not only in a tooltip.

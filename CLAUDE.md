@@ -3,7 +3,7 @@
 You are one of two agents on this repository. As of 22 September 2026 (PRD §8A) **you build `contracts/` (initial draft), `engine/core/`, `trust/`, `app/` and `profiles/`.** Codex (GPT-6 Astra) builds `engine/render/`, `engine/geo/`, `engine/providers/`, `engine/3d/` and `site/`. **The agent that builds a module never writes the tests that gate it**: Codex writes the golden fixtures and property tests for your modules; you write them for Codex's. Read `AGENTS.md` too.
 
 ## Read before doing anything
-1. `docs/PRD.md` (v0.2.11) — §6 principles, §7.5 trust spine, §7.11 signing, §7.12 Learn mode, §5A (3D, generative video, narration), **§8A model allocation**, Appendices A–C.
+1. `docs/PRD.md` (v0.2.12) — §6 principles, §7.5 trust spine, §7.11 signing, §7.12 Learn mode, §5A (3D, generative video, narration), **§8A model allocation**, Appendices A–C.
 2. `docs/CONTRACTS.md` and `contracts/` — the interfaces. `contracts/models.json` is the only place model IDs and effort levels live.
 3. `design/prototype/` and `skills/drawlogic-prototype-fidelity/SKILL.md` before any `app/` work. **The build must match the prototype.**
 4. `skills/drawlogic-trust-rules/SKILL.md` — non-negotiable product rules, enforced by tests.

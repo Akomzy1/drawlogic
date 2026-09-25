@@ -55,5 +55,8 @@ Materials and construction methods not stated by the user come from the active j
 ## 13a. Narration is a stamp read aloud
 Every spoken fact in a property film traces to a DDL element and its source; `ai_inferred`/`verify` facts are hedged or omitted, never stated as certain. The script generator has no path to invent a fact absent from the model. **Test:** narration fixtures assert every segment carries a source id; a segment with no matching DDL element fails generation.
 
+## 13b. Student reach without compulsion
+Free student access is never conditional on posting, sharing, following or tagging (PRD §6 principle 11, FR-165–172). Student exports always carry "Made with Drawlogic" beside the student watermark. Sharing is optional, unlocks only after the exercise is marked, and any reward is disclosed on the card and caption. Public features are off for under-18 accounts. **Tests:** no code path gates student access (verification, plan, exercises, exports) on a share or social action; every rewarded share carries a disclosure label ("#ad" or "Gifted: Drawlogic credits") that the share flow cannot remove; share and public-posting actions are disabled, with "Available after your work is marked.", until the exercise is marked assessed (or submitted, where the institution allows); share cards, portfolio pages, referrals, ambassador roles and challenge entry are disabled for under-18 accounts; every student export carries the "Made with Drawlogic" mark.
+
 ## 14. Decisions are not defaults
 `docs/DECISIONS.md` lists open decisions. No agent resolves one by assumption. Stop and ask.
