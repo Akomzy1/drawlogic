@@ -19,7 +19,7 @@ Located in `design/prototype/`. If this folder is missing or a screen you need i
 | `idea-results.html` | Options, numbers, render, assumptions panel, export menu | Idea |
 | `learn-critique.html` | Inspiration, graded critique, locked worked answers, Generate lock | Learn |
 | `learn-compare.html` | Sketch vs generated, feedback report, reflection, integrity export | Learn |
-| `idea-site.html` | Site context panel, massing options over basemap, flags | Idea |
+| `idea-site.html` | Site context panel, massing options over basemap, flags, cost band (FR-151) and uncovered-location state (FR-159) | Idea |
 | `site-boundary.html` | Boundary polygon, survey-plan override, geodata provenance | Idea |
 | `promote.html` | Promote modal → interpretation card | Idea→Draft |
 | `draft-workspace.html` | Chat beside drawing, change list, provenance layer, chip | Draft |
@@ -49,6 +49,7 @@ Open the file for the screen you are building. Building the Check panel from the
 - **Learn mode:** Generate is locked until a revision cycle; "Generate anyway" is present, secondary, with its tooltip; worked answers locked until an attempt.
 - **Render Studio:** every variant shows the source drawing hash; diffusion tiles show a fidelity score; Preview video tiles show the preview label and **no** fidelity score; Studio (ray-traced) is greyed with "Stage 3" until it ships.
 - **Site context:** the boundary source (traced vs survey) and imagery date are visible on the screen, not only in a tooltip.
+- **Cost (Stage 2, PRD §5B):** a cost band is always a range with "Indicative — not a quote" and its benchmark source and date visible; where the location has no cost data, "No verified cost data for [jurisdiction] — no cost shown" replaces it and quantities stay. Never a single figure, never another jurisdiction's rates.
 - **Plan gates** render as shown in `settings.html` — a gated feature is visible and locked, never hidden.
 - **Disciplines and jurisdictions are never hidden either.** Roadmap disciplines are selectable with the roadmap note; an uncovered jurisdiction resolves to Generic with the "no local rules claimed" line and an "Author a profile" link, in the New project modal, Browse and Settings.
 
