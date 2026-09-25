@@ -37,7 +37,7 @@ Located in `design/prototype/`. If this folder is missing or a screen you need i
 Open the file for the screen you are building. Building the Check panel from the Draft workspace's components is not fidelity.
 
 ## Design tokens
-`tokens.css` is the authoritative token source. Encode it in `tailwind.config.ts` by **replacing** `theme.colors` (not extending), so an unapproved colour fails at build time. Tokens include the canvas/surface/ink/muted set, one accent blue, one safety amber, and the six provenance colours (`user`, `project`, `reference`, `ai_inferred`, `verify`, `auto_fix`). Type: Inter with tabular figures; JetBrains Mono only for hashes, rule IDs, stamps, code. Take radii, spacing and line weights from the same file.
+`tokens.css` is the authoritative token source. Encode it in `tailwind.config.ts` by **replacing** `theme.colors` (not extending), so an unapproved colour fails at build time. Tokens include the canvas/surface/ink/muted set, one accent blue, one safety amber, and the six provenance colours (`user`, `project`, `reference`, `ai_inferred`, `verify`, `auto_fix`). Type: Source Sans 3 with tabular figures; IBM Plex Mono only for hashes, rule IDs, stamps, code; Material Symbols Outlined for icons. No other font family. Take radii, spacing and line weights from the same file.
 
 ## Binding UI behaviours (these are product rules, not styling)
 - **Interpretation card gates generation.** Confirm & generate is disabled while "Missing" is non-empty. No route generates a Draft drawing without a confirmed card.

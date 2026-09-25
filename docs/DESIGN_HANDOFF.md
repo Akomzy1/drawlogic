@@ -1,5 +1,7 @@
 # DRAWLOGIC — Design handoff note (Relume wireframes → Claude Design)
 
+> **25 Sept 2026 — Pre-export design brief.** Where it differs from design/prototype/marketing-site.html (Home hero and sections, fonts, section placement, the five-prompt strip, landlord/HMO material), the approved export governs; PRD rules still govern content.
+
 **Scope:** marketing website, 12 pages (Home; Product: Idea mode, For professionals, Students & educators, Render studio, Profile marketplace, Find a signer, Developers; Markets: For regulators & manufacturers, Lagos; Pricing; About/Contact). Revised 19 Sept 2026 for PRD v0.2.5: outcome-first Home, Learn mode, Preview video, site context from geodata, eleven disciplines with live/roadmap states, author-your-own jurisdiction. The wireframes fix section order and content; this note fixes everything the wireframes don't: brand, tone, colour, type, components and the rules that must survive design.
 
 ---

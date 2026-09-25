@@ -15,7 +15,7 @@ Status: OPEN unless marked. Decided items record date and answer.
 | 9 | Idea mode brand | **DECIDED 15 Sept 2026** — one product name, two modes, no separate consumer name; dedicated Lagos page on the site |
 | 10 | Learn mode available to non-students as "Teach me first" toggle | **DECIDED 19 Sept 2026** — yes |
 | 11 | Basemap provider (Mapbox vs Esri) and tile metering rate | OPEN |
-| 12 | Nigeria pricing fixed in NGN for 12 months at the v0.2 table | OPEN — proposed ₦6k/20k/75k/450k |
+| 12 | Nigeria pricing fixed in NGN for 12 months at the v0.2 table | **DECIDED 25 Sept 2026** — ₦6,000 Idea (monthly) / ₦12,000 Idea per project / ₦20,000 Individual / ₦75,000 Professional per user / ₦450,000 Practice (5 seats) / ₦60,000 extra seat / ₦8,000 per 100 render credits; fixed for 12 months, Paystack-billed, Nigerian accounts only |
 | 13 | Reference-interpretation model (Opus 5.5 vs Sonnet 5 vs GPT-6 Astra) | OPEN — eval-decided in Prompt 9; provisional default Opus 5.5 |
 | 14 | Agent allocation: Claude Code builds contracts, engine/core, trust, app, profiles; Codex builds render, geo, providers, 3d, site; each examines the other | **APPLIED 22 Sept 2026** (PRD §8A.3) — revert here if not wanted |
 | 15 | Runtime routing defaults per PRD §8A.1 (Haiku 4.5 / Sonnet 5 / Opus 5.5) | **APPLIED 22 Sept 2026** — revisit on eval results and each model release |

@@ -388,7 +388,7 @@ Indicative cost per Idea concept with a cached ~30k-token prefix (profile stack,
 | `trust/` — provenance, stamp, gate, audit, verification | Claude Code | Codex — trust-rule and gate tests |
 | `app/`, `profiles/` | Claude Code | Codex — journey and profile tests |
 | `engine/render/`, `engine/geo/`, `engine/providers/` (render, video, voice, geo adapters), `engine/3d/` (Stage 3 extrusion and Blender pipeline) | **Codex (GPT-6 Astra)** | Claude Code — render fixtures, drift tests |
-| `site/` (marketing) — built to `design/prototype/marketing-site.html` | Codex | Claude Code — site fidelity tests (TESTING.md layer 5a): visual regression per section, section order, copy, PRD-governed values, manifest assets and hashes, captions and roadmap tags, honesty strips, tokens, copy source, interactive elements, motion and reduced motion, banned words, WCAG 2.2 AA, Lighthouse |
+| `site/` (marketing) | Codex — built to design/prototype/marketing-site.html under the fidelity skill | Claude Code — site fidelity tests (TESTING.md layer 5a): visual regression per section, section order, copy, PRD-governed values, manifest assets and hashes, captions and roadmap tags, honesty strips, tokens, copy source, interactive elements, motion and reduced motion, banned words, WCAG 2.2 AA, Lighthouse |
 
 Rule: the agent that builds a module never writes the tests that gate it. This is generator/examiner separation applied to code as well as to runtime output.
 
