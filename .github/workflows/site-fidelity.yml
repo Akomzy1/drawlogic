@@ -1,4 +1,6 @@
-# TESTING.md layer 5a: site fidelity tests. Required for any PR that touches site/ or the marketing prototype.
+# TESTING.md layer 5a: site fidelity tests. The gate for any PR that touches site/ or the marketing prototype.
+# With no site/ app in the tree (tests-only changes), the job validates the tests themselves instead:
+# the committed fixture still matches the prototype, and the measurement is stable on identical input.
 name: site-fidelity
 
 on:
@@ -8,6 +10,7 @@ on:
       - "design/prototype/marketing-site.html"
       - "docs/PRD.md"
       - "contracts/copy.json"
+      - ".github/workflows/site-fidelity.yml"
   push:
     branches: [main]
     paths:
@@ -17,7 +20,9 @@ on:
 jobs:
   site-fidelity:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90
+    env:
+      CI: "true"
     steps:
       - uses: actions/checkout@v4
 
@@ -25,11 +30,10 @@ jobs:
         with:
           node-version: 24
 
-      - name: Build the site (static export)
-        working-directory: site
+      - name: Is there a site to test?
+        id: site
         run: |
-          npm ci
-          npm run build
+          if [ -f site/package.json ]; then echo "present=true" >> "$GITHUB_OUTPUT"; else echo "present=false" >> "$GITHUB_OUTPUT"; fi
 
       - name: Install the tests
         working-directory: site/tests
@@ -41,16 +45,29 @@ jobs:
         uses: actions/cache@v4
         with:
           path: site/tests/.cache
-          key: prototype-${{ hashFiles('design/prototype/marketing-site.html', 'site/tests/lib/dom.mjs', 'site/tests/scripts/extract-prototype.mjs') }}
+          key: prototype-${{ runner.os }}-${{ hashFiles('design/prototype/marketing-site.html', 'site/tests/lib/**', 'site/tests/scripts/extract-prototype.mjs') }}
+
+      - name: Validate the tests (fixture matches the prototype; measurement is stable)
+        if: steps.site.outputs.present == 'false'
+        working-directory: site/tests
+        run: |
+          node scripts/extract-prototype.mjs --baselines-only
+          npm run self-check
+
+      - name: Build the site (static export)
+        if: steps.site.outputs.present == 'true'
+        working-directory: site
+        run: |
+          npm ci
+          npm run build
 
       - name: Run site fidelity tests
+        if: steps.site.outputs.present == 'true'
         working-directory: site/tests
-        env:
-          CI: "true"
         run: npm test
 
-      - name: Summarise failures as issues
-        if: failure()
+      - name: Summarise failures as issues (one per page, Home first)
+        if: failure() && steps.site.outputs.present == 'true'
         working-directory: site/tests
         run: npm run issues
 
@@ -59,3 +76,4 @@ jobs:
         with:
           name: site-fidelity-report
           path: site/tests/reports
+          if-no-files-found: ignore

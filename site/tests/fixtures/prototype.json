@@ -372,7 +372,164 @@
           "text": "Contractor ROADMAP",
           "item": "Contractor"
         }
-      ]
+      ],
+      "interactive": [
+        {
+          "kind": "hero-wall",
+          "section": "Anyone can start. Professionals can issue.",
+          "expect": {
+            "reduced": {
+              "advances": false
+            },
+            "full": {
+              "advances": true
+            }
+          }
+        },
+        {
+          "kind": "currency",
+          "section": "Start free. Pay when you issue.",
+          "options": [
+            "GBP",
+            "USD",
+            "NGN"
+          ],
+          "expect": {
+            "reduced": {
+              "initial": {
+                "GBP": "true",
+                "USD": "false",
+                "NGN": "false"
+              },
+              "steps": [
+                {
+                  "choose": "GBP",
+                  "states": {
+                    "GBP": "true",
+                    "USD": "false",
+                    "NGN": "false"
+                  },
+                  "changed": false,
+                  "symbols": [
+                    "£"
+                  ]
+                },
+                {
+                  "choose": "USD",
+                  "states": {
+                    "GBP": "false",
+                    "USD": "true",
+                    "NGN": "false"
+                  },
+                  "changed": true,
+                  "symbols": [
+                    "$"
+                  ]
+                },
+                {
+                  "choose": "NGN",
+                  "states": {
+                    "GBP": "false",
+                    "USD": "false",
+                    "NGN": "true"
+                  },
+                  "changed": true,
+                  "symbols": [
+                    "₦"
+                  ]
+                }
+              ]
+            },
+            "full": {
+              "initial": {
+                "GBP": "true",
+                "USD": "false",
+                "NGN": "false"
+              },
+              "steps": [
+                {
+                  "choose": "GBP",
+                  "states": {
+                    "GBP": "true",
+                    "USD": "false",
+                    "NGN": "false"
+                  },
+                  "changed": false,
+                  "symbols": [
+                    "£"
+                  ]
+                },
+                {
+                  "choose": "USD",
+                  "states": {
+                    "GBP": "false",
+                    "USD": "true",
+                    "NGN": "false"
+                  },
+                  "changed": true,
+                  "symbols": [
+                    "$"
+                  ]
+                },
+                {
+                  "choose": "NGN",
+                  "states": {
+                    "GBP": "false",
+                    "USD": "false",
+                    "NGN": "true"
+                  },
+                  "changed": true,
+                  "symbols": [
+                    "₦"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "motion": {
+        "header": {
+          "time": false,
+          "scroll": false
+        },
+        "Anyone can start. Professionals can issue.": {
+          "time": true,
+          "scroll": false
+        },
+        "A sentence becomes a drawing": {
+          "time": false,
+          "scroll": false
+        },
+        "Idea → Draft → Sign": {
+          "time": false,
+          "scroll": false
+        },
+        "Three things people ask it for": {
+          "time": false,
+          "scroll": false
+        },
+        "The stamp says what was checked, and what was not": {
+          "time": false,
+          "scroll": false
+        },
+        "Disciplines and jurisdictions": {
+          "time": false,
+          "scroll": false
+        },
+        "Start free. Pay when you issue.": {
+          "time": false,
+          "scroll": false
+        },
+        "Start with an idea, or start a draft.": {
+          "time": false,
+          "scroll": false
+        },
+        "footer": {
+          "time": false,
+          "scroll": false
+        }
+      }
     },
     "Idea mode": {
       "route": "/idea-mode",
@@ -643,7 +800,152 @@
         "illustrative": 0,
         "preview_label": 0
       },
-      "roadmap": []
+      "roadmap": [],
+      "interactive": [
+        {
+          "kind": "currency",
+          "section": "Free to try",
+          "options": [
+            "GBP",
+            "USD",
+            "NGN"
+          ],
+          "expect": {
+            "reduced": {
+              "initial": {
+                "GBP": "true",
+                "USD": "false",
+                "NGN": "false"
+              },
+              "steps": [
+                {
+                  "choose": "GBP",
+                  "states": {
+                    "GBP": "true",
+                    "USD": "false",
+                    "NGN": "false"
+                  },
+                  "changed": false,
+                  "symbols": [
+                    "£"
+                  ]
+                },
+                {
+                  "choose": "USD",
+                  "states": {
+                    "GBP": "false",
+                    "USD": "true",
+                    "NGN": "false"
+                  },
+                  "changed": true,
+                  "symbols": [
+                    "$"
+                  ]
+                },
+                {
+                  "choose": "NGN",
+                  "states": {
+                    "GBP": "false",
+                    "USD": "false",
+                    "NGN": "true"
+                  },
+                  "changed": true,
+                  "symbols": [
+                    "₦"
+                  ]
+                }
+              ]
+            },
+            "full": {
+              "initial": {
+                "GBP": "true",
+                "USD": "false",
+                "NGN": "false"
+              },
+              "steps": [
+                {
+                  "choose": "GBP",
+                  "states": {
+                    "GBP": "true",
+                    "USD": "false",
+                    "NGN": "false"
+                  },
+                  "changed": false,
+                  "symbols": [
+                    "£"
+                  ]
+                },
+                {
+                  "choose": "USD",
+                  "states": {
+                    "GBP": "false",
+                    "USD": "true",
+                    "NGN": "false"
+                  },
+                  "changed": true,
+                  "symbols": [
+                    "$"
+                  ]
+                },
+                {
+                  "choose": "NGN",
+                  "states": {
+                    "GBP": "false",
+                    "USD": "false",
+                    "NGN": "true"
+                  },
+                  "changed": true,
+                  "symbols": [
+                    "₦"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "motion": {
+        "header": {
+          "time": false,
+          "scroll": false
+        },
+        "Describe it. See it.": {
+          "time": false,
+          "scroll": false
+        },
+        "Two or three options, the numbers, and a render": {
+          "time": false,
+          "scroll": false
+        },
+        "Everything it filled in for you, in plain words": {
+          "time": false,
+          "scroll": false
+        },
+        "A concept leaves here labelled as a concept": {
+          "time": false,
+          "scroll": false
+        },
+        "When you are ready, one click hands it over": {
+          "time": false,
+          "scroll": false
+        },
+        "Free to try": {
+          "time": false,
+          "scroll": false
+        },
+        "Plainly answered": {
+          "time": false,
+          "scroll": false
+        },
+        "Start with a sentence.": {
+          "time": false,
+          "scroll": false
+        },
+        "footer": {
+          "time": false,
+          "scroll": false
+        }
+      }
     },
     "For professionals": {
       "route": "/for-professionals",
@@ -991,7 +1293,152 @@
           "text": "Electrical, civil — roadmap",
           "item": "Electrical, civil"
         }
-      ]
+      ],
+      "interactive": [
+        {
+          "kind": "currency",
+          "section": "For the people who issue",
+          "options": [
+            "GBP",
+            "USD",
+            "NGN"
+          ],
+          "expect": {
+            "reduced": {
+              "initial": {
+                "GBP": "true",
+                "USD": "false",
+                "NGN": "false"
+              },
+              "steps": [
+                {
+                  "choose": "GBP",
+                  "states": {
+                    "GBP": "true",
+                    "USD": "false",
+                    "NGN": "false"
+                  },
+                  "changed": false,
+                  "symbols": [
+                    "£"
+                  ]
+                },
+                {
+                  "choose": "USD",
+                  "states": {
+                    "GBP": "false",
+                    "USD": "true",
+                    "NGN": "false"
+                  },
+                  "changed": true,
+                  "symbols": [
+                    "$"
+                  ]
+                },
+                {
+                  "choose": "NGN",
+                  "states": {
+                    "GBP": "false",
+                    "USD": "false",
+                    "NGN": "true"
+                  },
+                  "changed": true,
+                  "symbols": [
+                    "₦"
+                  ]
+                }
+              ]
+            },
+            "full": {
+              "initial": {
+                "GBP": "true",
+                "USD": "false",
+                "NGN": "false"
+              },
+              "steps": [
+                {
+                  "choose": "GBP",
+                  "states": {
+                    "GBP": "true",
+                    "USD": "false",
+                    "NGN": "false"
+                  },
+                  "changed": false,
+                  "symbols": [
+                    "£"
+                  ]
+                },
+                {
+                  "choose": "USD",
+                  "states": {
+                    "GBP": "false",
+                    "USD": "true",
+                    "NGN": "false"
+                  },
+                  "changed": true,
+                  "symbols": [
+                    "$"
+                  ]
+                },
+                {
+                  "choose": "NGN",
+                  "states": {
+                    "GBP": "false",
+                    "USD": "false",
+                    "NGN": "true"
+                  },
+                  "changed": true,
+                  "symbols": [
+                    "₦"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "motion": {
+        "header": {
+          "time": false,
+          "scroll": false
+        },
+        "Every line has a source. Every check has a signer.": {
+          "time": false,
+          "scroll": false
+        },
+        "It shows you its reading of the brief": {
+          "time": false,
+          "scroll": false
+        },
+        "Turn it on and the drawing explains itself": {
+          "time": false,
+          "scroll": false
+        },
+        "Against a profile, with a version on it": {
+          "time": false,
+          "scroll": false
+        },
+        "Your drawings, your standards": {
+          "time": false,
+          "scroll": false
+        },
+        "For the people who issue": {
+          "time": false,
+          "scroll": false
+        },
+        "Where liability sits": {
+          "time": false,
+          "scroll": false
+        },
+        "Draft it, check it, sign it.": {
+          "time": false,
+          "scroll": false
+        },
+        "footer": {
+          "time": false,
+          "scroll": false
+        }
+      }
     },
     "Render studio": {
       "route": "/render-studio",
@@ -1182,7 +1629,148 @@
         "illustrative": 0,
         "preview_label": 0
       },
-      "roadmap": []
+      "roadmap": [],
+      "interactive": [
+        {
+          "kind": "currency",
+          "section": "Renders are metered",
+          "options": [
+            "GBP",
+            "USD",
+            "NGN"
+          ],
+          "expect": {
+            "reduced": {
+              "initial": {
+                "GBP": "true",
+                "USD": "false",
+                "NGN": "false"
+              },
+              "steps": [
+                {
+                  "choose": "GBP",
+                  "states": {
+                    "GBP": "true",
+                    "USD": "false",
+                    "NGN": "false"
+                  },
+                  "changed": false,
+                  "symbols": [
+                    "£"
+                  ]
+                },
+                {
+                  "choose": "USD",
+                  "states": {
+                    "GBP": "false",
+                    "USD": "true",
+                    "NGN": "false"
+                  },
+                  "changed": true,
+                  "symbols": [
+                    "$"
+                  ]
+                },
+                {
+                  "choose": "NGN",
+                  "states": {
+                    "GBP": "false",
+                    "USD": "false",
+                    "NGN": "true"
+                  },
+                  "changed": true,
+                  "symbols": [
+                    "₦"
+                  ]
+                }
+              ]
+            },
+            "full": {
+              "initial": {
+                "GBP": "true",
+                "USD": "false",
+                "NGN": "false"
+              },
+              "steps": [
+                {
+                  "choose": "GBP",
+                  "states": {
+                    "GBP": "true",
+                    "USD": "false",
+                    "NGN": "false"
+                  },
+                  "changed": false,
+                  "symbols": [
+                    "£"
+                  ]
+                },
+                {
+                  "choose": "USD",
+                  "states": {
+                    "GBP": "false",
+                    "USD": "true",
+                    "NGN": "false"
+                  },
+                  "changed": true,
+                  "symbols": [
+                    "$"
+                  ]
+                },
+                {
+                  "choose": "NGN",
+                  "states": {
+                    "GBP": "false",
+                    "USD": "false",
+                    "NGN": "true"
+                  },
+                  "changed": true,
+                  "symbols": [
+                    "₦"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "motion": {
+        "header": {
+          "time": false,
+          "scroll": false
+        },
+        "Rendered from the drawing, not from a screenshot.": {
+          "time": false,
+          "scroll": false
+        },
+        "Drawing and render, side by side, same hash": {
+          "time": false,
+          "scroll": false
+        },
+        "What you put in": {
+          "time": false,
+          "scroll": false
+        },
+        "Four variants, one fixed camera": {
+          "time": false,
+          "scroll": false
+        },
+        "Every render carries its drawing": {
+          "time": false,
+          "scroll": false
+        },
+        "Renders are metered": {
+          "time": false,
+          "scroll": false
+        },
+        "Render from a drawing you already have.": {
+          "time": false,
+          "scroll": false
+        },
+        "footer": {
+          "time": false,
+          "scroll": false
+        }
+      }
     },
     "Profile marketplace": {
       "route": "/profile-marketplace",
@@ -1410,7 +1998,155 @@
         "illustrative": 0,
         "preview_label": 0
       },
-      "roadmap": []
+      "roadmap": [],
+      "interactive": [
+        {
+          "kind": "tabs",
+          "section": "untitled: All",
+          "options": [
+            "All",
+            "Jurisdictions",
+            "Offices",
+            "Manufacturers"
+          ],
+          "expect": {
+            "reduced": {
+              "initial": {
+                "All": "true",
+                "Jurisdictions": "false",
+                "Offices": "false",
+                "Manufacturers": "false"
+              },
+              "steps": [
+                {
+                  "choose": "All",
+                  "states": {
+                    "All": "true",
+                    "Jurisdictions": "false",
+                    "Offices": "false",
+                    "Manufacturers": "false"
+                  },
+                  "changed": false
+                },
+                {
+                  "choose": "Jurisdictions",
+                  "states": {
+                    "All": "false",
+                    "Jurisdictions": "true",
+                    "Offices": "false",
+                    "Manufacturers": "false"
+                  },
+                  "changed": true
+                },
+                {
+                  "choose": "Offices",
+                  "states": {
+                    "All": "false",
+                    "Jurisdictions": "false",
+                    "Offices": "true",
+                    "Manufacturers": "false"
+                  },
+                  "changed": true
+                },
+                {
+                  "choose": "Manufacturers",
+                  "states": {
+                    "All": "false",
+                    "Jurisdictions": "false",
+                    "Offices": "false",
+                    "Manufacturers": "true"
+                  },
+                  "changed": true
+                }
+              ]
+            },
+            "full": {
+              "initial": {
+                "All": "true",
+                "Jurisdictions": "false",
+                "Offices": "false",
+                "Manufacturers": "false"
+              },
+              "steps": [
+                {
+                  "choose": "All",
+                  "states": {
+                    "All": "true",
+                    "Jurisdictions": "false",
+                    "Offices": "false",
+                    "Manufacturers": "false"
+                  },
+                  "changed": false
+                },
+                {
+                  "choose": "Jurisdictions",
+                  "states": {
+                    "All": "false",
+                    "Jurisdictions": "true",
+                    "Offices": "false",
+                    "Manufacturers": "false"
+                  },
+                  "changed": true
+                },
+                {
+                  "choose": "Offices",
+                  "states": {
+                    "All": "false",
+                    "Jurisdictions": "false",
+                    "Offices": "true",
+                    "Manufacturers": "false"
+                  },
+                  "changed": true
+                },
+                {
+                  "choose": "Manufacturers",
+                  "states": {
+                    "All": "false",
+                    "Jurisdictions": "false",
+                    "Offices": "false",
+                    "Manufacturers": "true"
+                  },
+                  "changed": true
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "motion": {
+        "header": {
+          "time": false,
+          "scroll": false
+        },
+        "Every jurisdiction is a profile you can buy or author": {
+          "time": false,
+          "scroll": false
+        },
+        "untitled: All": {
+          "time": false,
+          "scroll": false
+        },
+        "What the badge means": {
+          "time": false,
+          "scroll": false
+        },
+        "Author a profile from the document itself": {
+          "time": false,
+          "scroll": false
+        },
+        "Project, client, office, manufacturer": {
+          "time": false,
+          "scroll": false
+        },
+        "Author a profile, or browse what exists.": {
+          "time": false,
+          "scroll": false
+        },
+        "footer": {
+          "time": false,
+          "scroll": false
+        }
+      }
     },
     "Find a signer": {
       "route": "/find-a-signer",
@@ -1649,7 +2385,56 @@
         "illustrative": 0,
         "preview_label": 0
       },
-      "roadmap": []
+      "roadmap": [],
+      "interactive": [
+        {
+          "kind": "gate",
+          "section": "The stamp stays disabled until the work is done",
+          "button": "Apply stamp — 2 items outstanding",
+          "expect": {
+            "reduced": {},
+            "full": {}
+          }
+        }
+      ],
+      "motion": {
+        "header": {
+          "time": false,
+          "scroll": false
+        },
+        "Reviewed and signed under responsible charge — with the review on record": {
+          "time": false,
+          "scroll": false
+        },
+        "Three steps": {
+          "time": false,
+          "scroll": false
+        },
+        "Identity, registry and insurance, checked": {
+          "time": false,
+          "scroll": false
+        },
+        "The stamp stays disabled until the work is done": {
+          "time": false,
+          "scroll": false
+        },
+        "Become a signer": {
+          "time": false,
+          "scroll": false
+        },
+        "Responsibility and insurance": {
+          "time": false,
+          "scroll": false
+        },
+        "Send a drawing for review.": {
+          "time": false,
+          "scroll": false
+        },
+        "footer": {
+          "time": false,
+          "scroll": false
+        }
+      }
     },
     "Developers": {
       "route": "/developers",
@@ -1851,910 +2636,42 @@
         "illustrative": 0,
         "preview_label": 0
       },
-      "roadmap": []
-    },
-    "Regulators & manufacturers": {
-      "route": "/regulators-and-manufacturers",
-      "section_keys_by_viewport": {
-        "w375": [
-          "header",
-          "For regulators and manufacturers",
-          "A submission in, a cited report out",
-          "Where it sits in an e-permitting workflow",
-          "Shared commitments",
-          "Tell us which half you are",
-          "footer"
-        ],
-        "w768": [
-          "header",
-          "For regulators and manufacturers",
-          "A submission in, a cited report out",
-          "Where it sits in an e-permitting workflow",
-          "Shared commitments",
-          "Tell us which half you are",
-          "footer"
-        ],
-        "w1280": [
-          "header",
-          "For regulators and manufacturers",
-          "A submission in, a cited report out",
-          "Where it sits in an e-permitting workflow",
-          "Shared commitments",
-          "Tell us which half you are",
-          "footer"
-        ]
-      },
-      "sections": [
-        {
-          "key": "header",
-          "lines": [
-            "Drawlogic",
-            "Product",
-            "keyboard_arrow_down",
-            "Markets",
-            "keyboard_arrow_down",
-            "Pricing",
-            "About",
-            "Sign in",
-            "Try an idea"
-          ]
+      "roadmap": [],
+      "interactive": [],
+      "motion": {
+        "header": {
+          "time": false,
+          "scroll": false
         },
-        {
-          "key": "For regulators and manufacturers",
-          "lines": [
-            "For regulators and manufacturers",
-            "Two arrangements on one engine. Authorities run submissions against their own profile. Manufacturers publish signed product profiles so their systems are specified correctly.",
-            "For regulators",
-            "For manufacturers"
-          ]
+        "Compile, check and render drawings from your own product": {
+          "time": false,
+          "scroll": false
         },
-        {
-          "key": "A submission in, a cited report out",
-          "lines": [
-            "PRECHECK API",
-            "A submission in, a cited report out",
-            "Driven by the authority's own profile, at a version the authority controls. Every pass and every flag carries the clause it came from.",
-            "Your profile, your version",
-            "You author and sign the rule set. PreCheck runs nothing you have not approved.",
-            "Cited, not scored",
-            "Each result names the rule ID and the document clause. There is no single approval number.",
-            "Lists what it did not check",
-            "The report ends with the checks not performed, the same as every other Drawlogic output.",
-            "POST /v1/precheck",
-            "{",
-            "\"submission\": \"sub_2026_04812.pdf\",",
-            "\"profile\": \"ng-lagos-epps@2026.1\"",
-            "}",
-            "→ 200",
-            "checks_performed: 33",
-            "flags: 2",
-            "not_performed: 4",
-            "retention: none (not opted in)"
-          ]
+        "Five verbs": {
+          "time": false,
+          "scroll": false
         },
-        {
-          "key": "Where it sits in an e-permitting workflow",
-          "lines": [
-            "FIT",
-            "Where it sits in an e-permitting workflow",
-            "Before intake",
-            "Applicants self-check. Fewer incomplete submissions reach your officers.",
-            "At intake",
-            "PreCheck runs automatically and attaches a cited report to the case file.",
-            "During review",
-            "Officers see the provenance layer — which values came from the applicant and which were inferred.",
-            "No retention by default",
-            "Submissions are processed and discarded unless your authority opts in to retention.",
-            "Talk to us"
-          ]
+        "A typed drawing model with provenance on every element": {
+          "time": false,
+          "scroll": false
         },
-        {
-          "key": "Shared commitments",
-          "lines": [
-            "TRUST AND DATA",
-            "Shared commitments",
-            "No training on customer data",
-            "Your drawings and submissions are never used for training. This is a contractual term, not a setting.",
-            "Residency options",
-            "UK, EU, US and Nigeria regions available on Enterprise arrangements.",
-            "Audit trail",
-            "Who opened what, what changed, and when — exportable as evidence in PDF or JSON.",
-            "Versioned everything",
-            "Profiles, rules and drawings all carry versions. A check can always be reproduced."
-          ]
+        "MCP server": {
+          "time": false,
+          "scroll": false
         },
-        {
-          "key": "Tell us which half you are",
-          "lines": [
-            "CONTACT",
-            "Tell us which half you are",
-            "Organisation",
-            "You are",
-            "Regulator or authority",
-            "Manufacturer",
-            "Standards body",
-            "Other",
-            "keyboard_arrow_down",
-            "What are you trying to solve?",
-            "what you would want PreCheck or a product profile to do",
-            "Send"
-          ]
+        "What you are charged for": {
+          "time": false,
+          "scroll": false
         },
-        {
-          "key": "footer",
-          "lines": [
-            "Drawlogic",
-            "Anyone can start. Professionals can issue.",
-            "PRODUCT",
-            "Idea mode",
-            "For professionals",
-            "Render studio",
-            "Profile marketplace",
-            "Find a signer",
-            "Developers",
-            "Students & educators",
-            "MARKETS",
-            "Regulators & manufacturers",
-            "Lagos",
-            "United Kingdom",
-            "United States",
-            "Nigeria",
-            "COMPANY",
-            "About",
-            "Contact",
-            "Pricing",
-            "Become a signer",
-            "Author a profile",
-            "Your drawings are never used for training.",
-            "Drawlogic performs automated design-rule checks against versioned jurisdiction profiles and lists what it did not check. Outputs are not a statement of legal compliance. Drawings are issued under the responsible charge of the verified professional who signs them.",
-            "© 2026 Drawlogic",
-            "Privacy policy",
-            "Data policy",
-            "Terms of service",
-            "Liability"
-          ]
+        "Get a key and compile your first drawing.": {
+          "time": false,
+          "scroll": false
+        },
+        "footer": {
+          "time": false,
+          "scroll": false
         }
-      ],
-      "honesty": [
-        "liability",
-        "training"
-      ],
-      "captions": {
-        "illustrative": 0,
-        "preview_label": 0
-      },
-      "roadmap": []
-    },
-    "Lagos": {
-      "route": "/lagos",
-      "section_keys_by_viewport": {
-        "w375": [
-          "header",
-          "EPPPS-ready submissions, first time",
-          "What a submission needs, as Drawlogic sees it",
-          "Lagos conventions, without re-teaching the software",
-          "The statutory seal and the Drawlogic stamp are not the same thing",
-          "Pilot programme for practices",
-          "Naira pricing via Paystack",
-          "EPPPS, sealing and local workflow",
-          "Type your plot. See what fits.",
-          "footer"
-        ],
-        "w768": [
-          "header",
-          "EPPPS-ready submissions, first time",
-          "What a submission needs, as Drawlogic sees it",
-          "Lagos conventions, without re-teaching the software",
-          "The statutory seal and the Drawlogic stamp are not the same thing",
-          "Pilot programme for practices",
-          "Naira pricing via Paystack",
-          "EPPPS, sealing and local workflow",
-          "Type your plot. See what fits.",
-          "footer"
-        ],
-        "w1280": [
-          "header",
-          "EPPPS-ready submissions, first time",
-          "What a submission needs, as Drawlogic sees it",
-          "Lagos conventions, without re-teaching the software",
-          "The statutory seal and the Drawlogic stamp are not the same thing",
-          "Pilot programme for practices",
-          "Naira pricing via Paystack",
-          "EPPPS, sealing and local workflow",
-          "Type your plot. See what fits.",
-          "footer"
-        ]
-      },
-      "sections": [
-        {
-          "key": "header",
-          "lines": [
-            "Drawlogic",
-            "Product",
-            "keyboard_arrow_down",
-            "Markets",
-            "keyboard_arrow_down",
-            "Pricing",
-            "About",
-            "Sign in",
-            "Try an idea"
-          ]
-        },
-        {
-          "key": "EPPPS-ready submissions, first time",
-          "lines": [
-            "Lagos State · Nigeria",
-            "EPPPS-ready submissions, first time",
-            "For Lagos developers and ARCON/COREN professionals. The same engine, with the Lagos State profile, Naira pricing and the EPPPS checklist built in.",
-            "Try a Lagos plot",
-            "Join the pilot"
-          ]
-        },
-        {
-          "key": "What a submission needs, as Drawlogic sees it",
-          "lines": [
-            "THE CHECKLIST",
-            "What a submission needs, as Drawlogic sees it",
-            "Drawlogic prepares the drawing set and flags what it cannot produce. The items marked as supplied by others are yours to obtain.",
-            "The EPPPS checklist, as Drawlogic sees it",
-            "✓",
-            "A3 drawing set",
-            "Category-aware sheet list, Lagos conventions applied",
-            "READY",
-            "⚠",
-            "ARCON/COREN sealed drawings",
-            "Applied by the verified professional, not by Drawlogic",
-            "NEEDS ATTENTION",
-            "✓",
-            "3D view — buildings above three floors",
-            "Rendered from the drawing, hash on the sheet",
-            "READY",
-            "⚠",
-            "M&E drawings where required",
-            "Electrical on roadmap — supply or commission separately",
-            "NEEDS ATTENTION",
-            "○",
-            "Survey plan",
-            "SUPPLIED BY OTHERS",
-            "○",
-            "Title documents",
-            "SUPPLIED BY OTHERS",
-            "○",
-            "Tax clearance and receipts",
-            "SUPPLIED BY OTHERS",
-            "Drawlogic does not submit your application and does not obtain documents on your behalf.",
-            "For developers",
-            "Type your plot and see what fits, with setback and coverage flags, before you hire anyone.",
-            "add_photo_alternate",
-            "Upload a photo or sketch",
-            "location_on",
-            "Lekki, Lagos",
-            "See what fits"
-          ]
-        },
-        {
-          "key": "Lagos conventions, without re-teaching the software",
-          "lines": [
-            "FOR ARCHITECTS",
-            "Lagos conventions, without re-teaching the software",
-            "Category-aware sets",
-            "The sheet list follows the development category, so a Category 2 submission does not carry Category 3 drawings.",
-            "Lagos conventions",
-            "Sheet sizes, title blocks, hatching and annotation set to what the authority expects to see.",
-            "Submission-readiness check",
-            "Every item on the checklist, with the ones Drawlogic cannot produce named plainly."
-          ]
-        },
-        {
-          "key": "The statutory seal and the Drawlogic stamp are not the same thing",
-          "lines": [
-            "SEALING",
-            "The statutory seal and the Drawlogic stamp are not the same thing",
-            "One is a legal act performed by a registered professional. The other is evidence that a review happened. They sit on the sheet separately and they are labelled separately.",
-            "Statutory",
-            "ARCON / COREN seal",
-            "Applied by the registered professional under their own registration. Drawlogic does not generate it, reproduce it or hold it.",
-            "SEAL AREA",
-            "Applied by the professional",
-            "Not produced by Drawlogic",
-            "Evidence of review",
-            "DRAWLOGIC VERIFICATION STAMP",
-            "SIGNED",
-            "PROFILES",
-            "NG-Lagos-EPPPS v2026.1 · Office: Adeyemi Partners v2",
-            "CHECKS PERFORMED",
-            "33",
-            "CHECKS FLAGGED",
-            "⚠ 2",
-            "CHECKS NOT PERFORMED",
-            "2",
-            "UNVERIFIED ELEMENTS",
-            "1",
-            "SIGNER",
-            "A. Okonkwo · ARCON 12/3456 · 2026-09-15",
-            "DRAWING HASH",
-            "sha256:41e8…b902 rev A",
-            "TIMESTAMP",
-            "2026-09-15 09:40 WAT",
-            "CHECKS NOT PERFORMED:",
-            "Structural adequacy",
-            "M&E coordination",
-            "This is an automated design-rule check. It is not a statement of legal compliance."
-          ]
-        },
-        {
-          "key": "Pilot programme for practices",
-          "lines": [
-            "What we don't do",
-            "close",
-            "We do not submit your application to the authority.",
-            "close",
-            "We do not obtain survey plans, title documents or tax receipts.",
-            "close",
-            "We do not apply the ARCON or COREN seal.",
-            "close",
-            "We do not guarantee approval.",
-            "Pilot programme for practices",
-            "Ten Lagos practices, three months, Naira pricing, with the Lagos State profile authored alongside you. We take your corrections to the profile and publish them, signed.",
-            "Join the pilot",
-            "chevron_right"
-          ]
-        },
-        {
-          "key": "Naira pricing via Paystack",
-          "lines": [
-            "PRICING",
-            "Naira pricing via Paystack",
-            "₦ NGN",
-            "$ USD",
-            "ANYONE CAN START",
-            "Idea",
-            "Developers and homeowners",
-            "₦9,500 /mo",
-            "✓",
-            "Unlimited concepts",
-            "✓",
-            "Lagos State profile",
-            "✓",
-            "Setback and coverage flags",
-            "PROFESSIONALS CAN ISSUE",
-            "Individual",
-            "Sole practitioners",
-            "₦32,000 /mo",
-            "✓",
-            "Draft mode",
-            "✓",
-            "A3 sets",
-            "✓",
-            "EPPPS checklist",
-            "Professional",
-            "Per seat",
-            "₦119,000 /user/mo",
-            "✓",
-            "Office profiles",
-            "✓",
-            "Provenance layer",
-            "✓",
-            "Verification stamp"
-          ]
-        },
-        {
-          "key": "EPPPS, sealing and local workflow",
-          "lines": [
-            "QUESTIONS",
-            "EPPPS, sealing and local workflow",
-            "Does a Drawlogic stamp satisfy EPPPS?",
-            "keyboard_arrow_down",
-            "No. EPPPS requires drawings sealed by registered ARCON and COREN professionals. The Drawlogic stamp is evidence that an automated check and a professional review happened. It sits alongside the statutory seal, not in place of it.",
-            "Is the Lagos State profile verified?",
-            "keyboard_arrow_down",
-            "Yes — Tier 1, signed by a named ARCON-registered professional, cited to EPPPS 2019 and the Lagos State Physical Planning Permit Law. The version is pinned on every check.",
-            "Can I pay in Naira?",
-            "keyboard_arrow_down",
-            "Yes, via Paystack, at the rates on this page. The card currency does not change what you get.",
-            "Do you handle M&E?",
-            "keyboard_arrow_down",
-            "Not yet. Electrical is on the roadmap and is marked as not checked in the report until it ships. Commission M&E separately and attach the drawings to your set."
-          ]
-        },
-        {
-          "key": "Type your plot. See what fits.",
-          "lines": [
-            "Type your plot. See what fits.",
-            "Or join the pilot as a practice.",
-            "Try a Lagos plot",
-            "Join the pilot"
-          ]
-        },
-        {
-          "key": "footer",
-          "lines": [
-            "Drawlogic",
-            "Anyone can start. Professionals can issue.",
-            "PRODUCT",
-            "Idea mode",
-            "For professionals",
-            "Render studio",
-            "Profile marketplace",
-            "Find a signer",
-            "Developers",
-            "Students & educators",
-            "MARKETS",
-            "Regulators & manufacturers",
-            "Lagos",
-            "United Kingdom",
-            "United States",
-            "Nigeria",
-            "COMPANY",
-            "About",
-            "Contact",
-            "Pricing",
-            "Become a signer",
-            "Author a profile",
-            "Your drawings are never used for training.",
-            "Drawlogic performs automated design-rule checks against versioned jurisdiction profiles and lists what it did not check. Outputs are not a statement of legal compliance. Drawings are issued under the responsible charge of the verified professional who signs them.",
-            "© 2026 Drawlogic",
-            "Privacy policy",
-            "Data policy",
-            "Terms of service",
-            "Liability"
-          ]
-        }
-      ],
-      "honesty": [
-        "liability",
-        "training"
-      ],
-      "captions": {
-        "illustrative": 0,
-        "preview_label": 0
-      },
-      "roadmap": [
-        {
-          "text": "Electrical on roadmap — supply or commission separately",
-          "item": "Electrical"
-        }
-      ]
-    },
-    "Pricing": {
-      "route": "/pricing",
-      "section_keys_by_viewport": {
-        "w375": [
-          "header",
-          "Simple pricing, transparent value",
-          "untitled: £ GBP",
-          "Nigeria tier and the student plan",
-          "Line by line",
-          "The two fees that are not subscriptions",
-          "Questions about the bill",
-          "Start free.",
-          "footer"
-        ],
-        "w768": [
-          "header",
-          "Simple pricing, transparent value",
-          "untitled: £ GBP",
-          "Nigeria tier and the student plan",
-          "Line by line",
-          "The two fees that are not subscriptions",
-          "Questions about the bill",
-          "Start free.",
-          "footer"
-        ],
-        "w1280": [
-          "header",
-          "Simple pricing, transparent value",
-          "untitled: £ GBP",
-          "Nigeria tier and the student plan",
-          "Line by line",
-          "The two fees that are not subscriptions",
-          "Questions about the bill",
-          "Start free.",
-          "footer"
-        ]
-      },
-      "sections": [
-        {
-          "key": "header",
-          "lines": [
-            "Drawlogic",
-            "Product",
-            "keyboard_arrow_down",
-            "Markets",
-            "keyboard_arrow_down",
-            "Pricing",
-            "About",
-            "Sign in",
-            "Try an idea"
-          ]
-        },
-        {
-          "key": "Simple pricing, transparent value",
-          "lines": [
-            "Simple pricing, transparent value",
-            "Free to try, six tiers, three currencies. Idea sits with Free because both are for people starting out; the professional tiers group together because they all end in something you can issue."
-          ]
-        },
-        {
-          "key": "untitled: £ GBP",
-          "lines": [
-            "£ GBP",
-            "$ USD",
-            "₦ NGN",
-            "ANYONE CAN START",
-            "Free",
-            "One idea at a time",
-            "£0",
-            "✓",
-            "Concept options in seconds",
-            "✓",
-            "Plans and key numbers",
-            "✓",
-            "Watermarked PDF and PNG",
-            "Idea",
-            "Homeowners and developers",
-            "£11 /mo",
-            "✓",
-            "Unlimited concepts",
-            "✓",
-            "Assumptions panel",
-            "✓",
-            "Promote to Draft",
-            "✓",
-            "Find a signer",
-            "PROFESSIONALS CAN ISSUE",
-            "Individual",
-            "Sole practitioners",
-            "£39 /mo",
-            "✓",
-            "Draft mode",
-            "✓",
-            "DXF and PDF exports",
-            "✓",
-            "Standards Report",
-            "✓",
-            "Chat-based drawing edits",
-            "Professional",
-            "Per seat",
-            "£139 /user/mo",
-            "✓",
-            "Office profiles",
-            "✓",
-            "Provenance layer",
-            "✓",
-            "Verification stamp",
-            "✓",
-            "Audit record",
-            "Practice",
-            "Up to 25 seats",
-            "£849 /mo",
-            "✓",
-            "Everything in Professional",
-            "✓",
-            "Office standards hierarchy",
-            "✓",
-            "Conflict detection",
-            "✓",
-            "Priority profile authoring",
-            "Enterprise / Regulator",
-            "Authorities and manufacturers",
-            "Custom",
-            "✓",
-            "PreCheck API",
-            "✓",
-            "Data residency options",
-            "✓",
-            "No retention unless opted in",
-            "✓",
-            "Named support"
-          ]
-        },
-        {
-          "key": "Nigeria tier and the student plan",
-          "lines": [
-            "ALSO AVAILABLE",
-            "Nigeria tier and the student plan",
-            "Nigeria",
-            "Local pricing via Paystack",
-            "Idea",
-            "₦9,500 /mo",
-            "Individual",
-            "₦32,000 /mo",
-            "Professional",
-            "₦119,000 /user/mo",
-            "Same features. Paid in Naira, billed by Paystack.",
-            "Students",
-            "Free with academic verification",
-            "Draft mode, three projects a month, watermarked exports. Verification through your institution's email domain or a registration letter.",
-            "Verify as a student",
-            "Render credits",
-            "$19 per 100 credits",
-            "Top up",
-            "Instant top-up. Credits do not expire. About 20 interior renders per 100."
-          ]
-        },
-        {
-          "key": "Line by line",
-          "lines": [
-            "WHAT EACH TIER INCLUDES",
-            "Line by line",
-            "FREE IDEA INDIVIDUAL PROFESSIONAL PRACTICE ENTERPRISE",
-            "Drafts per month 1 Unlimited Unlimited Unlimited Unlimited Unlimited",
-            "Jurisdiction profiles Generic Generic 1 Tier 1 All Tier 1 All Tier 1 All + private",
-            "Render credits included 0 20 60 200 1 000 Negotiated",
-            "Exports PNG PDF, PNG DXF, PDF DXF, PDF, SVG DXF, PDF, SVG DXF, PDF, SVG",
-            "Signing role — — Request Request + sign Request + sign Request + sign",
-            "Audit trail — — 30 days Full Full Full + export"
-          ]
-        },
-        {
-          "key": "The two fees that are not subscriptions",
-          "lines": [
-            "MARKETPLACE AND SIGNERS",
-            "The two fees that are not subscriptions",
-            "Profile marketplace",
-            "Authors keep 70% of each sale. Drawlogic takes 30% and handles payment, versioning and distribution.",
-            "Responsible-charge reviews",
-            "Signers set their own fee per review, shown before you commit. Drawlogic takes a 12% marketplace fee on the review."
-          ]
-        },
-        {
-          "key": "Questions about the bill",
-          "lines": [
-            "BILLING",
-            "Questions about the bill",
-            "What is watermarked on a free export?",
-            "keyboard_arrow_down",
-            "Every Free and Idea export carries CONCEPT — NOT FOR CONSTRUCTION and is delivered as PDF or PNG only. There is no CAD geometry in a free export.",
-            "What does a free export actually include?",
-            "keyboard_arrow_down",
-            "The concept plan, the key numbers, the assumptions list and one render. It does not include a Standards Report or a verification stamp.",
-            "Can I cancel?",
-            "keyboard_arrow_down",
-            "Yes, at any time, from the billing page. You keep access until the end of the paid period and your drawings stay downloadable for 90 days after.",
-            "Do you store payment details?",
-            "keyboard_arrow_down",
-            "No. Card details are held by Stripe, or by Paystack for Naira billing. We store the last four digits and the expiry only."
-          ]
-        },
-        {
-          "key": "Start free.",
-          "lines": [
-            "Start free.",
-            "Talk to us if you need a regulator or enterprise arrangement.",
-            "Start free",
-            "Talk to sales"
-          ]
-        },
-        {
-          "key": "footer",
-          "lines": [
-            "Drawlogic",
-            "Anyone can start. Professionals can issue.",
-            "PRODUCT",
-            "Idea mode",
-            "For professionals",
-            "Render studio",
-            "Profile marketplace",
-            "Find a signer",
-            "Developers",
-            "Students & educators",
-            "MARKETS",
-            "Regulators & manufacturers",
-            "Lagos",
-            "United Kingdom",
-            "United States",
-            "Nigeria",
-            "COMPANY",
-            "About",
-            "Contact",
-            "Pricing",
-            "Become a signer",
-            "Author a profile",
-            "Your drawings are never used for training.",
-            "Drawlogic performs automated design-rule checks against versioned jurisdiction profiles and lists what it did not check. Outputs are not a statement of legal compliance. Drawings are issued under the responsible charge of the verified professional who signs them.",
-            "© 2026 Drawlogic",
-            "Privacy policy",
-            "Data policy",
-            "Terms of service",
-            "Liability"
-          ]
-        }
-      ],
-      "honesty": [
-        "liability",
-        "training",
-        "concept-watermark"
-      ],
-      "captions": {
-        "illustrative": 0,
-        "preview_label": 0
-      },
-      "roadmap": []
-    },
-    "About": {
-      "route": "/about",
-      "section_keys_by_viewport": {
-        "w375": [
-          "header",
-          "About & Contact",
-          "A drawing is a claim about the world",
-          "Four rules we build against",
-          "Three markets, three profile sets",
-          "Thirty minutes, on one of your live drawings",
-          "Direct lines",
-          "footer"
-        ],
-        "w768": [
-          "header",
-          "About & Contact",
-          "A drawing is a claim about the world",
-          "Four rules we build against",
-          "Three markets, three profile sets",
-          "Thirty minutes, on one of your live drawings",
-          "Direct lines",
-          "footer"
-        ],
-        "w1280": [
-          "header",
-          "About & Contact",
-          "A drawing is a claim about the world",
-          "Four rules we build against",
-          "Three markets, three profile sets",
-          "Thirty minutes, on one of your live drawings",
-          "Direct lines",
-          "footer"
-        ]
-      },
-      "sections": [
-        {
-          "key": "header",
-          "lines": [
-            "Drawlogic",
-            "Product",
-            "keyboard_arrow_down",
-            "Markets",
-            "keyboard_arrow_down",
-            "Pricing",
-            "About",
-            "Sign in",
-            "Try an idea"
-          ]
-        },
-        {
-          "key": "About & Contact",
-          "lines": [
-            "About & Contact",
-            "Why drawings need a source and a signer"
-          ]
-        },
-        {
-          "key": "A drawing is a claim about the world",
-          "lines": [
-            "MISSION",
-            "A drawing is a claim about the world",
-            "Somebody has to be able to say where each line came from and who stands behind it. That is what a drawing set has always been for, and it is the part that generative tools skip.",
-            "Drawlogic keeps the source on every element and the signature on every check. Anyone can start something here. Only a verified professional can issue it."
-          ]
-        },
-        {
-          "key": "Four rules we build against",
-          "lines": [
-            "PRINCIPLES",
-            "Four rules we build against",
-            "Fail closed",
-            "When the engine cannot resolve something, it blocks the element and says so. It does not produce a plausible line.",
-            "Never invent engineering",
-            "Loads, ratings and member sizes are supplied by a professional or the drawing is blocked at that element.",
-            "Honest stamps",
-            "Every stamp lists checks performed, checks flagged and checks not performed, and names the signer or says UNSIGNED.",
-            "Your data is not our training set",
-            "Your drawings are never used for training. It is a contractual term."
-          ]
-        },
-        {
-          "key": "Three markets, three profile sets",
-          "lines": [
-            "WHERE WE WORK",
-            "Three markets, three profile sets",
-            "United Kingdom",
-            "Approved Documents, local plan checks. Tier 1, signed by ARB-registered professionals.",
-            "london@drawlogic.com",
-            "United States",
-            "State-by-state. California CBC and Title 24 live at Tier 2.",
-            "new york@drawlogic.com",
-            "Nigeria",
-            "Lagos State EPPPS at Tier 1, signed by ARCON-registered professionals. Naira billing.",
-            "lagos@drawlogic.com"
-          ]
-        },
-        {
-          "key": "Thirty minutes, on one of your live drawings",
-          "lines": [
-            "BOOK A DEMO",
-            "Thirty minutes, on one of your live drawings",
-            "Name *",
-            "Email *",
-            "You are a *",
-            "Professional — architect, technologist, engineer",
-            "Developer or agent builder",
-            "Regulator or authority",
-            "Manufacturer",
-            "Press",
-            "keyboard_arrow_down",
-            "Preferred date",
-            "Preferred time",
-            "Morning (GMT)",
-            "Afternoon (GMT)",
-            "Afternoon (WAT)",
-            "Morning (PT)",
-            "keyboard_arrow_down",
-            "What would you like us to run it on?",
-            "a drawing, a jurisdiction, a workflow",
-            "Send me the monthly product note",
-            "Profile releases and check coverage. No marketing.",
-            "Book a demo"
-          ]
-        },
-        {
-          "key": "Direct lines",
-          "lines": [
-            "CONTACT",
-            "Direct lines",
-            "GENERAL",
-            "hello@drawlogic.com",
-            "PROFESSIONALS",
-            "practices@drawlogic.com",
-            "REGULATORS",
-            "authorities@drawlogic.com",
-            "PRESS",
-            "press@drawlogic.com"
-          ]
-        },
-        {
-          "key": "footer",
-          "lines": [
-            "Drawlogic",
-            "Anyone can start. Professionals can issue.",
-            "PRODUCT",
-            "Idea mode",
-            "For professionals",
-            "Render studio",
-            "Profile marketplace",
-            "Find a signer",
-            "Developers",
-            "Students & educators",
-            "MARKETS",
-            "Regulators & manufacturers",
-            "Lagos",
-            "United Kingdom",
-            "United States",
-            "Nigeria",
-            "COMPANY",
-            "About",
-            "Contact",
-            "Pricing",
-            "Become a signer",
-            "Author a profile",
-            "Your drawings are never used for training.",
-            "Drawlogic performs automated design-rule checks against versioned jurisdiction profiles and lists what it did not check. Outputs are not a statement of legal compliance. Drawings are issued under the responsible charge of the verified professional who signs them.",
-            "© 2026 Drawlogic",
-            "Privacy policy",
-            "Data policy",
-            "Terms of service",
-            "Liability"
-          ]
-        }
-      ],
-      "honesty": [
-        "liability",
-        "training"
-      ],
-      "captions": {
-        "illustrative": 0,
-        "preview_label": 0
-      },
-      "roadmap": []
+      }
     },
     "Students & educators": {
       "route": "/students-and-educators",
@@ -3138,7 +3055,1539 @@
         "illustrative": 1,
         "preview_label": 1
       },
-      "roadmap": []
+      "roadmap": [],
+      "interactive": [
+        {
+          "kind": "switch",
+          "section": "Want to understand why, before you see it?",
+          "name": "Teach me first",
+          "expect": {
+            "reduced": {
+              "initial": "true",
+              "after": "false",
+              "changed": true
+            },
+            "full": {
+              "initial": "true",
+              "after": "false",
+              "changed": true
+            }
+          }
+        },
+        {
+          "kind": "options",
+          "section": "Drop a pin. Draw the boundary. See what fits.",
+          "options": [
+            "A · Courtyard",
+            "B · Linear",
+            "C · Two blocks"
+          ],
+          "expect": {
+            "reduced": {
+              "initial": {
+                "A · Courtyard": "true",
+                "B · Linear": "false",
+                "C · Two blocks": "false"
+              },
+              "steps": [
+                {
+                  "choose": "A · Courtyard",
+                  "states": {
+                    "A · Courtyard": "true",
+                    "B · Linear": "false",
+                    "C · Two blocks": "false"
+                  },
+                  "changed": false
+                },
+                {
+                  "choose": "B · Linear",
+                  "states": {
+                    "A · Courtyard": "false",
+                    "B · Linear": "true",
+                    "C · Two blocks": "false"
+                  },
+                  "changed": true
+                },
+                {
+                  "choose": "C · Two blocks",
+                  "states": {
+                    "A · Courtyard": "false",
+                    "B · Linear": "false",
+                    "C · Two blocks": "true"
+                  },
+                  "changed": true
+                }
+              ]
+            },
+            "full": {
+              "initial": {
+                "A · Courtyard": "true",
+                "B · Linear": "false",
+                "C · Two blocks": "false"
+              },
+              "steps": [
+                {
+                  "choose": "A · Courtyard",
+                  "states": {
+                    "A · Courtyard": "true",
+                    "B · Linear": "false",
+                    "C · Two blocks": "false"
+                  },
+                  "changed": false
+                },
+                {
+                  "choose": "B · Linear",
+                  "states": {
+                    "A · Courtyard": "false",
+                    "B · Linear": "true",
+                    "C · Two blocks": "false"
+                  },
+                  "changed": true
+                },
+                {
+                  "choose": "C · Two blocks",
+                  "states": {
+                    "A · Courtyard": "false",
+                    "B · Linear": "false",
+                    "C · Two blocks": "true"
+                  },
+                  "changed": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "kind": "boundary",
+          "section": "Drop a pin. Draw the boundary. See what fits.",
+          "expect": {
+            "reduced": {},
+            "full": {}
+          }
+        },
+        {
+          "kind": "video-tile",
+          "section": "A camera move on the drawing you already have.",
+          "expect": {
+            "reduced": {},
+            "full": {}
+          }
+        }
+      ],
+      "motion": {
+        "header": {
+          "time": false,
+          "scroll": false
+        },
+        "It teaches before it draws.": {
+          "time": false,
+          "scroll": false
+        },
+        "Want to understand why, before you see it?": {
+          "time": false,
+          "scroll": false
+        },
+        "Drop a pin. Draw the boundary. See what fits.": {
+          "time": false,
+          "scroll": false
+        },
+        "A camera move on the drawing you already have.": {
+          "time": false,
+          "scroll": false
+        },
+        "Six steps, in this order": {
+          "time": false,
+          "scroll": false
+        },
+        "A rough sketch, the principles, and what it found": {
+          "time": false,
+          "scroll": false
+        },
+        "Worked answers unlock after you try": {
+          "time": false,
+          "scroll": false
+        },
+        "Every submission says how much was yours": {
+          "time": false,
+          "scroll": false
+        },
+        "Set the exercise. Read the record.": {
+          "time": false,
+          "scroll": false
+        },
+        "Plainly answered": {
+          "time": false,
+          "scroll": false
+        },
+        "Learn the reasons first.": {
+          "time": false,
+          "scroll": false
+        },
+        "footer": {
+          "time": false,
+          "scroll": false
+        }
+      }
+    },
+    "Regulators & manufacturers": {
+      "route": "/regulators-and-manufacturers",
+      "section_keys_by_viewport": {
+        "w375": [
+          "header",
+          "For regulators and manufacturers",
+          "A submission in, a cited report out",
+          "Where it sits in an e-permitting workflow",
+          "Shared commitments",
+          "Tell us which half you are",
+          "footer"
+        ],
+        "w768": [
+          "header",
+          "For regulators and manufacturers",
+          "A submission in, a cited report out",
+          "Where it sits in an e-permitting workflow",
+          "Shared commitments",
+          "Tell us which half you are",
+          "footer"
+        ],
+        "w1280": [
+          "header",
+          "For regulators and manufacturers",
+          "A submission in, a cited report out",
+          "Where it sits in an e-permitting workflow",
+          "Shared commitments",
+          "Tell us which half you are",
+          "footer"
+        ]
+      },
+      "sections": [
+        {
+          "key": "header",
+          "lines": [
+            "Drawlogic",
+            "Product",
+            "keyboard_arrow_down",
+            "Markets",
+            "keyboard_arrow_down",
+            "Pricing",
+            "About",
+            "Sign in",
+            "Try an idea"
+          ]
+        },
+        {
+          "key": "For regulators and manufacturers",
+          "lines": [
+            "For regulators and manufacturers",
+            "Two arrangements on one engine. Authorities run submissions against their own profile. Manufacturers publish signed product profiles so their systems are specified correctly.",
+            "For regulators",
+            "For manufacturers"
+          ]
+        },
+        {
+          "key": "A submission in, a cited report out",
+          "lines": [
+            "PRECHECK API",
+            "A submission in, a cited report out",
+            "Driven by the authority's own profile, at a version the authority controls. Every pass and every flag carries the clause it came from.",
+            "Your profile, your version",
+            "You author and sign the rule set. PreCheck runs nothing you have not approved.",
+            "Cited, not scored",
+            "Each result names the rule ID and the document clause. There is no single approval number.",
+            "Lists what it did not check",
+            "The report ends with the checks not performed, the same as every other Drawlogic output.",
+            "POST /v1/precheck",
+            "{",
+            "\"submission\": \"sub_2026_04812.pdf\",",
+            "\"profile\": \"ng-lagos-epps@2026.1\"",
+            "}",
+            "→ 200",
+            "checks_performed: 33",
+            "flags: 2",
+            "not_performed: 4",
+            "retention: none (not opted in)"
+          ]
+        },
+        {
+          "key": "Where it sits in an e-permitting workflow",
+          "lines": [
+            "FIT",
+            "Where it sits in an e-permitting workflow",
+            "Before intake",
+            "Applicants self-check. Fewer incomplete submissions reach your officers.",
+            "At intake",
+            "PreCheck runs automatically and attaches a cited report to the case file.",
+            "During review",
+            "Officers see the provenance layer — which values came from the applicant and which were inferred.",
+            "No retention by default",
+            "Submissions are processed and discarded unless your authority opts in to retention.",
+            "Talk to us"
+          ]
+        },
+        {
+          "key": "Shared commitments",
+          "lines": [
+            "TRUST AND DATA",
+            "Shared commitments",
+            "No training on customer data",
+            "Your drawings and submissions are never used for training. This is a contractual term, not a setting.",
+            "Residency options",
+            "UK, EU, US and Nigeria regions available on Enterprise arrangements.",
+            "Audit trail",
+            "Who opened what, what changed, and when — exportable as evidence in PDF or JSON.",
+            "Versioned everything",
+            "Profiles, rules and drawings all carry versions. A check can always be reproduced."
+          ]
+        },
+        {
+          "key": "Tell us which half you are",
+          "lines": [
+            "CONTACT",
+            "Tell us which half you are",
+            "Organisation",
+            "You are",
+            "Regulator or authority",
+            "Manufacturer",
+            "Standards body",
+            "Other",
+            "keyboard_arrow_down",
+            "What are you trying to solve?",
+            "what you would want PreCheck or a product profile to do",
+            "Send"
+          ]
+        },
+        {
+          "key": "footer",
+          "lines": [
+            "Drawlogic",
+            "Anyone can start. Professionals can issue.",
+            "PRODUCT",
+            "Idea mode",
+            "For professionals",
+            "Render studio",
+            "Profile marketplace",
+            "Find a signer",
+            "Developers",
+            "Students & educators",
+            "MARKETS",
+            "Regulators & manufacturers",
+            "Lagos",
+            "United Kingdom",
+            "United States",
+            "Nigeria",
+            "COMPANY",
+            "About",
+            "Contact",
+            "Pricing",
+            "Become a signer",
+            "Author a profile",
+            "Your drawings are never used for training.",
+            "Drawlogic performs automated design-rule checks against versioned jurisdiction profiles and lists what it did not check. Outputs are not a statement of legal compliance. Drawings are issued under the responsible charge of the verified professional who signs them.",
+            "© 2026 Drawlogic",
+            "Privacy policy",
+            "Data policy",
+            "Terms of service",
+            "Liability"
+          ]
+        }
+      ],
+      "honesty": [
+        "liability",
+        "training"
+      ],
+      "captions": {
+        "illustrative": 0,
+        "preview_label": 0
+      },
+      "roadmap": [],
+      "interactive": [
+        {
+          "kind": "tabs",
+          "section": "For regulators and manufacturers",
+          "options": [
+            "For regulators",
+            "For manufacturers"
+          ],
+          "expect": {
+            "reduced": {
+              "initial": {
+                "For regulators": "true",
+                "For manufacturers": "false"
+              },
+              "steps": [
+                {
+                  "choose": "For regulators",
+                  "states": {
+                    "For regulators": "true",
+                    "For manufacturers": "false"
+                  },
+                  "changed": false
+                },
+                {
+                  "choose": "For manufacturers",
+                  "states": {
+                    "For regulators": "false",
+                    "For manufacturers": "true"
+                  },
+                  "changed": false
+                }
+              ]
+            },
+            "full": {
+              "initial": {
+                "For regulators": "true",
+                "For manufacturers": "false"
+              },
+              "steps": [
+                {
+                  "choose": "For regulators",
+                  "states": {
+                    "For regulators": "true",
+                    "For manufacturers": "false"
+                  },
+                  "changed": false
+                },
+                {
+                  "choose": "For manufacturers",
+                  "states": {
+                    "For regulators": "false",
+                    "For manufacturers": "true"
+                  },
+                  "changed": false
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "motion": {
+        "header": {
+          "time": false,
+          "scroll": false
+        },
+        "For regulators and manufacturers": {
+          "time": false,
+          "scroll": false
+        },
+        "A submission in, a cited report out": {
+          "time": false,
+          "scroll": false
+        },
+        "Where it sits in an e-permitting workflow": {
+          "time": false,
+          "scroll": false
+        },
+        "Shared commitments": {
+          "time": false,
+          "scroll": false
+        },
+        "Tell us which half you are": {
+          "time": false,
+          "scroll": false
+        },
+        "footer": {
+          "time": false,
+          "scroll": false
+        }
+      }
+    },
+    "Lagos": {
+      "route": "/lagos",
+      "section_keys_by_viewport": {
+        "w375": [
+          "header",
+          "EPPPS-ready submissions, first time",
+          "What a submission needs, as Drawlogic sees it",
+          "Lagos conventions, without re-teaching the software",
+          "The statutory seal and the Drawlogic stamp are not the same thing",
+          "Pilot programme for practices",
+          "Naira pricing via Paystack",
+          "EPPPS, sealing and local workflow",
+          "Type your plot. See what fits.",
+          "footer"
+        ],
+        "w768": [
+          "header",
+          "EPPPS-ready submissions, first time",
+          "What a submission needs, as Drawlogic sees it",
+          "Lagos conventions, without re-teaching the software",
+          "The statutory seal and the Drawlogic stamp are not the same thing",
+          "Pilot programme for practices",
+          "Naira pricing via Paystack",
+          "EPPPS, sealing and local workflow",
+          "Type your plot. See what fits.",
+          "footer"
+        ],
+        "w1280": [
+          "header",
+          "EPPPS-ready submissions, first time",
+          "What a submission needs, as Drawlogic sees it",
+          "Lagos conventions, without re-teaching the software",
+          "The statutory seal and the Drawlogic stamp are not the same thing",
+          "Pilot programme for practices",
+          "Naira pricing via Paystack",
+          "EPPPS, sealing and local workflow",
+          "Type your plot. See what fits.",
+          "footer"
+        ]
+      },
+      "sections": [
+        {
+          "key": "header",
+          "lines": [
+            "Drawlogic",
+            "Product",
+            "keyboard_arrow_down",
+            "Markets",
+            "keyboard_arrow_down",
+            "Pricing",
+            "About",
+            "Sign in",
+            "Try an idea"
+          ]
+        },
+        {
+          "key": "EPPPS-ready submissions, first time",
+          "lines": [
+            "Lagos State · Nigeria",
+            "EPPPS-ready submissions, first time",
+            "For Lagos developers and ARCON/COREN professionals. The same engine, with the Lagos State profile, Naira pricing and the EPPPS checklist built in.",
+            "Try a Lagos plot",
+            "Join the pilot"
+          ]
+        },
+        {
+          "key": "What a submission needs, as Drawlogic sees it",
+          "lines": [
+            "THE CHECKLIST",
+            "What a submission needs, as Drawlogic sees it",
+            "Drawlogic prepares the drawing set and flags what it cannot produce. The items marked as supplied by others are yours to obtain.",
+            "The EPPPS checklist, as Drawlogic sees it",
+            "✓",
+            "A3 drawing set",
+            "Category-aware sheet list, Lagos conventions applied",
+            "READY",
+            "⚠",
+            "ARCON/COREN sealed drawings",
+            "Applied by the verified professional, not by Drawlogic",
+            "NEEDS ATTENTION",
+            "✓",
+            "3D view — buildings above three floors",
+            "Rendered from the drawing, hash on the sheet",
+            "READY",
+            "⚠",
+            "M&E drawings where required",
+            "Electrical on roadmap — supply or commission separately",
+            "NEEDS ATTENTION",
+            "○",
+            "Survey plan",
+            "SUPPLIED BY OTHERS",
+            "○",
+            "Title documents",
+            "SUPPLIED BY OTHERS",
+            "○",
+            "Tax clearance and receipts",
+            "SUPPLIED BY OTHERS",
+            "Drawlogic does not submit your application and does not obtain documents on your behalf.",
+            "For developers",
+            "Type your plot and see what fits, with setback and coverage flags, before you hire anyone.",
+            "add_photo_alternate",
+            "Upload a photo or sketch",
+            "location_on",
+            "Lekki, Lagos",
+            "See what fits"
+          ]
+        },
+        {
+          "key": "Lagos conventions, without re-teaching the software",
+          "lines": [
+            "FOR ARCHITECTS",
+            "Lagos conventions, without re-teaching the software",
+            "Category-aware sets",
+            "The sheet list follows the development category, so a Category 2 submission does not carry Category 3 drawings.",
+            "Lagos conventions",
+            "Sheet sizes, title blocks, hatching and annotation set to what the authority expects to see.",
+            "Submission-readiness check",
+            "Every item on the checklist, with the ones Drawlogic cannot produce named plainly."
+          ]
+        },
+        {
+          "key": "The statutory seal and the Drawlogic stamp are not the same thing",
+          "lines": [
+            "SEALING",
+            "The statutory seal and the Drawlogic stamp are not the same thing",
+            "One is a legal act performed by a registered professional. The other is evidence that a review happened. They sit on the sheet separately and they are labelled separately.",
+            "Statutory",
+            "ARCON / COREN seal",
+            "Applied by the registered professional under their own registration. Drawlogic does not generate it, reproduce it or hold it.",
+            "SEAL AREA",
+            "Applied by the professional",
+            "Not produced by Drawlogic",
+            "Evidence of review",
+            "DRAWLOGIC VERIFICATION STAMP",
+            "SIGNED",
+            "PROFILES",
+            "NG-Lagos-EPPPS v2026.1 · Office: Adeyemi Partners v2",
+            "CHECKS PERFORMED",
+            "33",
+            "CHECKS FLAGGED",
+            "⚠ 2",
+            "CHECKS NOT PERFORMED",
+            "2",
+            "UNVERIFIED ELEMENTS",
+            "1",
+            "SIGNER",
+            "A. Okonkwo · ARCON 12/3456 · 2026-09-15",
+            "DRAWING HASH",
+            "sha256:41e8…b902 rev A",
+            "TIMESTAMP",
+            "2026-09-15 09:40 WAT",
+            "CHECKS NOT PERFORMED:",
+            "Structural adequacy",
+            "M&E coordination",
+            "This is an automated design-rule check. It is not a statement of legal compliance."
+          ]
+        },
+        {
+          "key": "Pilot programme for practices",
+          "lines": [
+            "What we don't do",
+            "close",
+            "We do not submit your application to the authority.",
+            "close",
+            "We do not obtain survey plans, title documents or tax receipts.",
+            "close",
+            "We do not apply the ARCON or COREN seal.",
+            "close",
+            "We do not guarantee approval.",
+            "Pilot programme for practices",
+            "Ten Lagos practices, three months, Naira pricing, with the Lagos State profile authored alongside you. We take your corrections to the profile and publish them, signed.",
+            "Join the pilot",
+            "chevron_right"
+          ]
+        },
+        {
+          "key": "Naira pricing via Paystack",
+          "lines": [
+            "PRICING",
+            "Naira pricing via Paystack",
+            "₦ NGN",
+            "$ USD",
+            "ANYONE CAN START",
+            "Idea",
+            "Developers and homeowners",
+            "₦9,500 /mo",
+            "✓",
+            "Unlimited concepts",
+            "✓",
+            "Lagos State profile",
+            "✓",
+            "Setback and coverage flags",
+            "PROFESSIONALS CAN ISSUE",
+            "Individual",
+            "Sole practitioners",
+            "₦32,000 /mo",
+            "✓",
+            "Draft mode",
+            "✓",
+            "A3 sets",
+            "✓",
+            "EPPPS checklist",
+            "Professional",
+            "Per seat",
+            "₦119,000 /user/mo",
+            "✓",
+            "Office profiles",
+            "✓",
+            "Provenance layer",
+            "✓",
+            "Verification stamp"
+          ]
+        },
+        {
+          "key": "EPPPS, sealing and local workflow",
+          "lines": [
+            "QUESTIONS",
+            "EPPPS, sealing and local workflow",
+            "Does a Drawlogic stamp satisfy EPPPS?",
+            "keyboard_arrow_down",
+            "No. EPPPS requires drawings sealed by registered ARCON and COREN professionals. The Drawlogic stamp is evidence that an automated check and a professional review happened. It sits alongside the statutory seal, not in place of it.",
+            "Is the Lagos State profile verified?",
+            "keyboard_arrow_down",
+            "Yes — Tier 1, signed by a named ARCON-registered professional, cited to EPPPS 2019 and the Lagos State Physical Planning Permit Law. The version is pinned on every check.",
+            "Can I pay in Naira?",
+            "keyboard_arrow_down",
+            "Yes, via Paystack, at the rates on this page. The card currency does not change what you get.",
+            "Do you handle M&E?",
+            "keyboard_arrow_down",
+            "Not yet. Electrical is on the roadmap and is marked as not checked in the report until it ships. Commission M&E separately and attach the drawings to your set."
+          ]
+        },
+        {
+          "key": "Type your plot. See what fits.",
+          "lines": [
+            "Type your plot. See what fits.",
+            "Or join the pilot as a practice.",
+            "Try a Lagos plot",
+            "Join the pilot"
+          ]
+        },
+        {
+          "key": "footer",
+          "lines": [
+            "Drawlogic",
+            "Anyone can start. Professionals can issue.",
+            "PRODUCT",
+            "Idea mode",
+            "For professionals",
+            "Render studio",
+            "Profile marketplace",
+            "Find a signer",
+            "Developers",
+            "Students & educators",
+            "MARKETS",
+            "Regulators & manufacturers",
+            "Lagos",
+            "United Kingdom",
+            "United States",
+            "Nigeria",
+            "COMPANY",
+            "About",
+            "Contact",
+            "Pricing",
+            "Become a signer",
+            "Author a profile",
+            "Your drawings are never used for training.",
+            "Drawlogic performs automated design-rule checks against versioned jurisdiction profiles and lists what it did not check. Outputs are not a statement of legal compliance. Drawings are issued under the responsible charge of the verified professional who signs them.",
+            "© 2026 Drawlogic",
+            "Privacy policy",
+            "Data policy",
+            "Terms of service",
+            "Liability"
+          ]
+        }
+      ],
+      "honesty": [
+        "liability",
+        "training"
+      ],
+      "captions": {
+        "illustrative": 0,
+        "preview_label": 0
+      },
+      "roadmap": [
+        {
+          "text": "Electrical on roadmap — supply or commission separately",
+          "item": "Electrical"
+        }
+      ],
+      "interactive": [
+        {
+          "kind": "currency",
+          "section": "Naira pricing via Paystack",
+          "options": [
+            "NGN",
+            "USD"
+          ],
+          "expect": {
+            "reduced": {
+              "initial": {
+                "NGN": "true",
+                "USD": "false"
+              },
+              "steps": [
+                {
+                  "choose": "NGN",
+                  "states": {
+                    "NGN": "true",
+                    "USD": "false"
+                  },
+                  "changed": false,
+                  "symbols": [
+                    "₦"
+                  ]
+                },
+                {
+                  "choose": "USD",
+                  "states": {
+                    "NGN": "true",
+                    "USD": "false"
+                  },
+                  "changed": false,
+                  "symbols": [
+                    "₦"
+                  ]
+                }
+              ]
+            },
+            "full": {
+              "initial": {
+                "NGN": "true",
+                "USD": "false"
+              },
+              "steps": [
+                {
+                  "choose": "NGN",
+                  "states": {
+                    "NGN": "true",
+                    "USD": "false"
+                  },
+                  "changed": false,
+                  "symbols": [
+                    "₦"
+                  ]
+                },
+                {
+                  "choose": "USD",
+                  "states": {
+                    "NGN": "true",
+                    "USD": "false"
+                  },
+                  "changed": false,
+                  "symbols": [
+                    "₦"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "motion": {
+        "header": {
+          "time": false,
+          "scroll": false
+        },
+        "EPPPS-ready submissions, first time": {
+          "time": false,
+          "scroll": false
+        },
+        "What a submission needs, as Drawlogic sees it": {
+          "time": false,
+          "scroll": false
+        },
+        "Lagos conventions, without re-teaching the software": {
+          "time": false,
+          "scroll": false
+        },
+        "The statutory seal and the Drawlogic stamp are not the same thing": {
+          "time": false,
+          "scroll": false
+        },
+        "Pilot programme for practices": {
+          "time": false,
+          "scroll": false
+        },
+        "Naira pricing via Paystack": {
+          "time": false,
+          "scroll": false
+        },
+        "EPPPS, sealing and local workflow": {
+          "time": false,
+          "scroll": false
+        },
+        "Type your plot. See what fits.": {
+          "time": false,
+          "scroll": false
+        },
+        "footer": {
+          "time": false,
+          "scroll": false
+        }
+      }
+    },
+    "Pricing": {
+      "route": "/pricing",
+      "section_keys_by_viewport": {
+        "w375": [
+          "header",
+          "Simple pricing, transparent value",
+          "untitled: £ GBP",
+          "Nigeria tier and the student plan",
+          "Line by line",
+          "The two fees that are not subscriptions",
+          "Questions about the bill",
+          "Start free.",
+          "footer"
+        ],
+        "w768": [
+          "header",
+          "Simple pricing, transparent value",
+          "untitled: £ GBP",
+          "Nigeria tier and the student plan",
+          "Line by line",
+          "The two fees that are not subscriptions",
+          "Questions about the bill",
+          "Start free.",
+          "footer"
+        ],
+        "w1280": [
+          "header",
+          "Simple pricing, transparent value",
+          "untitled: £ GBP",
+          "Nigeria tier and the student plan",
+          "Line by line",
+          "The two fees that are not subscriptions",
+          "Questions about the bill",
+          "Start free.",
+          "footer"
+        ]
+      },
+      "sections": [
+        {
+          "key": "header",
+          "lines": [
+            "Drawlogic",
+            "Product",
+            "keyboard_arrow_down",
+            "Markets",
+            "keyboard_arrow_down",
+            "Pricing",
+            "About",
+            "Sign in",
+            "Try an idea"
+          ]
+        },
+        {
+          "key": "Simple pricing, transparent value",
+          "lines": [
+            "Simple pricing, transparent value",
+            "Free to try, six tiers, three currencies. Idea sits with Free because both are for people starting out; the professional tiers group together because they all end in something you can issue."
+          ]
+        },
+        {
+          "key": "untitled: £ GBP",
+          "lines": [
+            "£ GBP",
+            "$ USD",
+            "₦ NGN",
+            "ANYONE CAN START",
+            "Free",
+            "One idea at a time",
+            "£0",
+            "✓",
+            "Concept options in seconds",
+            "✓",
+            "Plans and key numbers",
+            "✓",
+            "Watermarked PDF and PNG",
+            "Idea",
+            "Homeowners and developers",
+            "£11 /mo",
+            "✓",
+            "Unlimited concepts",
+            "✓",
+            "Assumptions panel",
+            "✓",
+            "Promote to Draft",
+            "✓",
+            "Find a signer",
+            "PROFESSIONALS CAN ISSUE",
+            "Individual",
+            "Sole practitioners",
+            "£39 /mo",
+            "✓",
+            "Draft mode",
+            "✓",
+            "DXF and PDF exports",
+            "✓",
+            "Standards Report",
+            "✓",
+            "Chat-based drawing edits",
+            "Professional",
+            "Per seat",
+            "£139 /user/mo",
+            "✓",
+            "Office profiles",
+            "✓",
+            "Provenance layer",
+            "✓",
+            "Verification stamp",
+            "✓",
+            "Audit record",
+            "Practice",
+            "Up to 25 seats",
+            "£849 /mo",
+            "✓",
+            "Everything in Professional",
+            "✓",
+            "Office standards hierarchy",
+            "✓",
+            "Conflict detection",
+            "✓",
+            "Priority profile authoring",
+            "Enterprise / Regulator",
+            "Authorities and manufacturers",
+            "Custom",
+            "✓",
+            "PreCheck API",
+            "✓",
+            "Data residency options",
+            "✓",
+            "No retention unless opted in",
+            "✓",
+            "Named support"
+          ]
+        },
+        {
+          "key": "Nigeria tier and the student plan",
+          "lines": [
+            "ALSO AVAILABLE",
+            "Nigeria tier and the student plan",
+            "Nigeria",
+            "Local pricing via Paystack",
+            "Idea",
+            "₦9,500 /mo",
+            "Individual",
+            "₦32,000 /mo",
+            "Professional",
+            "₦119,000 /user/mo",
+            "Same features. Paid in Naira, billed by Paystack.",
+            "Students",
+            "Free with academic verification",
+            "Draft mode, three projects a month, watermarked exports. Verification through your institution's email domain or a registration letter.",
+            "Verify as a student",
+            "Render credits",
+            "$19 per 100 credits",
+            "Top up",
+            "Instant top-up. Credits do not expire. About 20 interior renders per 100."
+          ]
+        },
+        {
+          "key": "Line by line",
+          "lines": [
+            "WHAT EACH TIER INCLUDES",
+            "Line by line",
+            "FREE IDEA INDIVIDUAL PROFESSIONAL PRACTICE ENTERPRISE",
+            "Drafts per month 1 Unlimited Unlimited Unlimited Unlimited Unlimited",
+            "Jurisdiction profiles Generic Generic 1 Tier 1 All Tier 1 All Tier 1 All + private",
+            "Render credits included 0 20 60 200 1 000 Negotiated",
+            "Exports PNG PDF, PNG DXF, PDF DXF, PDF, SVG DXF, PDF, SVG DXF, PDF, SVG",
+            "Signing role — — Request Request + sign Request + sign Request + sign",
+            "Audit trail — — 30 days Full Full Full + export"
+          ]
+        },
+        {
+          "key": "The two fees that are not subscriptions",
+          "lines": [
+            "MARKETPLACE AND SIGNERS",
+            "The two fees that are not subscriptions",
+            "Profile marketplace",
+            "Authors keep 70% of each sale. Drawlogic takes 30% and handles payment, versioning and distribution.",
+            "Responsible-charge reviews",
+            "Signers set their own fee per review, shown before you commit. Drawlogic takes a 12% marketplace fee on the review."
+          ]
+        },
+        {
+          "key": "Questions about the bill",
+          "lines": [
+            "BILLING",
+            "Questions about the bill",
+            "What is watermarked on a free export?",
+            "keyboard_arrow_down",
+            "Every Free and Idea export carries CONCEPT — NOT FOR CONSTRUCTION and is delivered as PDF or PNG only. There is no CAD geometry in a free export.",
+            "What does a free export actually include?",
+            "keyboard_arrow_down",
+            "The concept plan, the key numbers, the assumptions list and one render. It does not include a Standards Report or a verification stamp.",
+            "Can I cancel?",
+            "keyboard_arrow_down",
+            "Yes, at any time, from the billing page. You keep access until the end of the paid period and your drawings stay downloadable for 90 days after.",
+            "Do you store payment details?",
+            "keyboard_arrow_down",
+            "No. Card details are held by Stripe, or by Paystack for Naira billing. We store the last four digits and the expiry only."
+          ]
+        },
+        {
+          "key": "Start free.",
+          "lines": [
+            "Start free.",
+            "Talk to us if you need a regulator or enterprise arrangement.",
+            "Start free",
+            "Talk to sales"
+          ]
+        },
+        {
+          "key": "footer",
+          "lines": [
+            "Drawlogic",
+            "Anyone can start. Professionals can issue.",
+            "PRODUCT",
+            "Idea mode",
+            "For professionals",
+            "Render studio",
+            "Profile marketplace",
+            "Find a signer",
+            "Developers",
+            "Students & educators",
+            "MARKETS",
+            "Regulators & manufacturers",
+            "Lagos",
+            "United Kingdom",
+            "United States",
+            "Nigeria",
+            "COMPANY",
+            "About",
+            "Contact",
+            "Pricing",
+            "Become a signer",
+            "Author a profile",
+            "Your drawings are never used for training.",
+            "Drawlogic performs automated design-rule checks against versioned jurisdiction profiles and lists what it did not check. Outputs are not a statement of legal compliance. Drawings are issued under the responsible charge of the verified professional who signs them.",
+            "© 2026 Drawlogic",
+            "Privacy policy",
+            "Data policy",
+            "Terms of service",
+            "Liability"
+          ]
+        }
+      ],
+      "honesty": [
+        "liability",
+        "training",
+        "concept-watermark"
+      ],
+      "captions": {
+        "illustrative": 0,
+        "preview_label": 0
+      },
+      "roadmap": [],
+      "interactive": [
+        {
+          "kind": "currency",
+          "section": "untitled: £ GBP",
+          "options": [
+            "GBP",
+            "USD",
+            "NGN"
+          ],
+          "expect": {
+            "reduced": {
+              "initial": {
+                "GBP": "true",
+                "USD": "false",
+                "NGN": "false"
+              },
+              "steps": [
+                {
+                  "choose": "GBP",
+                  "states": {
+                    "GBP": "true",
+                    "USD": "false",
+                    "NGN": "false"
+                  },
+                  "changed": false,
+                  "symbols": [
+                    "£"
+                  ]
+                },
+                {
+                  "choose": "USD",
+                  "states": {
+                    "GBP": "false",
+                    "USD": "true",
+                    "NGN": "false"
+                  },
+                  "changed": true,
+                  "symbols": [
+                    "$"
+                  ]
+                },
+                {
+                  "choose": "NGN",
+                  "states": {
+                    "GBP": "false",
+                    "USD": "false",
+                    "NGN": "true"
+                  },
+                  "changed": true,
+                  "symbols": [
+                    "₦"
+                  ]
+                }
+              ]
+            },
+            "full": {
+              "initial": {
+                "GBP": "true",
+                "USD": "false",
+                "NGN": "false"
+              },
+              "steps": [
+                {
+                  "choose": "GBP",
+                  "states": {
+                    "GBP": "true",
+                    "USD": "false",
+                    "NGN": "false"
+                  },
+                  "changed": false,
+                  "symbols": [
+                    "£"
+                  ]
+                },
+                {
+                  "choose": "USD",
+                  "states": {
+                    "GBP": "false",
+                    "USD": "true",
+                    "NGN": "false"
+                  },
+                  "changed": true,
+                  "symbols": [
+                    "$"
+                  ]
+                },
+                {
+                  "choose": "NGN",
+                  "states": {
+                    "GBP": "false",
+                    "USD": "false",
+                    "NGN": "true"
+                  },
+                  "changed": true,
+                  "symbols": [
+                    "₦"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "motion": {
+        "header": {
+          "time": false,
+          "scroll": false
+        },
+        "Simple pricing, transparent value": {
+          "time": false,
+          "scroll": false
+        },
+        "untitled: £ GBP": {
+          "time": false,
+          "scroll": false
+        },
+        "Nigeria tier and the student plan": {
+          "time": false,
+          "scroll": false
+        },
+        "Line by line": {
+          "time": false,
+          "scroll": false
+        },
+        "The two fees that are not subscriptions": {
+          "time": false,
+          "scroll": false
+        },
+        "Questions about the bill": {
+          "time": false,
+          "scroll": false
+        },
+        "Start free.": {
+          "time": false,
+          "scroll": false
+        },
+        "footer": {
+          "time": false,
+          "scroll": false
+        }
+      }
+    },
+    "About": {
+      "route": "/about",
+      "section_keys_by_viewport": {
+        "w375": [
+          "header",
+          "About & Contact",
+          "A drawing is a claim about the world",
+          "Four rules we build against",
+          "Three markets, three profile sets",
+          "Thirty minutes, on one of your live drawings",
+          "Direct lines",
+          "footer"
+        ],
+        "w768": [
+          "header",
+          "About & Contact",
+          "A drawing is a claim about the world",
+          "Four rules we build against",
+          "Three markets, three profile sets",
+          "Thirty minutes, on one of your live drawings",
+          "Direct lines",
+          "footer"
+        ],
+        "w1280": [
+          "header",
+          "About & Contact",
+          "A drawing is a claim about the world",
+          "Four rules we build against",
+          "Three markets, three profile sets",
+          "Thirty minutes, on one of your live drawings",
+          "Direct lines",
+          "footer"
+        ]
+      },
+      "sections": [
+        {
+          "key": "header",
+          "lines": [
+            "Drawlogic",
+            "Product",
+            "keyboard_arrow_down",
+            "Markets",
+            "keyboard_arrow_down",
+            "Pricing",
+            "About",
+            "Sign in",
+            "Try an idea"
+          ]
+        },
+        {
+          "key": "About & Contact",
+          "lines": [
+            "About & Contact",
+            "Why drawings need a source and a signer"
+          ]
+        },
+        {
+          "key": "A drawing is a claim about the world",
+          "lines": [
+            "MISSION",
+            "A drawing is a claim about the world",
+            "Somebody has to be able to say where each line came from and who stands behind it. That is what a drawing set has always been for, and it is the part that generative tools skip.",
+            "Drawlogic keeps the source on every element and the signature on every check. Anyone can start something here. Only a verified professional can issue it."
+          ]
+        },
+        {
+          "key": "Four rules we build against",
+          "lines": [
+            "PRINCIPLES",
+            "Four rules we build against",
+            "Fail closed",
+            "When the engine cannot resolve something, it blocks the element and says so. It does not produce a plausible line.",
+            "Never invent engineering",
+            "Loads, ratings and member sizes are supplied by a professional or the drawing is blocked at that element.",
+            "Honest stamps",
+            "Every stamp lists checks performed, checks flagged and checks not performed, and names the signer or says UNSIGNED.",
+            "Your data is not our training set",
+            "Your drawings are never used for training. It is a contractual term."
+          ]
+        },
+        {
+          "key": "Three markets, three profile sets",
+          "lines": [
+            "WHERE WE WORK",
+            "Three markets, three profile sets",
+            "United Kingdom",
+            "Approved Documents, local plan checks. Tier 1, signed by ARB-registered professionals.",
+            "london@drawlogic.com",
+            "United States",
+            "State-by-state. California CBC and Title 24 live at Tier 2.",
+            "new york@drawlogic.com",
+            "Nigeria",
+            "Lagos State EPPPS at Tier 1, signed by ARCON-registered professionals. Naira billing.",
+            "lagos@drawlogic.com"
+          ]
+        },
+        {
+          "key": "Thirty minutes, on one of your live drawings",
+          "lines": [
+            "BOOK A DEMO",
+            "Thirty minutes, on one of your live drawings",
+            "Name *",
+            "Email *",
+            "You are a *",
+            "Professional — architect, technologist, engineer",
+            "Developer or agent builder",
+            "Regulator or authority",
+            "Manufacturer",
+            "Press",
+            "keyboard_arrow_down",
+            "Preferred date",
+            "Preferred time",
+            "Morning (GMT)",
+            "Afternoon (GMT)",
+            "Afternoon (WAT)",
+            "Morning (PT)",
+            "keyboard_arrow_down",
+            "What would you like us to run it on?",
+            "a drawing, a jurisdiction, a workflow",
+            "Send me the monthly product note",
+            "Profile releases and check coverage. No marketing.",
+            "Book a demo"
+          ]
+        },
+        {
+          "key": "Direct lines",
+          "lines": [
+            "CONTACT",
+            "Direct lines",
+            "GENERAL",
+            "hello@drawlogic.com",
+            "PROFESSIONALS",
+            "practices@drawlogic.com",
+            "REGULATORS",
+            "authorities@drawlogic.com",
+            "PRESS",
+            "press@drawlogic.com"
+          ]
+        },
+        {
+          "key": "footer",
+          "lines": [
+            "Drawlogic",
+            "Anyone can start. Professionals can issue.",
+            "PRODUCT",
+            "Idea mode",
+            "For professionals",
+            "Render studio",
+            "Profile marketplace",
+            "Find a signer",
+            "Developers",
+            "Students & educators",
+            "MARKETS",
+            "Regulators & manufacturers",
+            "Lagos",
+            "United Kingdom",
+            "United States",
+            "Nigeria",
+            "COMPANY",
+            "About",
+            "Contact",
+            "Pricing",
+            "Become a signer",
+            "Author a profile",
+            "Your drawings are never used for training.",
+            "Drawlogic performs automated design-rule checks against versioned jurisdiction profiles and lists what it did not check. Outputs are not a statement of legal compliance. Drawings are issued under the responsible charge of the verified professional who signs them.",
+            "© 2026 Drawlogic",
+            "Privacy policy",
+            "Data policy",
+            "Terms of service",
+            "Liability"
+          ]
+        }
+      ],
+      "honesty": [
+        "liability",
+        "training"
+      ],
+      "captions": {
+        "illustrative": 0,
+        "preview_label": 0
+      },
+      "roadmap": [],
+      "interactive": [],
+      "motion": {
+        "header": {
+          "time": false,
+          "scroll": false
+        },
+        "About & Contact": {
+          "time": false,
+          "scroll": false
+        },
+        "A drawing is a claim about the world": {
+          "time": false,
+          "scroll": false
+        },
+        "Four rules we build against": {
+          "time": false,
+          "scroll": false
+        },
+        "Three markets, three profile sets": {
+          "time": false,
+          "scroll": false
+        },
+        "Thirty minutes, on one of your live drawings": {
+          "time": false,
+          "scroll": false
+        },
+        "Direct lines": {
+          "time": false,
+          "scroll": false
+        },
+        "footer": {
+          "time": false,
+          "scroll": false
+        }
+      }
+    }
+  },
+  "style": {
+    "note": "Allowed colours (normalised) and font families: tokens.css custom properties plus what the prototype renders. Value = where first seen.",
+    "colors": {
+      "#000000": "For professionals w375 line",
+      "#092b4c": "tokens.css",
+      "#093533": "tokens.css",
+      "#0c3966": "For professionals w375 span",
+      "#0c4744": "For professionals w375 span",
+      "#0d0505": "For professionals w375 line",
+      "#0d3721": "tokens.css",
+      "#134d2d": "For professionals w375 span",
+      "#1873cc": "tokens.css",
+      "#197c45": "tokens.css",
+      "#198e88": "tokens.css",
+      "#1e90ff": "For professionals w375 circle",
+      "#1f9d57": "For professionals w375 span",
+      "#20b2aa": "For professionals w375 span",
+      "#251e1e": "For professionals w375 span",
+      "#261a4d": "tokens.css",
+      "#342369": "For professionals w375 span",
+      "#4c2020": "tokens.css",
+      "#4c4000": "tokens.css",
+      "#553cb0": "tokens.css",
+      "#555050": "For professionals w375 p",
+      "#5cba83": "Developers w375 div",
+      "#61b1ff": "Developers w375 div",
+      "#62c9c3": "Developers w375 div",
+      "#662a2a": "For professionals w375 span",
+      "#665600": "For professionals w375 span",
+      "#6c4fd8": "For professionals w375 span",
+      "#868282": "For professionals w375 th",
+      "#8a8a7c": "Students & educators w375 rect",
+      "#8f8d82": "Students & educators w375 div",
+      "#9b86e8": "Developers w375 div",
+      "#b6b4b4": "tokens.css",
+      "#cc5555": "tokens.css",
+      "#ccac00": "tokens.css",
+      "#cfe9da": "tokens.css",
+      "#d2e8ff": "For professionals w375 section.dl-section",
+      "#d2efee": "tokens.css",
+      "#dad9d9": "Students & educators w375 span",
+      "#e0d8fa": "tokens.css",
+      "#e8f3ff": "For professionals w375 header",
+      "#e8f7f6": "For professionals w375 span",
+      "#e9f6ee": "For professionals w375 span",
+      "#f1edfd": "For professionals w375 span",
+      "#f1efe8": "Students & educators w375 polygon",
+      "#f2f2f2": "For professionals w375 div",
+      "#faf9f9": "For professionals w375 section.dl-section",
+      "#ff6b6b": "For professionals w375 span",
+      "#ff9797": "Home w375 span",
+      "#ffd700": "For professionals w375 span",
+      "#ffe1e1": "tokens.css",
+      "#ffe34c": "For professionals w375 span",
+      "#fff0f0": "For professionals w375 span",
+      "#fff7cc": "For professionals w375 div",
+      "#fffbe5": "For professionals w375 span",
+      "#ffffff": "For professionals w375 a",
+      "color(srgb 0.0509804 0.0196078 0.0196078 / 0.05)": "tokens.css",
+      "color(srgb 0.0509804 0.0196078 0.0196078 / 0.1)": "For professionals w375 tr",
+      "color(srgb 0.0509804 0.0196078 0.0196078 / 0.15)": "For professionals w375 header",
+      "color(srgb 0.0509804 0.0196078 0.0196078 / 0.2)": "Students & educators w375 div",
+      "color(srgb 0.0509804 0.0196078 0.0196078 / 0.3)": "For professionals w375 figure",
+      "color(srgb 0.0509804 0.0196078 0.0196078 / 0.5)": "tokens.css",
+      "color(srgb 1 1 1 / 0.1)": "tokens.css",
+      "color(srgb 1 1 1 / 0.2)": "For professionals w375 div",
+      "color(srgb 1 1 1 / 0.3)": "tokens.css",
+      "color(srgb 1 1 1 / 0.6)": "For professionals w375 span",
+      "rgba(255,255,255,0.90)": "Students & educators w375 span",
+      "rgba(30,144,255,0.12)": "Students & educators w375 polygon"
+    },
+    "fonts": {
+      "ibm plex mono": "For professionals w375 span",
+      "material symbols outlined": "For professionals w375 span.dl-icon",
+      "source sans 3": "For professionals w375 span"
     }
   }
 }

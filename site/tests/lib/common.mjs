@@ -6,6 +6,17 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 export const TESTS_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 export const REPO_ROOT = path.resolve(TESTS_DIR, "../..");
+// Test settings may be set in the repository's .env (see .env.example). Only these keys are read from it,
+// and a value already in the environment wins.
+const ENV_KEYS = ["REPORTS_DIR", "SITE_DIR", "SITE_OUT", "SITE_URL", "SITE_PORT", "SITE_LAUNCHED", "PROTOTYPE_FILE"];
+const envFile = path.join(REPO_ROOT, ".env");
+if (fs.existsSync(envFile)) {
+  for (const line of fs.readFileSync(envFile, "utf8").split(/\r?\n/)) {
+    const m = /^\s*([A-Z_]+)\s*=\s*(.*?)\s*$/.exec(line);
+    if (m && ENV_KEYS.includes(m[1]) && process.env[m[1]] === undefined) process.env[m[1]] = m[2].replace(/^["']|["']$/g, "");
+  }
+}
+
 export const PROTOTYPE_FILE = path.resolve(process.env.PROTOTYPE_FILE ?? path.join(REPO_ROOT, "design/prototype/marketing-site.html"));
 export const PROTOTYPE_URL = pathToFileURL(PROTOTYPE_FILE).href;
 // The site under test. Defaults to this checkout's site/; point SITE_DIR at another worktree to examine its build.

@@ -2,7 +2,7 @@
 
 Examiner: Claude Code. Builder of `site/`: Codex. **The builder never edits this folder** (PRD §8A.3). If a test looks wrong, open an issue citing the prototype or the PRD clause; the examiner decides.
 
-The spec is `design/prototype/marketing-site.html`, with `docs/PRD.md` winning on content and rules (`skills/drawlogic-prototype-fidelity/SKILL.md`, precedence).
+The spec is `design/prototype/marketing-site.html` — the only approved design for `site/`, including Home (Decision 16) — with `docs/PRD.md` winning on content and rules (`skills/drawlogic-prototype-fidelity/SKILL.md`, precedence).
 
 ## What is checked, per prototype page, at 375 / 768 / 1280
 
@@ -12,13 +12,16 @@ The spec is `design/prototype/marketing-site.html`, with `docs/PRD.md` winning o
 | `visual` | Each section within 2% differing pixels of the prototype's section; video, canvas and `[data-dynamic-media]` masked; animations frozen |
 | `copy` (1280) | Each section's text matches the prototype line by line; lines with prices, credits or seats are left to `prd` |
 | `prd` (1280) | US-dollar amounts, seats and comparison-table cells agree with PRD §10 (`fixtures/prd-governed.json`); values tied to an OPEN decision are annotated, not asserted |
-| `assets` | Every image, video, poster and background image is listed in `site/public/media/manifest.json`, is not marked rejected, and the served file's sha256 is recorded on its manifest entry |
+| `assets` | Every image, video, poster and background image (full-motion experience) is listed in `site/public/media/manifest.json`, is not marked rejected, and the served file's sha256 is recorded on its manifest entry |
 | `labels` | Generated stills carry "Illustrative — generated from a Drawlogic drawing" in their figure or section; video also carries "Generated preview — not a model render"; every prototype roadmap item keeps its roadmap tag |
 | `honesty` | Each honesty strip on the prototype page is visible DOM text (not an image, canvas, pseudo-content or `aria-hidden`) |
-| `motion` | Under `prefers-reduced-motion`: no video plays or autoplays, no running animations, no content hidden, and the viewport does not move |
+| `tokens` | Every rendered colour and font family is one the prototype's `tokens.css` defines or the prototype renders |
+| `content` (1280) | Every rendered line is made of strings from `site/content/*.json` (asset captions may come from the media manifest) — copy is not written inline |
+| `interactive` | Hero wall, site-feasibility options and boundary polygon, preview-video tile, currency toggle, Teach me first toggle, tabs and the signing gate behave as the prototype's do, in full and reduced motion. The same checks run against the prototype when the fixture is generated, and must pass there |
+| `motion` | Full motion: a section moves on its own or with scrolling only if the prototype's same section does (1280). Reduced motion: no video plays or autoplays, no running animations, no content hidden, and the viewport does not move |
 | `banned` | No banned word (`contracts/copy.json`, or the trust-rules skill §8 until that exists) in rendered text, attributes or any text file in the build output |
 | `a11y` | Zero axe violations for WCAG 2.0/2.1/2.2 A and AA |
-| `lighthouse` (Home) | Performance, accessibility, best practices and SEO each ≥ 90 |
+| `lighthouse` (Home) | Performance, accessibility, best practices and SEO each ≥ 90. Until launch (`SITE_LAUNCHED` unset) crawlers stay blocked, so `is-crawlable` is excluded. Performance gates only on CI; a local score is reported, not asserted |
 
 ## Running
 
@@ -28,15 +31,17 @@ npm test                                  # tests this checkout's site/out
 SITE_DIR=../../../drawlogic-engine/site npm test   # tests another worktree's site (manifest + out/)
 SITE_URL=http://127.0.0.1:4179 npm test   # tests an already-running server instead of serving out/
 npm run report                            # HTML report with prototype / site / diff images for failing sections
-npm run issues                            # one issue per failing check: reports/issues.md and issues.json
+npm run issues                            # one issue per page, Home first, then the prototype's navigation order
 npm run self-check                        # examiner check that the measurement is stable on identical input
 ```
 
-The site must be built first (`next build` → `site/out`). Set `REPORTS_DIR` to write test output and reports elsewhere (on a OneDrive-synced checkout, a local temp folder is much faster); then `npx playwright show-report $REPORTS_DIR/html`.
+The site must be built first (`next build` → `site/out`). Settings can go in the repository's `.env` (see `.env.example`; only `REPORTS_DIR`, `SITE_DIR`, `SITE_OUT`, `SITE_URL`, `SITE_PORT`, `SITE_LAUNCHED` and `PROTOTYPE_FILE` are read). **Set `REPORTS_DIR` outside OneDrive or any synced folder**: writing test output into a synced folder turns a run of minutes into hours. Then `npx playwright show-report $REPORTS_DIR/html`.
+
+In CI (`.github/workflows/site-fidelity.yml`), a PR with a `site/` app runs the full gate; a tests-only PR validates the tests instead (fixture still matches the prototype, measurement stable).
 
 ## Fixtures
 
-- `fixtures/prototype.json` is generated by `npm run extract` from the prototype: section keys per width, section copy, honesty strips, roadmap items. Committed so the spec can be reviewed. The tests refuse to run if the prototype has changed since it was generated.
+- `fixtures/prototype.json` is generated by `npm run extract` from the prototype: section keys per width, section copy, honesty strips, roadmap items, interactive elements, per-section motion, and the allowed colours and fonts. Committed so the spec can be reviewed. Extraction runs every interactive check against the prototype and writes nothing if the prototype fails one. The tests refuse to run if the prototype has changed since the fixture was generated.
 - Section screenshots of the prototype are rendered into `.cache/` (not committed) on the first run for each prototype version.
-- `fixtures/routes.json` maps each prototype page to its site route.
+- `fixtures/routes.json` maps each prototype page to its site route, in the prototype's navigation order.
 - `fixtures/prd-governed.json` lists the PRD-governed values, each with its PRD clause, and the OPEN decisions that are reported rather than asserted.

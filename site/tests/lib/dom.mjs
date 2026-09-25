@@ -84,18 +84,27 @@ export async function isolate(page, idx) {
   });
 }
 
-/** Screenshot one section (by data-fidelity-idx) with dynamic media masked and animations frozen. */
-export async function shootSection(page, idx) {
-  const restore = await isolate(page, idx);
-  // No hover or focus state in the shot: clear focus and park the pointer on a transparent full-screen shield.
+/**
+ * No hover or focus state: clear focus and park the pointer on a transparent full-screen shield, so nothing on the
+ * page is hovered (a hovered slideshow pauses, a hovered button changes colour). Undo with releasePointer().
+ */
+export async function parkPointer(page) {
   await page.evaluate(() => {
     document.activeElement?.blur?.();
+    if (document.getElementById("fidelity-shield")) return;
     const shield = document.createElement("div");
     shield.id = "fidelity-shield";
     shield.style.cssText = "position:fixed;inset:0;z-index:2147483647;background:transparent;pointer-events:auto";
     document.body.appendChild(shield);
   });
   await page.mouse.move(2, 2);
+}
+export const releasePointer = (page) => page.evaluate(() => document.getElementById("fidelity-shield")?.remove());
+
+/** Screenshot one section (by data-fidelity-idx) with dynamic media masked and animations frozen. */
+export async function shootSection(page, idx) {
+  const restore = await isolate(page, idx);
+  await parkPointer(page);
   try {
     return await page.locator(`[data-fidelity-idx="${idx}"]`).screenshot({
       animations: "disabled",
@@ -106,7 +115,7 @@ export async function shootSection(page, idx) {
       timeout: 60000,
     });
   } finally {
-    await page.evaluate(() => document.getElementById("fidelity-shield")?.remove());
+    await releasePointer(page);
     await restore();
   }
 }
