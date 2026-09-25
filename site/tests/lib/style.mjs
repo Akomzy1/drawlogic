@@ -14,12 +14,13 @@ export function collectStyle(page) {
       if (m) return Number(m[4]) === 0 ? null : `rgba(${m[1]},${m[2]},${m[3]},${Number(m[4]).toFixed(2)})`;
       return v.toLowerCase();
     };
-    const family = (f) => {
-      const first = f.split(",")[0].trim().replace(/^["']|["']$/g, "");
-      if (/^__.+_Fallback_[0-9a-f]+$/i.test(first)) return null; // Next.js metric fallback, not a design font
-      const next = /^__(.+?)_[0-9a-f]{6}$/i.exec(first); // next/font renames families
-      return (next ? next[1].replace(/_/g, " ") : first).toLowerCase();
-    };
+    // Every family named in a font stack, normalised. next/font renames families ("__Inter_a1b2c3") and adds metric
+    // fallbacks ("__Inter_Fallback_a1b2c3"); both are reported as the family they stand for.
+    const families = (f) => f.split(",").map((x) => {
+      const name = x.trim().replace(/^["']|["']$/g, "");
+      const next = /^__(.+?)(_Fallback)?_[0-9a-f]{6,}$/i.exec(name);
+      return (next ? next[1].replace(/_/g, " ") : name).toLowerCase();
+    }).filter(Boolean);
     const colors = new Map();
     const fonts = new Map();
     const note = (map, key, el) => { if (key && !map.has(key)) map.set(key, `${el.tagName.toLowerCase()}${el.className && typeof el.className === "string" ? "." + el.className.split(" ")[0] : ""}`); };
@@ -27,7 +28,7 @@ export function collectStyle(page) {
       if (el.closest("#viewtoggle, #fidelity-shield") || !el.checkVisibility?.({ opacityProperty: true, visibilityProperty: true })) continue;
       const cs = getComputedStyle(el);
       const hasText = [...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim());
-      if (hasText) { note(colors, norm(cs.color), el); note(fonts, family(cs.fontFamily), el); }
+      if (hasText) { note(colors, norm(cs.color), el); for (const f of families(cs.fontFamily)) note(fonts, f, el); }
       note(colors, norm(cs.backgroundColor), el);
       for (const side of ["Top", "Right", "Bottom", "Left"]) {
         if (parseFloat(cs[`border${side}Width`]) > 0 && cs[`border${side}Style`] !== "none") note(colors, norm(cs[`border${side}Color`]), el);
@@ -35,6 +36,8 @@ export function collectStyle(page) {
       if (cs.outlineStyle !== "none" && parseFloat(cs.outlineWidth) > 0) note(colors, norm(cs.outlineColor), el);
       if (el instanceof SVGElement && !(el instanceof SVGSVGElement)) { note(colors, norm(cs.fill), el); note(colors, norm(cs.stroke), el); }
     }
+    // Web fonts the page declares (@font-face or FontFace), whether or not any text uses them.
+    for (const face of document.fonts) for (const f of families(face.family)) if (!fonts.has(f)) fonts.set(f, `@font-face (${face.status})`);
     return { colors: Object.fromEntries(colors), fonts: Object.fromEntries(fonts) };
   });
 }

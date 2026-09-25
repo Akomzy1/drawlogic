@@ -1,6 +1,6 @@
 {
-  "note": "Values the PRD governs on the marketing site (skills/drawlogic-prototype-fidelity/SKILL.md, precedence). Each cites its PRD clause. Values tied to an OPEN decision in docs/DECISIONS.md are reported, never asserted.",
-  "source": "docs/PRD.md v0.2.8 §10 Pricing and packaging",
+  "note": "Values the PRD and DECIDED decisions govern on the marketing site (skills/drawlogic-prototype-fidelity/SKILL.md, precedence). Each cites its source. Values tied to an OPEN decision in docs/DECISIONS.md are reported, never asserted.",
+  "source": "docs/PRD.md v0.2.8a §10 Pricing and packaging; docs/DECISIONS.md row 12",
   "required_on_pricing": [
     { "what": "Free tier price", "text": "$0", "prd": "§10 Free: $0" },
     { "what": "Individual tier price", "text": "$49", "prd": "§10 Individual: $49/mo" },
@@ -27,8 +27,30 @@
     "prd": ["$0", "$14", "$29", "$49", "$179", "$1,099", "$149", "$19"],
     "prd_silent": [{ "values": ["$89", "$319"], "what": "500 and 2 000 credit packs", "status": "not in PRD; prototype value stands until decided" }]
   },
+  "ngn": {
+    "note": "Decision 12 (docs/DECISIONS.md row 12, DECIDED 25 Sept 2026): fixed for 12 months, Paystack-billed, Nigerian accounts only. With NGN chosen in any currency toggle, every displayed price must be one of these (₦0 is the Free tier).",
+    "decision": 12,
+    "values": {
+      "₦0": "Free",
+      "₦6,000": "Idea (monthly)",
+      "₦12,000": "Idea per project",
+      "₦20,000": "Individual",
+      "₦75,000": "Professional per user",
+      "₦450,000": "Practice (5 seats)",
+      "₦60,000": "Practice extra seat",
+      "₦8,000": "100 render credits"
+    },
+    "prd_silent": [{ "values": ["₦58,000", "₦209,000"], "what": "500 and 2 000 credit packs (prototype naira values)", "status": "not in Decision 12; reported until the larger packs are decided" }]
+  },
+  "behaviour_overrides": [
+    {
+      "page": "Lagos",
+      "section": "Naira pricing via Paystack",
+      "kind": "currency",
+      "reason": "Decision 12 (DESIGN_GAPS row 20 closed): the toggle switches between Decision 12 NGN values and PRD §10 USD prices; the export's toggle is inert. Checked by prd.spec.ts instead of the recorded prototype behaviour."
+    }
+  ],
   "open_decisions": [
-    { "decision": 7, "what": "Idea tier price point ($14/mo vs $29/project)", "values": ["$14", "$29", "£11", "₦9,500"] },
-    { "decision": 12, "what": "Nigeria NGN pricing (prototype ₦9,500/32,000/119,000/729,000; proposed ₦6k/20k/75k/450k)", "pattern": "₦\\s?[\\d,]+" }
+    { "decision": 7, "what": "Idea tier USD price point ($14/mo vs $29/project)", "values": ["$14", "$29", "£11"] }
   ]
 }

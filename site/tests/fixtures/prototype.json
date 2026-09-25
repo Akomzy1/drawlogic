@@ -1,7 +1,7 @@
 {
   "note": "Generated from the prototype by scripts/extract-prototype.mjs. Do not edit by hand; re-run the script when the prototype changes and review the diff.",
   "prototype_file": "design/prototype/marketing-site.html",
-  "prototype_sha256": "0daf6ca41771b2c6f0d95a1d68ae663167bf1767360a7330ec5d9cd87fe2a123",
+  "prototype_sha256": "7786fc5f65e7784864d1433c368ff615b5f66495274635332d508a5d22a5b5d8",
   "pages": {
     "Home": {
       "route": "/",
@@ -538,7 +538,9 @@
           "header",
           "Describe it. See it.",
           "Two or three options, the numbers, and a render",
+          "Drop a pin. Draw the boundary. See what fits.",
           "Everything it filled in for you, in plain words",
+          "Want to understand why, before you see it?",
           "A concept leaves here labelled as a concept",
           "When you are ready, one click hands it over",
           "Free to try",
@@ -550,7 +552,9 @@
           "header",
           "Describe it. See it.",
           "Two or three options, the numbers, and a render",
+          "Drop a pin. Draw the boundary. See what fits.",
           "Everything it filled in for you, in plain words",
+          "Want to understand why, before you see it?",
           "A concept leaves here labelled as a concept",
           "When you are ready, one click hands it over",
           "Free to try",
@@ -562,7 +566,9 @@
           "header",
           "Describe it. See it.",
           "Two or three options, the numbers, and a render",
+          "Drop a pin. Draw the boundary. See what fits.",
           "Everything it filled in for you, in plain words",
+          "Want to understand why, before you see it?",
           "A concept leaves here labelled as a concept",
           "When you are ready, one click hands it over",
           "Free to try",
@@ -635,6 +641,35 @@
           ]
         },
         {
+          "key": "Drop a pin. Draw the boundary. See what fits.",
+          "lines": [
+            "SITE FEASIBILITY",
+            "Drop a pin. Draw the boundary. See what fits.",
+            "Drawlogic pulls in satellite imagery, terrain and roads for your plot, lays your options over the real site, and tells you what it assumed — imagery date, boundary source, elevation accuracy. A survey plan always overrides a traced boundary.",
+            "A · Courtyard",
+            "B · Linear",
+            "C · Two blocks",
+            "Plot used 38% · floor area 420 m²",
+            "10 m",
+            "N",
+            "YOUR PLOT · TRACED",
+            "SETBACK 3 m",
+            "OPTION A",
+            "SATELLITE BASEMAP · 2024-03 · 0.5 m/px",
+            "DRAG A CORNER TO RETRACE",
+            "Imagery",
+            "2024-03 · 0.5 m/px",
+            "⚠",
+            "Boundary",
+            "traced · no survey yet",
+            "⚠",
+            "Terrain",
+            "30 m elevation model",
+            "Illustrative — generated from Drawlogic drawings",
+            "Flood zones and constraints appear as things to check, never as a decision."
+          ]
+        },
+        {
           "key": "Everything it filled in for you, in plain words",
           "lines": [
             "NOTHING HIDDEN",
@@ -663,6 +698,43 @@
             "Whether the extension needs building control sign-off",
             "Find a signer",
             "chevron_right"
+          ]
+        },
+        {
+          "key": "Want to understand why, before you see it?",
+          "lines": [
+            "OPTIONAL",
+            "Want to understand why, before you see it?",
+            "Switch on Teach me first and Drawlogic critiques your idea — what works, what doesn't, and why — before it draws anything. Same engine, one toggle.",
+            "IDEA",
+            "a two-bedroom flat on a 7 m by 12 m plot",
+            "Teach me first",
+            "On",
+            "CONCEPT · PDF/PNG ONLY",
+            "CONCEPT A",
+            "C-001",
+            "Drawn after revision",
+            "CONCEPT · PDF/PNG ONLY",
+            "CONCEPT B",
+            "C-002",
+            "Drawn after revision",
+            "CONCEPT · PDF/PNG ONLY",
+            "CONCEPT C",
+            "C-003",
+            "Drawn after revision",
+            "Critique",
+            "3 points · before drawing",
+            "✓",
+            "SOUND",
+            "One clear route from the door",
+            "⚠",
+            "WEAK",
+            "Kitchen 6 m deep from one window",
+            "⚠",
+            "MISSING",
+            "No structure for the 7 m span",
+            "Revise",
+            "Generate anyway"
           ]
         },
         {
@@ -794,14 +866,123 @@
       "honesty": [
         "liability",
         "training",
-        "concept-watermark"
+        "concept-watermark",
+        "illustrative"
       ],
       "captions": {
-        "illustrative": 0,
+        "illustrative": 1,
         "preview_label": 0
       },
       "roadmap": [],
       "interactive": [
+        {
+          "kind": "options",
+          "section": "Drop a pin. Draw the boundary. See what fits.",
+          "options": [
+            "A · Courtyard",
+            "B · Linear",
+            "C · Two blocks"
+          ],
+          "expect": {
+            "reduced": {
+              "initial": {
+                "A · Courtyard": "true",
+                "B · Linear": "false",
+                "C · Two blocks": "false"
+              },
+              "steps": [
+                {
+                  "choose": "A · Courtyard",
+                  "states": {
+                    "A · Courtyard": "true",
+                    "B · Linear": "false",
+                    "C · Two blocks": "false"
+                  },
+                  "changed": false
+                },
+                {
+                  "choose": "B · Linear",
+                  "states": {
+                    "A · Courtyard": "false",
+                    "B · Linear": "true",
+                    "C · Two blocks": "false"
+                  },
+                  "changed": true
+                },
+                {
+                  "choose": "C · Two blocks",
+                  "states": {
+                    "A · Courtyard": "false",
+                    "B · Linear": "false",
+                    "C · Two blocks": "true"
+                  },
+                  "changed": true
+                }
+              ]
+            },
+            "full": {
+              "initial": {
+                "A · Courtyard": "true",
+                "B · Linear": "false",
+                "C · Two blocks": "false"
+              },
+              "steps": [
+                {
+                  "choose": "A · Courtyard",
+                  "states": {
+                    "A · Courtyard": "true",
+                    "B · Linear": "false",
+                    "C · Two blocks": "false"
+                  },
+                  "changed": false
+                },
+                {
+                  "choose": "B · Linear",
+                  "states": {
+                    "A · Courtyard": "false",
+                    "B · Linear": "true",
+                    "C · Two blocks": "false"
+                  },
+                  "changed": true
+                },
+                {
+                  "choose": "C · Two blocks",
+                  "states": {
+                    "A · Courtyard": "false",
+                    "B · Linear": "false",
+                    "C · Two blocks": "true"
+                  },
+                  "changed": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "kind": "boundary",
+          "section": "Drop a pin. Draw the boundary. See what fits.",
+          "expect": {
+            "reduced": {},
+            "full": {}
+          }
+        },
+        {
+          "kind": "switch",
+          "section": "Want to understand why, before you see it?",
+          "name": "Teach me first",
+          "expect": {
+            "reduced": {
+              "initial": "true",
+              "after": "false",
+              "changed": true
+            },
+            "full": {
+              "initial": "true",
+              "after": "false",
+              "changed": true
+            }
+          }
+        },
         {
           "kind": "currency",
           "section": "Free to try",
@@ -917,7 +1098,15 @@
           "time": false,
           "scroll": false
         },
+        "Drop a pin. Draw the boundary. See what fits.": {
+          "time": false,
+          "scroll": false
+        },
         "Everything it filled in for you, in plain words": {
+          "time": false,
+          "scroll": false
+        },
+        "Want to understand why, before you see it?": {
           "time": false,
           "scroll": false
         },
@@ -1447,6 +1636,7 @@
           "header",
           "Rendered from the drawing, not from a screenshot.",
           "Drawing and render, side by side, same hash",
+          "A camera move on the drawing you already have.",
           "What you put in",
           "Four variants, one fixed camera",
           "Every render carries its drawing",
@@ -1458,6 +1648,7 @@
           "header",
           "Rendered from the drawing, not from a screenshot.",
           "Drawing and render, side by side, same hash",
+          "A camera move on the drawing you already have.",
           "What you put in",
           "Four variants, one fixed camera",
           "Every render carries its drawing",
@@ -1469,6 +1660,7 @@
           "header",
           "Rendered from the drawing, not from a screenshot.",
           "Drawing and render, side by side, same hash",
+          "A camera move on the drawing you already have.",
           "What you put in",
           "Four variants, one fixed camera",
           "Every render carries its drawing",
@@ -1517,6 +1709,39 @@
             "R-101",
             "sha256:9f2c…41ab",
             "drift check: passed · geometry delta 0.4% · failed renders are never delivered"
+          ]
+        },
+        {
+          "key": "A camera move on the drawing you already have.",
+          "lines": [
+            "STAGE 2",
+            "A camera move on the drawing you already have.",
+            "Start from a geometry-locked still and add a push-in, orbit or drift — up to ten seconds, for the client pitch or the investor deck. The first frame is faithful; later frames may drift, so every clip is labelled a preview and carries the drawing it came from.",
+            "play_arrow",
+            "00:00 / 00:10",
+            "push-in · 10 s · 1 280 × 720",
+            "CONCEPT — NOT FOR CONSTRUCTION",
+            "CONCEPT — NOT FOR CONSTRUCTION",
+            "CONCEPT — NOT FOR CONSTRUCTION",
+            "CONCEPT · PDF/PNG ONLY",
+            "⚠",
+            "Generated preview — not a model render. First frame is faithful; later frames may drift.",
+            "Source drawing",
+            "R-02 · camera 01 fixed",
+            "Hash",
+            "sha256:4f2a1d80…c91e",
+            "Revision",
+            "Rev B · 2026-09-15 13:58",
+            "Move",
+            "Push-in · 10 s",
+            "Backend",
+            "generative video",
+            "Cost",
+            "12 credits",
+            "Clips carry no check and no signature. The hash and revision point back to the drawing they were made from, and the CONCEPT watermark stays on every frame.",
+            "See Render Studio",
+            "chevron_right",
+            "Coming at Stage 3: ray-traced Studio renders from the 3D model."
           ]
         },
         {
@@ -1623,14 +1848,24 @@
       ],
       "honesty": [
         "liability",
-        "training"
+        "training",
+        "preview-label",
+        "concept-watermark"
       ],
       "captions": {
         "illustrative": 0,
-        "preview_label": 0
+        "preview_label": 1
       },
       "roadmap": [],
       "interactive": [
+        {
+          "kind": "video-tile",
+          "section": "A camera move on the drawing you already have.",
+          "expect": {
+            "reduced": {},
+            "full": {}
+          }
+        },
         {
           "kind": "currency",
           "section": "Renders are metered",
@@ -1743,6 +1978,10 @@
           "scroll": false
         },
         "Drawing and render, side by side, same hash": {
+          "time": false,
+          "scroll": false
+        },
+        "A camera move on the drawing you already have.": {
           "time": false,
           "scroll": false
         },
@@ -2679,9 +2918,7 @@
         "w375": [
           "header",
           "It teaches before it draws.",
-          "Want to understand why, before you see it?",
-          "Drop a pin. Draw the boundary. See what fits.",
-          "A camera move on the drawing you already have.",
+          "untitled: The same critique is available to anyone in Idea mode — swit",
           "Six steps, in this order",
           "A rough sketch, the principles, and what it found",
           "Worked answers unlock after you try",
@@ -2694,9 +2931,7 @@
         "w768": [
           "header",
           "It teaches before it draws.",
-          "Want to understand why, before you see it?",
-          "Drop a pin. Draw the boundary. See what fits.",
-          "A camera move on the drawing you already have.",
+          "untitled: The same critique is available to anyone in Idea mode — swit",
           "Six steps, in this order",
           "A rough sketch, the principles, and what it found",
           "Worked answers unlock after you try",
@@ -2709,9 +2944,7 @@
         "w1280": [
           "header",
           "It teaches before it draws.",
-          "Want to understand why, before you see it?",
-          "Drop a pin. Draw the boundary. See what fits.",
-          "A camera move on the drawing you already have.",
+          "untitled: The same critique is available to anyone in Idea mode — swit",
           "Six steps, in this order",
           "A rough sketch, the principles, and what it found",
           "Worked answers unlock after you try",
@@ -2748,102 +2981,9 @@
           ]
         },
         {
-          "key": "Want to understand why, before you see it?",
+          "key": "untitled: The same critique is available to anyone in Idea mode — swit",
           "lines": [
-            "OPTIONAL",
-            "Want to understand why, before you see it?",
-            "Switch on Teach me first and Drawlogic critiques your idea — what works, what doesn't, and why — before it draws anything. Same engine, one toggle.",
-            "IDEA",
-            "a two-bedroom flat on a 7 m by 12 m plot",
-            "Teach me first",
-            "On",
-            "CONCEPT · PDF/PNG ONLY",
-            "CONCEPT A",
-            "C-001",
-            "Drawn after revision",
-            "CONCEPT · PDF/PNG ONLY",
-            "CONCEPT B",
-            "C-002",
-            "Drawn after revision",
-            "CONCEPT · PDF/PNG ONLY",
-            "CONCEPT C",
-            "C-003",
-            "Drawn after revision",
-            "Critique",
-            "3 points · before drawing",
-            "✓",
-            "SOUND",
-            "One clear route from the door",
-            "⚠",
-            "WEAK",
-            "Kitchen 6 m deep from one window",
-            "⚠",
-            "MISSING",
-            "No structure for the 7 m span",
-            "Revise",
-            "Generate anyway"
-          ]
-        },
-        {
-          "key": "Drop a pin. Draw the boundary. See what fits.",
-          "lines": [
-            "SITE FEASIBILITY",
-            "Drop a pin. Draw the boundary. See what fits.",
-            "Drawlogic pulls in satellite imagery, terrain and roads for your plot, lays your options over the real site, and tells you what it assumed — imagery date, boundary source, elevation accuracy. A survey plan always overrides a traced boundary.",
-            "A · Courtyard",
-            "B · Linear",
-            "C · Two blocks",
-            "Plot used 38% · floor area 420 m²",
-            "10 m",
-            "N",
-            "YOUR PLOT · TRACED",
-            "SETBACK 3 m",
-            "OPTION A",
-            "SATELLITE BASEMAP · 2024-03 · 0.5 m/px",
-            "DRAG A CORNER TO RETRACE",
-            "Imagery",
-            "2024-03 · 0.5 m/px",
-            "⚠",
-            "Boundary",
-            "traced · no survey yet",
-            "⚠",
-            "Terrain",
-            "30 m elevation model",
-            "Illustrative — generated from Drawlogic drawings",
-            "Flood zones and constraints appear as things to check, never as a decision."
-          ]
-        },
-        {
-          "key": "A camera move on the drawing you already have.",
-          "lines": [
-            "STAGE 2",
-            "A camera move on the drawing you already have.",
-            "Start from a geometry-locked still and add a push-in, orbit or drift — up to ten seconds, for the client pitch or the investor deck. The first frame is faithful; later frames may drift, so every clip is labelled a preview and carries the drawing it came from.",
-            "play_arrow",
-            "00:00 / 00:10",
-            "push-in · 10 s · 1 280 × 720",
-            "CONCEPT — NOT FOR CONSTRUCTION",
-            "CONCEPT — NOT FOR CONSTRUCTION",
-            "CONCEPT — NOT FOR CONSTRUCTION",
-            "CONCEPT · PDF/PNG ONLY",
-            "⚠",
-            "Generated preview — not a model render. First frame is faithful; later frames may drift.",
-            "Source drawing",
-            "R-02 · camera 01 fixed",
-            "Hash",
-            "sha256:4f2a1d80…c91e",
-            "Revision",
-            "Rev B · 2026-09-15 13:58",
-            "Move",
-            "Push-in · 10 s",
-            "Backend",
-            "generative video",
-            "Cost",
-            "12 credits",
-            "Clips carry no check and no signature. The hash and revision point back to the drawing they were made from, and the CONCEPT watermark stays on every frame.",
-            "See Render Studio",
-            "chevron_right",
-            "Coming at Stage 3: ray-traced Studio renders from the 3D model."
+            "The same critique is available to anyone in Idea mode — switch on Teach me first. Open Idea mode"
           ]
         },
         {
@@ -3046,134 +3186,14 @@
       ],
       "honesty": [
         "liability",
-        "training",
-        "preview-label",
-        "concept-watermark",
-        "illustrative"
+        "training"
       ],
       "captions": {
-        "illustrative": 1,
-        "preview_label": 1
+        "illustrative": 0,
+        "preview_label": 0
       },
       "roadmap": [],
-      "interactive": [
-        {
-          "kind": "switch",
-          "section": "Want to understand why, before you see it?",
-          "name": "Teach me first",
-          "expect": {
-            "reduced": {
-              "initial": "true",
-              "after": "false",
-              "changed": true
-            },
-            "full": {
-              "initial": "true",
-              "after": "false",
-              "changed": true
-            }
-          }
-        },
-        {
-          "kind": "options",
-          "section": "Drop a pin. Draw the boundary. See what fits.",
-          "options": [
-            "A · Courtyard",
-            "B · Linear",
-            "C · Two blocks"
-          ],
-          "expect": {
-            "reduced": {
-              "initial": {
-                "A · Courtyard": "true",
-                "B · Linear": "false",
-                "C · Two blocks": "false"
-              },
-              "steps": [
-                {
-                  "choose": "A · Courtyard",
-                  "states": {
-                    "A · Courtyard": "true",
-                    "B · Linear": "false",
-                    "C · Two blocks": "false"
-                  },
-                  "changed": false
-                },
-                {
-                  "choose": "B · Linear",
-                  "states": {
-                    "A · Courtyard": "false",
-                    "B · Linear": "true",
-                    "C · Two blocks": "false"
-                  },
-                  "changed": true
-                },
-                {
-                  "choose": "C · Two blocks",
-                  "states": {
-                    "A · Courtyard": "false",
-                    "B · Linear": "false",
-                    "C · Two blocks": "true"
-                  },
-                  "changed": true
-                }
-              ]
-            },
-            "full": {
-              "initial": {
-                "A · Courtyard": "true",
-                "B · Linear": "false",
-                "C · Two blocks": "false"
-              },
-              "steps": [
-                {
-                  "choose": "A · Courtyard",
-                  "states": {
-                    "A · Courtyard": "true",
-                    "B · Linear": "false",
-                    "C · Two blocks": "false"
-                  },
-                  "changed": false
-                },
-                {
-                  "choose": "B · Linear",
-                  "states": {
-                    "A · Courtyard": "false",
-                    "B · Linear": "true",
-                    "C · Two blocks": "false"
-                  },
-                  "changed": true
-                },
-                {
-                  "choose": "C · Two blocks",
-                  "states": {
-                    "A · Courtyard": "false",
-                    "B · Linear": "false",
-                    "C · Two blocks": "true"
-                  },
-                  "changed": true
-                }
-              ]
-            }
-          }
-        },
-        {
-          "kind": "boundary",
-          "section": "Drop a pin. Draw the boundary. See what fits.",
-          "expect": {
-            "reduced": {},
-            "full": {}
-          }
-        },
-        {
-          "kind": "video-tile",
-          "section": "A camera move on the drawing you already have.",
-          "expect": {
-            "reduced": {},
-            "full": {}
-          }
-        }
-      ],
+      "interactive": [],
       "motion": {
         "header": {
           "time": false,
@@ -3183,15 +3203,7 @@
           "time": false,
           "scroll": false
         },
-        "Want to understand why, before you see it?": {
-          "time": false,
-          "scroll": false
-        },
-        "Drop a pin. Draw the boundary. See what fits.": {
-          "time": false,
-          "scroll": false
-        },
-        "A camera move on the drawing you already have.": {
+        "untitled: The same critique is available to anyone in Idea mode — swit": {
           "time": false,
           "scroll": false
         },
@@ -4544,8 +4556,8 @@
       "#665600": "For professionals w375 span",
       "#6c4fd8": "For professionals w375 span",
       "#868282": "For professionals w375 th",
-      "#8a8a7c": "Students & educators w375 rect",
-      "#8f8d82": "Students & educators w375 div",
+      "#8a8a7c": "Idea mode w375 rect",
+      "#8f8d82": "Idea mode w375 div",
       "#9b86e8": "Developers w375 div",
       "#b6b4b4": "tokens.css",
       "#cc5555": "tokens.css",
@@ -4553,13 +4565,13 @@
       "#cfe9da": "tokens.css",
       "#d2e8ff": "For professionals w375 section.dl-section",
       "#d2efee": "tokens.css",
-      "#dad9d9": "Students & educators w375 span",
+      "#dad9d9": "Idea mode w375 span",
       "#e0d8fa": "tokens.css",
       "#e8f3ff": "For professionals w375 header",
       "#e8f7f6": "For professionals w375 span",
       "#e9f6ee": "For professionals w375 span",
       "#f1edfd": "For professionals w375 span",
-      "#f1efe8": "Students & educators w375 polygon",
+      "#f1efe8": "Idea mode w375 polygon",
       "#f2f2f2": "For professionals w375 div",
       "#faf9f9": "For professionals w375 section.dl-section",
       "#ff6b6b": "For professionals w375 span",
@@ -4574,20 +4586,27 @@
       "color(srgb 0.0509804 0.0196078 0.0196078 / 0.05)": "tokens.css",
       "color(srgb 0.0509804 0.0196078 0.0196078 / 0.1)": "For professionals w375 tr",
       "color(srgb 0.0509804 0.0196078 0.0196078 / 0.15)": "For professionals w375 header",
-      "color(srgb 0.0509804 0.0196078 0.0196078 / 0.2)": "Students & educators w375 div",
+      "color(srgb 0.0509804 0.0196078 0.0196078 / 0.2)": "Render studio w375 div",
       "color(srgb 0.0509804 0.0196078 0.0196078 / 0.3)": "For professionals w375 figure",
       "color(srgb 0.0509804 0.0196078 0.0196078 / 0.5)": "tokens.css",
       "color(srgb 1 1 1 / 0.1)": "tokens.css",
       "color(srgb 1 1 1 / 0.2)": "For professionals w375 div",
       "color(srgb 1 1 1 / 0.3)": "tokens.css",
       "color(srgb 1 1 1 / 0.6)": "For professionals w375 span",
-      "rgba(255,255,255,0.90)": "Students & educators w375 span",
-      "rgba(30,144,255,0.12)": "Students & educators w375 polygon"
+      "rgba(255,255,255,0.90)": "Idea mode w375 span",
+      "rgba(30,144,255,0.12)": "Idea mode w375 polygon"
     },
     "fonts": {
+      "-apple-system": "For professionals w375 span",
       "ibm plex mono": "For professionals w375 span",
       "material symbols outlined": "For professionals w375 span.dl-icon",
-      "source sans 3": "For professionals w375 span"
+      "menlo": "For professionals w375 span",
+      "monospace": "For professionals w375 span",
+      "sans-serif": "For professionals w375 span",
+      "segoe ui": "For professionals w375 span",
+      "sfmono-regular": "For professionals w375 span",
+      "source sans 3": "For professionals w375 span",
+      "ui-monospace": "For professionals w375 span"
     }
   }
 }
