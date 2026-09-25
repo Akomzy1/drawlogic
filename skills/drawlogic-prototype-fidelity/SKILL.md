@@ -26,6 +26,8 @@ Re-exports from Claude Design are dropped into design/prototype/ with their expo
 | `portfolio.standalone.html` | Opt-in portfolio: owner / public / under-18 / deleted, per-item remove | Learn |
 | `referrals.standalone.html` | Invite classmates, credits, ambassador disclosure | Learn |
 | `challenges.standalone.html` | Monthly brief, entry, opt-in public gallery, under-18 state | Learn |
+| `precedents.standalone.html` | Precedent panel in Idea: cards (text-only, licensed image, public domain, designer-shared), pin a quality, decline-and-offer-qualities state | Idea |
+| `learn-precedents.standalone.html` | Precedents in Learn's inspiration step: cited text, public-domain and designer-shared only; pinned qualities cited in the provenance summary | Learn |
 | `idea-site.standalone.html` | Site context panel, massing options over basemap, flags, cost band (FR-151) and uncovered-location state (FR-159) | Idea |
 | `site-boundary.standalone.html` | Boundary polygon, survey-plan override, geodata provenance | Idea |
 | `promote.standalone.html` | Promote modal → interpretation card | Idea→Draft |
