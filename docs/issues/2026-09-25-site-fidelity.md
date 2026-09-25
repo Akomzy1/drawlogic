@@ -1,6 +1,6 @@
 > **Rebuild stopped 25 Sept 2026 by Tokunbo. Do not continue rebuild work. Bring site/ into line with design/prototype/marketing-site.html under skills/drawlogic-prototype-fidelity/SKILL.md; the site fidelity tests are the gate.**
 >
-> Decision 16 (`docs/DECISIONS.md`). Reuse existing `site/` code only where it matches the prototype (layout primitives, the asset pipeline, motion the prototype specifies). Anything that exists only because of the rebuild — the "See it before you build it" hero, the signature scroll sequence, extra sections — is removed, not adapted. Assets not in the approved manifest are dropped or listed in `docs/DESIGN_GAPS.md` for design review. The HMO case survives only as the landlord card in the prototype's "Try one of these" strip; that strip is not in the current export yet (DESIGN_GAPS row 19), so do not build it until it is.
+> Decision 16 (`docs/DECISIONS.md`). Reuse existing `site/` code only where it matches the prototype (layout primitives, the asset pipeline, motion the prototype specifies). Anything that exists only because of the rebuild — the "See it before you build it" hero, the signature scroll sequence, extra sections — is removed, not adapted. Assets not in the approved manifest are dropped or listed in `docs/DESIGN_GAPS.md` for design review. Home's "Three things people ask it for" (kitchen extension, Lekki plot, restaurant) is approved as exported (Tokunbo, 25 Sept): no "Try one of these" strip or landlord card is added, and the HMO case does not appear on the site.
 
 # Site fidelity issues for Codex — 25 September 2026
 
@@ -24,7 +24,7 @@ The current Home is the rebuild's, not the prototype's. Remove the rebuild secti
 - **Assets.** Not in the manifest: `/home/plan.webp`, `/home/provenance.webp`, `/home/poster.webp`, `/home/poster-mobile.webp`, `/home/clip.mp4`, `/home/clip-mobile.mp4`. Drop them or list them in DESIGN_GAPS for review. `/home/plan.webp` also has no "Illustrative" caption.
 - **Roadmap tags.** The prototype tags eleven entries as roadmap (Interior, Urban & site planning, Electrical, Civil, Structural, Mechanical / HVAC, Plumbing & drainage, Landscape, Survey, Estate developer, Contractor); the build shows none with a roadmap tag.
 - **Passing:** WCAG 2.2 AA at all widths; honesty strips as visible text; no banned words; no price contradicting PRD §10; Lighthouse accessibility, best practices and SEO 100. Performance measured 74 on a loaded local machine; the CI runner is the gate.
-- **Not in the export, do not build:** the "Try one of these" strip with the landlord card (DESIGN_GAPS row 19).
+- **"Three things people ask it for"** is built as exported — kitchen extension, Lekki plot, restaurant. No landlord card and no HMO material anywhere on the site (DESIGN_GAPS row 19, closed).
 
 ## Pages 2–12 — not built
 
