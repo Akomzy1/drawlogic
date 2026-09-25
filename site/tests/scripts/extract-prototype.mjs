@@ -7,7 +7,7 @@
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
-import { PAGES, PROTOTYPE_FILE, PROTOTYPE_URL, REPO_ROOT, VIEWPORTS, baselineDir, baselineRoot, prototypeFixtureFile, sha256File } from "../lib/common.mjs";
+import { PAGES, PROTOTYPE_FILE, PROTOTYPE_URL, REPO_ROOT, VIEWPORTS, baselineDir, baselineRoot, prototypeFixtureFile, prototypeSha } from "../lib/common.mjs";
 import { readSections, settle, shootSection } from "../lib/dom.mjs";
 import { inventory, observe } from "../lib/interact.mjs";
 import { measureMotion } from "../lib/motion.mjs";
@@ -15,7 +15,7 @@ import { collectStyle, resolveTokenColors } from "../lib/style.mjs";
 import { HONESTY, ILLUSTRATIVE, PREVIEW_LABEL } from "../lib/rules.mjs";
 
 const baselinesOnly = process.argv.includes("--baselines-only");
-const protoSha = sha256File(PROTOTYPE_FILE);
+const protoSha = prototypeSha();
 const CONCURRENCY = Number(process.env.EXTRACT_CONCURRENCY ?? 3);
 
 const colors = new Map();

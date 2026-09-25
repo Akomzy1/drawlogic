@@ -6,12 +6,12 @@
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
-import { MAX_SECTION_DIFF, PAGES, PROTOTYPE_FILE, PROTOTYPE_URL, VIEWPORTS, baselineDir, prototypeFixtureFile, readJSON, sha256File } from "../lib/common.mjs";
+import { MAX_SECTION_DIFF, PAGES, PROTOTYPE_FILE, PROTOTYPE_URL, VIEWPORTS, baselineDir, prototypeFixtureFile, readJSON, prototypeSha } from "../lib/common.mjs";
 import { readSections, settle, shootSection } from "../lib/dom.mjs";
 import { compareImages } from "../lib/pixels.mjs";
 
 const names = process.argv.slice(2).length ? process.argv.slice(2) : ["Home", "Pricing"];
-const sha = sha256File(PROTOTYPE_FILE);
+const sha = prototypeSha();
 const fixture = readJSON(prototypeFixtureFile);
 const browser = await chromium.launch();
 let worst = 0;

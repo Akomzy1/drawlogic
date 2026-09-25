@@ -1,0 +1,2 @@
+# Bundled prototype exports are byte-exact artefacts: never convert line endings (the site tests pin their sha256).
+design/prototype/*.html -text

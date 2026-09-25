@@ -42,6 +42,8 @@ export const MAX_SECTION_DIFF = 0.02;
 export const readJSON = (file) => JSON.parse(fs.readFileSync(file, "utf8"));
 export const sha256 = (buf) => createHash("sha256").update(buf).digest("hex");
 export const sha256File = (file) => sha256(fs.readFileSync(file));
+/** The prototype's identity, independent of line endings (a Windows checkout may convert them). */
+export const prototypeSha = () => sha256(fs.readFileSync(PROTOTYPE_FILE, "utf8").replace(/\r\n/g, "\n"));
 
 export const PAGES = readJSON(path.join(FIXTURES_DIR, "routes.json")).pages;
 export const slug = (name) => name.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");

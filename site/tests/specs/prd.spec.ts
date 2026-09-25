@@ -1,8 +1,9 @@
 import { expect, test } from "@playwright/test";
 import path from "node:path";
 import { FIXTURES_DIR, PAGES, readJSON } from "../lib/common.mjs";
-import { visibleText } from "../lib/dom.mjs";
-import { openSite } from "../lib/site.mjs";
+import { checkCurrencies, readCurrencies } from "../lib/currency.mjs";
+import { readSections, visibleText } from "../lib/dom.mjs";
+import { openSite, prototype } from "../lib/site.mjs";
 
 // PRD-governed values (prices, credits, seats): checked against docs/PRD.md, not the prototype.
 // Values tied to an OPEN decision are reported as annotations, never asserted.
@@ -55,3 +56,23 @@ test("Pricing: PRD §10 values are shown", async ({ page }, info) => {
     expect.soft(c.found, `Pricing table "${c.row}" / ${c.tier}: expected ${c.value} — PRD ${c.prd}`).toBe(c.value);
   }
 });
+
+// Currency toggles (every one the prototype has, including Lagos): choosing a currency switches every displayed price
+// in the section to it; NGN amounts are Decision 12's, USD amounts PRD §10's.
+const proto = prototype();
+for (const p of PAGES) {
+  const toggles = (proto.pages[p.name].interactive ?? []).filter((i: any) => i.kind === "currency");
+  if (!toggles.length) continue;
+  test(`${p.name}: currency toggles switch every price; NGN matches Decision 12`, async ({ page }, info) => {
+    test.skip(info.project.name !== "w1280", "Checked once, at 1280.");
+    await openSite(page, p);
+    const sections = await readSections(page);
+    for (const item of toggles) {
+      const readings = await readCurrencies(page, sections, item);
+      if (!readings) { expect.soft(readings, `${p.name}: section "${item.section}" with the ${item.options.join("/")} toggle is missing`).toBeTruthy(); continue; }
+      const { problems, notes } = checkCurrencies(readings, gov);
+      for (const n of notes) info.annotations.push({ type: "PRD silent", description: `${p.name} — "${item.section}": ${n}` });
+      expect.soft(problems, `${p.name} — "${item.section}" (${item.options.join("/")} toggle)`).toEqual([]);
+    }
+  });
+}

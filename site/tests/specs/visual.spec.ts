@@ -1,14 +1,14 @@
 import { expect, test } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
-import { MAX_SECTION_DIFF, PAGES, PROTOTYPE_FILE, baselineDir, sha256File } from "../lib/common.mjs";
+import { MAX_SECTION_DIFF, PAGES, PROTOTYPE_FILE, baselineDir, prototypeSha } from "../lib/common.mjs";
 import { readSections, shootSection } from "../lib/dom.mjs";
 import { compareImages } from "../lib/pixels.mjs";
 import { openSite, prototype } from "../lib/site.mjs";
 
 // Per-section visual regression against the prototype: ≤ 2% differing pixels, dynamic media masked, animations frozen.
 const proto = prototype();
-const protoSha = sha256File(PROTOTYPE_FILE);
+const protoSha = prototypeSha();
 
 for (const p of PAGES) {
   test(`${p.name}: each section matches the prototype within ${MAX_SECTION_DIFF * 100}%`, async ({ page }, info) => {
