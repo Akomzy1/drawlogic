@@ -5,7 +5,7 @@
 | **Status** | Draft for review |
 | **Owner** | Tokunbo Akomolede (AkomzyAi Consulting Ltd) |
 | **Date** | 15 September 2026 (v0.1: 14 September 2026) |
-| **Changes in v0.2** | Adds Idea mode for non-professionals (homeowners, developers, small-business designers); Promote-to-Draft bridge; consumer pricing tier; site-feasibility pulled forward into Stage 2 for Lagos; personas, flows, principles, risks and decisions updated accordingly. v0.2.1 (15 Sept): Find-a-signer reframed as a responsible-charge marketplace (FR-99, 7.11, Decision 8). v0.2.2 (16 Sept): Stage 3 extension — 3D model and studio render (5A, FR-120–127) and four Stage 1 TRD hooks (5A.3). v0.2.3 (16 Sept): site context from geodata (FR-102–106). v0.2.4 (18 Sept): Preview video via generative-video backend (FR-55, FR-127 amended, FR-128–131). v0.2.5 (19 Sept): Learn mode — critique-before-generation student version, also available as a toggle in Idea mode (7.12, FR-140–149; FR-82 replaced). v0.2.6 (21 Sept): construction and material defaults are jurisdiction data — no brick cavity walls on a Lagos project unless the user says so (FR-06–09, FR-57a). v0.2.7 (22 Sept): narrated property film — script generated from the DDL with provenance in the narration, Stage 3 with the Studio walkthrough (FR-132–135). v0.2.8 (22 Sept): AI model allocation re-set for Claude Opus 5.5 — runtime routing, Opus 5.5 integration rules, build-time builder/examiner split between Claude Code and Codex (§8A). v0.2.8a (25 Sept): §8A.3 `site/` examiner row aligned with TESTING.md layer 5a; marketing site follows the approved prototype (Decision 16) |
+| **Changes in v0.2** | Adds Idea mode for non-professionals (homeowners, developers, small-business designers); Promote-to-Draft bridge; consumer pricing tier; site-feasibility pulled forward into Stage 2 for Lagos; personas, flows, principles, risks and decisions updated accordingly. v0.2.1 (15 Sept): Find-a-signer reframed as a responsible-charge marketplace (FR-99, 7.11, Decision 8). v0.2.2 (16 Sept): Stage 3 extension — 3D model and studio render (5A, FR-120–127) and four Stage 1 TRD hooks (5A.3). v0.2.3 (16 Sept): site context from geodata (FR-102–106). v0.2.4 (18 Sept): Preview video via generative-video backend (FR-55, FR-127 amended, FR-128–131). v0.2.5 (19 Sept): Learn mode — critique-before-generation student version, also available as a toggle in Idea mode (7.12, FR-140–149; FR-82 replaced). v0.2.6 (21 Sept): construction and material defaults are jurisdiction data — no brick cavity walls on a Lagos project unless the user says so (FR-06–09, FR-57a). v0.2.7 (22 Sept): narrated property film — script generated from the DDL with provenance in the narration, Stage 3 with the Studio walkthrough (FR-132–135). v0.2.8 (22 Sept): AI model allocation re-set for Claude Opus 5.5 — runtime routing, Opus 5.5 integration rules, build-time builder/examiner split between Claude Code and Codex (§8A). v0.2.8a (25 Sept): §8A.3 `site/` examiner row aligned with TESTING.md layer 5a; marketing site follows the approved prototype (Decision 16). v0.2.9 (25 Sept): Nigeria tier prices fixed in §10 (Decision 12) |
 | **Inputs** | Concept doc (universal, multi-discipline, v2); Competitive analysis & innovation strategy (Sept 2026 research report); Tokunbo's standard build methodology |
 | **Next artefacts** | TRD (DDL schema, profile schema, rule engine) → MVP scope → user flow → design system → DB schema → monetisation → launch → acquisition → growth |
 
@@ -414,13 +414,27 @@ Rule: the agent that builds a module never writes the tests that gate it. This i
 | **Professional** | $179/user/mo | + office profile, project memory, 250 credits, client profiles, API access, priority check queue. Justified only because Draft + Check + Render + provenance are bundled; each replaces a point tool ($99 ArchiLabs, $25–270 checkers, $35–80 renderers). |
 | **Practice** | $1,099/mo (5 seats) + $149/seat | + Signer roles, audit export, SSO, private marketplace, data residency. Positioned as replacing 3–4 point tools; below TestFit ($8–10k/yr) and STACK multi-seat. |
 | **Enterprise / Regulator** | Custom | PreCheck API, SLA, on-prem reference store, custom profiles. |
-| **Nigeria / emerging-market tier** | Paystack, ~70% below USD list | Same features; cross-subsidised. Idea tier in NGN is the Lagos developer entry point. |
+| **Nigeria tier** | NGN via Paystack, fixed for 12 months from 25 Sept 2026 | Same features as the USD tier. Nigerian accounts only (Paystack-billed Nigerian card or bank, Nigerian projects). |
 | **Student** | Free (verified) | Learn mode (critique before generation), architecture detail types, non-commercial, "Student — educational use" watermark with provenance summary. |
 | **Institution** | Custom (Stage 3) | Tutor exercises, cohort view, provenance summaries with submissions. |
 | **Render credits** | $19 / 100 | 1 credit = 1 image variant; a 10-second Preview video costs 10–20 credits. |
 | **Marketplace** | 70/30 to authors | Headline revenue line, not an afterthought. |
 | **Manufacturer listing** | $3k–$15k/yr | Signed product profiles, specification analytics. |
 | **Responsible-charge marketplace referral** | 10–15% of the professional's fee, or fixed lead fee | Fourth revenue line; concept/draft → professional under responsible charge. |
+
+**Nigeria tier prices (Decision 12, 25 Sept 2026; review 25 Sept 2027)**
+
+| Plan | NGN |
+|---|---|
+| Idea | ₦6,000 / month or ₦12,000 / project |
+| Individual | ₦20,000 / month |
+| Professional | ₦75,000 / user / month |
+| Practice (5 seats) | ₦450,000 / month |
+| Extra Practice seat | ₦60,000 / month |
+| Render credits | ₦8,000 / 100 |
+| Student | ₦0 (verified) |
+
+Prices are set in naira and do not float with the exchange rate.
 
 ---
 

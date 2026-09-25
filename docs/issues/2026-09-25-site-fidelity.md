@@ -74,14 +74,14 @@ Interactive: tabs (For regulators, For manufacturers) — selection state change
 ### 10. Lagos — `/lagos` — page missing
 
 Sections, in order: EPPPS-ready submissions, first time · What a submission needs, as Drawlogic sees it · Lagos conventions, without re-teaching the software · The statutory seal and the Drawlogic stamp are not the same thing · Pilot programme for practices · Naira pricing via Paystack · EPPPS, sealing and local workflow · Type your plot. See what fits.
-Interactive: NGN / USD toggle in "Naira pricing via Paystack" — it must switch every displayed price between the Decision 12 NGN values and the PRD §10 USD prices (Decision 12; DESIGN_GAPS row 20 closed). The export's toggle is inert; do not copy that.
+Interactive: NGN / USD toggle in "Naira pricing via Paystack" — it must switch every displayed price between the PRD §10 Nigeria tier prices and the PRD §10 USD prices (Decision 12; DESIGN_GAPS row 20 closed). The export's toggle is inert; do not copy that.
 Roadmap tags: Electrical.
 
 ### 11. Pricing — `/pricing` — page missing
 
 Sections, in order: Simple pricing, transparent value · (untitled pricing table with the GBP / USD / NGN toggle) · Nigeria tier and the student plan · Line by line · The two fees that are not subscriptions · Questions about the bill · Start free.
 Interactive: currency toggle (GBP, USD, NGN) switches every price.
-PRD §10 values, in the prototype's layout (DESIGN_GAPS row 18; `site/tests/fixtures/prd-governed.json`): $0, $49, $179, $1,099 with 5 seats + $149/seat, $19 per 100 credits; comparison table Free drafts/month 3, render credits included Idea 40, Individual 60, Professional 250. "Up to 25 seats" must not appear. NGN prices are Decision 12 (DECIDED 25 Sept): ₦6,000 Idea / ₦12,000 per project / ₦20,000 Individual / ₦75,000 Professional per user / ₦450,000 Practice (5 seats) / ₦60,000 extra seat / ₦8,000 per 100 render credits — replacing the prototype's naira figures in every currency toggle. The Idea tier USD price (Decision 7) is OPEN: reported, not asserted.
+PRD §10 values, in the prototype's layout (DESIGN_GAPS row 18; `site/tests/fixtures/prd-governed.json`): $0, $49, $179, $1,099 with 5 seats + $149/seat, $19 per 100 credits; comparison table Free drafts/month 3, render credits included Idea 40, Individual 60, Professional 250. "Up to 25 seats" must not appear. NGN prices are the PRD §10 "Nigeria tier prices" table (Decision 12, fixed from 25 Sept 2026; the tests read it from the PRD) — replacing the prototype's naira figures in every currency toggle. The Idea tier USD price (Decision 7) is OPEN: reported, not asserted.
 
 ### 12. About — `/about` — page missing
 

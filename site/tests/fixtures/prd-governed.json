@@ -1,56 +1,122 @@
 {
-  "note": "Values the PRD and DECIDED decisions govern on the marketing site (skills/drawlogic-prototype-fidelity/SKILL.md, precedence). Each cites its source. Values tied to an OPEN decision in docs/DECISIONS.md are reported, never asserted.",
-  "source": "docs/PRD.md v0.2.8a §10 Pricing and packaging; docs/DECISIONS.md row 12",
+  "note": "Rules for PRD-governed values on the marketing site (skills/drawlogic-prototype-fidelity/SKILL.md, precedence). The prices themselves are read from docs/PRD.md §10 at run time (lib/prd.mjs): US-dollar amounts from the plan table's Price column, naira amounts from the 'Nigeria tier prices' table. This file holds only the checks, their citations, and amounts the PRD does not state. Values tied to an OPEN decision are reported, never asserted.",
+  "source": "docs/PRD.md §10 Pricing and packaging (v0.2.9)",
   "required_on_pricing": [
-    { "what": "Free tier price", "text": "$0", "prd": "§10 Free: $0" },
-    { "what": "Individual tier price", "text": "$49", "prd": "§10 Individual: $49/mo" },
-    { "what": "Professional tier price", "text": "$179", "prd": "§10 Professional: $179/user/mo" },
-    { "what": "Practice tier price", "text": "$1,099", "prd": "§10 Practice: $1,099/mo (5 seats) + $149/seat" },
-    { "what": "Practice additional seat", "text": "$149", "prd": "§10 Practice: + $149/seat" },
-    { "what": "Practice included seats", "pattern": "\\b5 seats\\b", "prd": "§10 Practice: (5 seats)" },
-    { "what": "Render credits pack", "text": "$19", "prd": "§10 Render credits: $19 / 100" }
+    {
+      "what": "Free tier price",
+      "text": "$0",
+      "prd": "§10 Free: $0"
+    },
+    {
+      "what": "Individual tier price",
+      "text": "$49",
+      "prd": "§10 Individual: $49/mo"
+    },
+    {
+      "what": "Professional tier price",
+      "text": "$179",
+      "prd": "§10 Professional: $179/user/mo"
+    },
+    {
+      "what": "Practice tier price",
+      "text": "$1,099",
+      "prd": "§10 Practice: $1,099/mo (5 seats) + $149/seat"
+    },
+    {
+      "what": "Practice additional seat",
+      "text": "$149",
+      "prd": "§10 Practice: + $149/seat"
+    },
+    {
+      "what": "Practice included seats",
+      "pattern": "\\b5 seats\\b",
+      "prd": "§10 Practice: (5 seats)"
+    },
+    {
+      "what": "Render credits pack",
+      "text": "$19",
+      "prd": "§10 Render credits: $19 / 100"
+    }
   ],
   "forbidden_anywhere": [
-    { "what": "Practice seat count from the prototype", "pattern": "Up to 25 seats", "prd": "§10 Practice: $1,099/mo (5 seats) + $149/seat" }
+    {
+      "what": "Practice seat count from the prototype",
+      "pattern": "Up to 25 seats",
+      "prd": "§10 Practice: $1,099/mo (5 seats) + $149/seat"
+    }
   ],
   "comparison_table": {
     "note": "Cells of the prototype's 'Line by line' comparison table that the PRD states. Columns are found by tier name in the table header.",
     "cells": [
-      { "row": "Drafts per month", "tier": "Free", "value": "3", "prd": "§10 Free: 3 Draft drawings/month" },
-      { "row": "Render credits included", "tier": "Idea", "value": "40", "prd": "§10 Idea: 40 render credits" },
-      { "row": "Render credits included", "tier": "Individual", "value": "60", "prd": "§10 Individual: 60 render credits" },
-      { "row": "Render credits included", "tier": "Professional", "value": "250", "prd": "§10 Professional: 250 credits" }
+      {
+        "row": "Drafts per month",
+        "tier": "Free",
+        "value": "3",
+        "prd": "§10 Free: 3 Draft drawings/month"
+      },
+      {
+        "row": "Render credits included",
+        "tier": "Idea",
+        "value": "40",
+        "prd": "§10 Idea: 40 render credits"
+      },
+      {
+        "row": "Render credits included",
+        "tier": "Individual",
+        "value": "60",
+        "prd": "§10 Individual: 60 render credits"
+      },
+      {
+        "row": "Render credits included",
+        "tier": "Professional",
+        "value": "250",
+        "prd": "§10 Professional: 250 credits"
+      }
     ]
   },
   "usd_allowed": {
-    "note": "Every US-dollar amount on the site must be one of these. PRD §10 amounts, plus prototype amounts the PRD does not state (larger credit packs), listed separately so they can be decided.",
-    "prd": ["$0", "$14", "$29", "$49", "$179", "$1,099", "$149", "$19"],
-    "prd_silent": [{ "values": ["$89", "$319"], "what": "500 and 2 000 credit packs", "status": "not in PRD; prototype value stands until decided" }]
+    "note": "Every US-dollar amount on the site must be a PRD §10 plan price (read from the PRD), or one of these prototype amounts the PRD does not state, which are reported until decided.",
+    "prd_silent": [
+      {
+        "values": [
+          "$89",
+          "$319"
+        ],
+        "what": "500 and 2 000 credit packs",
+        "status": "not in PRD; prototype value stands until decided"
+      }
+    ]
   },
   "ngn": {
-    "note": "Decision 12 (docs/DECISIONS.md row 12, DECIDED 25 Sept 2026): fixed for 12 months, Paystack-billed, Nigerian accounts only. With NGN chosen in any currency toggle, every displayed price must be one of these (₦0 is the Free tier).",
-    "decision": 12,
-    "values": {
-      "₦0": "Free",
-      "₦6,000": "Idea (monthly)",
-      "₦12,000": "Idea per project",
-      "₦20,000": "Individual",
-      "₦75,000": "Professional per user",
-      "₦450,000": "Practice (5 seats)",
-      "₦60,000": "Practice extra seat",
-      "₦8,000": "100 render credits"
-    },
-    "prd_silent": [{ "values": ["₦58,000", "₦209,000"], "what": "500 and 2 000 credit packs (prototype naira values)", "status": "not in Decision 12; reported until the larger packs are decided" }]
+    "note": "With NGN chosen in any currency toggle, every displayed price must be in PRD §10 'Nigeria tier prices' (read from the PRD; ₦0 covers Free and Student), or one of these amounts the PRD does not state, which are reported until decided.",
+    "prd_silent": [
+      {
+        "values": [
+          "₦58,000",
+          "₦209,000"
+        ],
+        "what": "500 and 2 000 credit packs (prototype naira values)",
+        "status": "not in PRD §10; reported until the larger packs are decided"
+      }
+    ]
   },
   "behaviour_overrides": [
     {
       "page": "Lagos",
       "section": "Naira pricing via Paystack",
       "kind": "currency",
-      "reason": "Decision 12 (DESIGN_GAPS row 20 closed): the toggle switches between Decision 12 NGN values and PRD §10 USD prices; the export's toggle is inert. Checked by prd.spec.ts instead of the recorded prototype behaviour."
+      "reason": "PRD §10 Nigeria tier (Decision 12; DESIGN_GAPS row 20 closed): the toggle switches between the PRD §10 naira prices and USD prices; the export's toggle is inert. Checked by prd.spec.ts instead of the recorded prototype behaviour."
     }
   ],
   "open_decisions": [
-    { "decision": 7, "what": "Idea tier USD price point ($14/mo vs $29/project)", "values": ["$14", "$29", "£11"] }
+    {
+      "decision": 7,
+      "what": "Idea tier USD price point ($14/mo vs $29/project)",
+      "values": [
+        "$14",
+        "$29",
+        "£11"
+      ]
+    }
   ]
 }

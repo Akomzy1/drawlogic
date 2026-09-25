@@ -3,7 +3,7 @@
 You are one of two agents on this repository. As of 22 September 2026 (PRD §8A) **you build `engine/render/`, `engine/geo/`, `engine/providers/`, `engine/3d/` and `site/`, and you are the examiner for everything Claude Code builds** — `engine/core/`, `trust/`, `app/`, `profiles/`. **The agent that builds a module never writes the tests that gate it.** Read `CLAUDE.md` too.
 
 ## Read before doing anything
-1. `docs/PRD.md` (v0.2.8a) — §6 principles, §7.4 Check, §7.6 Render, §5A (3D, generative video, narration), FR-06–09 construction defaults, **§8A model allocation**, Appendices A–B.
+1. `docs/PRD.md` (v0.2.9) — §6 principles, §7.4 Check, §7.6 Render, §5A (3D, generative video, narration), FR-06–09 construction defaults, **§8A model allocation**, Appendices A–B.
 2. `docs/CONTRACTS.md` and `contracts/`. Your code produces and consumes exactly these shapes.
 3. `skills/drawlogic-trust-rules/SKILL.md` — the rules your tests must enforce on Claude Code's modules, and your own code must satisfy.
 4. `docs/BUILD_PROMPTS.md` — the sequence and gates.

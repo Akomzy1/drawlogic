@@ -3,12 +3,15 @@ import path from "node:path";
 import { FIXTURES_DIR, PAGES, readJSON } from "../lib/common.mjs";
 import { checkCurrencies, readCurrencies } from "../lib/currency.mjs";
 import { readSections, visibleText } from "../lib/dom.mjs";
+import { prdPricing } from "../lib/prd.mjs";
 import { openSite, prototype } from "../lib/site.mjs";
 
 // PRD-governed values (prices, credits, seats): checked against docs/PRD.md, not the prototype.
 // Values tied to an OPEN decision are reported as annotations, never asserted.
 const gov = readJSON(path.join(FIXTURES_DIR, "prd-governed.json"));
-const usdAllowed = new Set([...gov.usd_allowed.prd, ...gov.usd_allowed.prd_silent.flatMap((s: any) => s.values)]);
+// Prices come from docs/PRD.md §10 itself (single source); the fixture adds only amounts the PRD does not state.
+const prices = prdPricing();
+const usdAllowed = new Set([...prices.usd, ...gov.usd_allowed.prd_silent.flatMap((s: any) => s.values)]);
 const pricing = PAGES.find((p) => p.name === "Pricing")!;
 
 for (const p of PAGES) {
@@ -58,19 +61,19 @@ test("Pricing: PRD §10 values are shown", async ({ page }, info) => {
 });
 
 // Currency toggles (every one the prototype has, including Lagos): choosing a currency switches every displayed price
-// in the section to it; NGN amounts are Decision 12's, USD amounts PRD §10's.
+// in the section to it; NGN amounts are PRD §10's Nigeria tier prices, USD amounts its plan prices.
 const proto = prototype();
 for (const p of PAGES) {
   const toggles = (proto.pages[p.name].interactive ?? []).filter((i: any) => i.kind === "currency");
   if (!toggles.length) continue;
-  test(`${p.name}: currency toggles switch every price; NGN matches Decision 12`, async ({ page }, info) => {
+  test(`${p.name}: currency toggles switch every price; NGN matches PRD §10`, async ({ page }, info) => {
     test.skip(info.project.name !== "w1280", "Checked once, at 1280.");
     await openSite(page, p);
     const sections = await readSections(page);
     for (const item of toggles) {
       const readings = await readCurrencies(page, sections, item);
       if (!readings) { expect.soft(readings, `${p.name}: section "${item.section}" with the ${item.options.join("/")} toggle is missing`).toBeTruthy(); continue; }
-      const { problems, notes } = checkCurrencies(readings, gov);
+      const { problems, notes } = checkCurrencies(readings, gov, prices);
       for (const n of notes) info.annotations.push({ type: "PRD silent", description: `${p.name} — "${item.section}": ${n}` });
       expect.soft(problems, `${p.name} — "${item.section}" (${item.options.join("/")} toggle)`).toEqual([]);
     }
