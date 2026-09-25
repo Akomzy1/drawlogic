@@ -11,7 +11,8 @@ export default function globalSetup() {
   if (fixture.prototype_sha256 !== sha) {
     throw new Error(`design/prototype/marketing-site.html changed (sha256 ${sha.slice(0, 12)}, fixture ${fixture.prototype_sha256.slice(0, 12)}). The examiner re-runs \`npm run extract\` and reviews the fixture diff; the builder does not.`);
   }
-  if (!fs.existsSync(path.join(baselineRoot(sha), "complete.json"))) {
+  // Section baselines are needed only by the visual tests against a site; NO_SITE runs skip rendering them.
+  if (!process.env.NO_SITE && !fs.existsSync(path.join(baselineRoot(sha), "complete.json"))) {
     console.log("Rendering prototype section baselines (first run for this prototype version)…");
     execFileSync(process.execPath, ["scripts/extract-prototype.mjs", "--baselines-only"], { cwd: TESTS_DIR, stdio: "inherit" });
   }

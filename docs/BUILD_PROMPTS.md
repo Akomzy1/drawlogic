@@ -72,7 +72,7 @@ Gate: journey A runs end to end against the engine up to export.
 
 ## Prompt 11 — Signing (CC)
 ```
-Implement trust/gate (state machine per contracts/signing-gate.schema.json), 2FA step-up at signing, signature block from copy.json, review-evidence recording into the audit chain, signer verification flow (identity via KYC adapter stub, registry match adapter stubs for ARB/state boards/ARCON/COREN, contact match, verification levels, one-licence-one-account, monthly re-check job). Build sign.html and signers.html routes to the prototype. Gate tests: control disabled-not-absent; enablement only when all items complete.
+Implement trust/gate (state machine per contracts/signing-gate.schema.json), 2FA step-up at signing, signature block from copy.json, review-evidence recording into the audit chain, signer verification flow (identity via KYC adapter stub, registry match adapter stubs for ARB/state boards/ARCON/COREN, contact match, verification levels, one-licence-one-account, monthly re-check job). Build sign.standalone.html and signers.standalone.html routes to the prototype. Gate tests: control disabled-not-absent; enablement only when all items complete.
 ```
 Gate: gate state-machine tests green; sign route matches prototype.
 
@@ -84,7 +84,7 @@ Gate: drifted-image fixture fails; preview-video fixture carries label and null 
 
 ## Prompt 13 — App: Render Studio and Preview video (CC)
 ```
-Build render.html and preview-video.html routes to the prototype: engine selector (Fast / Preview video / Studio greyed Stage 3), variants with hash and fidelity readouts, outdated label, credits meter, three-step preview flow with permanent label and moderation-failure state. Credit metering wired to billing stubs.
+Build render.standalone.html and preview-video.standalone.html routes to the prototype: engine selector (Fast / Preview video / Studio greyed Stage 3), variants with hash and fidelity readouts, outdated label, credits meter, three-step preview flow with permanent label and moderation-failure state. Credit metering wired to billing stubs.
 ```
 Gate: fidelity checklist; no fidelity score on preview tiles (test).
 
@@ -98,13 +98,13 @@ Gate: journey C runs end to end; integrity export fields present.
 ## Prompt 15 — Profiles UI: marketplace and Authoring Studio (builder CC · examiner CX)
 ```
 CC: engine/core/profiles — validate authored profiles; AI-assisted rule drafting from an uploaded document via Opus 5.5 on the Batch API (every drafted rule state=unverified); profile diff and version bump.
-CC: profiles.html routes to the prototype (browse with tier/signer badges; Authoring Studio with unverified highlighting, structured rule editor, signing with credential confirmation, versioning, publish private/link/marketplace with 70/30 note). Marketplace listing model in Supabase; Stripe Connect payout stub.
+CC: profiles.standalone.html routes to the prototype (browse with tier/signer badges; Authoring Studio with unverified highlighting, structured rule editor, signing with credential confirmation, versioning, publish private/link/marketplace with 70/30 note). Marketplace listing model in Supabase; Stripe Connect payout stub.
 ```
 Gate: an authored profile round-trips through engine validation and appears in browse.
 
 ## Prompt 16 — Lagos readiness, settings, billing (CC)
 ```
-Build lagos-readiness.html (EPPPS checklist split "Drawlogic produces / you provide"; surveyed-levels requirement; NG-LA coverage) and settings.html (roles, profile stack order, data residency, billing with GBP/USD/NGN, audit log export, plan gates visible-and-locked). Billing: Stripe (Free/Idea/Individual/Professional/Practice), Paystack NGN tier with eligibility rules, render and site-feasibility credits, student verification. Plan-gate tests: gated features present and disabled on lower tiers.
+Build lagos-readiness.standalone.html (EPPPS checklist split "Drawlogic produces / you provide"; surveyed-levels requirement; NG-LA coverage) and settings.standalone.html (roles, profile stack order, data residency, billing with GBP/USD/NGN, audit log export, plan gates visible-and-locked). Billing: Stripe (Free/Idea/Individual/Professional/Practice), Paystack NGN tier with eligibility rules, render and site-feasibility credits, student verification. Plan-gate tests: gated features present and disabled on lower tiers.
 ```
 Gate: journey B runs end to end; billing webhooks tested.
 

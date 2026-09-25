@@ -11,31 +11,34 @@ Drawlogic's UI went through a deliberate pipeline: competitive teardown → PRD 
 ## The prototype files
 Located in `design/prototype/`. If this folder is missing or a screen you need is absent, **stop and say so** — do not build the screen from the prompt text alone.
 
+Re-exports from Claude Design are dropped into design/prototype/ with their exported filenames and contents unchanged. Never rename a re-export to a different name and never hand-edit links inside an export. Screens are named `*.standalone.html`, the names their exports link to; `site/tests/specs/prototype-links.spec.ts` (CI job `prototype-links`) fails on any internal link that does not resolve to a file in `design/prototype/`.
+
 | File | Screen | Mode |
 |---|---|---|
 | `tokens.css`, `system.html` | **Read first.** Tokens and the 12 components with states | — |
-| `shell.html` | App frame, rail, top bar, mode toggle, coverage chip, New project modal (discipline live/roadmap chips, jurisdiction resolution, author-a-profile link) | both |
-| `idea-home.html` | Prompt box hero, examples, recent ideas | Idea |
-| `idea-results.html` | Options, numbers, render, assumptions panel, export menu | Idea |
-| `learn-critique.html` | Inspiration, graded critique, locked worked answers, Generate lock | Learn |
-| `learn-compare.html` | Sketch vs generated, feedback report, reflection, integrity export | Learn |
-| `learn-share.html` | Share card after marking: not-yet-marked / marked / under-18 states, card formats, disclosed reward | Learn |
-| `portfolio.html` | Opt-in portfolio: owner / public / under-18 / deleted, per-item remove | Learn |
-| `referrals.html` | Invite classmates, credits, ambassador disclosure | Learn |
-| `challenges.html` | Monthly brief, entry, opt-in public gallery, under-18 state | Learn |
-| `idea-site.html` | Site context panel, massing options over basemap, flags, cost band (FR-151) and uncovered-location state (FR-159) | Idea |
-| `site-boundary.html` | Boundary polygon, survey-plan override, geodata provenance | Idea |
-| `promote.html` | Promote modal → interpretation card | Idea→Draft |
-| `draft-workspace.html` | Chat beside drawing, change list, provenance layer, chip | Draft |
-| `check-panel.html` | Standards Report drawer, auto-fix, checks not performed | Draft |
-| `export.html` | Format choice, sheet preview, verification stamp, Free watermark | Draft |
-| `sign.html` | Signing gate checklist, 2FA step-up, signature block, review evidence | Draft |
-| `render.html` | Engine selector, variants, fidelity readouts, outdated label | Render |
-| `preview-video.html` | Still → move → clip with preview label, moderation-failure state | Render |
-| `profiles.html` | Browse cards; Authoring Studio with unverified rules, signing, publish | Profiles |
-| `signers.html` | Requester view; signer onboarding steps and mismatch state | Signing |
-| `lagos-readiness.html` | EPPPS checklist split "Drawlogic produces / you provide" | Draft |
-| `settings.html` | Roles, profile stack, data, billing, audit log, plan gates | — |
+| `Brand Assets.html` | Brand assets page linked from `system.html` (logo files still to be exported, DESIGN_GAPS 29) | — |
+| `shell.standalone.html` | App frame, rail, top bar, mode toggle, coverage chip, New project modal (discipline live/roadmap chips, jurisdiction resolution, author-a-profile link) | both |
+| `idea-home.standalone.html` | Prompt box hero, examples, recent ideas | Idea |
+| `idea-results.standalone.html` | Options, numbers, render, assumptions panel, export menu | Idea |
+| `learn-critique.standalone.html` | Inspiration, graded critique, locked worked answers, Generate lock | Learn |
+| `learn-compare.standalone.html` | Sketch vs generated, feedback report, reflection, integrity export | Learn |
+| `learn-share.standalone.html` | Share card after marking: not-yet-marked / marked / under-18 states, card formats, disclosed reward | Learn |
+| `portfolio.standalone.html` | Opt-in portfolio: owner / public / under-18 / deleted, per-item remove | Learn |
+| `referrals.standalone.html` | Invite classmates, credits, ambassador disclosure | Learn |
+| `challenges.standalone.html` | Monthly brief, entry, opt-in public gallery, under-18 state | Learn |
+| `idea-site.standalone.html` | Site context panel, massing options over basemap, flags, cost band (FR-151) and uncovered-location state (FR-159) | Idea |
+| `site-boundary.standalone.html` | Boundary polygon, survey-plan override, geodata provenance | Idea |
+| `promote.standalone.html` | Promote modal → interpretation card | Idea→Draft |
+| `draft-workspace.standalone.html` | Chat beside drawing, change list, provenance layer, chip | Draft |
+| `check-panel.standalone.html` | Standards Report drawer, auto-fix, checks not performed | Draft |
+| `export.standalone.html` | Format choice, sheet preview, verification stamp, Free watermark | Draft |
+| `sign.standalone.html` | Signing gate checklist, 2FA step-up, signature block, review evidence | Draft |
+| `render.standalone.html` | Engine selector, variants, fidelity readouts, outdated label | Render |
+| `preview-video.standalone.html` | Still → move → clip with preview label, moderation-failure state | Render |
+| `profiles.standalone.html` | Browse cards; Authoring Studio with unverified rules, signing, publish | Profiles |
+| `signers.standalone.html` | Requester view; signer onboarding steps and mismatch state | Signing |
+| `lagos-readiness.standalone.html` | EPPPS checklist split "Drawlogic produces / you provide" | Draft |
+| `settings.standalone.html` | Roles, profile stack, data, billing, audit log, plan gates | — |
 | `index.html` | Journeys A/B/C and the fidelity statement | — |
 
 Open the file for the screen you are building. Building the Check panel from the Draft workspace's components is not fidelity.
@@ -55,7 +58,7 @@ Open the file for the screen you are building. Building the Check panel from the
 - **Render Studio:** every variant shows the source drawing hash; diffusion tiles show a fidelity score; Preview video tiles show the preview label and **no** fidelity score; Studio (ray-traced) is greyed with "Stage 3" until it ships. Every render, clip and Idea render tile shows its material basis per material and as a summary line, and "colour approximate" where the colour check flags it (PRD FR-163/164); no "exact match", "exact colour" or "true colour".
 - **Site context:** the boundary source (traced vs survey) and imagery date are visible on the screen, not only in a tooltip.
 - **Cost (Stage 2, PRD §5B):** a cost band is always a range with "Indicative — not a quote" and its benchmark source and date visible; where the location has no cost data, "No verified cost data for [jurisdiction] — no cost shown" replaces it and quantities stay. Never a single figure, never another jurisdiction's rates.
-- **Plan gates** render as shown in `settings.html` — a gated feature is visible and locked, never hidden.
+- **Plan gates** render as shown in `settings.standalone.html` — a gated feature is visible and locked, never hidden.
 - **Disciplines and jurisdictions are never hidden either.** Roadmap disciplines are selectable with the roadmap note; an uncovered jurisdiction resolves to Generic with the "no local rules claimed" line and an "Author a profile" link, in the New project modal, Browse and Settings.
 
 ## What "matching the prototype" means

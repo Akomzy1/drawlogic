@@ -21,6 +21,7 @@ The spec is `design/prototype/marketing-site.html` — the only approved design 
 | `motion` | Full motion: a section moves on its own or with scrolling only if the prototype's same section does (1280). Reduced motion: no video plays or autoplays, no running animations, no content hidden, and the viewport does not move |
 | `banned` | No banned word (`contracts/copy.json`, or the trust-rules skill §8 until that exists) in rendered text, attributes or any text file in the build output |
 | `a11y` | Zero axe violations for WCAG 2.0/2.1/2.2 A and AA |
+| `prototype-links` (own CI job, `PROTOTYPE_LINKS=1`) | Every file in `design/prototype/` loads and every internal link, rendered or written in the export, resolves to a file there. Exports keep their exported `*.standalone.html` names so their links work unedited |
 | `lighthouse` (Home) | Performance, accessibility, best practices and SEO each ≥ 90. Until launch (`SITE_LAUNCHED` unset) crawlers stay blocked, so `is-crawlable` is excluded. Performance gates only on CI; a local score is reported, not asserted |
 
 ## Running

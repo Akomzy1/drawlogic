@@ -1,0 +1,37 @@
+# Prototype integrity: every file in design/prototype/ loads and every internal link resolves to a file there.
+# Separate from site-fidelity so a missing design asset never blocks a site PR.
+name: prototype-links
+
+on:
+  pull_request:
+    paths:
+      - "design/prototype/**"
+      - "site/tests/specs/prototype-links.spec.ts"
+      - "site/tests/lib/bundle.mjs"
+      - ".github/workflows/prototype-links.yml"
+  push:
+    branches: [main]
+    paths:
+      - "design/prototype/**"
+      - "site/tests/specs/prototype-links.spec.ts"
+
+jobs:
+  prototype-links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install the tests
+        working-directory: site/tests
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+      - name: Every prototype link resolves
+        working-directory: site/tests
+        env:
+          NO_SITE: "1"
+          PROTOTYPE_LINKS: "1"
+        run: npx playwright test specs/prototype-links.spec.ts --project=w1280
