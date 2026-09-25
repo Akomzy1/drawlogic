@@ -3,7 +3,7 @@
 You are one of two agents on this repository. As of 22 September 2026 (PRD §8A) **you build `contracts/` (initial draft), `engine/core/`, `trust/`, `app/` and `profiles/`.** Codex (GPT-6 Astra) builds `engine/render/`, `engine/geo/`, `engine/providers/`, `engine/3d/` and `site/`. **The agent that builds a module never writes the tests that gate it**: Codex writes the golden fixtures and property tests for your modules; you write them for Codex's. Read `AGENTS.md` too.
 
 ## Read before doing anything
-1. `docs/PRD.md` (v0.2.8) — §6 principles, §7.5 trust spine, §7.11 signing, §7.12 Learn mode, §5A (3D, generative video, narration), **§8A model allocation**, Appendices A–C.
+1. `docs/PRD.md` (v0.2.8a) — §6 principles, §7.5 trust spine, §7.11 signing, §7.12 Learn mode, §5A (3D, generative video, narration), **§8A model allocation**, Appendices A–C.
 2. `docs/CONTRACTS.md` and `contracts/` — the interfaces. `contracts/models.json` is the only place model IDs and effort levels live.
 3. `design/prototype/` and `skills/drawlogic-prototype-fidelity/SKILL.md` before any `app/` work. **The build must match the prototype.**
 4. `skills/drawlogic-trust-rules/SKILL.md` — non-negotiable product rules, enforced by tests.
@@ -18,7 +18,7 @@ You are one of two agents on this repository. As of 22 September 2026 (PRD §8A)
 | `trust/` | **You** | Codex (`trust/tests/` gate and rule tests) |
 | `app/`, `profiles/` | **You** | Codex (journey tests, profile test cases) |
 | `engine/render/`, `engine/geo/`, `engine/providers/`, `engine/3d/` | Codex — **do not edit** | You (`fixtures/render/`, drift and banned-word tests) |
-| `site/` (marketing) | Codex — **do not edit** outside `site/tests/` | **You**: `site/tests/` — fidelity to `design/prototype/marketing-site.html` under the fidelity skill (TESTING.md layer 5a), written from the prototype and PRD before Codex builds; failures go to Codex as issues |
+| `site/` (marketing site) | Codex — **do not edit** | You (`site/tests/`): site fidelity to `design/prototype/marketing-site.html` under the fidelity skill — visual regression, section order, copy diff, asset hashes, captions, banned words, accessibility |
 | `docs/` | shared | — |
 
 Never edit a test file that gates your own module. If you believe a Codex-written fixture is wrong, open an issue citing the PRD clause; do not change it.

@@ -3,7 +3,7 @@
 You are one of two agents on this repository. As of 22 September 2026 (PRD §8A) **you build `engine/render/`, `engine/geo/`, `engine/providers/`, `engine/3d/` and `site/`, and you are the examiner for everything Claude Code builds** — `engine/core/`, `trust/`, `app/`, `profiles/`. **The agent that builds a module never writes the tests that gate it.** Read `CLAUDE.md` too.
 
 ## Read before doing anything
-1. `docs/PRD.md` (v0.2.8) — §6 principles, §7.4 Check, §7.6 Render, §5A (3D, generative video, narration), FR-06–09 construction defaults, **§8A model allocation**, Appendices A–B.
+1. `docs/PRD.md` (v0.2.8a) — §6 principles, §7.4 Check, §7.6 Render, §5A (3D, generative video, narration), FR-06–09 construction defaults, **§8A model allocation**, Appendices A–B.
 2. `docs/CONTRACTS.md` and `contracts/`. Your code produces and consumes exactly these shapes.
 3. `skills/drawlogic-trust-rules/SKILL.md` — the rules your tests must enforce on Claude Code's modules, and your own code must satisfy.
 4. `docs/BUILD_PROMPTS.md` — the sequence and gates.
@@ -13,7 +13,7 @@ You are one of two agents on this repository. As of 22 September 2026 (PRD §8A)
 | Path | Builder | Examiner |
 |---|---|---|
 | `engine/render/` (SVG/DXF/PDF, line-art/depth/material-map artefacts), `engine/geo/`, `engine/providers/` (render: diffusion, generative_video, raytraced, voice; geo tiles/terrain/OSM), `engine/3d/` (Stage 3 extrusion, IFC, Blender pipeline) | **You** | Claude Code (`fixtures/render/`, drift, label and banned-word tests) |
-| `site/` (marketing) — built to `design/prototype/marketing-site.html` under `skills/drawlogic-prototype-fidelity/SKILL.md` | **You** | Claude Code (`site/tests/`: visual fidelity, section order, copy, asset manifest, labels, reduced motion, banned words, Lighthouse, WCAG 2.2 AA) |
+| `site/` (marketing site) | **You** — built to `design/prototype/marketing-site.html` under `skills/drawlogic-prototype-fidelity/SKILL.md` | Claude Code (`site/tests/`: visual regression against the prototype, section order, copy diff, asset hashes, captions, banned words, accessibility) |
 | `engine/core/`, `trust/`, `app/`, `profiles/` | Claude Code — **do not edit** | **You**: `fixtures/core/` golden DDL, resolved DDL and check results; property tests (solver conservation, determinism, no ✓ without verified+signed rule, provenance preserved, engineering values never invented, construction defaults by jurisdiction, narration facts traceable); gate state-machine and audit-chain tests; journey tests |
 | `contracts/` | Claude Code drafts; PR-only | You review every contract PR |
 
@@ -26,7 +26,7 @@ As examiner, write fixtures and tests **before** Claude Code builds the module, 
 - Voice (`voice`): script comes from `engine/core` narration output only; you never generate or edit narration text.
 - Geo: Mapbox/Esri tiles only (never Google tiles); imagery date, resolution, boundary source and DEM resolution carried as provenance.
 - Stage 3 Blender: headless deterministic scripts driven by the IFC model and material library; no runtime agent chooses geometry.
-- `site/`: load `skills/drawlogic-prototype-fidelity/SKILL.md` before any change. Build every page to `design/prototype/marketing-site.html` — section order, structure, components, tokens — with PRD values where the two disagree. Use only approved assets listed in `site/public/media/manifest.json`. Anything the prototype does not cover gets a `docs/DESIGN_GAPS.md` entry before it is built. Every `site/` PR attaches prototype vs build side-by-sides at 375, 768 and 1280 and the fidelity checklist. `site/tests/` is Claude Code's; never edit it.
+- `site/`: load `skills/drawlogic-prototype-fidelity/SKILL.md` before any change. The approved design is `design/prototype/marketing-site.html` and the approved assets are those in `site/public/media/manifest.json`. PRD wins on content and rules; the prototype wins on layout and visuals. Anything the prototype does not cover goes into `docs/DESIGN_GAPS.md`, not straight into the site. Every `site/` PR carries the fidelity checklist and side-by-sides at 375/768/1280.
 - No provider-specific code outside its adapter. No banned words in any emitted string.
 - Model calls, if any, go through `contracts/providers` with IDs from `contracts/models.json`.
 

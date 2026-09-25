@@ -19,5 +19,6 @@ Status: OPEN unless marked. Decided items record date and answer.
 | 13 | Reference-interpretation model (Opus 5.5 vs Sonnet 5 vs GPT-6 Astra) | OPEN — eval-decided in Prompt 9; provisional default Opus 5.5 |
 | 14 | Agent allocation: Claude Code builds contracts, engine/core, trust, app, profiles; Codex builds render, geo, providers, 3d, site; each examines the other | **APPLIED 22 Sept 2026** (PRD §8A.3) — revert here if not wanted |
 | 15 | Runtime routing defaults per PRD §8A.1 (Haiku 4.5 / Sonnet 5 / Opus 5.5) | **APPLIED 22 Sept 2026** — revisit on eval results and each model release |
+| 16 | Marketing site follows design/prototype/marketing-site.html; Codex rebuild instruction withdrawn | **DECIDED 25 Sept 2026** — the prototype is the only approved design for `site/`, including Home. The rebuild Home ("See it before you build it") and all rebuild-only pages, sections and motion are superseded and removed, not adapted; existing `site/` code is reused only where it matches the prototype. Assets outside the approved manifest are dropped or listed in DESIGN_GAPS.md. The HMO case survives only as the landlord card in the prototype's "Try one of these" strip (DESIGN_GAPS row 19). |
 
 Process: an agent that hits an OPEN decision stops, states which one, and proposes at most two options. Tokunbo decides; the row is updated in the same PR as the work.
