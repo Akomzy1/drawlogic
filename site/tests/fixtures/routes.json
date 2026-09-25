@@ -1,0 +1,53 @@
+{
+  "note": "One route per page of design/prototype/marketing-site.html. The prototype addresses pages by name (#Idea%20mode); the site serves each at the path below. Paths are the page names in lower-case kebab form. Changing a path needs a decision recorded, not a test edit by the builder. Listed in the prototype's navigation order (Home, then Product, Markets, Pricing, About); tests and issues follow this order.",
+  "pages": [
+    {
+      "name": "Home",
+      "route": "/"
+    },
+    {
+      "name": "Idea mode",
+      "route": "/idea-mode"
+    },
+    {
+      "name": "For professionals",
+      "route": "/for-professionals"
+    },
+    {
+      "name": "Render studio",
+      "route": "/render-studio"
+    },
+    {
+      "name": "Profile marketplace",
+      "route": "/profile-marketplace"
+    },
+    {
+      "name": "Find a signer",
+      "route": "/find-a-signer"
+    },
+    {
+      "name": "Developers",
+      "route": "/developers"
+    },
+    {
+      "name": "Students & educators",
+      "route": "/students-and-educators"
+    },
+    {
+      "name": "Regulators & manufacturers",
+      "route": "/regulators-and-manufacturers"
+    },
+    {
+      "name": "Lagos",
+      "route": "/lagos"
+    },
+    {
+      "name": "Pricing",
+      "route": "/pricing"
+    },
+    {
+      "name": "About",
+      "route": "/about"
+    }
+  ]
+}
