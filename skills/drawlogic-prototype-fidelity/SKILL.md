@@ -45,7 +45,7 @@ Open the file for the screen you are building. Building the Check panel from the
 - **Standards Report always renders "Checks not performed"**, styled as a feature block, even when empty ("None for this profile").
 - **Verification stamp** renders exactly the fields and closing sentence in `contracts/copy.json`. It never contains a banned word.
 - **Signing gate:** the Sign control is disabled until every gate item is complete; the disabled state is visible, not hidden.
-- **Idea mode:** Concept watermark on every image and export; no DXF in the export menu; "CAD export available after Promote to Draft" note present.
+- **Idea mode:** Concept watermark on every image and export; no DXF in the export menu; "CAD export available after Promote to Draft" note present; the cost band is shown greyed with a "Stage 2" tag and its tooltip until Stage 2 ships (PRD §5B), never as figures.
 - **Learn mode:** Generate is locked until a revision cycle; "Generate anyway" is present, secondary, with its tooltip; worked answers locked until an attempt.
 - **Render Studio:** every variant shows the source drawing hash; diffusion tiles show a fidelity score; Preview video tiles show the preview label and **no** fidelity score; Studio (ray-traced) is greyed with "Stage 3" until it ships.
 - **Site context:** the boundary source (traced vs survey) and imagery date are visible on the screen, not only in a tooltip.

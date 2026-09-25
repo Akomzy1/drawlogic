@@ -5,7 +5,7 @@
 | **Status** | Draft for review |
 | **Owner** | Tokunbo Akomolede (AkomzyAi Consulting Ltd) |
 | **Date** | 15 September 2026 (v0.1: 14 September 2026) |
-| **Changes in v0.2** | Adds Idea mode for non-professionals (homeowners, developers, small-business designers); Promote-to-Draft bridge; consumer pricing tier; site-feasibility pulled forward into Stage 2 for Lagos; personas, flows, principles, risks and decisions updated accordingly. v0.2.1 (15 Sept): Find-a-signer reframed as a responsible-charge marketplace (FR-99, 7.11, Decision 8). v0.2.2 (16 Sept): Stage 3 extension — 3D model and studio render (5A, FR-120–127) and four Stage 1 TRD hooks (5A.3). v0.2.3 (16 Sept): site context from geodata (FR-102–106). v0.2.4 (18 Sept): Preview video via generative-video backend (FR-55, FR-127 amended, FR-128–131). v0.2.5 (19 Sept): Learn mode — critique-before-generation student version, also available as a toggle in Idea mode (7.12, FR-140–149; FR-82 replaced). v0.2.6 (21 Sept): construction and material defaults are jurisdiction data — no brick cavity walls on a Lagos project unless the user says so (FR-06–09, FR-57a). v0.2.7 (22 Sept): narrated property film — script generated from the DDL with provenance in the narration, Stage 3 with the Studio walkthrough (FR-132–135). v0.2.8 (22 Sept): AI model allocation re-set for Claude Opus 5.5 — runtime routing, Opus 5.5 integration rules, build-time builder/examiner split between Claude Code and Codex (§8A). v0.2.8a (25 Sept): §8A.3 `site/` examiner row aligned with TESTING.md layer 5a; marketing site follows the approved prototype (Decision 16). v0.2.9 (25 Sept): Nigeria tier prices fixed in §10 (Decision 12) |
+| **Changes in v0.2** | Adds Idea mode for non-professionals (homeowners, developers, small-business designers); Promote-to-Draft bridge; consumer pricing tier; site-feasibility pulled forward into Stage 2 for Lagos; personas, flows, principles, risks and decisions updated accordingly. v0.2.1 (15 Sept): Find-a-signer reframed as a responsible-charge marketplace (FR-99, 7.11, Decision 8). v0.2.2 (16 Sept): Stage 3 extension — 3D model and studio render (5A, FR-120–127) and four Stage 1 TRD hooks (5A.3). v0.2.3 (16 Sept): site context from geodata (FR-102–106). v0.2.4 (18 Sept): Preview video via generative-video backend (FR-55, FR-127 amended, FR-128–131). v0.2.5 (19 Sept): Learn mode — critique-before-generation student version, also available as a toggle in Idea mode (7.12, FR-140–149; FR-82 replaced). v0.2.6 (21 Sept): construction and material defaults are jurisdiction data — no brick cavity walls on a Lagos project unless the user says so (FR-06–09, FR-57a). v0.2.7 (22 Sept): narrated property film — script generated from the DDL with provenance in the narration, Stage 3 with the Studio walkthrough (FR-132–135). v0.2.8 (22 Sept): AI model allocation re-set for Claude Opus 5.5 — runtime routing, Opus 5.5 integration rules, build-time builder/examiner split between Claude Code and Codex (§8A). v0.2.8a (25 Sept): §8A.3 `site/` examiner row aligned with TESTING.md layer 5a; marketing site follows the approved prototype (Decision 16). v0.2.9 (25 Sept): Nigeria tier prices fixed in §10 (Decision 12). v0.2.10 (25 Sept): Quantities and cost (Stage 2–3) — new §5B, FR-150–159; estimate banned words; §10 packaging for quantities, estimates and rate profiles |
 | **Inputs** | Concept doc (universal, multi-discipline, v2); Competitive analysis & innovation strategy (Sept 2026 research report); Tokunbo's standard build methodology |
 | **Next artefacts** | TRD (DDL schema, profile schema, rule engine) → MVP scope → user flow → design system → DB schema → monetisation → launch → acquisition → growth |
 
@@ -124,11 +124,13 @@ It is *not* marketed as "AI that edits or renders drawings" — natural-language
 - **MCP server + REST API** exposing compile / check / render so other agents can call Drawlogic as the drawing engine.
 - Interior pack (plans, elevations, joinery, finishes/FF&E schedules) — same DDL, lowest incremental cost.
 - Photo → as-existing drawing → proposed render (with verification stamp), building on the Stage 1 vision ingestion.
+- **Quantities and indicative cost** (5B): quantity schedule from the DDL, Idea-mode cost ranges from profile `cost_benchmarks`, quantities-only where no verified cost data exists (FR-150–152, FR-159).
 - **Go / no-go:** if neither a paying Lagos pilot nor a paying manufacturer converts within two quarters, narrow to UK/US and treat Africa as later expansion.
 
 ### Stage 3 — Widen disciplines, defend (months 12–24)
 - **Electrical pack**: single-line diagrams and power/lighting layouts from prompts; IEC 60617 ↔ ANSI/IEEE 315 symbol switching as profile data. Nobody does prompt → SLD.
 - **Urban & site pack** (full: masterplan layouts for large land holdings — plots, roads, phasing, open space — FAR/parking checks, land-use plans; site feasibility for single plots and small clusters ships in Stage 2) and **Civil pack** (roads, drainage layouts and long sections, levels). Survey and drone ingestion (FR-106) lands here.
+- **Priced estimates** (5B): QS-signed rate profiles, priced estimates and bills of quantities in NRM2 / CSI MasterFormat / NIQS format, live cost change beside Draft edits, rate expiry, workspace rates (FR-153–158).
 - **Standards-hierarchy conflict detection** (project location vs client vs office vs manufacturer).
 - **Multi-drawing coordination graph** on 2D sets ("17 affected drawings — update all?"), tool-agnostic.
 - **Markup → revision automation** (Rev A + redlined PDF → Rev B with clouds and revision schedule).
@@ -179,6 +181,26 @@ It is *not* marketed as "AI that edits or renders drawings" — natural-language
 - Generic "confidence & audit layer" — only element-level provenance + fail-closed stamp are new; reframed accordingly.
 - GIS-aware dynamic compliance near-term — Archistar's entrenched government GIS integrations; enter via profiles and emerging markets first.
 - ISO 27001 as an innovation — hygiene, planned, not marketed as a differentiator.
+
+### 5B. Quantities and cost (Stage 2–3; not in Stage 1)
+
+**Principle.** Quantities come from the DDL, never from measuring a picture; costs are ranges with a dated, sourced rate basis; an estimate is never a quote.
+
+**Stage 2**
+- FR-150 (P1) **Quantity schedule from the resolved DDL:** areas, volumes, lengths and counts by element class and `material_id`, each line traceable to its elements. Quantities resting on `ai_inferred` or `verify` elements are flagged.
+- FR-151 (P1) **Idea-mode cost range** from benchmark rates (per m² / ft²) held in the jurisdiction profile's `cost_benchmarks` block, with source and date shown. Always a range, always labelled "Indicative — not a quote".
+- FR-152 (P1) **Profile schema gains `cost_benchmarks`** (rate, unit, building type, source, date, expiry).
+- FR-159 (P1) **Uncovered jurisdictions.** Where no `cost_benchmarks` or rate profile exists for the project location, show quantities only, with "No verified cost data for [jurisdiction] — no cost shown"; never convert or borrow another jurisdiction's rates. Location factors within a jurisdiction come from the profile, keyed to the project address.
+
+**Stage 3**
+- FR-153 (P2) **Rate profiles:** itemised rates per material/element class, authored in the Authoring Studio, signed by a qualified quantity surveyor (RICS, NIQS or equivalent), versioned and dated; unsigned rates can produce only ranges flagged "unverified rates".
+- FR-154 (P2) **Priced estimate and bill of quantities export** in the jurisdiction's measurement standard (NRM2 UK, CSI MasterFormat US, NIQS format Nigeria) as XLSX/PDF, carrying the drawing hash, rate profile version and signer.
+- FR-155 (P2) **Live cost change beside every Draft edit** ("insulation 120 → 140 mm: +£310"), with the rate basis on hover.
+- FR-156 (P2) **Honesty block on every estimate:** rate source and date, "Items not priced: …", count of quantities resting on unverified elements, and "This is an estimate, not a quotation."
+- FR-157 (P2) **Rate expiry:** rates past their expiry date (default 90 days for NG-LA, 12 months for GB-ENG/US) are flagged stale and excluded from totals unless the user accepts them explicitly.
+- FR-158 (P2) **User-supplied rates:** a workspace can upload its own rate library (XLSX/CSV) as a private rate profile; estimates using it are labelled "Workspace rates — not independently verified" with the upload date.
+
+**Copy.** In any estimate output, "quote", "guaranteed price" and "fixed price" are banned words (the fixed labels "Indicative — not a quote" and "This is an estimate, not a quotation." are the only uses of quote/quotation). **Pricing:** see §10. **Rate data source per launch market:** Decision 17 (DECISIONS.md), OPEN.
 
 ---
 
@@ -411,14 +433,15 @@ Rule: the agent that builds a module never writes the tests that gate it. This i
 | **Free** | $0 | 3 Idea-mode concepts/month with low-res renders; 3 Draft drawings/month, Generic + public profiles, provenance, Standards Report, 5 watermarked renders, stamped exports. Must be genuinely useful — Snaptrude and Zoo set that bar. |
 | **Idea** | $14/mo or $29/project | Unlimited concepts, assumptions editing, 40 render credits, share links, saved ideas, Find a signer. Consumer pricing against Visualizee ($15) and Planner 5D; Idea mode is never the justification for professional seat prices. |
 | **Individual** | $49/mo | Unlimited drafts, all available profiles, 60 render credits, DXF/PDF/SVG, signing (self). |
-| **Professional** | $179/user/mo | + office profile, project memory, 250 credits, client profiles, API access, priority check queue. Justified only because Draft + Check + Render + provenance are bundled; each replaces a point tool ($99 ArchiLabs, $25–270 checkers, $35–80 renderers). |
-| **Practice** | $1,099/mo (5 seats) + $149/seat | + Signer roles, audit export, SSO, private marketplace, data residency. Positioned as replacing 3–4 point tools; below TestFit ($8–10k/yr) and STACK multi-seat. |
+| **Professional** | $179/user/mo | + office profile, project memory, quantity schedule (Stage 2, FR-150; included in Professional and above), 250 credits, client profiles, API access, priority check queue. Justified only because Draft + Check + Render + provenance are bundled; each replaces a point tool ($99 ArchiLabs, $25–270 checkers, $35–80 renderers). |
+| **Practice** | $1,099/mo (5 seats) + $149/seat | + Signer roles, audit export, SSO, private marketplace, data residency, priced estimates and bill-of-quantities export (Stage 3, FR-154). Positioned as replacing 3–4 point tools; below TestFit ($8–10k/yr) and STACK multi-seat. |
 | **Enterprise / Regulator** | Custom | PreCheck API, SLA, on-prem reference store, custom profiles. |
 | **Nigeria tier** | NGN via Paystack, fixed for 12 months from 25 Sept 2026 | Same features as the USD tier. Nigerian accounts only (Paystack-billed Nigerian card or bank, Nigerian projects). |
 | **Student** | Free (verified) | Learn mode (critique before generation), architecture detail types, non-commercial, "Student — educational use" watermark with provenance summary. |
 | **Institution** | Custom (Stage 3) | Tutor exercises, cohort view, provenance summaries with submissions. |
+| **Estimates & BoQ add-on** | Price not yet set | Priced estimates and bill-of-quantities export (Stage 3, FR-154) for plans below Practice. |
 | **Render credits** | $19 / 100 | 1 credit = 1 image variant; a 10-second Preview video costs 10–20 credits. |
-| **Marketplace** | 70/30 to authors | Headline revenue line, not an afterthought. |
+| **Marketplace** | 70/30 to authors | Headline revenue line, not an afterthought. Rate profiles (Stage 3, FR-153) are sold through it on the same 70/30 split. |
 | **Manufacturer listing** | $3k–$15k/yr | Signed product profiles, specification analytics. |
 | **Responsible-charge marketplace referral** | 10–15% of the professional's fee, or fixed lead fee | Fourth revenue line; concept/draft → professional under responsible charge. |
 
