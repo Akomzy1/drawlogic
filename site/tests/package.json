@@ -1,0 +1,21 @@
+{
+  "name": "drawlogic-site-tests",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Examiner tests for site/ (TESTING.md layer 5a). Written by Claude Code from design/prototype/marketing-site.html and docs/PRD.md. The site's builder never edits this folder.",
+  "type": "module",
+  "scripts": {
+    "extract": "node scripts/extract-prototype.mjs",
+    "self-check": "node scripts/self-check.mjs",
+    "test": "playwright test",
+    "report": "playwright show-report reports/html",
+    "issues": "node scripts/issues.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.11.0",
+    "@playwright/test": "1.63.0",
+    "lighthouse": "^13.5.0",
+    "pixelmatch": "^7.1.0",
+    "pngjs": "^7.0.0"
+  }
+}

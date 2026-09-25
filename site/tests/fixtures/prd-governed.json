@@ -1,0 +1,34 @@
+{
+  "note": "Values the PRD governs on the marketing site (skills/drawlogic-prototype-fidelity/SKILL.md, precedence). Each cites its PRD clause. Values tied to an OPEN decision in docs/DECISIONS.md are reported, never asserted.",
+  "source": "docs/PRD.md v0.2.8 §10 Pricing and packaging",
+  "required_on_pricing": [
+    { "what": "Free tier price", "text": "$0", "prd": "§10 Free: $0" },
+    { "what": "Individual tier price", "text": "$49", "prd": "§10 Individual: $49/mo" },
+    { "what": "Professional tier price", "text": "$179", "prd": "§10 Professional: $179/user/mo" },
+    { "what": "Practice tier price", "text": "$1,099", "prd": "§10 Practice: $1,099/mo (5 seats) + $149/seat" },
+    { "what": "Practice additional seat", "text": "$149", "prd": "§10 Practice: + $149/seat" },
+    { "what": "Practice included seats", "pattern": "\\b5 seats\\b", "prd": "§10 Practice: (5 seats)" },
+    { "what": "Render credits pack", "text": "$19", "prd": "§10 Render credits: $19 / 100" }
+  ],
+  "forbidden_anywhere": [
+    { "what": "Practice seat count from the prototype", "pattern": "Up to 25 seats", "prd": "§10 Practice: $1,099/mo (5 seats) + $149/seat" }
+  ],
+  "comparison_table": {
+    "note": "Cells of the prototype's 'Line by line' comparison table that the PRD states. Columns are found by tier name in the table header.",
+    "cells": [
+      { "row": "Drafts per month", "tier": "Free", "value": "3", "prd": "§10 Free: 3 Draft drawings/month" },
+      { "row": "Render credits included", "tier": "Idea", "value": "40", "prd": "§10 Idea: 40 render credits" },
+      { "row": "Render credits included", "tier": "Individual", "value": "60", "prd": "§10 Individual: 60 render credits" },
+      { "row": "Render credits included", "tier": "Professional", "value": "250", "prd": "§10 Professional: 250 credits" }
+    ]
+  },
+  "usd_allowed": {
+    "note": "Every US-dollar amount on the site must be one of these. PRD §10 amounts, plus prototype amounts the PRD does not state (larger credit packs), listed separately so they can be decided.",
+    "prd": ["$0", "$14", "$29", "$49", "$179", "$1,099", "$149", "$19"],
+    "prd_silent": [{ "values": ["$89", "$319"], "what": "500 and 2 000 credit packs", "status": "not in PRD; prototype value stands until decided" }]
+  },
+  "open_decisions": [
+    { "decision": 7, "what": "Idea tier price point ($14/mo vs $29/project)", "values": ["$14", "$29", "£11", "₦9,500"] },
+    { "decision": 12, "what": "Nigeria NGN pricing (prototype ₦9,500/32,000/119,000/729,000; proposed ₦6k/20k/75k/450k)", "pattern": "₦\\s?[\\d,]+" }
+  ]
+}

@@ -1,0 +1,61 @@
+# TESTING.md layer 5a: site fidelity tests. Required for any PR that touches site/ or the marketing prototype.
+name: site-fidelity
+
+on:
+  pull_request:
+    paths:
+      - "site/**"
+      - "design/prototype/marketing-site.html"
+      - "docs/PRD.md"
+      - "contracts/copy.json"
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - "design/prototype/marketing-site.html"
+
+jobs:
+  site-fidelity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Build the site (static export)
+        working-directory: site
+        run: |
+          npm ci
+          npm run build
+
+      - name: Install the tests
+        working-directory: site/tests
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+
+      - name: Prototype section baselines (cached per prototype version)
+        uses: actions/cache@v4
+        with:
+          path: site/tests/.cache
+          key: prototype-${{ hashFiles('design/prototype/marketing-site.html', 'site/tests/lib/dom.mjs', 'site/tests/scripts/extract-prototype.mjs') }}
+
+      - name: Run site fidelity tests
+        working-directory: site/tests
+        env:
+          CI: "true"
+        run: npm test
+
+      - name: Summarise failures as issues
+        if: failure()
+        working-directory: site/tests
+        run: npm run issues
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: site-fidelity-report
+          path: site/tests/reports
