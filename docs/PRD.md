@@ -439,7 +439,7 @@ Rule: the agent that builds a module never writes the tests that gate it. This i
 | **Nigeria tier** | NGN via Paystack, fixed for 12 months from 25 Sept 2026 | Same features as the USD tier. Nigerian accounts only (Paystack-billed Nigerian card or bank, Nigerian projects). |
 | **Student** | Free (verified) | Learn mode (critique before generation), architecture detail types, non-commercial, "Student — educational use" watermark with provenance summary. |
 | **Institution** | Custom (Stage 3) | Tutor exercises, cohort view, provenance summaries with submissions. |
-| **Estimates & BoQ add-on** | Price not yet set | Priced estimates and bill-of-quantities export (Stage 3, FR-154) for plans below Practice. |
+| **Estimates & BoQ add-on** | Not set until Stage 3 | Priced estimates and bill-of-quantities export (Stage 3, FR-154) for plans below Practice. |
 | **Render credits** | $19 / 100 | 1 credit = 1 image variant; a 10-second Preview video costs 10–20 credits. |
 | **Marketplace** | 70/30 to authors | Headline revenue line, not an afterthought. Rate profiles (Stage 3, FR-153) are sold through it on the same 70/30 split. |
 | **Manufacturer listing** | $3k–$15k/yr | Signed product profiles, specification analytics. |
