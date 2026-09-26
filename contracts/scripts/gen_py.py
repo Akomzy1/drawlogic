@@ -23,6 +23,8 @@ def generate(dest: Path) -> None:
         staged.mkdir()
         for schema in sorted(ROOT.glob("*.schema.json")):
             shutil.copy(schema, staged / schema.name)
+        # Flag/value pairs stay on one line.
+        # fmt: off
         subprocess.run(
             [
                 sys.executable, "-m", "datamodel_code_generator",
@@ -41,6 +43,7 @@ def generate(dest: Path) -> None:
             ],
             check=True,
         )
+        # fmt: on
 
 
 def main() -> int:

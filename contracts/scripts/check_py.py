@@ -10,6 +10,7 @@ import importlib
 import json
 import sys
 from pathlib import Path
+from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.dont_write_bytecode = True  # keep __pycache__ out of generated/ (and out of synced folders)
@@ -44,7 +45,7 @@ CONFIG = {
 }
 
 
-def model(module: str, name: str):
+def model(module: str, name: str) -> Any:
     return getattr(importlib.import_module(f"drawlogic_contracts.{module}"), name)
 
 

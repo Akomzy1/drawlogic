@@ -1,4 +1,7 @@
-# TESTING.md layers 1–5. Prompt 0 adds layer 1 (contract validation); Prompt 1 adds trust-rule tests, lint and type checks.
+# TESTING.md layers 1–5. The gate for every PR to main.
+# Layer 1: contract validation. Layers 2–4: the examiner-written tests (Codex writes trust/tests and engine/tests for
+# Claude Code's modules; Claude Code writes fixtures/render and site/tests for Codex's) run here as they land.
+# Layer 5: app/ checks run once app/ exists. Site fidelity (5a) runs in site-fidelity.yml.
 name: ci
 
 on:
@@ -37,7 +40,7 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version-file: .python-version
 
       - name: Install Python generators
         run: pip install -r requirements.txt
@@ -45,5 +48,87 @@ jobs:
       - name: Generated pydantic models are current
         run: python scripts/gen_py.py --check
 
-      - name: pydantic models accept every example
+      - name: pydantic models accept every example; Python condition text matches
         run: python scripts/check_py.py
+
+  prototype:
+    name: prototype files present
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: design/prototype holds every file the fidelity skill lists
+        run: node .github/scripts/prototype-files.mjs
+
+  python:
+    name: python lint, types and tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+
+      - name: Install engine dev tools (pins from engine/pyproject.toml)
+        run: |
+          pip install $(python -c "import tomllib; print(' '.join(tomllib.load(open('engine/pyproject.toml','rb'))['project']['optional-dependencies']['dev']))")
+          pip install -r contracts/requirements.txt
+
+      - name: ruff
+        run: |
+          ruff check engine contracts trust profiles
+          ruff format --check engine contracts/scripts trust
+
+      - name: mypy (strict)
+        run: |
+          mypy --strict contracts/scripts/condition_text.py contracts/scripts/gen_py.py contracts/scripts/check_py.py
+          if [ -n "$(find engine trust -name '*.py' -not -path '*/tests/*' | head -1)" ]; then
+            mypy --strict --config-file engine/pyproject.toml engine trust
+          else
+            echo "::notice::No engine or trust source yet; mypy runs on them once code lands."
+          fi
+
+      - name: examiner tests (trust/tests, engine/tests)
+        run: |
+          dirs=""
+          for d in trust/tests engine/tests; do
+            if [ -n "$(find "$d" -name 'test_*.py' -o -name '*_test.py' | head -1)" ]; then dirs="$dirs $d"; fi
+          done
+          if [ -z "$dirs" ]; then
+            echo "::notice::No examiner tests yet. Codex's trust-rule, gate and golden tests run here once they land (Prompt 2)."
+          else
+            python -m pytest $dirs
+          fi
+
+  app:
+    name: app lint, types and tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Is there an app yet?
+        id: app
+        run: |
+          if [ -f app/package.json ]; then echo "present=true" >> "$GITHUB_OUTPUT"; else echo "present=false" >> "$GITHUB_OUTPUT"; echo "::notice::No app/ yet (Prompt 8)."; fi
+
+      - uses: actions/setup-node@v4
+        if: steps.app.outputs.present == 'true'
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - name: Install, lint, typecheck, test
+        if: steps.app.outputs.present == 'true'
+        working-directory: app
+        run: |
+          npm ci
+          npm run lint
+          npx tsc --noEmit
+          npm test

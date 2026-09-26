@@ -1,0 +1,22 @@
+# TESTING.md layer 6: eval harness (fixtures/eval/). Stub until Prompt 9 builds the harness and the seed set.
+# Routing changes in contracts/models.json need an eval report from this workflow attached.
+name: nightly-eval
+
+on:
+  schedule:
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Eval harness
+        run: |
+          if [ -f fixtures/eval/manifest.json ]; then
+            echo "::error::fixtures/eval/manifest.json exists but the harness is not wired yet; wire it in Prompt 9."
+            exit 1
+          fi
+          echo "::notice::No eval harness yet (Prompt 9). Candidates will be Opus 5.5, Sonnet 5 and, once Decision 20 closes, GPT-6 Astra."
