@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://drawlogic.invalid/contracts/rule.schema.json",
+  "title": "Rule",
+  "description": "A profile rule. Version 0.1.0. PRD App. B, FR-30–33, FR-61–62, §7.12. Only a verified rule with a signer can produce ✓ (trust rule 3).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "profile", "state", "signer", "category", "document", "applies_to", "condition", "condition_text", "severity", "auto_fix", "message", "why", "modes"],
+  "properties": {
+    "id": { "description": "Profile-scoped rule id, e.g. gb-eng-C-dpc-height (PRD App. B).", "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$" },
+    "profile": { "$ref": "common.schema.json#/$defs/profile_ref" },
+    "state": { "type": "string", "enum": ["verified", "unverified"] },
+    "signer": { "oneOf": [{ "$ref": "common.schema.json#/$defs/signer" }, { "type": "null" }] },
+    "category": { "description": "Check category from the pack vocabulary (e.g. moisture, thermal, fire, structural, acoustic, access, ventilation, drainage, geometry, annotation). Categories a stack does not cover are listed as checks not performed.", "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+    "document": {
+      "description": "Null only for Generic good-practice rules (FR-34), which cite no document.",
+      "oneOf": [{ "$ref": "common.schema.json#/$defs/document_ref" }, { "type": "null" }]
+    },
+    "applies_to": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["drawing_type"],
+      "properties": {
+        "drawing_type": { "type": "string" },
+        "detail_type": { "type": "string" },
+        "object_class": { "description": "Evaluated once per object of this class; omitted means once per drawing.", "type": "string" }
+      }
+    },
+    "condition": { "$ref": "#/$defs/expr" },
+    "condition_text": { "description": "Display text generated from `condition` by contracts/scripts/condition-text.mjs (Python twin condition_text.py); never authored. CI fails if it differs from the generated text. The engine evaluates `condition`.", "type": "string" },
+    "severity": { "type": "string", "enum": ["flag", "info"] },
+    "auto_fix": {
+      "description": "Deterministic correction only (FR-33). Applied fixes record source: auto_fix.",
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["action", "field", "value"],
+          "properties": {
+            "action": { "type": "string", "enum": ["set", "min", "max"] },
+            "field": { "type": "string" },
+            "value": { "type": ["number", "string", "boolean"] }
+          }
+        },
+        { "type": "null" }
+      ]
+    },
+    "message": { "description": "Professional message for the Standards Report. Never states compliance.", "type": "string", "minLength": 1 },
+    "why": { "description": "Plain-language reason, used by Learn mode and Idea tooltips (§7.12).", "type": "string", "minLength": 1 },
+    "judgement": { "description": "A judgement clause: Learn tags it \"discuss with your tutor\" rather than grading it (FR-142).", "type": "boolean", "default": false },
+    "modes": {
+      "description": "Where the rule runs. Rules with idea in this list are Idea-mode \"things to check\" (FR-97); in Idea they never produce ✓.",
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": { "$ref": "common.schema.json#/$defs/mode" }
+    },
+    "requires_inputs": { "description": "Fields that must be present to evaluate; absent → ⚠ needs_input.", "type": "array", "items": { "type": "string" } }
+  },
+  "if": { "properties": { "state": { "const": "verified" } } },
+  "then": { "properties": { "signer": { "$ref": "common.schema.json#/$defs/signer", "required": ["name", "credential", "signed_at"] } } },
+  "else": { "properties": { "signer": { "type": "null" } } },
+  "$defs": {
+    "value_ref": {
+      "description": "An operand. `field` reads the subject object; `object` reads a named object; `measure` calls an engine geometry primitive; `param` reads a profile parameter; `value` is a literal in drawing units.",
+      "oneOf": [
+        { "type": "object", "additionalProperties": false, "required": ["value"], "properties": { "value": { "type": ["number", "string", "boolean"] }, "unit": { "type": "string" } } },
+        { "type": "object", "additionalProperties": false, "required": ["field"], "properties": { "field": { "type": "string" } } },
+        { "type": "object", "additionalProperties": false, "required": ["object_class", "field"], "properties": { "object_class": { "type": "string" }, "field": { "type": "string" }, "select": { "type": "string", "enum": ["one", "min", "max", "all"] } } },
+        { "type": "object", "additionalProperties": false, "required": ["param"], "properties": { "param": { "type": "string" } } },
+        {
+          "type": "object", "additionalProperties": false, "required": ["measure"],
+          "properties": {
+            "measure": {
+              "description": "Engine-implemented, jurisdiction-neutral primitives. Adding one is a contract change.",
+              "type": "string",
+              "enum": ["vertical_distance", "horizontal_distance", "thickness_sum", "count", "is_continuous", "is_closed", "is_connected", "overlap_length", "fall_ratio", "area", "coverage_ratio", "setback"]
+            },
+            "args": { "type": "object", "additionalProperties": { "type": ["string", "number", "boolean", "array"] } }
+          }
+        }
+      ]
+    },
+    "expr": {
+      "oneOf": [
+        { "type": "object", "additionalProperties": false, "required": ["all"], "properties": { "all": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/expr" } } } },
+        { "type": "object", "additionalProperties": false, "required": ["any"], "properties": { "any": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/expr" } } } },
+        { "type": "object", "additionalProperties": false, "required": ["not"], "properties": { "not": { "$ref": "#/$defs/expr" } } },
+        { "type": "object", "additionalProperties": false, "required": ["exists"], "properties": { "exists": { "$ref": "#/$defs/value_ref" } } },
+        {
+          "type": "object", "additionalProperties": false, "required": ["cmp"],
+          "properties": {
+            "cmp": {
+              "type": "object", "additionalProperties": false, "required": ["left", "op", "right"],
+              "properties": {
+                "left": { "$ref": "#/$defs/value_ref" },
+                "op": { "type": "string", "enum": [">=", "<=", ">", "<", "==", "!="] },
+                "right": { "$ref": "#/$defs/value_ref" }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

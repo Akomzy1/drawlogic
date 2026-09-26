@@ -1,0 +1,49 @@
+# TESTING.md layers 1–5. Prompt 0 adds layer 1 (contract validation); Prompt 1 adds trust-rule tests, lint and type checks.
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  contracts:
+    name: contract validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: contracts
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: contracts/package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Every schema compiles, every example validates, rule-breaking mutations are rejected
+        run: npm run validate
+
+      - name: Generated TypeScript is current
+        run: npm run check:generated
+
+      - name: Provider interfaces typecheck against the generated types
+        run: npm run typecheck
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python generators
+        run: pip install -r requirements.txt
+
+      - name: Generated pydantic models are current
+        run: python scripts/gen_py.py --check
+
+      - name: pydantic models accept every example
+        run: python scripts/check_py.py

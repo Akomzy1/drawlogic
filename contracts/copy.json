@@ -1,0 +1,129 @@
+{
+  "schema_version": "0.1.0",
+  "stamp": {
+    "title": "DRAWLOGIC VERIFICATION",
+    "closing_sentence": "This is an automated design-rule check. It is not a statement of legal compliance.",
+    "unsigned": "UNSIGNED — professional verification required",
+    "signed_basis": "Reviewed and modified under responsible charge by {name}, {credential}, {jurisdiction} · audit record {audit_hash}",
+    "liability_summary": "Passes automated checks against {profiles}; ⚠ items require professional verification; checks not performed: {not_performed}",
+    "unverified_line": "Unverified elements: {count}"
+  },
+  "check": {
+    "status_symbols": {
+      "pass": "✓",
+      "flag": "⚠",
+      "out_of_scope": "—"
+    },
+    "reasons": {
+      "fail": "Does not meet the rule",
+      "unverified": "Rule not yet verified by a signer",
+      "no_rule": "No rule covers this",
+      "needs_input": "Needs information to check"
+    },
+    "not_performed_heading": "Checks not performed",
+    "not_performed_none": "Checks not performed: none — every check category in the active profiles was run."
+  },
+  "watermark": {
+    "concept": "Concept — not for construction",
+    "student": "Student — educational use",
+    "free_tier": "AI-assisted — professional verification required"
+  },
+  "mark": {
+    "made_with": "Made with Drawlogic"
+  },
+  "label": {
+    "preview": "Generated preview — not a model render",
+    "preview_drift": "First frame is faithful; later frames may drift.",
+    "illustrative": "Illustrative — generated from a Drawlogic drawing",
+    "outdated": "Outdated",
+    "colour_approximate": "colour approximate",
+    "material_basis_summary": "Material basis"
+  },
+  "material_basis": {
+    "manufacturer_texture": "manufacturer texture",
+    "sample_photo": "sample photo",
+    "colour_code": "colour code {code}",
+    "description_only": "description only"
+  },
+  "idea": {
+    "assumptions_heading": "I assumed…",
+    "assumptions_intro": "You did not tell me these, so I guessed. Change anything that is wrong and I will work the options out again.",
+    "inferred_tag": "I inferred this",
+    "things_to_check_heading": "Things to check with a professional",
+    "geodata_imagery_note": "Imagery dated {date} — verify site condition.",
+    "geodata_dem_note": "Slope read off a {resolution} m elevation grid — not suitable for drainage design"
+  },
+  "learn": {
+    "general_good_practice": "general good practice — not a verified check",
+    "discuss_with_tutor": "discuss with your tutor",
+    "generate_anyway": "Generate anyway",
+    "share_locked": "Available after your work is marked."
+  },
+  "reward_disclosure": {
+    "ad": "#ad",
+    "gifted": "Gifted: Drawlogic credits"
+  },
+  "reference": {
+    "rights_confirmation": "I have the right to use this as a reference for this project"
+  },
+  "precedent": {
+    "from_precedent": "{quality} — from precedent: {project}, {designer}",
+    "public_domain": "Public domain",
+    "decline_replicate": "I can't recreate a specific protected design, but here are the qualities that make it work."
+  },
+  "estimate": {
+    "indicative": "Indicative — not a quote",
+    "not_a_quotation": "This is an estimate, not a quotation.",
+    "unverified_rates": "unverified rates",
+    "workspace_rates": "Workspace rates — not independently verified",
+    "no_cost_data": "No verified cost data for {jurisdiction} — no cost shown"
+  },
+  "banned": [
+    "compliant",
+    "code-compliant",
+    "meets code",
+    "guaranteed",
+    "stamp marketplace",
+    "get your plans stamped",
+    "stamping service"
+  ],
+  "banned_patterns": [
+    {
+      "id": "approved_compliance_claim",
+      "description": "\"approved\" is banned only as a compliance claim (trust rule 8).",
+      "pattern": "\\b(code|building[\\s-]control|council|regulator|regulation|planning)[\\s-]approved\\b|\\bapproved (by|for) (building control|the council|planning|code|regulators?)\\b",
+      "flags": "i"
+    }
+  ],
+  "banned_scoped": {
+    "outside_studio_output": {
+      "description": "Reserved for Studio (ray-traced) output, FR-123/127/130.",
+      "words": [
+        "flythrough",
+        "walkthrough",
+        "cinematic"
+      ]
+    },
+    "estimate_output": {
+      "description": "Quantities, cost ranges, priced estimates, BoQ (PRD §5B). The estimate labels above are the only permitted uses of quote/quotation.",
+      "words": [
+        "quote",
+        "quotation",
+        "guaranteed price",
+        "fixed price"
+      ],
+      "permitted_phrases": [
+        "Indicative — not a quote",
+        "This is an estimate, not a quotation."
+      ]
+    },
+    "render_and_preview_output": {
+      "description": "Stills and preview clips (FR-160–164).",
+      "words": [
+        "exact match",
+        "exact colour",
+        "true colour"
+      ]
+    }
+  }
+}

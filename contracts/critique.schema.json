@@ -1,0 +1,411 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://drawlogic.invalid/contracts/critique.schema.json",
+  "title": "Critique",
+  "description": "Learn-mode inspiration, critique and compare payload. Version 0.1.0. PRD §7.12 FR-140–147, FR-149, FR-180. Addition to the CONTRACTS.md table (structured output for the `learn_critique` task).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "exercise_id",
+    "detail_type",
+    "profile_stack",
+    "submission",
+    "cycle",
+    "inspiration",
+    "points",
+    "blocked",
+    "generation_unlocked",
+    "compare",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "$ref": "common.schema.json#/$defs/semver"
+    },
+    "id": {
+      "type": "string"
+    },
+    "exercise_id": {
+      "type": "string"
+    },
+    "detail_type": {
+      "type": "string"
+    },
+    "profile_stack": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "common.schema.json#/$defs/stack_entry"
+      }
+    },
+    "submission": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "description"
+      ],
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "sketch_asset_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "cycle": {
+      "description": "0 = first critique; each revision increments.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "inspiration": {
+      "description": "FR-141: principles and partial diagrams, never a copy-ready detail.",
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "principles",
+          "typical_detail_id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "typical_detail_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "precedent_card_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "principles": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "partial_diagram_asset_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "points": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/point"
+      }
+    },
+    "blocked": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/blocked_value"
+      }
+    },
+    "generation_unlocked": {
+      "description": "FR-140/147: false until one revision cycle has run or Generate anyway was chosen (logged).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unlocked",
+        "by"
+      ],
+      "properties": {
+        "unlocked": {
+          "type": "boolean"
+        },
+        "by": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "revision_cycle",
+            "generate_anyway",
+            null
+          ]
+        },
+        "audit_record_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "compare": {
+      "description": "FR-144, after generation: every difference annotated with what, why and which point it resolves.",
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ddl_hash",
+            "differences"
+          ],
+          "properties": {
+            "ddl_hash": {
+              "$ref": "common.schema.json#/$defs/hash"
+            },
+            "differences": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "what",
+                  "why",
+                  "resolves_point_ids",
+                  "object_ids"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "what": {
+                    "type": "string"
+                  },
+                  "why": {
+                    "type": "string"
+                  },
+                  "resolves_point_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "object_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "created_at": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "generation_unlocked": {
+            "properties": {
+              "unlocked": {
+                "const": false
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "compare": {
+            "type": "null"
+          },
+          "generation_unlocked": {
+            "properties": {
+              "by": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "generation_unlocked": {
+            "properties": {
+              "unlocked": {
+                "const": true
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "generation_unlocked": {
+            "properties": {
+              "by": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "point": {
+      "title": "CritiquePoint",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "grade",
+        "title",
+        "reason",
+        "why",
+        "source",
+        "state",
+        "worked_answer_available"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "grade": {
+          "description": "discuss = judgement clause, tagged \"discuss with your tutor\", never graded (FR-142).",
+          "type": "string",
+          "enum": [
+            "green",
+            "amber",
+            "red",
+            "discuss"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "reason": {
+          "description": "Plain-language reason.",
+          "type": "string",
+          "minLength": 1
+        },
+        "why": {
+          "type": "string",
+          "minLength": 1
+        },
+        "question": {
+          "description": "Socratic prompt pointing at the principle (FR-143).",
+          "type": "string"
+        },
+        "source": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "rule_id",
+                "document"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "rule"
+                },
+                "rule_id": {
+                  "type": "string"
+                },
+                "rule_state": {
+                  "type": "string",
+                  "enum": [
+                    "verified",
+                    "unverified"
+                  ]
+                },
+                "document": {
+                  "oneOf": [
+                    {
+                      "$ref": "common.schema.json#/$defs/document_ref"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "label_key"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "general_good_practice"
+                },
+                "label_key": {
+                  "const": "learn.general_good_practice"
+                }
+              }
+            }
+          ]
+        },
+        "asks_for": {
+          "description": "Engineering values the critique asks the student to supply; it never supplies them.",
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/blocked_value"
+          }
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "raised",
+            "attempted",
+            "addressed"
+          ]
+        },
+        "worked_answer_available": {
+          "description": "True only after the student attempted a revision on this point, or after Generate anyway (FR-143).",
+          "type": "boolean"
+        }
+      },
+      "if": {
+        "properties": {
+          "grade": {
+            "const": "discuss"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "source": {
+            "properties": {
+              "kind": {
+                "const": "general_good_practice"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

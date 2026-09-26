@@ -1,0 +1,403 @@
+{
+  "ddl_version": "0.1.0",
+  "drawing": {
+    "id": "a1c4e7f0-3b2d-4e5f-8a9b-0c1d2e3f4a51",
+    "title": "Kitchen extension — option 1, more garden",
+    "discipline": "architecture",
+    "type": "plan",
+    "mode": "idea",
+    "scale": 50,
+    "units": "mm",
+    "jurisdiction": "GB-ENG",
+    "rev": "C1",
+    "hash": "sha256:058efc6ff6537d245a888ebb92d039996b1766c4852462652bc6e8cedef17976",
+    "parent_hash": null,
+    "profile_stack": [
+      {
+        "id": "gb-eng-residential",
+        "name": "GB-ENG Residential",
+        "version": "1.3.0",
+        "layer": "jurisdiction",
+        "tier": 1,
+        "signer": {
+          "name": "J. Smith",
+          "credential": "CIAT 12345",
+          "jurisdiction": "England",
+          "verification_level": "verified"
+        }
+      },
+      {
+        "id": "generic",
+        "name": "Generic",
+        "version": "0.9.0",
+        "layer": "generic",
+        "tier": null,
+        "signer": null
+      }
+    ],
+    "created_at": "2026-09-15T09:30:20Z"
+  },
+  "project": {
+    "id": "idea-kitchen-0001",
+    "location": {
+      "country": "GB",
+      "jurisdiction": "GB-ENG"
+    },
+    "building_type": "residential",
+    "storeys": [
+      {
+        "id": "ground",
+        "name": "Ground floor",
+        "ffl": 0,
+        "height": 2400,
+        "source": "ai_inferred",
+        "confidence": 0.6,
+        "verify": true,
+        "source_detail": {
+          "model": {
+            "provider": "anthropic",
+            "model_id": "claude-sonnet-5",
+            "task": "idea"
+          }
+        }
+      }
+    ]
+  },
+  "materials": [
+    {
+      "id": "brick_facing",
+      "name": "Facing brick",
+      "category": "masonry",
+      "basis": "description_only",
+      "source": "profile",
+      "confidence": 1,
+      "verify": false,
+      "source_detail": {
+        "profile": {
+          "id": "gb-eng-residential",
+          "version": "1.3.0"
+        }
+      }
+    },
+    {
+      "id": "block_inner",
+      "name": "Concrete block",
+      "category": "masonry",
+      "basis": "description_only",
+      "source": "profile",
+      "confidence": 1,
+      "verify": false,
+      "source_detail": {
+        "profile": {
+          "id": "gb-eng-residential",
+          "version": "1.3.0"
+        }
+      }
+    },
+    {
+      "id": "roof_tile",
+      "name": "Concrete or clay roof tile",
+      "category": "tile",
+      "basis": "description_only",
+      "source": "profile",
+      "confidence": 1,
+      "verify": false,
+      "source_detail": {
+        "profile": {
+          "id": "gb-eng-residential",
+          "version": "1.3.0"
+        }
+      }
+    },
+    {
+      "id": "alu_bifold",
+      "name": "Aluminium bifold doors",
+      "category": "glazing",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "objects": [
+    {
+      "id": "rear_wall_existing",
+      "class": "masonry",
+      "label": "Existing rear wall",
+      "material_id": "brick_facing",
+      "thickness": null,
+      "height": null,
+      "level": "ground",
+      "base_offset": null,
+      "geometry": {
+        "kind": "polyline",
+        "points": [
+          [
+            0,
+            0
+          ],
+          [
+            5900,
+            0
+          ]
+        ]
+      },
+      "status": "existing",
+      "source": "ai_inferred",
+      "confidence": 0.7,
+      "verify": true,
+      "rule_refs": [],
+      "source_detail": {
+        "reference": {
+          "asset_id": "ast-kitchen-photo",
+          "origin": "own_work",
+          "rights_confirmed": true
+        },
+        "note": "Position read from the photo of the existing kitchen."
+      }
+    },
+    {
+      "id": "ext_wall_left",
+      "class": "masonry",
+      "label": "Extension side wall",
+      "material_id": "brick_facing",
+      "thickness": null,
+      "height": 2400,
+      "level": "ground",
+      "base_offset": null,
+      "geometry": {
+        "kind": "polyline",
+        "points": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            -3000
+          ]
+        ]
+      },
+      "status": "proposed",
+      "source": "profile",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": [],
+      "source_detail": {
+        "profile": {
+          "id": "gb-eng-residential",
+          "version": "1.3.0"
+        },
+        "note": "Build-up gb_cavity_brick_block from construction defaults."
+      }
+    },
+    {
+      "id": "ext_wall_right",
+      "class": "masonry",
+      "label": "Extension side wall",
+      "material_id": "brick_facing",
+      "thickness": null,
+      "height": 2400,
+      "level": "ground",
+      "base_offset": null,
+      "geometry": {
+        "kind": "polyline",
+        "points": [
+          [
+            3200,
+            0
+          ],
+          [
+            3200,
+            -3000
+          ]
+        ]
+      },
+      "status": "proposed",
+      "source": "profile",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": [],
+      "source_detail": {
+        "profile": {
+          "id": "gb-eng-residential",
+          "version": "1.3.0"
+        }
+      }
+    },
+    {
+      "id": "bifold",
+      "class": "door",
+      "label": "Bifold doors",
+      "material_id": "alu_bifold",
+      "thickness": null,
+      "height": null,
+      "level": "ground",
+      "base_offset": null,
+      "geometry": {
+        "kind": "polyline",
+        "points": [
+          [
+            0,
+            -3000
+          ],
+          [
+            3200,
+            -3000
+          ]
+        ]
+      },
+      "status": "proposed",
+      "source": "user",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": []
+    },
+    {
+      "id": "ext_roof",
+      "class": "roof",
+      "label": "Extension roof",
+      "material_id": "roof_tile",
+      "thickness": null,
+      "height": null,
+      "level": "ground",
+      "base_offset": null,
+      "geometry": {
+        "kind": "rect",
+        "origin": [
+          0,
+          -3000
+        ],
+        "width": 3200,
+        "height": 3000
+      },
+      "status": "proposed",
+      "source": "profile",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": [],
+      "source_detail": {
+        "profile": {
+          "id": "gb-eng-residential",
+          "version": "1.3.0"
+        }
+      }
+    },
+    {
+      "id": "room_kitchen",
+      "class": "room",
+      "label": "Kitchen",
+      "material_id": null,
+      "thickness": null,
+      "height": 2400,
+      "level": "ground",
+      "base_offset": null,
+      "geometry": {
+        "kind": "rect",
+        "origin": [
+          0,
+          -3000
+        ],
+        "width": 4000,
+        "height": 5900
+      },
+      "properties": {
+        "area_m2": 23.6
+      },
+      "status": "proposed",
+      "source": "ai_inferred",
+      "confidence": 0.7,
+      "verify": true,
+      "rule_refs": [],
+      "source_detail": {
+        "model": {
+          "provider": "anthropic",
+          "model_id": "claude-sonnet-5",
+          "task": "idea"
+        }
+      }
+    }
+  ],
+  "connections": [],
+  "constraints": [],
+  "dimensions": [
+    {
+      "id": "ext_depth",
+      "kind": "linear",
+      "refs": [
+        "ext_wall_left"
+      ],
+      "value": 3000,
+      "driving": true,
+      "source": "user",
+      "confidence": 1
+    },
+    {
+      "id": "ext_width",
+      "kind": "linear",
+      "refs": [
+        "bifold"
+      ],
+      "value": 3200,
+      "driving": true,
+      "source": "ai_inferred",
+      "confidence": 0.6,
+      "verify": true,
+      "source_detail": {
+        "model": {
+          "provider": "anthropic",
+          "model_id": "claude-sonnet-5",
+          "task": "idea"
+        }
+      }
+    },
+    {
+      "id": "ceiling_height",
+      "kind": "level",
+      "refs": [
+        "room_kitchen"
+      ],
+      "value": 2400,
+      "driving": true,
+      "source": "ai_inferred",
+      "confidence": 0.6,
+      "verify": true,
+      "source_detail": {
+        "model": {
+          "provider": "anthropic",
+          "model_id": "claude-sonnet-5",
+          "task": "idea"
+        }
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "id": "an_kitchen",
+      "kind": "label",
+      "text": "Kitchen 23.6 m²",
+      "targets": [
+        "room_kitchen"
+      ],
+      "source": "ai_inferred",
+      "confidence": 0.7,
+      "verify": true,
+      "source_detail": {
+        "model": {
+          "provider": "anthropic",
+          "model_id": "claude-sonnet-5",
+          "task": "idea"
+        }
+      }
+    }
+  ],
+  "layers": [],
+  "schedules": [],
+  "solver": {
+    "status": "resolved",
+    "conflicts": [],
+    "resolved_at": "2026-09-15T09:30:22Z"
+  },
+  "checks": null,
+  "stamp": null
+}

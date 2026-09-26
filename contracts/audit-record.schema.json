@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://drawlogic.invalid/contracts/audit-record.schema.json",
+  "title": "AuditRecord",
+  "description": "One hash-chained audit entry. Version 0.1.0. PRD FR-44–45, FR-114, trust rules 5 and 9. `hash` is sha256 of the JCS canonical record without `hash`; `prev_hash` is the previous record's `hash` in the same chain (null for the first).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "chain_id", "seq", "drawing_id", "actor", "action", "before_hash", "after_hash", "prev_hash", "hash", "ts"],
+  "properties": {
+    "schema_version": { "$ref": "common.schema.json#/$defs/semver" },
+    "id": { "$ref": "common.schema.json#/$defs/uuid" },
+    "chain_id": { "description": "One chain per drawing.", "type": "string" },
+    "seq": { "type": "integer", "minimum": 0 },
+    "drawing_id": { "$ref": "common.schema.json#/$defs/uuid" },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id"],
+      "properties": {
+        "kind": { "type": "string", "enum": ["user", "model", "auto_fix", "system"] },
+        "id": { "description": "User id, rule id (auto_fix) or service name.", "type": "string" },
+        "model_id": { "type": "string" },
+        "model_version": { "type": "string" },
+        "credential": { "description": "Signer credential on signing events (FR-114).", "type": "string" }
+      },
+      "allOf": [
+        { "if": { "properties": { "kind": { "const": "model" } } }, "then": { "required": ["model_id"] } }
+      ]
+    },
+    "action": {
+      "type": "string",
+      "enum": ["ddl.create", "ddl.edit", "ddl.auto_fix", "ddl.promote", "card.confirm", "check.run", "flag.clear", "flag.accept", "verify.resolve", "drawing.open", "report.review", "sign.second_factor", "sign", "export", "learn.generate_anyway", "render.job", "refusal"]
+    },
+    "before_hash": { "oneOf": [{ "$ref": "common.schema.json#/$defs/hash" }, { "type": "null" }] },
+    "after_hash": { "oneOf": [{ "$ref": "common.schema.json#/$defs/hash" }, { "type": "null" }] },
+    "payload": { "description": "Action detail, e.g. the DDL diff id, the flag note, review time. Never drawing content beyond ids and hashes.", "type": "object" },
+    "prev_hash": { "oneOf": [{ "$ref": "common.schema.json#/$defs/hash" }, { "type": "null" }] },
+    "hash": { "$ref": "common.schema.json#/$defs/hash" },
+    "ts": { "$ref": "common.schema.json#/$defs/timestamp" }
+  },
+  "if": { "properties": { "seq": { "const": 0 } } },
+  "then": { "properties": { "prev_hash": { "type": "null" } } },
+  "else": { "properties": { "prev_hash": { "$ref": "common.schema.json#/$defs/hash" } } }
+}

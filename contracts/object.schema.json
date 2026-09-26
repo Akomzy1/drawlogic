@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://drawlogic.invalid/contracts/object.schema.json",
+  "title": "DrawingObject",
+  "description": "A DDL object. Version 0.1.0. PRD §7.5 FR-40, §5A.3 hooks 1 and 3, FR-160–163. The object-class vocabulary is pack data (profiles), not part of the contract.",
+  "type": "object",
+  "allOf": [{ "$ref": "common.schema.json#/$defs/provenance" }],
+  "required": ["id", "class", "source", "confidence", "verify", "rule_refs"],
+  "properties": {
+    "id": { "$ref": "common.schema.json#/$defs/id", "description": "Stable across revisions; never reused for a different element." },
+    "class": { "description": "Object class from the pack vocabulary, e.g. masonry, insulation, cavity, membrane, coping, dpc, upstand, deck, room, plot_boundary.", "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+    "label": { "type": "string" },
+    "material_id": { "description": "Key into the DDL `materials` list. Never free text (5A.3 hook 1).", "oneOf": [{ "$ref": "common.schema.json#/$defs/id" }, { "type": "null" }] },
+    "thickness": { "oneOf": [{ "$ref": "common.schema.json#/$defs/length" }, { "type": "null" }] },
+    "height": { "description": "3D slot, nullable from v0.1 (5A.3 hook 1).", "oneOf": [{ "$ref": "common.schema.json#/$defs/length" }, { "type": "null" }] },
+    "level": { "description": "Storey id or datum-relative level; storeys and datum are project data (5A.3 hook 2).", "oneOf": [{ "type": "string" }, { "type": "number" }, { "type": "null" }] },
+    "base_offset": { "oneOf": [{ "$ref": "common.schema.json#/$defs/length" }, { "type": "null" }] },
+    "geometry": { "oneOf": [{ "$ref": "#/$defs/geometry" }, { "type": "null" }] },
+    "properties": {
+      "description": "Further typed values for the class (e.g. fall_ratio, upstand_height, span). Keys come from the pack vocabulary.",
+      "type": "object",
+      "additionalProperties": { "type": ["number", "string", "boolean", "null"] }
+    },
+    "field_provenance": {
+      "description": "Per-field provenance where a field's source differs from the object's (e.g. the user named the material but the thickness was inferred).",
+      "type": "object",
+      "additionalProperties": { "$ref": "common.schema.json#/$defs/provenance", "unevaluatedProperties": false }
+    },
+    "verify": { "type": "boolean" },
+    "rule_refs": { "description": "Rule ids that apply to this object.", "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "layer_id": { "type": "string" },
+    "status": { "description": "Existing vs proposed; used by narration (FR-132) and plans.", "type": "string", "enum": ["existing", "proposed", "demolish"] }
+  },
+  "unevaluatedProperties": false,
+  "$defs": {
+    "geometry": {
+      "description": "Coordinates are in the drawing's units, in the drawing's local frame (site plans: the CRS in `site`).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind"],
+      "properties": {
+        "kind": { "type": "string", "enum": ["point", "polyline", "polygon", "rect", "layer_band", "arc"] },
+        "points": { "type": "array", "items": { "$ref": "common.schema.json#/$defs/point" } },
+        "closed": { "type": "boolean" },
+        "origin": { "$ref": "common.schema.json#/$defs/point" },
+        "width": { "type": "number" },
+        "height": { "type": "number" },
+        "rotation_deg": { "type": "number" },
+        "along": { "description": "layer_band: the path a build-up layer follows, as object ids or a polyline.", "type": "array", "items": { "type": "string" } },
+        "center": { "$ref": "common.schema.json#/$defs/point" },
+        "radius": { "type": "number" },
+        "start_deg": { "type": "number" },
+        "end_deg": { "type": "number" }
+      }
+    },
+    "material": {
+      "description": "A material referenced by `material_id`. Construction defaults supply most materials (FR-06–09); a user statement overrides and becomes source: user.",
+      "type": "object",
+      "allOf": [{ "$ref": "common.schema.json#/$defs/provenance" }],
+      "required": ["id", "name", "category", "source", "confidence", "basis"],
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/id" },
+        "name": { "description": "Plain name as it appears in annotations and schedules.", "type": "string", "minLength": 1 },
+        "category": { "description": "Pack vocabulary, e.g. masonry, insulation, membrane, metal, stone, render, glazing, roofing_sheet, tile.", "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+        "spec": { "description": "Specification text as supplied, e.g. \"PIR board, foil faced\".", "type": "string" },
+        "colour_ref": { "oneOf": [{ "$ref": "common.schema.json#/$defs/colour_ref" }, { "type": "null" }] },
+        "sample_asset_id": { "description": "User-uploaded sample photo (FR-160), used only within this material's region mask (FR-161).", "type": ["string", "null"] },
+        "manufacturer_product": {
+          "description": "Only from a signed product profile (FR-162).",
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["profile", "product_id", "signed"],
+              "properties": {
+                "profile": { "$ref": "common.schema.json#/$defs/profile_ref" },
+                "product_id": { "type": "string" },
+                "texture_asset_id": { "type": ["string", "null"] },
+                "signed": { "const": true }
+              }
+            },
+            { "type": "null" }
+          ]
+        },
+        "basis": { "$ref": "common.schema.json#/$defs/material_basis" },
+        "pbr_asset_id": { "description": "Stage 3 Studio renders (FR-123). Null until then.", "type": ["string", "null"] },
+        "verify": { "type": "boolean" }
+      },
+      "unevaluatedProperties": false,
+      "$comment": "basis must agree with what is present (trust rule 11a): manufacturer_texture needs a signed manufacturer_product with a texture; sample_photo needs sample_asset_id; colour_code needs colour_ref.",
+      "dependentSchemas": {
+        "basis": {
+          "allOf": [
+            {
+              "if": { "properties": { "basis": { "const": "manufacturer_texture" } } },
+              "then": { "required": ["manufacturer_product"], "properties": { "manufacturer_product": { "type": "object", "required": ["texture_asset_id"], "properties": { "texture_asset_id": { "type": "string" } } } } }
+            },
+            {
+              "if": { "properties": { "basis": { "const": "sample_photo" } } },
+              "then": { "required": ["sample_asset_id"], "properties": { "sample_asset_id": { "type": "string" } } }
+            },
+            {
+              "if": { "properties": { "basis": { "const": "colour_code" } } },
+              "then": { "required": ["colour_ref"], "properties": { "colour_ref": { "type": "object" } } }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

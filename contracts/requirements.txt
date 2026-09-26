@@ -1,0 +1,5 @@
+# Pinned tools for contracts/scripts/gen_py.py and check_py.py. Regenerated models must be byte-identical in CI.
+datamodel-code-generator==0.83.0
+black==26.5.1
+isort==8.0.1
+pydantic==2.13.5

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://drawlogic.invalid/contracts/narration-script.schema.json",
+  "title": "NarrationScript",
+  "description": "Narration script generated only from resolved DDL facts. Version 0.1.0. PRD FR-132–135, trust rule 13a. No segment without an element and a source; ai_inferred or verify facts are hedged or omitted.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "drawing_id", "drawing_hash", "language", "units", "segments", "generated_at"],
+  "properties": {
+    "schema_version": { "$ref": "common.schema.json#/$defs/semver" },
+    "id": { "type": "string" },
+    "drawing_id": { "$ref": "common.schema.json#/$defs/uuid" },
+    "drawing_hash": { "$ref": "common.schema.json#/$defs/hash" },
+    "language": { "description": "BCP 47, from the project profile.", "type": "string" },
+    "units": { "type": "string", "enum": ["metric", "imperial"] },
+    "illustrative": { "description": "Proposed (unbuilt) property: the Illustrative caption runs throughout (FR-134).", "type": "boolean" },
+    "segments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "element_id", "text", "source", "hedge"],
+        "properties": {
+          "id": { "type": "string" },
+          "element_id": { "description": "DDL object, room or storey id the fact comes from.", "type": "string", "minLength": 1 },
+          "field": { "type": "string" },
+          "text": { "type": "string", "minLength": 1 },
+          "source": { "$ref": "common.schema.json#/$defs/source" },
+          "verify": { "type": "boolean" },
+          "hedge": { "type": "boolean" },
+          "camera_cue": { "description": "Camera path marker this segment syncs to (FR-134).", "type": "string" }
+        },
+        "allOf": [
+          {
+            "if": { "anyOf": [{ "properties": { "source": { "const": "ai_inferred" } }, "required": ["source"] }, { "properties": { "verify": { "const": true } }, "required": ["verify"] }] },
+            "then": { "properties": { "hedge": { "const": true } } }
+          }
+        ]
+      }
+    },
+    "omitted": {
+      "description": "Facts left out rather than hedged, with the reason.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["element_id", "reason"],
+        "properties": { "element_id": { "type": "string" }, "reason": { "type": "string" } }
+      }
+    },
+    "generated_at": { "$ref": "common.schema.json#/$defs/timestamp" }
+  }
+}

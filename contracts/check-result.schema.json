@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://drawlogic.invalid/contracts/check-result.schema.json",
+  "title": "CheckResult",
+  "description": "One run of the rule engine over a resolved DDL. Version 0.1.0. PRD §7.4 FR-30–35, FR-97, trust rule 3. Fail-closed is enforced here: a pass needs a verified rule with a signer; Idea runs never pass.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "drawing_id", "drawing_hash", "mode", "profile_versions", "results", "checks_not_performed", "blocked", "summary", "generated_at"],
+  "properties": {
+    "schema_version": { "$ref": "common.schema.json#/$defs/semver" },
+    "run_id": { "$ref": "common.schema.json#/$defs/uuid" },
+    "drawing_id": { "$ref": "common.schema.json#/$defs/uuid" },
+    "drawing_hash": { "$ref": "common.schema.json#/$defs/hash" },
+    "mode": { "$ref": "common.schema.json#/$defs/mode" },
+    "profile_versions": {
+      "description": "Profile id → pinned version used for this run.",
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "common.schema.json#/$defs/semver" }
+    },
+    "results": { "type": "array", "items": { "$ref": "#/$defs/result" } },
+    "checks_not_performed": {
+      "description": "Always present (FR-32). Empty only when every category is covered; the UI then shows copy.json → check.not_performed_none.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["category", "label"],
+        "properties": {
+          "category": { "type": "string" },
+          "label": { "type": "string" }
+        }
+      }
+    },
+    "blocked": { "type": "array", "items": { "$ref": "common.schema.json#/$defs/blocked_value" } },
+    "summary": {
+      "description": "Derived from results; CI checks it matches.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["performed", "passed", "flagged", "out_of_scope"],
+      "properties": {
+        "performed": { "description": "passed + flagged.", "type": "integer", "minimum": 0 },
+        "passed": { "type": "integer", "minimum": 0 },
+        "flagged": { "type": "integer", "minimum": 0 },
+        "out_of_scope": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "generated_at": { "$ref": "common.schema.json#/$defs/timestamp" }
+  },
+  "if": { "properties": { "mode": { "const": "idea" } } },
+  "then": {
+    "properties": {
+      "results": { "items": { "properties": { "status": { "not": { "const": "pass" } } } } },
+      "summary": { "properties": { "passed": { "const": 0 } } }
+    }
+  },
+  "$defs": {
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "rule_id", "category", "status", "reason", "object_ids", "message", "document", "rule_state", "signer", "auto_fix"],
+      "properties": {
+        "id": { "type": "string" },
+        "rule_id": { "description": "Null for a no_rule flag.", "type": ["string", "null"] },
+        "profile": { "$ref": "common.schema.json#/$defs/profile_ref" },
+        "category": { "type": "string" },
+        "status": { "$ref": "common.schema.json#/$defs/check_status" },
+        "reason": { "oneOf": [{ "$ref": "common.schema.json#/$defs/reason_code" }, { "type": "null" }] },
+        "object_ids": { "type": "array", "items": { "type": "string" } },
+        "message": { "type": "string" },
+        "document": { "oneOf": [{ "$ref": "common.schema.json#/$defs/document_ref" }, { "type": "null" }] },
+        "rule_state": { "type": ["string", "null"], "enum": ["verified", "unverified", null] },
+        "signer": { "oneOf": [{ "$ref": "common.schema.json#/$defs/signer" }, { "type": "null" }] },
+        "auto_fix": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["available"],
+          "properties": {
+            "available": { "type": "boolean" },
+            "fix_id": { "type": "string" }
+          }
+        },
+        "resolution": {
+          "description": "Set in review: a flag cleared or accepted with a note (FR-113).",
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["state", "by", "at"],
+              "properties": {
+                "state": { "type": "string", "enum": ["cleared", "accepted"] },
+                "note": { "type": "string" },
+                "by": { "type": "string" },
+                "at": { "$ref": "common.schema.json#/$defs/timestamp" }
+              },
+              "if": { "properties": { "state": { "const": "accepted" } } },
+              "then": { "required": ["note"], "properties": { "note": { "minLength": 1 } } }
+            },
+            { "type": "null" }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "status": { "const": "pass" } } },
+          "then": {
+            "properties": {
+              "reason": { "type": "null" },
+              "rule_id": { "type": "string" },
+              "rule_state": { "const": "verified" },
+              "signer": { "$ref": "common.schema.json#/$defs/signer" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "status": { "const": "flag" } } },
+          "then": { "properties": { "reason": { "$ref": "common.schema.json#/$defs/reason_code" } } }
+        },
+        {
+          "if": { "properties": { "reason": { "const": "no_rule" } } },
+          "then": { "properties": { "rule_id": { "type": "null" }, "rule_state": { "type": "null" } } }
+        },
+        {
+          "if": { "properties": { "reason": { "const": "unverified" } } },
+          "then": { "properties": { "rule_state": { "const": "unverified" } } }
+        }
+      ]
+    }
+  }
+}

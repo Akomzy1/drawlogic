@@ -1,0 +1,260 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://drawlogic.invalid/contracts/common.schema.json",
+  "title": "Common",
+  "description": "Shared definitions used by every Drawlogic contract. Version 0.1.0. PRD v0.2.13 §7.5, App. A.",
+  "$defs": {
+    "semver": {
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(-[0-9A-Za-z.-]+)?$"
+    },
+    "id": {
+      "description": "Stable identifier. Lower-case letters, digits, underscore, hyphen, dot.",
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_.-]{0,127}$"
+    },
+    "uuid": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "hash": {
+      "description": "sha256 of the RFC 8785 (JCS) canonical JSON of the hashed document, hex, prefixed. See contracts/README.md for what each hash covers.",
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "timestamp": {
+      "description": "UTC, RFC 3339, Z suffix.",
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?Z$"
+    },
+    "date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "copy_key": {
+      "description": "Dotted path into contracts/copy.json. Code never hard-codes stamp, label or watermark text.",
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*(\\.[a-z0-9_]+)+$"
+    },
+    "source": {
+      "description": "Provenance enum, PRD FR-40. Every model element carries one.",
+      "type": "string",
+      "enum": ["user", "project", "reference", "profile", "manufacturer", "ai_inferred", "auto_fix"]
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["draft", "idea", "learn"]
+    },
+    "discipline": {
+      "description": "Stage 1 ships architecture only (Decision 1, OPEN). The list is the discipline packs named in PRD §5.",
+      "type": "string",
+      "enum": ["architecture", "interior", "electrical", "urban_site", "civil"]
+    },
+    "profile_ref": {
+      "description": "A pinned profile version, e.g. {id: gb-eng-residential, version: 1.3.0}.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "version": { "$ref": "#/$defs/semver" }
+      }
+    },
+    "profile_layer": {
+      "description": "Stack resolution order, FR-03: jurisdiction → regional amendment → client → office → manufacturer. Generic sits under the jurisdiction.",
+      "type": "string",
+      "enum": ["generic", "jurisdiction", "regional", "client", "office", "manufacturer"]
+    },
+    "tier": {
+      "description": "Profile tier. 1 = signed by a named professional; 2 = drafted, partially signed. Null for Generic and for private office/client profiles, which carry no tier.",
+      "type": ["integer", "null"],
+      "enum": [1, 2, null]
+    },
+    "signer": {
+      "description": "A named professional with a declared credential (FR-62).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "credential"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "credential": { "description": "Body and number, e.g. \"CIAT 12345\", \"ARB 012345F\", \"COREN R.12345\".", "type": "string", "minLength": 1 },
+        "jurisdiction": { "type": "string" },
+        "verification_level": { "type": "string", "enum": ["verified", "verified_insured", "pending"] },
+        "signed_at": { "$ref": "#/$defs/timestamp" }
+      }
+    },
+    "stack_entry": {
+      "description": "One profile in a drawing's active stack, as shown on the coverage statement and the stamp.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "layer", "tier", "signer"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string" },
+        "version": { "$ref": "#/$defs/semver" },
+        "layer": { "$ref": "#/$defs/profile_layer" },
+        "tier": { "$ref": "#/$defs/tier" },
+        "signer": { "oneOf": [{ "$ref": "#/$defs/signer" }, { "type": "null" }] }
+      }
+    },
+    "document_ref": {
+      "description": "A reference to a published standard. Profiles cite documents; they never republish them (PRD §3 non-goals).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ref"],
+      "properties": {
+        "ref": { "type": "string", "minLength": 1 },
+        "edition": { "type": "string" },
+        "clause": { "type": "string" }
+      }
+    },
+    "source_detail": {
+      "description": "Where a value came from, beyond the enum. Which member is present depends on `source`.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": { "$ref": "#/$defs/profile_ref", "description": "source: profile — the profile and version the default came from (FR-07)." },
+        "manufacturer_profile": { "$ref": "#/$defs/profile_ref", "description": "source: manufacturer — the signed product profile (FR-66, FR-162)." },
+        "reference": {
+          "description": "source: reference — an upload, a DXF, geodata, or a precedent.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "asset_id": { "type": "string" },
+            "origin": { "description": "Stated origin of an upload (FR-177), e.g. \"my own work\", \"supplied by my client\", \"published elsewhere\".", "type": "string" },
+            "rights_confirmed": { "description": "FR-177: user confirmed the right to use it for this purpose. An upload of someone else's work cannot be used until true.", "type": "boolean" },
+            "page": { "type": "integer", "minimum": 1 },
+            "precedent_card_id": { "type": "string" },
+            "attribution": { "description": "FR-176: \"[project], [designer]\" for anything pinned from a precedent.", "type": "string" },
+            "geodata": { "$ref": "#/$defs/geodata_provenance" }
+          }
+        },
+        "model": {
+          "description": "source: ai_inferred — the model that inferred it.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["provider", "model_id"],
+          "properties": {
+            "provider": { "type": "string" },
+            "model_id": { "type": "string" },
+            "task": { "type": "string" }
+          }
+        },
+        "auto_fix": {
+          "description": "source: auto_fix — the rule whose deterministic fix set the value (FR-33).",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["rule_id"],
+          "properties": {
+            "rule_id": { "type": "string" },
+            "check_run_id": { "type": "string" }
+          }
+        },
+        "note": { "type": "string" }
+      }
+    },
+    "geodata_provenance": {
+      "description": "FR-105. Imagery date and resolution, boundary source, elevation model and each layer's source.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "provider"],
+      "properties": {
+        "kind": { "type": "string", "enum": ["basemap", "terrain", "context_layer", "boundary", "survey"] },
+        "provider": { "type": "string" },
+        "dataset": { "type": "string" },
+        "imagery_date": { "$ref": "#/$defs/date" },
+        "resolution_m": { "type": "number", "exclusiveMinimum": 0 },
+        "licence": { "type": "string" },
+        "attribution": { "type": "string" },
+        "retrieved_at": { "$ref": "#/$defs/timestamp" }
+      }
+    },
+    "provenance": {
+      "description": "Mixed into every model element. PRD §6 principle 4: an element with no source cannot exist.",
+      "type": "object",
+      "required": ["source", "confidence"],
+      "properties": {
+        "source": { "$ref": "#/$defs/source" },
+        "confidence": { "$ref": "#/$defs/confidence" },
+        "verify": { "description": "true on any ai_inferred element below the profile's verify threshold (default 0.8, FR-40).", "type": "boolean" },
+        "source_detail": { "$ref": "#/$defs/source_detail" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "source": { "const": "auto_fix" } }, "required": ["source"] },
+          "then": { "required": ["source_detail"], "properties": { "source_detail": { "required": ["auto_fix"] } } }
+        },
+        {
+          "if": { "properties": { "source": { "const": "profile" } }, "required": ["source"] },
+          "then": { "required": ["source_detail"], "properties": { "source_detail": { "required": ["profile"] } } }
+        }
+      ]
+    },
+    "length": {
+      "description": "A length in the drawing's units.",
+      "type": "number"
+    },
+    "point": {
+      "type": "array",
+      "items": { "type": "number" },
+      "minItems": 2,
+      "maxItems": 3
+    },
+    "check_status": {
+      "description": "✓ pass (verified, signed rule only) · ⚠ flag · — out of scope. Display symbols in copy.json → check.status_symbols.",
+      "type": "string",
+      "enum": ["pass", "flag", "out_of_scope"]
+    },
+    "reason_code": {
+      "type": "string",
+      "enum": ["fail", "unverified", "no_rule", "needs_input"]
+    },
+    "blocked_value": {
+      "description": "An engineering value that is absent and will not be invented (FR-14, principle 6). Generation that would imply it is blocked.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["key", "kind", "request"],
+      "properties": {
+        "key": { "type": "string" },
+        "object_id": { "type": "string" },
+        "kind": { "type": "string", "enum": ["load", "rating", "member_size", "cable_size", "fire_period", "u_value_target", "structural_connection", "other_engineering"] },
+        "label": { "type": "string" },
+        "request": { "description": "The specific request shown to the user.", "type": "string", "minLength": 1 },
+        "why": { "type": "string" }
+      }
+    },
+    "colour_ref": {
+      "description": "FR-160. Stored exactly as supplied; `value` is the colour converted from the code by a colour library, used for render conditioning and the ΔE2000 check.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["system", "code"],
+      "properties": {
+        "system": { "type": "string", "enum": ["RAL", "NCS", "Pantone", "BS 4800", "manufacturer"] },
+        "code": { "type": "string", "minLength": 1 },
+        "manufacturer": { "description": "Required when system is manufacturer.", "type": "string" },
+        "value": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "required": ["srgb_hex"],
+          "properties": {
+            "srgb_hex": { "type": "string", "pattern": "^#[0-9A-F]{6}$" },
+            "lab": { "type": "array", "items": { "type": "number" }, "minItems": 3, "maxItems": 3 },
+            "library": { "description": "Colour library and version used for the conversion.", "type": "string" }
+          }
+        }
+      },
+      "if": { "properties": { "system": { "const": "manufacturer" } } },
+      "then": { "required": ["manufacturer"] }
+    },
+    "material_basis": {
+      "description": "FR-163. What a rendered material is based on. Labels in copy.json → material_basis.",
+      "type": "string",
+      "enum": ["manufacturer_texture", "sample_photo", "colour_code", "description_only"]
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://drawlogic.invalid/contracts/copy.schema.json",
+  "title": "Copy",
+  "description": "Shape of contracts/copy.json — the only source of stamp, label and watermark text (CONTRACTS.md). `banned` stays a flat list of strings banned everywhere; scoped lists sit beside it.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "stamp", "check", "watermark", "mark", "label", "material_basis", "idea", "learn", "reward_disclosure", "reference", "precedent", "estimate", "banned", "banned_patterns", "banned_scoped"],
+  "properties": {
+    "schema_version": { "$ref": "common.schema.json#/$defs/semver" },
+    "stamp": { "$ref": "#/$defs/strings", "required": ["title", "closing_sentence", "unsigned", "signed_basis", "liability_summary"] },
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status_symbols", "reasons", "not_performed_heading", "not_performed_none"],
+      "properties": {
+        "status_symbols": { "type": "object", "additionalProperties": false, "required": ["pass", "flag", "out_of_scope"], "properties": { "pass": { "type": "string" }, "flag": { "type": "string" }, "out_of_scope": { "type": "string" } } },
+        "reasons": { "type": "object", "additionalProperties": false, "required": ["fail", "unverified", "no_rule", "needs_input"], "properties": { "fail": { "type": "string" }, "unverified": { "type": "string" }, "no_rule": { "type": "string" }, "needs_input": { "type": "string" } } },
+        "not_performed_heading": { "type": "string" },
+        "not_performed_none": { "type": "string" }
+      }
+    },
+    "watermark": { "$ref": "#/$defs/strings", "required": ["concept", "student", "free_tier"] },
+    "mark": { "$ref": "#/$defs/strings", "required": ["made_with"] },
+    "label": { "$ref": "#/$defs/strings", "required": ["preview", "illustrative", "outdated", "colour_approximate"] },
+    "material_basis": { "$ref": "#/$defs/strings", "required": ["manufacturer_texture", "sample_photo", "colour_code", "description_only"] },
+    "idea": { "$ref": "#/$defs/strings", "required": ["things_to_check_heading"] },
+    "learn": { "$ref": "#/$defs/strings", "required": ["general_good_practice", "discuss_with_tutor", "generate_anyway", "share_locked"] },
+    "reward_disclosure": { "$ref": "#/$defs/strings", "required": ["ad", "gifted"] },
+    "reference": { "$ref": "#/$defs/strings", "required": ["rights_confirmation"] },
+    "precedent": { "$ref": "#/$defs/strings", "required": ["from_precedent", "public_domain", "decline_replicate"] },
+    "estimate": { "$ref": "#/$defs/strings", "required": ["indicative", "not_a_quotation", "unverified_rates", "workspace_rates", "no_cost_data"] },
+    "banned": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+    "banned_patterns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "pattern", "flags"],
+        "properties": { "id": { "type": "string" }, "description": { "type": "string" }, "pattern": { "type": "string" }, "flags": { "type": "string", "pattern": "^[gimsuy]*$" } }
+      }
+    },
+    "banned_scoped": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["outside_studio_output", "estimate_output", "render_and_preview_output"],
+      "properties": {
+        "outside_studio_output": { "$ref": "#/$defs/scope" },
+        "estimate_output": { "$ref": "#/$defs/scope" },
+        "render_and_preview_output": { "$ref": "#/$defs/scope" }
+      }
+    }
+  },
+  "$defs": {
+    "strings": { "type": "object", "additionalProperties": { "type": "string", "minLength": 1 } },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["words"],
+      "properties": {
+        "description": { "type": "string" },
+        "words": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "permitted_phrases": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

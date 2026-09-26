@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://drawlogic.invalid/contracts/interpretation.schema.json",
+  "title": "Interpretation",
+  "description": "Interpretation card payload. Version 0.1.0. PRD §7.2 FR-10–14, FR-90–92, FR-98, FR-176–177, trust rules 4 and 6. No confirmed card → no Draft drawing.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "card_id", "mode", "status", "discipline", "drawing_type", "units", "jurisdiction", "profile_stack", "inputs", "recognised", "missing", "blocked", "assumptions", "created_at"],
+  "properties": {
+    "schema_version": { "$ref": "common.schema.json#/$defs/semver" },
+    "card_id": { "type": "string", "minLength": 1 },
+    "mode": { "$ref": "common.schema.json#/$defs/mode" },
+    "status": { "type": "string", "enum": ["draft", "confirmed"] },
+    "confirmed_by": { "type": "string" },
+    "confirmed_at": { "$ref": "common.schema.json#/$defs/timestamp" },
+    "discipline": { "$ref": "common.schema.json#/$defs/discipline" },
+    "drawing_type": { "type": "string" },
+    "detail_type": { "type": "string" },
+    "scale": { "type": ["integer", "null"], "minimum": 1 },
+    "units": { "type": "string", "enum": ["mm", "m", "in", "ft"] },
+    "jurisdiction": { "type": "string" },
+    "jurisdiction_inferred": { "description": "Idea mode: location, units and profile are inferred and shown (FR-90).", "type": "boolean" },
+    "profile_stack": { "type": "array", "minItems": 1, "items": { "$ref": "common.schema.json#/$defs/stack_entry" } },
+    "inputs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind"],
+        "properties": {
+          "kind": { "type": "string", "enum": ["text", "sketch", "pdf", "dxf", "image", "photo", "voice", "location"] },
+          "text": { "type": "string" },
+          "asset_id": { "type": "string" },
+          "origin": { "type": "string", "enum": ["own_work", "client_supplied", "published_elsewhere", "other"] },
+          "rights_confirmed": { "description": "FR-177. Required true before an upload is used.", "type": "boolean" }
+        },
+        "if": { "properties": { "kind": { "enum": ["sketch", "pdf", "dxf", "image", "photo"] } } },
+        "then": { "required": ["asset_id", "origin", "rights_confirmed"] }
+      }
+    },
+    "recognised": { "type": "array", "items": { "$ref": "#/$defs/recognised_item" } },
+    "missing": {
+      "description": "Required constraints not supplied (FR-12). In Draft each is a question; generation waits.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["key", "label", "question"],
+        "properties": {
+          "key": { "type": "string" },
+          "label": { "type": "string" },
+          "question": { "type": "string" },
+          "suggested": { "description": "A profile default the user may accept; accepting it records source: profile.", "type": ["number", "string", "null"] },
+          "from_assumption": { "description": "Promote to Draft (FR-98): the Idea assumption this question came from.", "type": "string" }
+        }
+      }
+    },
+    "blocked": { "type": "array", "items": { "$ref": "common.schema.json#/$defs/blocked_value" } },
+    "assumptions": {
+      "description": "Idea mode (FR-91–92): every gap filled from defaults, in plain language. Empty in Draft.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/assumption" }
+    },
+    "promoted_from": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["idea_result_id", "option_id"],
+      "properties": { "idea_result_id": { "type": "string" }, "option_id": { "type": "string" } }
+    },
+    "created_at": { "$ref": "common.schema.json#/$defs/timestamp" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "status": { "const": "confirmed" } } },
+      "then": { "required": ["confirmed_by", "confirmed_at"] }
+    },
+    {
+      "description": "A Draft card cannot be confirmed while a required value is missing or blocked.",
+      "if": { "properties": { "mode": { "const": "draft" }, "status": { "const": "confirmed" } } },
+      "then": { "properties": { "missing": { "maxItems": 0 }, "blocked": { "maxItems": 0 } } }
+    },
+    {
+      "if": { "properties": { "mode": { "const": "draft" } } },
+      "then": { "properties": { "assumptions": { "maxItems": 0 } } }
+    }
+  ],
+  "$defs": {
+    "recognised_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["key", "label", "value", "source", "confidence", "verify"],
+      "allOf": [{ "$ref": "common.schema.json#/$defs/provenance" }],
+      "properties": {
+        "key": { "type": "string" },
+        "object_id": { "type": "string" },
+        "label": { "type": "string" },
+        "plain_label": { "type": "string" },
+        "value": { "type": ["number", "string", "boolean", "null"] },
+        "unit": { "type": "string" },
+        "material_id": { "type": "string" },
+        "source": true, "confidence": true, "verify": true, "source_detail": true
+      }
+    },
+    "assumption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "key", "text", "value", "source", "confidence", "verify", "editable"],
+      "allOf": [
+        { "$ref": "common.schema.json#/$defs/provenance" },
+        { "properties": { "source": { "enum": ["ai_inferred", "profile", "reference"] } } }
+      ],
+      "properties": {
+        "id": { "type": "string" },
+        "key": { "type": "string" },
+        "text": { "description": "Plain language, first person, e.g. \"I assumed 3 m ceilings\".", "type": "string", "minLength": 1 },
+        "technical_term": { "description": "Shown on hover (FR-94).", "type": "string" },
+        "value": { "type": ["number", "string", "boolean", "null"] },
+        "unit": { "type": "string" },
+        "editable": { "const": true },
+        "source": true, "confidence": true, "verify": true, "source_detail": true
+      }
+    }
+  }
+}

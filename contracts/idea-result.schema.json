@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://drawlogic.invalid/contracts/idea-result.schema.json",
+  "title": "IdeaResult",
+  "description": "Idea-mode result: 2–3 options with concept plan or massing, key numbers, one render and things to check. Version 0.1.0. PRD §7.13 FR-90–98, FR-100, FR-163, principle 5. Addition to the CONTRACTS.md table (structured output for the `idea` task).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "request", "card_id", "jurisdiction", "profile_stack", "assumptions", "options", "things_to_check", "marks", "teach_me_first", "created_at"],
+  "properties": {
+    "schema_version": { "$ref": "common.schema.json#/$defs/semver" },
+    "id": { "type": "string" },
+    "request": { "description": "What the user typed.", "type": "string", "minLength": 1 },
+    "card_id": { "description": "The Idea-mode interpretation card (mode idea) whose assumptions this result used.", "type": "string" },
+    "jurisdiction": { "type": "string" },
+    "profile_stack": { "type": "array", "minItems": 1, "items": { "$ref": "common.schema.json#/$defs/stack_entry" } },
+    "assumptions": {
+      "description": "Non-empty whenever a default was used (trust rule 6).",
+      "type": "array",
+      "items": { "$ref": "interpretation.schema.json#/$defs/assumption" }
+    },
+    "options": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "label", "ddl_hash", "key_numbers", "render"],
+        "properties": {
+          "id": { "type": "string" },
+          "label": { "description": "What differs, e.g. \"more garden\", \"extra bedroom\", \"cheaper build\" (FR-93).", "type": "string", "minLength": 1 },
+          "summary": { "type": "string" },
+          "ddl_hash": { "$ref": "common.schema.json#/$defs/hash" },
+          "key_numbers": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["key", "label", "value", "unit", "source", "confidence"],
+              "allOf": [{ "$ref": "common.schema.json#/$defs/provenance" }],
+              "properties": {
+                "key": { "type": "string" },
+                "label": { "type": "string" },
+                "value": { "type": ["number", "string"] },
+                "unit": { "type": "string" },
+                "source": true, "confidence": true, "verify": true, "source_detail": true
+              }
+            }
+          },
+          "assumption_overrides": { "description": "Assumption ids this option changes relative to the shared list.", "type": "array", "items": { "type": "string" } },
+          "render": {
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["asset_id", "drawing_hash", "resolution", "material_basis"],
+                "properties": {
+                  "asset_id": { "type": "string" },
+                  "drawing_hash": { "$ref": "common.schema.json#/$defs/hash" },
+                  "resolution": { "type": "string", "enum": ["low", "high"] },
+                  "material_basis": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["material_id", "basis"],
+                      "properties": {
+                        "material_id": { "type": "string" },
+                        "basis": { "$ref": "common.schema.json#/$defs/material_basis" },
+                        "colour_code": { "type": "string" },
+                        "colour_approximate": { "type": "boolean" }
+                      }
+                    }
+                  }
+                }
+              },
+              { "description": "Render pending or failed; never a render that failed fidelity.", "type": "null" }
+            ]
+          }
+        }
+      }
+    },
+    "things_to_check": {
+      "description": "FR-97: plain-language items to check with a professional; never pass/fail.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "text", "rule_id", "option_ids"],
+        "properties": {
+          "id": { "type": "string" },
+          "text": { "type": "string", "minLength": 1 },
+          "rule_id": { "type": ["string", "null"] },
+          "option_ids": { "type": "array", "items": { "type": "string" } },
+          "geodata": { "$ref": "common.schema.json#/$defs/geodata_provenance" }
+        }
+      }
+    },
+    "marks": {
+      "type": "array",
+      "contains": { "const": "watermark.concept" },
+      "items": { "type": "string", "enum": ["watermark.concept", "watermark.free_tier"] }
+    },
+    "teach_me_first": { "description": "FR-149: when true the critique panel replaces the assumptions panel and options are generated only after the revise step.", "type": "boolean" },
+    "cost_band": { "description": "Stage 2 (FR-151). Null in Stage 1.", "type": "null" },
+    "created_at": { "$ref": "common.schema.json#/$defs/timestamp" }
+  }
+}

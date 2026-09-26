@@ -1,0 +1,7 @@
+# Same lint rules as engine/pyproject.toml; generated/ is not linted.
+target-version = "py312"
+line-length = 140
+extend-exclude = ["generated", "node_modules"]
+
+[lint]
+select = ["E", "F", "W", "I", "B", "UP"]

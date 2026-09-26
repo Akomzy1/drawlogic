@@ -1,0 +1,147 @@
+{
+  "schema_version": "0.1.0",
+  "metadata": {
+    "id": "gb-eng-residential",
+    "name": "GB-ENG Residential",
+    "version": "1.3.0",
+    "type": "jurisdiction",
+    "jurisdiction": "GB-ENG",
+    "tier": 1,
+    "disciplines": ["architecture"],
+    "building_types": ["residential"],
+    "scope": "Example excerpt: the parapet detail only. Profiles v0.1 are authored in Prompt 3.",
+    "author": "Drawlogic",
+    "signers": [{ "name": "J. Smith", "credential": "CIAT 12345", "jurisdiction": "England", "verification_level": "verified" }],
+    "publish": "marketplace",
+    "price": null,
+    "changelog": [{ "version": "1.3.0", "date": "2026-09-02", "summary": "Parapet upstand rule signed." }]
+  },
+  "conventions": {
+    "units": "mm",
+    "sheets": [{ "size": "A3", "orientation": "landscape" }],
+    "title_block": "drawlogic-a3",
+    "layer_standard": "BS EN ISO 13567",
+    "dimension_style": { "terminator": "tick", "text_height_mm": 2.5, "precision": 0 },
+    "annotation_language": "en-GB"
+  },
+  "applicable_documents": [
+    { "ref": "Approved Document L" },
+    { "ref": "Approved Document C" },
+    { "ref": "BS 6229", "edition": "2018" }
+  ],
+  "provenance_settings": { "verify_threshold": 0.8 },
+  "required_constraints": {
+    "parapet": {
+      "draft": [
+        { "key": "wall_build_up", "label": "Wall build-up", "plain_label": "What the wall is made of", "kind": "material", "object_class": "masonry" },
+        { "key": "parapet_height", "label": "Parapet height above membrane", "plain_label": "How high the wall goes above the roof", "kind": "dimension" },
+        { "key": "membrane_system", "label": "Membrane system", "plain_label": "The waterproof layer on the roof", "kind": "system", "object_class": "membrane" },
+        { "key": "coping_material", "label": "Coping material", "plain_label": "What caps the top of the wall", "kind": "material", "object_class": "coping" },
+        { "key": "fall_direction", "label": "Coping fall direction", "plain_label": "Which way the top of the wall sheds water", "kind": "direction", "object_class": "coping" }
+      ],
+      "idea": [
+        { "key": "wall_build_up", "label": "Wall build-up", "plain_label": "What the wall is made of", "kind": "material", "object_class": "masonry", "default_from": "construction_defaults" },
+        { "key": "parapet_height", "label": "Parapet height above membrane", "plain_label": "How high the wall goes above the roof", "kind": "dimension", "default_from": "typical_detail" }
+      ]
+    }
+  },
+  "rules": [
+    {
+      "id": "gb-eng-roof-upstand-150",
+      "profile": { "id": "gb-eng-residential", "version": "1.3.0" },
+      "state": "verified",
+      "signer": { "name": "J. Smith", "credential": "CIAT 12345", "jurisdiction": "England", "verification_level": "verified", "signed_at": "2026-09-02T10:00:00Z" },
+      "category": "moisture",
+      "document": { "ref": "BS 6229", "edition": "2018" },
+      "applies_to": { "drawing_type": "detail", "detail_type": "parapet", "object_class": "upstand" },
+      "condition": { "cmp": { "left": { "field": "height" }, "op": ">=", "right": { "value": 150, "unit": "mm" } } },
+      "condition_text": "upstand.height >= 150 mm",
+      "severity": "flag",
+      "auto_fix": { "action": "min", "field": "height", "value": 150 },
+      "message": "Membrane upstand should be at least 150 mm above the finished roof surface.",
+      "why": "Water can pond or be blown against the parapet. The membrane has to turn up high enough that it does not get over the top of the upstand and into the wall.",
+      "judgement": false,
+      "modes": ["draft", "learn"],
+      "requires_inputs": ["height"]
+    },
+    {
+      "id": "gb-eng-L-4.2",
+      "profile": { "id": "gb-eng-residential", "version": "1.3.0" },
+      "state": "unverified",
+      "signer": null,
+      "category": "thermal",
+      "document": { "ref": "Approved Document L" },
+      "applies_to": { "drawing_type": "detail", "detail_type": "parapet", "object_class": "insulation" },
+      "condition": { "cmp": { "left": { "measure": "is_continuous", "args": { "from_class": "insulation", "to_class": "roof_insulation" } }, "op": "==", "right": { "value": true } } },
+      "condition_text": "is_continuous(from_class=insulation, to_class=roof_insulation) == true",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "Wall insulation should be continuous with the roof insulation at the parapet.",
+      "why": "A gap in the insulation where the wall meets the roof is a cold spot. Warm, damp air can condense there.",
+      "judgement": false,
+      "modes": ["draft", "learn"]
+    }
+  ],
+  "check_categories": ["moisture", "thermal", "drainage", "geometry", "fire_stopping", "structural", "acoustic"],
+  "typical_details": [
+    {
+      "id": "gb-eng-parapet-warm-roof",
+      "detail_type": "parapet",
+      "construction_method": "gb_cavity_brick_block",
+      "title": "Parapet at warm flat roof, cavity masonry",
+      "principles": [
+        "Insulation sits above the deck; the membrane sits above the insulation.",
+        "The membrane turns up the parapet as an upstand.",
+        "Wall insulation and roof insulation meet so the warm line is unbroken."
+      ],
+      "ddl_ref": "typical-details/parapet-warm-roof.ddl.json"
+    }
+  ],
+  "construction_defaults": {
+    "materials": [
+      { "id": "brick_facing", "name": "Facing brick", "category": "masonry", "basis": "description_only", "source": "profile", "confidence": 1, "verify": false, "source_detail": { "profile": { "id": "gb-eng-residential", "version": "1.3.0" } } },
+      { "id": "block_inner", "name": "Concrete block", "category": "masonry", "basis": "description_only", "source": "profile", "confidence": 1, "verify": false, "source_detail": { "profile": { "id": "gb-eng-residential", "version": "1.3.0" } } },
+      { "id": "roof_tile", "name": "Concrete or clay roof tile", "category": "tile", "basis": "description_only", "source": "profile", "confidence": 1, "verify": false, "source_detail": { "profile": { "id": "gb-eng-residential", "version": "1.3.0" } } },
+      { "id": "timber_truss", "name": "Timber trussed rafters", "category": "timber", "basis": "description_only", "source": "profile", "confidence": 1, "verify": false, "source_detail": { "profile": { "id": "gb-eng-residential", "version": "1.3.0" } } },
+      { "id": "upvc_window", "name": "uPVC or aluminium window", "category": "glazing", "basis": "description_only", "source": "profile", "confidence": 1, "verify": false, "source_detail": { "profile": { "id": "gb-eng-residential", "version": "1.3.0" } } },
+      { "id": "plasterboard_skim", "name": "Plasterboard and skim", "category": "finish", "basis": "description_only", "source": "profile", "confidence": 1, "verify": false, "source_detail": { "profile": { "id": "gb-eng-residential", "version": "1.3.0" } } }
+    ],
+    "walls": [
+      {
+        "id": "gb_cavity_brick_block",
+        "name": "Brick / cavity / block",
+        "plain_description": "brick outer wall, a cavity, and a block inner wall — the usual construction in England",
+        "layers": [
+          { "role": "outer_leaf", "material_id": "brick_facing", "thickness": 102.5 },
+          { "role": "cavity", "material_id": null, "thickness": null },
+          { "role": "inner_leaf", "material_id": "block_inner", "thickness": null }
+        ]
+      }
+    ],
+    "frame": { "id": "gb_loadbearing_masonry", "name": "Loadbearing masonry", "plain_description": "the walls carry the floors and roof — no separate frame", "layers": [] },
+    "roofs": [
+      { "id": "gb_pitched_tiled", "name": "Timber trussed pitched roof, tiled", "plain_description": "a pitched timber roof with concrete or clay tiles", "layers": [{ "role": "structure", "material_id": "timber_truss", "thickness": null }, { "role": "covering", "material_id": "roof_tile", "thickness": null }] }
+    ],
+    "floors": [
+      { "id": "gb_floor_example", "name": "Example excerpt — floors authored in Prompt 3", "plain_description": "floor construction from the profile", "layers": [] }
+    ],
+    "windows": [
+      { "id": "gb_window_upvc_alu", "name": "uPVC or aluminium windows", "plain_description": "uPVC or aluminium windows", "layers": [{ "role": "frame", "material_id": "upvc_window", "thickness": null }] }
+    ],
+    "doors": [
+      { "id": "gb_door_example", "name": "Example excerpt — doors authored in Prompt 3", "plain_description": "door system from the profile", "layers": [] }
+    ],
+    "finishes": {
+      "internal": [{ "id": "gb_plasterboard_skim", "name": "Plasterboard and skim", "plain_description": "plasterboard walls with a skim coat", "layers": [{ "role": "finish", "material_id": "plasterboard_skim", "thickness": null }] }]
+    },
+    "typical_detail_ids": ["gb-eng-parapet-warm-roof"]
+  },
+  "coverage": {
+    "statement": "GB-ENG Residential v1.3 (Tier 1) checks parapet moisture and thermal continuity. It does not check fire stopping, structure or acoustics.",
+    "checks_available": ["moisture", "thermal", "drainage", "geometry"],
+    "checks_not_available": ["fire_stopping", "structural", "acoustic"],
+    "rules_total": 2,
+    "rules_verified": 1,
+    "generated_at": "2026-09-02T10:05:00Z"
+  }
+}

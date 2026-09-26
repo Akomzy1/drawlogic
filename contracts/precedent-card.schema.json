@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://drawlogic.invalid/contracts/precedent-card.schema.json",
+  "title": "PrecedentCard",
+  "description": "A precedent card. Version 0.1.0. PRD §7.14 FR-173–180, trust rule 13c. Legal review is Decision 19 (OPEN). A card with a null licence_record carries no third-party image.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "name", "designer", "location", "year", "description", "qualities", "source_url", "licence_record", "public_domain", "images"],
+  "properties": {
+    "schema_version": { "$ref": "common.schema.json#/$defs/semver" },
+    "id": { "type": "string" },
+    "name": { "type": "string", "minLength": 1 },
+    "designer": { "type": "string", "minLength": 1 },
+    "location": { "type": "string" },
+    "year": { "description": "Year or range as published, e.g. \"1775–1783\".", "type": "string" },
+    "description": { "description": "Drawlogic's own words; no publisher text beyond a short attributed quotation.", "type": "string", "minLength": 1, "maxLength": 600 },
+    "qualities": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "text"],
+        "properties": {
+          "id": { "type": "string" },
+          "text": { "description": "A quality, never a copy: e.g. \"deep eaves\", \"parapet hides the roof\".", "type": "string" }
+        }
+      }
+    },
+    "source_url": { "description": "Link to the original publication.", "type": "string", "pattern": "^https://" },
+    "licence_record": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "reference"],
+          "properties": {
+            "type": { "type": "string", "enum": ["publisher_partnership", "designer_opt_in", "manufacturer", "public_domain"] },
+            "reference": { "type": "string", "minLength": 1 }
+          }
+        },
+        { "type": "null" }
+      ]
+    },
+    "public_domain": { "type": "boolean" },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["asset_id", "credit"],
+        "properties": { "asset_id": { "type": "string" }, "credit": { "type": "string" } }
+      }
+    },
+    "stage": { "type": "string", "enum": ["idea", "learn", "both"] }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "licence_record": { "type": "null" } } },
+      "then": { "properties": { "images": { "maxItems": 0 } } }
+    }
+  ]
+}

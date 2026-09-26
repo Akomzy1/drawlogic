@@ -1,0 +1,57 @@
+{
+  "schema_version": "0.1.0",
+  "id": "idea-lekki-0001",
+  "request": "60 × 120 ft plot in Lekki, 4-bed duplex with BQ and gate house",
+  "card_id": "card-lekki-0001",
+  "jurisdiction": "NG-LA",
+  "profile_stack": [
+    { "id": "ng-la-residential", "name": "NG-LA Residential", "version": "0.8.0", "layer": "jurisdiction", "tier": 2, "signer": null },
+    { "id": "generic", "name": "Generic", "version": "0.9.0", "layer": "generic", "tier": null, "signer": null }
+  ],
+  "assumptions": [
+    { "id": "as-setbacks", "key": "setbacks", "text": "I assumed setbacks of 6 m at the front and 3 m at the sides and rear", "technical_term": "Building setbacks", "value": "6.0 / 3.0 / 3.0", "unit": "m", "source": "ai_inferred", "confidence": 0.7, "verify": true, "editable": true, "source_detail": { "profile": { "id": "ng-la-residential", "version": "0.8.0" }, "note": "NG-LA Tier 2 profile default, not a signed rule." } },
+    { "id": "as-floors", "key": "floors", "text": "I assumed the duplex has two floors", "value": 2, "source": "ai_inferred", "confidence": 0.85, "verify": true, "editable": true, "source_detail": { "model": { "provider": "anthropic", "model_id": "claude-sonnet-5", "task": "idea" } } },
+    { "id": "as-walls", "key": "wall_build_up", "text": "I assumed sandcrete block walls with cement render — the usual construction in Lagos", "technical_term": "Sandcrete block, rendered", "value": "ng_sandcrete_render", "source": "profile", "confidence": 1, "verify": false, "editable": true, "source_detail": { "profile": { "id": "ng-la-residential", "version": "0.8.0" } } },
+    { "id": "as-frame", "key": "frame", "text": "I assumed a reinforced concrete frame", "technical_term": "RC frame and slabs", "value": "ng_rc_frame", "source": "profile", "confidence": 1, "verify": false, "editable": true, "source_detail": { "profile": { "id": "ng-la-residential", "version": "0.8.0" } } },
+    { "id": "as-roof", "key": "roof_type", "text": "I assumed a long-span aluminium sheet roof", "technical_term": "Long-span aluminium roofing sheet", "value": "ng_longspan_alu", "source": "profile", "confidence": 1, "verify": false, "editable": true, "source_detail": { "profile": { "id": "ng-la-residential", "version": "0.8.0" } } }
+  ],
+  "options": [
+    {
+      "id": "opt-a",
+      "label": "BQ at the back, bigger house",
+      "ddl_hash": "sha256:e0505d945004638e8d73a785898cf371c84a5795181e3f0ff124063f67e80839",
+      "key_numbers": [
+        { "key": "coverage", "label": "Plot coverage", "value": 30.7, "unit": "%", "source": "ai_inferred", "confidence": 0.7, "verify": true },
+        { "key": "floor_area", "label": "Total floor area", "value": 377.1, "unit": "m²", "source": "ai_inferred", "confidence": 0.7, "verify": true },
+        { "key": "bedrooms", "label": "Bedrooms", "value": 4, "unit": "rooms", "source": "user", "confidence": 1, "verify": false }
+      ],
+      "render": null
+    },
+    {
+      "id": "opt-b",
+      "label": "more garden",
+      "ddl_hash": "sha256:77dbe32907546c9847f62811d5dea21f1a06046f1c7d38f281ea080042cdbe9b",
+      "key_numbers": [
+        { "key": "coverage", "label": "Plot coverage", "value": 27.0, "unit": "%", "source": "ai_inferred", "confidence": 0.7, "verify": true },
+        { "key": "floor_area", "label": "Total floor area", "value": 327.9, "unit": "m²", "source": "ai_inferred", "confidence": 0.7, "verify": true },
+        { "key": "bedrooms", "label": "Bedrooms", "value": 4, "unit": "rooms", "source": "user", "confidence": 1, "verify": false }
+      ],
+      "render": null
+    }
+  ],
+  "things_to_check": [
+    { "id": "ttc-gate-house", "text": "The gate house sits inside the 6 m front setback. Check with a professional whether the setback applies to a gate house.", "rule_id": null, "option_ids": ["opt-a", "opt-b"] },
+    { "id": "ttc-setbacks", "text": "The setbacks are the profile's usual values, not a signed rule. Confirm them for this plot before relying on the layout.", "rule_id": null, "option_ids": ["opt-a", "opt-b"] },
+    {
+      "id": "ttc-dem",
+      "text": "Slope read off a 30 m elevation grid — not suitable for drainage design",
+      "rule_id": null,
+      "option_ids": ["opt-a", "opt-b"],
+      "geodata": { "kind": "terrain", "provider": "Copernicus", "dataset": "Copernicus DEM GLO-30", "resolution_m": 30, "attribution": "Copernicus DEM", "retrieved_at": "2026-09-16T11:03:40Z" }
+    }
+  ],
+  "marks": ["watermark.concept"],
+  "teach_me_first": false,
+  "cost_band": null,
+  "created_at": "2026-09-16T11:04:10Z"
+}

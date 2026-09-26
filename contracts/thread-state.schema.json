@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://drawlogic.invalid/contracts/thread-state.schema.json",
+  "title": "ThreadState",
+  "description": "Working state of an LLM thread, held by trust, never only in the conversation. Version 0.1.0. When a context change cannot enter as a mid-conversation system message (models.json → mid_conversation_system: false), or the model changes, the new thread is seeded from the DDL plus this state (§8A.2; contract review 27 Sept 2026).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "task", "mode", "workspace_id", "drawing_id", "ddl_hash", "assumptions", "critique_points", "revision_cycles", "generate_anyway", "thread_ids", "updated_at"],
+  "properties": {
+    "schema_version": { "$ref": "common.schema.json#/$defs/semver" },
+    "id": { "type": "string" },
+    "task": { "type": "string", "enum": ["route", "rewrite", "idea", "learn_critique", "precedent_search", "promote", "interpret", "compile", "explain", "profile_draft", "narrate"] },
+    "mode": { "$ref": "common.schema.json#/$defs/mode" },
+    "workspace_id": { "type": "string" },
+    "drawing_id": { "oneOf": [{ "$ref": "common.schema.json#/$defs/uuid" }, { "type": "null" }] },
+    "ddl_hash": { "description": "The DDL revision the next thread is seeded from. Null before the first compile.", "oneOf": [{ "$ref": "common.schema.json#/$defs/hash" }, { "type": "null" }] },
+    "card_id": { "type": ["string", "null"] },
+    "assumptions": { "description": "Current assumptions list, including the user's edits.", "type": "array", "items": { "$ref": "interpretation.schema.json#/$defs/assumption" } },
+    "critique_points": { "description": "Learn: every point raised so far with its state.", "type": "array", "items": { "$ref": "critique.schema.json#/$defs/point" } },
+    "revision_cycles": { "type": "integer", "minimum": 0 },
+    "generate_anyway": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["used", "audit_record_id"],
+      "properties": {
+        "used": { "type": "boolean" },
+        "audit_record_id": { "type": ["string", "null"] }
+      },
+      "if": { "properties": { "used": { "const": true } } },
+      "then": { "properties": { "audit_record_id": { "type": "string" } } },
+      "else": { "properties": { "audit_record_id": { "type": "null" } } }
+    },
+    "thread_ids": {
+      "description": "Every thread that has carried this work, oldest first, each bound to one model.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["thread_id", "model", "started_at", "reason"],
+        "properties": {
+          "thread_id": { "type": "string" },
+          "model": { "type": "string" },
+          "started_at": { "$ref": "common.schema.json#/$defs/timestamp" },
+          "reason": { "type": "string", "enum": ["start", "context_change", "model_change", "refusal_fallback"] }
+        }
+      }
+    },
+    "updated_at": { "$ref": "common.schema.json#/$defs/timestamp" }
+  }
+}

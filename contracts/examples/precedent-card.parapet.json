@@ -1,0 +1,19 @@
+{
+  "schema_version": "0.1.0",
+  "id": "prc-bedford-square",
+  "name": "Bedford Square",
+  "designer": "Attributed to Thomas Leverton",
+  "location": "Bloomsbury, London",
+  "year": "1775–1783",
+  "description": "A Georgian square of terraced houses whose brick fronts rise into parapets, so the roofs behind are hidden from the street and the top of each wall is capped against the weather.",
+  "qualities": [
+    { "id": "q-parapet-hides-roof", "text": "parapet hides the roof from the street" },
+    { "id": "q-capped-wall-head", "text": "wall head capped against the weather" },
+    { "id": "q-continuous-line", "text": "one continuous parapet line across the terrace" }
+  ],
+  "source_url": "https://en.wikipedia.org/wiki/Bedford_Square",
+  "licence_record": null,
+  "public_domain": true,
+  "images": [],
+  "stage": "learn"
+}
