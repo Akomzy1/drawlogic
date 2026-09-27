@@ -1,0 +1,428 @@
+{
+  "schema_version": "0.1.0",
+  "metadata": {
+    "id": "ng-la",
+    "name": "NG-LA Residential",
+    "version": "0.1.0",
+    "type": "jurisdiction",
+    "jurisdiction": "NG-LA",
+    "tier": null,
+    "disciplines": [
+      "architecture"
+    ],
+    "building_types": [
+      "residential"
+    ],
+    "scope": "Lagos State residential stub: conventions and construction defaults only. No rules yet; the tier is decided when the profile is signed (Decision 3).",
+    "author": "Drawlogic",
+    "publish": "private",
+    "changelog": [
+      {
+        "version": "0.1.0",
+        "date": "2026-09-28",
+        "summary": "First authored version. Every rule is unverified until a signer record is added."
+      }
+    ]
+  },
+  "conventions": {
+    "units": "mm",
+    "sheets": [
+      {
+        "size": "A3",
+        "orientation": "landscape"
+      },
+      {
+        "size": "A1",
+        "orientation": "landscape"
+      }
+    ],
+    "title_block": "drawlogic-a3",
+    "layer_standard": "ISO 13567",
+    "symbol_set": "Drawlogic NG-LA symbols v0.1 (draft)",
+    "dimension_style": {
+      "terminator": "tick",
+      "text_height_mm": 2.5,
+      "precision": 0
+    },
+    "text_heights_mm": {
+      "annotation": 2.5,
+      "dimension": 2.5,
+      "title": 5.0
+    },
+    "annotation_language": "en-NG"
+  },
+  "applicable_documents": [],
+  "provenance_settings": {
+    "verify_threshold": 0.8
+  },
+  "required_constraints": {},
+  "rules": [],
+  "check_categories": [
+    "setbacks",
+    "plot_coverage",
+    "moisture",
+    "thermal",
+    "structural",
+    "fire_stopping",
+    "drainage",
+    "access"
+  ],
+  "typical_details": [],
+  "construction_defaults": {
+    "materials": [
+      {
+        "id": "sandcrete_block",
+        "name": "Sandcrete hollow block",
+        "category": "masonry",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "ng-la",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "cement_render",
+        "name": "Cement render",
+        "category": "render",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "ng-la",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "emulsion_paint",
+        "name": "Paint finish",
+        "category": "paint",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "ng-la",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "reinforced_concrete",
+        "name": "Reinforced concrete frame and slabs",
+        "category": "concrete",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "ng-la",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "roof_truss",
+        "name": "Timber or steel roof trusses",
+        "category": "timber",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "ng-la",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "aluminium_roof_sheet",
+        "name": "Long-span aluminium roofing sheet",
+        "category": "metal",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "ng-la",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "roof_waterproofing",
+        "name": "Roof waterproofing (to be confirmed)",
+        "category": "membrane",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "ng-la",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "floor_tiles",
+        "name": "Ceramic or porcelain floor tiles",
+        "category": "tile",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "ng-la",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "aluminium_sliding_window",
+        "name": "Aluminium sliding window",
+        "category": "frame",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "ng-la",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "external_door",
+        "name": "External door (timber or steel, to be confirmed)",
+        "category": "frame",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "ng-la",
+            "version": "0.1.0"
+          }
+        }
+      }
+    ],
+    "walls": [
+      {
+        "id": "ng_sandcrete_render",
+        "name": "Sandcrete block, rendered",
+        "plain_description": "sandcrete block walls with cement render and paint — the usual construction in Lagos",
+        "layers": [
+          {
+            "role": "render_outer",
+            "material_id": "cement_render",
+            "thickness": null
+          },
+          {
+            "role": "paint_outer",
+            "material_id": "emulsion_paint",
+            "thickness": null
+          },
+          {
+            "role": "wall",
+            "material_id": "sandcrete_block",
+            "thickness": null
+          },
+          {
+            "role": "render_inner",
+            "material_id": "cement_render",
+            "thickness": null
+          },
+          {
+            "role": "paint_inner",
+            "material_id": "emulsion_paint",
+            "thickness": null
+          }
+        ]
+      }
+    ],
+    "frame": {
+      "id": "ng_rc_frame",
+      "name": "Reinforced concrete frame",
+      "plain_description": "a reinforced concrete frame with concrete floor slabs",
+      "layers": [
+        {
+          "role": "frame",
+          "material_id": "reinforced_concrete",
+          "thickness": null
+        }
+      ]
+    },
+    "roofs": [
+      {
+        "id": "ng_longspan_aluminium",
+        "name": "Long-span aluminium sheet roof",
+        "plain_description": "long-span aluminium roofing sheets on trusses",
+        "layers": [
+          {
+            "role": "structure",
+            "material_id": "roof_truss",
+            "thickness": null
+          },
+          {
+            "role": "covering",
+            "material_id": "aluminium_roof_sheet",
+            "thickness": null
+          }
+        ]
+      },
+      {
+        "id": "ng_concrete_flat_parapet",
+        "name": "Concrete flat roof with parapet",
+        "plain_description": "a concrete flat roof behind a parapet",
+        "layers": [
+          {
+            "role": "structure",
+            "material_id": "reinforced_concrete",
+            "thickness": null
+          },
+          {
+            "role": "waterproofing",
+            "material_id": "roof_waterproofing",
+            "thickness": null
+          }
+        ],
+        "applies_to": [
+          "flat roofs"
+        ]
+      }
+    ],
+    "floors": [
+      {
+        "id": "ng_rc_slab_tiled",
+        "name": "Concrete slab, tiled",
+        "plain_description": "concrete floor slabs finished with ceramic or porcelain tiles",
+        "layers": [
+          {
+            "role": "structure",
+            "material_id": "reinforced_concrete",
+            "thickness": null
+          },
+          {
+            "role": "finish",
+            "material_id": "floor_tiles",
+            "thickness": null
+          }
+        ]
+      }
+    ],
+    "windows": [
+      {
+        "id": "ng_aluminium_sliding",
+        "name": "Aluminium sliding windows",
+        "plain_description": "aluminium sliding windows",
+        "layers": [
+          {
+            "role": "frame",
+            "material_id": "aluminium_sliding_window",
+            "thickness": null
+          }
+        ]
+      }
+    ],
+    "doors": [
+      {
+        "id": "ng_external_door",
+        "name": "External doors",
+        "plain_description": "timber or steel external doors — to be confirmed",
+        "layers": [
+          {
+            "role": "frame",
+            "material_id": "external_door",
+            "thickness": null
+          }
+        ]
+      }
+    ],
+    "finishes": {
+      "external": [
+        {
+          "id": "ng_render_paint",
+          "name": "Render and paint",
+          "plain_description": "cement render and paint outside",
+          "layers": [
+            {
+              "role": "render",
+              "material_id": "cement_render",
+              "thickness": null
+            },
+            {
+              "role": "paint",
+              "material_id": "emulsion_paint",
+              "thickness": null
+            }
+          ]
+        }
+      ],
+      "internal": [
+        {
+          "id": "ng_render_paint_internal",
+          "name": "Render and paint",
+          "plain_description": "cement render and paint inside",
+          "layers": [
+            {
+              "role": "render",
+              "material_id": "cement_render",
+              "thickness": null
+            },
+            {
+              "role": "paint",
+              "material_id": "emulsion_paint",
+              "thickness": null
+            }
+          ]
+        }
+      ],
+      "floor": [
+        {
+          "id": "ng_floor_tiles",
+          "name": "Floor tiles",
+          "plain_description": "ceramic or porcelain floor tiles",
+          "layers": [
+            {
+              "role": "finish",
+              "material_id": "floor_tiles",
+              "thickness": null
+            }
+          ]
+        }
+      ]
+    },
+    "typical_detail_ids": []
+  },
+  "coverage": {
+    "statement": "NG-LA Residential v0.1.0 has no rules yet and is unsigned: it supplies conventions and construction defaults only. Checks not available: setbacks, plot coverage, moisture, thermal, structural, fire stopping, drainage, access.",
+    "checks_available": [],
+    "checks_not_available": [
+      "setbacks",
+      "plot_coverage",
+      "moisture",
+      "thermal",
+      "structural",
+      "fire_stopping",
+      "drainage",
+      "access"
+    ],
+    "rules_total": 0,
+    "rules_verified": 0
+  }
+}

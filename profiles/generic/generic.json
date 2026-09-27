@@ -1,0 +1,1227 @@
+{
+  "schema_version": "0.1.0",
+  "metadata": {
+    "id": "generic",
+    "name": "Generic",
+    "version": "0.1.0",
+    "type": "generic",
+    "tier": null,
+    "disciplines": [
+      "architecture"
+    ],
+    "building_types": [
+      "residential",
+      "commercial"
+    ],
+    "scope": "Good-practice checks that apply anywhere, conventions and construction defaults by region. Used under every jurisdiction and alone where no jurisdiction profile exists; regional defaults are inferred and always need confirming.",
+    "author": "Drawlogic",
+    "publish": "private",
+    "changelog": [
+      {
+        "version": "0.1.0",
+        "date": "2026-09-28",
+        "summary": "First authored version. Every rule is unverified until a signer record is added."
+      }
+    ]
+  },
+  "conventions": {
+    "units": "mm",
+    "annotation_language": "en",
+    "by_region": {
+      "west_africa_coastal": {
+        "units": "mm",
+        "sheets": [
+          {
+            "size": "A3",
+            "orientation": "landscape"
+          },
+          {
+            "size": "A1",
+            "orientation": "landscape"
+          }
+        ],
+        "title_block": "drawlogic-a3",
+        "layer_standard": "ISO 13567",
+        "symbol_set": "Drawlogic generic symbols v0.1",
+        "dimension_style": {
+          "terminator": "tick",
+          "text_height_mm": 2.5,
+          "precision": 0
+        },
+        "text_heights_mm": {
+          "annotation": 2.5,
+          "dimension": 2.5,
+          "title": 5.0
+        },
+        "annotation_language": "en"
+      },
+      "gulf": {
+        "units": "mm",
+        "sheets": [
+          {
+            "size": "A3",
+            "orientation": "landscape"
+          },
+          {
+            "size": "A1",
+            "orientation": "landscape"
+          }
+        ],
+        "title_block": "drawlogic-a3",
+        "layer_standard": "ISO 13567",
+        "symbol_set": "Drawlogic generic symbols v0.1",
+        "dimension_style": {
+          "terminator": "tick",
+          "text_height_mm": 2.5,
+          "precision": 0
+        },
+        "text_heights_mm": {
+          "annotation": 2.5,
+          "dimension": 2.5,
+          "title": 5.0
+        },
+        "annotation_language": "en"
+      },
+      "northern_europe": {
+        "units": "mm",
+        "sheets": [
+          {
+            "size": "A3",
+            "orientation": "landscape"
+          },
+          {
+            "size": "A1",
+            "orientation": "landscape"
+          }
+        ],
+        "title_block": "drawlogic-a3",
+        "layer_standard": "ISO 13567",
+        "symbol_set": "Drawlogic generic symbols v0.1",
+        "dimension_style": {
+          "terminator": "tick",
+          "text_height_mm": 2.5,
+          "precision": 0
+        },
+        "text_heights_mm": {
+          "annotation": 2.5,
+          "dimension": 2.5,
+          "title": 5.0
+        },
+        "annotation_language": "en"
+      }
+    }
+  },
+  "applicable_documents": [],
+  "provenance_settings": {
+    "verify_threshold": 0.8
+  },
+  "required_constraints": {
+    "detail": {
+      "draft": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry"
+        },
+        {
+          "key": "detail_scope",
+          "label": "What the detail shows",
+          "plain_label": "Which junction the drawing is of",
+          "kind": "system"
+        }
+      ],
+      "idea": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry",
+          "default_from": "construction_defaults"
+        }
+      ]
+    },
+    "plan": {
+      "draft": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry"
+        },
+        {
+          "key": "storey_heights",
+          "label": "Storey heights",
+          "plain_label": "How tall each floor is",
+          "kind": "dimension"
+        }
+      ],
+      "idea": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry",
+          "default_from": "construction_defaults"
+        },
+        {
+          "key": "storey_heights",
+          "label": "Storey heights",
+          "plain_label": "How tall each floor is",
+          "kind": "dimension",
+          "default_from": "conventions"
+        }
+      ]
+    }
+  },
+  "rules": [
+    {
+      "id": "generic-geometry-closure",
+      "profile": {
+        "id": "generic",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "geometry",
+      "document": null,
+      "applies_to": {
+        "drawing_type": "detail"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "measure": "is_closed",
+            "args": {
+              "scope": "all_objects"
+            }
+          },
+          "op": "==",
+          "right": {
+            "value": true
+          }
+        }
+      },
+      "condition_text": "is_closed(scope=all_objects) == true",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "Every drawn element should be a closed shape.",
+      "why": "Gaps between lines make quantities, hatching and renders wrong, and hide where one material ends and the next begins.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ]
+    },
+    {
+      "id": "generic-dimension-chain",
+      "profile": {
+        "id": "generic",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "dimensions",
+      "document": null,
+      "applies_to": {
+        "drawing_type": "detail"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "measure": "count",
+            "args": {
+              "of": "dimension_conflicts"
+            }
+          },
+          "op": "==",
+          "right": {
+            "value": 0
+          }
+        }
+      },
+      "condition_text": "count(of=dimension_conflicts) == 0",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "Dimension chains should add up to their overall dimensions.",
+      "why": "When a chain of dimensions does not add up, someone on site builds to the wrong number.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ]
+    },
+    {
+      "id": "generic-symbol-legend",
+      "profile": {
+        "id": "generic",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "symbols",
+      "document": null,
+      "applies_to": {
+        "drawing_type": "detail"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "measure": "count",
+            "args": {
+              "of": "symbols_without_legend"
+            }
+          },
+          "op": "==",
+          "right": {
+            "value": 0
+          }
+        }
+      },
+      "condition_text": "count(of=symbols_without_legend) == 0",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "Every symbol used should appear in the legend.",
+      "why": "A symbol nobody can look up is a guess waiting to happen on site.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ]
+    },
+    {
+      "id": "generic-annotation",
+      "profile": {
+        "id": "generic",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "annotation",
+      "document": null,
+      "applies_to": {
+        "drawing_type": "detail"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "measure": "count",
+            "args": {
+              "of": "materials_without_annotation"
+            }
+          },
+          "op": "==",
+          "right": {
+            "value": 0
+          }
+        }
+      },
+      "condition_text": "count(of=materials_without_annotation) == 0",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "Every material shown should carry an annotation.",
+      "why": "An unlabelled layer leaves the builder to guess what it is made of.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ]
+    },
+    {
+      "id": "generic-thermal-line",
+      "profile": {
+        "id": "generic",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "thermal",
+      "document": null,
+      "applies_to": {
+        "drawing_type": "detail"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "measure": "is_continuous",
+            "args": {
+              "path": "thermal_line"
+            }
+          },
+          "op": "==",
+          "right": {
+            "value": true
+          }
+        }
+      },
+      "condition_text": "is_continuous(path=thermal_line) == true",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "The insulation line should be drawn continuous through the detail.",
+      "why": "Breaks in the insulation line are where heat escapes and condensation forms.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ]
+    },
+    {
+      "id": "generic-drainage-path",
+      "profile": {
+        "id": "generic",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "drainage",
+      "document": null,
+      "applies_to": {
+        "drawing_type": "detail"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "measure": "count",
+            "args": {
+              "of": "drainage_paths"
+            }
+          },
+          "op": ">=",
+          "right": {
+            "value": 1
+          }
+        }
+      },
+      "condition_text": "count(of=drainage_paths) >= 1",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "The detail should show where water drains to.",
+      "why": "Water that has no drawn way out tends to end up inside the building.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ]
+    }
+  ],
+  "check_categories": [
+    "geometry",
+    "dimensions",
+    "symbols",
+    "annotation",
+    "thermal",
+    "drainage",
+    "moisture",
+    "structural",
+    "fire_stopping",
+    "acoustic",
+    "access",
+    "ventilation"
+  ],
+  "typical_details": [],
+  "construction_defaults_by_region": {
+    "west_africa_coastal": {
+      "materials": [
+        {
+          "id": "sandcrete_block",
+          "name": "Sandcrete or concrete hollow block",
+          "category": "masonry",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        },
+        {
+          "id": "cement_render",
+          "name": "Cement render and paint",
+          "category": "render",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        },
+        {
+          "id": "reinforced_concrete",
+          "name": "Reinforced concrete frame and slabs",
+          "category": "concrete",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        },
+        {
+          "id": "aluminium_roof_sheet",
+          "name": "Long-span aluminium roofing sheet",
+          "category": "metal",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        },
+        {
+          "id": "roof_truss",
+          "name": "Timber or steel roof trusses",
+          "category": "timber",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        },
+        {
+          "id": "floor_tiles",
+          "name": "Ceramic or porcelain floor tiles",
+          "category": "tile",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        },
+        {
+          "id": "aluminium_window",
+          "name": "Aluminium window",
+          "category": "frame",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        },
+        {
+          "id": "external_door",
+          "name": "External door (timber or steel, to be confirmed)",
+          "category": "frame",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "wa_block_render",
+          "name": "Block wall, rendered",
+          "plain_description": "block walls with cement render and paint — common construction in coastal West Africa",
+          "layers": [
+            {
+              "role": "render_outer",
+              "material_id": "cement_render",
+              "thickness": null
+            },
+            {
+              "role": "wall",
+              "material_id": "sandcrete_block",
+              "thickness": null
+            },
+            {
+              "role": "render_inner",
+              "material_id": "cement_render",
+              "thickness": null
+            }
+          ]
+        }
+      ],
+      "frame": {
+        "id": "wa_rc_frame",
+        "name": "Reinforced concrete frame",
+        "plain_description": "a reinforced concrete frame with concrete floor slabs",
+        "layers": [
+          {
+            "role": "frame",
+            "material_id": "reinforced_concrete",
+            "thickness": null
+          }
+        ]
+      },
+      "roofs": [
+        {
+          "id": "wa_aluminium_sheet_roof",
+          "name": "Long-span aluminium sheet roof",
+          "plain_description": "long-span aluminium roofing sheets on trusses",
+          "layers": [
+            {
+              "role": "structure",
+              "material_id": "roof_truss",
+              "thickness": null
+            },
+            {
+              "role": "covering",
+              "material_id": "aluminium_roof_sheet",
+              "thickness": null
+            }
+          ]
+        }
+      ],
+      "floors": [
+        {
+          "id": "wa_rc_slab_tiled",
+          "name": "Concrete slab, tiled",
+          "plain_description": "concrete floor slabs finished with ceramic or porcelain tiles",
+          "layers": [
+            {
+              "role": "structure",
+              "material_id": "reinforced_concrete",
+              "thickness": null
+            },
+            {
+              "role": "finish",
+              "material_id": "floor_tiles",
+              "thickness": null
+            }
+          ]
+        }
+      ],
+      "windows": [
+        {
+          "id": "wa_aluminium_windows",
+          "name": "Aluminium windows",
+          "plain_description": "aluminium windows",
+          "layers": [
+            {
+              "role": "frame",
+              "material_id": "aluminium_window",
+              "thickness": null
+            }
+          ]
+        }
+      ],
+      "doors": [
+        {
+          "id": "wa_external_door",
+          "name": "External doors",
+          "plain_description": "timber or steel external doors — to be confirmed",
+          "layers": [
+            {
+              "role": "frame",
+              "material_id": "external_door",
+              "thickness": null
+            }
+          ]
+        }
+      ],
+      "finishes": {
+        "external": [
+          {
+            "id": "wa_render_paint",
+            "name": "Render and paint",
+            "plain_description": "cement render and paint outside",
+            "layers": [
+              {
+                "role": "finish",
+                "material_id": "cement_render",
+                "thickness": null
+              }
+            ]
+          }
+        ]
+      },
+      "typical_detail_ids": []
+    },
+    "gulf": {
+      "materials": [
+        {
+          "id": "concrete_block",
+          "name": "Concrete block",
+          "category": "masonry",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        },
+        {
+          "id": "external_insulation",
+          "name": "External insulation (type and thickness to be confirmed)",
+          "category": "insulation",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        },
+        {
+          "id": "render_finish",
+          "name": "Render finish",
+          "category": "render",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        },
+        {
+          "id": "reinforced_concrete",
+          "name": "Reinforced concrete frame and slabs",
+          "category": "concrete",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        },
+        {
+          "id": "roof_waterproofing",
+          "name": "Roof waterproofing (to be confirmed)",
+          "category": "membrane",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        },
+        {
+          "id": "roof_insulation",
+          "name": "Roof insulation (type and thickness to be confirmed)",
+          "category": "insulation",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        },
+        {
+          "id": "floor_tiles",
+          "name": "Porcelain or stone floor tiles",
+          "category": "tile",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        },
+        {
+          "id": "aluminium_window",
+          "name": "Aluminium window with insulating glass",
+          "category": "frame",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        },
+        {
+          "id": "external_door",
+          "name": "External door (to be confirmed)",
+          "category": "frame",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "gulf_block_ext_insulation",
+          "name": "Block wall with external insulation and render",
+          "plain_description": "concrete block walls with external insulation and render — common construction in the Gulf",
+          "layers": [
+            {
+              "role": "render_outer",
+              "material_id": "render_finish",
+              "thickness": null
+            },
+            {
+              "role": "insulation",
+              "material_id": "external_insulation",
+              "thickness": null
+            },
+            {
+              "role": "wall",
+              "material_id": "concrete_block",
+              "thickness": null
+            }
+          ]
+        }
+      ],
+      "frame": {
+        "id": "gulf_rc_frame",
+        "name": "Reinforced concrete frame",
+        "plain_description": "a reinforced concrete frame with concrete floor slabs",
+        "layers": [
+          {
+            "role": "frame",
+            "material_id": "reinforced_concrete",
+            "thickness": null
+          }
+        ]
+      },
+      "roofs": [
+        {
+          "id": "gulf_concrete_flat_roof",
+          "name": "Insulated concrete flat roof",
+          "plain_description": "a concrete flat roof with insulation and waterproofing",
+          "layers": [
+            {
+              "role": "structure",
+              "material_id": "reinforced_concrete",
+              "thickness": null
+            },
+            {
+              "role": "insulation",
+              "material_id": "roof_insulation",
+              "thickness": null
+            },
+            {
+              "role": "waterproofing",
+              "material_id": "roof_waterproofing",
+              "thickness": null
+            }
+          ]
+        }
+      ],
+      "floors": [
+        {
+          "id": "gulf_rc_slab_tiled",
+          "name": "Concrete slab, tiled",
+          "plain_description": "concrete floor slabs finished with porcelain or stone tiles",
+          "layers": [
+            {
+              "role": "structure",
+              "material_id": "reinforced_concrete",
+              "thickness": null
+            },
+            {
+              "role": "finish",
+              "material_id": "floor_tiles",
+              "thickness": null
+            }
+          ]
+        }
+      ],
+      "windows": [
+        {
+          "id": "gulf_aluminium_windows",
+          "name": "Aluminium windows",
+          "plain_description": "aluminium windows with insulating glass",
+          "layers": [
+            {
+              "role": "frame",
+              "material_id": "aluminium_window",
+              "thickness": null
+            }
+          ]
+        }
+      ],
+      "doors": [
+        {
+          "id": "gulf_external_door",
+          "name": "External doors",
+          "plain_description": "external doors — to be confirmed",
+          "layers": [
+            {
+              "role": "frame",
+              "material_id": "external_door",
+              "thickness": null
+            }
+          ]
+        }
+      ],
+      "finishes": {
+        "external": [
+          {
+            "id": "gulf_render",
+            "name": "Render",
+            "plain_description": "render outside",
+            "layers": [
+              {
+                "role": "finish",
+                "material_id": "render_finish",
+                "thickness": null
+              }
+            ]
+          }
+        ]
+      },
+      "typical_detail_ids": []
+    },
+    "northern_europe": {
+      "materials": [
+        {
+          "id": "brick_facing",
+          "name": "Facing brick",
+          "category": "masonry",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        },
+        {
+          "id": "wall_insulation",
+          "name": "Wall insulation (type and thickness to be confirmed)",
+          "category": "insulation",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        },
+        {
+          "id": "inner_block",
+          "name": "Concrete block or timber frame inner wall (to be confirmed)",
+          "category": "masonry",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        },
+        {
+          "id": "plasterboard",
+          "name": "Plasterboard",
+          "category": "finish",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        },
+        {
+          "id": "timber_rafters",
+          "name": "Timber rafters or trusses",
+          "category": "timber",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        },
+        {
+          "id": "roof_tile",
+          "name": "Clay or concrete roof tiles",
+          "category": "tile",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        },
+        {
+          "id": "concrete_slab",
+          "name": "Concrete ground floor slab",
+          "category": "concrete",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        },
+        {
+          "id": "floor_insulation",
+          "name": "Floor insulation (type and thickness to be confirmed)",
+          "category": "insulation",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        },
+        {
+          "id": "window_frame",
+          "name": "Timber, uPVC or aluminium window",
+          "category": "frame",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        },
+        {
+          "id": "external_door",
+          "name": "External door (to be confirmed)",
+          "category": "frame",
+          "basis": "description_only",
+          "source": "profile",
+          "confidence": 1,
+          "verify": false,
+          "source_detail": {
+            "profile": {
+              "id": "generic",
+              "version": "0.1.0"
+            }
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "ne_brick_insulated",
+          "name": "Brick outer wall, insulated",
+          "plain_description": "a brick outer wall with insulation and an inner wall of block or timber frame — common in Northern Europe",
+          "layers": [
+            {
+              "role": "outer_leaf",
+              "material_id": "brick_facing",
+              "thickness": null
+            },
+            {
+              "role": "insulation",
+              "material_id": "wall_insulation",
+              "thickness": null
+            },
+            {
+              "role": "inner_leaf",
+              "material_id": "inner_block",
+              "thickness": null
+            },
+            {
+              "role": "finish",
+              "material_id": "plasterboard",
+              "thickness": null
+            }
+          ]
+        }
+      ],
+      "frame": {
+        "id": "ne_loadbearing_walls",
+        "name": "Loadbearing walls",
+        "plain_description": "the walls carry the floors and roof",
+        "layers": []
+      },
+      "roofs": [
+        {
+          "id": "ne_pitched_tiled",
+          "name": "Pitched tiled roof",
+          "plain_description": "a pitched timber roof with clay or concrete tiles",
+          "layers": [
+            {
+              "role": "structure",
+              "material_id": "timber_rafters",
+              "thickness": null
+            },
+            {
+              "role": "covering",
+              "material_id": "roof_tile",
+              "thickness": null
+            }
+          ]
+        }
+      ],
+      "floors": [
+        {
+          "id": "ne_insulated_slab",
+          "name": "Insulated concrete slab",
+          "plain_description": "an insulated concrete ground floor",
+          "layers": [
+            {
+              "role": "structure",
+              "material_id": "concrete_slab",
+              "thickness": null
+            },
+            {
+              "role": "insulation",
+              "material_id": "floor_insulation",
+              "thickness": null
+            }
+          ]
+        }
+      ],
+      "windows": [
+        {
+          "id": "ne_windows",
+          "name": "Windows",
+          "plain_description": "timber, uPVC or aluminium windows",
+          "layers": [
+            {
+              "role": "frame",
+              "material_id": "window_frame",
+              "thickness": null
+            }
+          ]
+        }
+      ],
+      "doors": [
+        {
+          "id": "ne_external_door",
+          "name": "External doors",
+          "plain_description": "external doors — to be confirmed",
+          "layers": [
+            {
+              "role": "frame",
+              "material_id": "external_door",
+              "thickness": null
+            }
+          ]
+        }
+      ],
+      "finishes": {
+        "external": [
+          {
+            "id": "ne_facing_brick",
+            "name": "Facing brickwork",
+            "plain_description": "the brick outer wall is the finished face",
+            "layers": [
+              {
+                "role": "finish",
+                "material_id": "brick_facing",
+                "thickness": null
+              }
+            ]
+          }
+        ]
+      },
+      "typical_detail_ids": []
+    }
+  },
+  "coverage": {
+    "statement": "Generic v0.1.0 runs 6 automated checks covering geometry, dimensions, symbols, annotation, thermal, drainage. All are unverified and unsigned, so every result is a flag for professional review, never a pass. Checks not available: moisture, structural, fire stopping, acoustic, access, ventilation.",
+    "checks_available": [
+      "geometry",
+      "dimensions",
+      "symbols",
+      "annotation",
+      "thermal",
+      "drainage"
+    ],
+    "checks_not_available": [
+      "moisture",
+      "structural",
+      "fire_stopping",
+      "acoustic",
+      "access",
+      "ventilation"
+    ],
+    "rules_total": 6,
+    "rules_verified": 0
+  }
+}

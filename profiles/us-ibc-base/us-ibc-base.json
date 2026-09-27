@@ -1,0 +1,432 @@
+{
+  "schema_version": "0.1.0",
+  "metadata": {
+    "id": "us-ibc-base",
+    "name": "US-IBC Base",
+    "version": "0.1.0",
+    "type": "jurisdiction",
+    "jurisdiction": "US-IBC",
+    "tier": null,
+    "disciplines": [
+      "architecture"
+    ],
+    "building_types": [
+      "residential"
+    ],
+    "scope": "United States base stub: conventions and construction defaults only. No rules yet; whether it ships at launch and at which tier is Decision 2.",
+    "author": "Drawlogic",
+    "publish": "private",
+    "changelog": [
+      {
+        "version": "0.1.0",
+        "date": "2026-09-28",
+        "summary": "First authored version. Every rule is unverified until a signer record is added."
+      }
+    ]
+  },
+  "conventions": {
+    "units": "in",
+    "sheets": [
+      {
+        "size": "ARCH D",
+        "orientation": "landscape"
+      },
+      {
+        "size": "ANSI B",
+        "orientation": "landscape"
+      }
+    ],
+    "title_block": "drawlogic-arch-d",
+    "layer_standard": "US National CAD Standard (AIA CAD Layer Guidelines)",
+    "symbol_set": "US National CAD Standard symbols",
+    "dimension_style": {
+      "terminator": "arrow",
+      "text_height_mm": 3,
+      "precision": 0
+    },
+    "text_heights_mm": {
+      "annotation": 3,
+      "dimension": 3,
+      "title": 6
+    },
+    "annotation_language": "en-US"
+  },
+  "applicable_documents": [
+    {
+      "ref": "International Building Code"
+    },
+    {
+      "ref": "International Residential Code"
+    }
+  ],
+  "provenance_settings": {
+    "verify_threshold": 0.8
+  },
+  "required_constraints": {},
+  "rules": [],
+  "check_categories": [
+    "moisture",
+    "thermal",
+    "egress",
+    "structural",
+    "fire_stopping",
+    "access"
+  ],
+  "typical_details": [],
+  "construction_defaults": {
+    "materials": [
+      {
+        "id": "wood_studs",
+        "name": "Wood studs",
+        "category": "timber",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "us-ibc-base",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "stud_insulation",
+        "name": "Insulation between studs (type and thickness to be confirmed)",
+        "category": "insulation",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "us-ibc-base",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "wall_sheathing",
+        "name": "Wall sheathing",
+        "category": "board",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "us-ibc-base",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "weather_barrier",
+        "name": "Weather-resistive barrier",
+        "category": "membrane",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "us-ibc-base",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "siding",
+        "name": "Siding (to be confirmed)",
+        "category": "cladding",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "us-ibc-base",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "gypsum_board",
+        "name": "Gypsum board",
+        "category": "finish",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "us-ibc-base",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "wood_trusses",
+        "name": "Wood roof trusses",
+        "category": "timber",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "us-ibc-base",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "asphalt_shingles",
+        "name": "Asphalt shingles",
+        "category": "roofing",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "us-ibc-base",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "concrete_slab",
+        "name": "Concrete slab on grade",
+        "category": "concrete",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "us-ibc-base",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "wood_floor_framing",
+        "name": "Wood floor framing",
+        "category": "timber",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "us-ibc-base",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "vinyl_window",
+        "name": "Vinyl window",
+        "category": "frame",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "us-ibc-base",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "entry_door",
+        "name": "Entry door (to be confirmed)",
+        "category": "frame",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "us-ibc-base",
+            "version": "0.1.0"
+          }
+        }
+      }
+    ],
+    "walls": [
+      {
+        "id": "us_wood_frame_wall",
+        "name": "Wood-frame wall",
+        "plain_description": "a wood-frame wall with insulation, sheathing and siding outside and gypsum board inside",
+        "layers": [
+          {
+            "role": "cladding",
+            "material_id": "siding",
+            "thickness": null
+          },
+          {
+            "role": "barrier",
+            "material_id": "weather_barrier",
+            "thickness": null
+          },
+          {
+            "role": "sheathing",
+            "material_id": "wall_sheathing",
+            "thickness": null
+          },
+          {
+            "role": "structure",
+            "material_id": "wood_studs",
+            "thickness": null
+          },
+          {
+            "role": "insulation",
+            "material_id": "stud_insulation",
+            "thickness": null
+          },
+          {
+            "role": "finish",
+            "material_id": "gypsum_board",
+            "thickness": null
+          }
+        ]
+      }
+    ],
+    "frame": {
+      "id": "us_light_wood_frame",
+      "name": "Light wood frame",
+      "plain_description": "a light wood frame carries the floors and roof",
+      "layers": [
+        {
+          "role": "frame",
+          "material_id": "wood_studs",
+          "thickness": null
+        }
+      ]
+    },
+    "roofs": [
+      {
+        "id": "us_shingle_truss_roof",
+        "name": "Asphalt shingle roof on trusses",
+        "plain_description": "asphalt shingles on wood roof trusses",
+        "layers": [
+          {
+            "role": "structure",
+            "material_id": "wood_trusses",
+            "thickness": null
+          },
+          {
+            "role": "covering",
+            "material_id": "asphalt_shingles",
+            "thickness": null
+          }
+        ]
+      }
+    ],
+    "floors": [
+      {
+        "id": "us_slab_on_grade",
+        "name": "Slab on grade",
+        "plain_description": "a concrete slab on grade",
+        "layers": [
+          {
+            "role": "structure",
+            "material_id": "concrete_slab",
+            "thickness": null
+          }
+        ]
+      },
+      {
+        "id": "us_wood_floor",
+        "name": "Wood floor framing",
+        "plain_description": "wood-framed upper floors",
+        "layers": [
+          {
+            "role": "structure",
+            "material_id": "wood_floor_framing",
+            "thickness": null
+          }
+        ],
+        "applies_to": [
+          "upper floors"
+        ]
+      }
+    ],
+    "windows": [
+      {
+        "id": "us_vinyl_windows",
+        "name": "Vinyl windows",
+        "plain_description": "vinyl windows",
+        "layers": [
+          {
+            "role": "frame",
+            "material_id": "vinyl_window",
+            "thickness": null
+          }
+        ]
+      }
+    ],
+    "doors": [
+      {
+        "id": "us_entry_door",
+        "name": "Entry doors",
+        "plain_description": "entry doors — to be confirmed",
+        "layers": [
+          {
+            "role": "frame",
+            "material_id": "entry_door",
+            "thickness": null
+          }
+        ]
+      }
+    ],
+    "finishes": {
+      "external": [
+        {
+          "id": "us_siding",
+          "name": "Siding",
+          "plain_description": "siding outside — to be confirmed",
+          "layers": [
+            {
+              "role": "finish",
+              "material_id": "siding",
+              "thickness": null
+            }
+          ]
+        }
+      ],
+      "internal": [
+        {
+          "id": "us_gypsum_board",
+          "name": "Gypsum board",
+          "plain_description": "gypsum board walls and ceilings",
+          "layers": [
+            {
+              "role": "finish",
+              "material_id": "gypsum_board",
+              "thickness": null
+            }
+          ]
+        }
+      ]
+    },
+    "typical_detail_ids": []
+  },
+  "coverage": {
+    "statement": "US-IBC Base v0.1.0 has no rules yet and is unsigned: it supplies conventions and construction defaults only. Checks not available: moisture, thermal, egress, structural, fire stopping, access.",
+    "checks_available": [],
+    "checks_not_available": [
+      "moisture",
+      "thermal",
+      "egress",
+      "structural",
+      "fire_stopping",
+      "access"
+    ],
+    "rules_total": 0,
+    "rules_verified": 0
+  }
+}
