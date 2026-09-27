@@ -1,0 +1,177 @@
+{
+  "detail_type": "parapet",
+  "input": "input.ddl.json",
+  "drawing_id": "1b31546a-7732-5045-9714-c8f05badc633",
+  "drawing_hash": "sha256:84893e473056c0863d3a557a66d42a90131b4da201e6975e2d9d0acac3c054ce",
+  "rev": "A",
+  "title": "Parapet at warm flat roof",
+  "scale": 10,
+  "layers": [
+    {
+      "id": "walls",
+      "name": "A-Walls"
+    },
+    {
+      "id": "roof",
+      "name": "A-Roof"
+    },
+    {
+      "id": "anno",
+      "name": "A-Anno"
+    }
+  ],
+  "objects": [
+    {
+      "id": "brick",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "brick_facing",
+      "hatch_category": "masonry"
+    },
+    {
+      "id": "cavity",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": null,
+      "hatch_category": null
+    },
+    {
+      "id": "ins",
+      "layer_id": "walls",
+      "source": "profile",
+      "verify": false,
+      "material_id": "pir_board",
+      "hatch_category": "insulation"
+    },
+    {
+      "id": "block",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "block_dense",
+      "hatch_category": "masonry"
+    },
+    {
+      "id": "deck",
+      "layer_id": "roof",
+      "source": "user",
+      "verify": false,
+      "material_id": "concrete_c25",
+      "hatch_category": "concrete"
+    },
+    {
+      "id": "vcl",
+      "layer_id": "roof",
+      "source": "profile",
+      "verify": false,
+      "material_id": "vcl_sheet",
+      "hatch_category": null
+    },
+    {
+      "id": "roof_ins",
+      "layer_id": "roof",
+      "source": "ai_inferred",
+      "verify": true,
+      "material_id": "pir_board",
+      "hatch_category": "insulation"
+    },
+    {
+      "id": "membrane",
+      "layer_id": "roof",
+      "source": "user",
+      "verify": false,
+      "material_id": "bitumen_membrane",
+      "hatch_category": null
+    },
+    {
+      "id": "upstand",
+      "layer_id": "roof",
+      "source": "user",
+      "verify": false,
+      "material_id": "bitumen_membrane",
+      "hatch_category": null
+    },
+    {
+      "id": "dpc",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "dpc_polymer",
+      "hatch_category": null
+    },
+    {
+      "id": "coping",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "alu_coping",
+      "hatch_category": null
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "upstand_height",
+      "value": 150,
+      "text": {
+        "gb-eng": "150",
+        "variant": "150.0"
+      },
+      "terminator": {
+        "gb-eng": "tick",
+        "variant": "arrow"
+      }
+    },
+    {
+      "id": "parapet_height",
+      "value": 660,
+      "text": {
+        "gb-eng": "660",
+        "variant": "660.0"
+      },
+      "terminator": {
+        "gb-eng": "tick",
+        "variant": "arrow"
+      }
+    },
+    {
+      "id": "coping_overhang",
+      "value": 40,
+      "text": {
+        "gb-eng": "40",
+        "variant": "40.0"
+      },
+      "terminator": {
+        "gb-eng": "tick",
+        "variant": "arrow"
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "id": "an_coping",
+      "text": "Aluminium coping RAL 7016",
+      "leader": true,
+      "targets": [
+        "coping"
+      ]
+    },
+    {
+      "id": "an_upstand",
+      "text": "Membrane upstand",
+      "leader": true,
+      "targets": [
+        "upstand"
+      ]
+    },
+    {
+      "id": "an_ins",
+      "text": "Roof insulation (to be confirmed)",
+      "leader": true,
+      "targets": [
+        "roof_ins"
+      ]
+    }
+  ]
+}

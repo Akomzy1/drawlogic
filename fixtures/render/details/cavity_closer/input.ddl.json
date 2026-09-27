@@ -1,0 +1,503 @@
+{
+  "ddl_version": "0.1.0",
+  "drawing": {
+    "id": "ff409c83-4220-5356-90bc-af24d3339899",
+    "title": "Cavity closer at opening, plan",
+    "discipline": "architecture",
+    "type": "detail",
+    "detail_type": "cavity_closer",
+    "mode": "draft",
+    "scale": 10,
+    "units": "mm",
+    "jurisdiction": "GB-ENG",
+    "rev": "A",
+    "hash": "sha256:a3e2749434d0a41e2a6c2c9784dc676f610d6950f816707903a0811579280fa7",
+    "parent_hash": null,
+    "profile_stack": [
+      {
+        "id": "gb-eng-residential",
+        "name": "GB-ENG Residential",
+        "version": "0.1.0",
+        "layer": "jurisdiction",
+        "tier": 1,
+        "signer": null
+      },
+      {
+        "id": "generic",
+        "name": "Generic",
+        "version": "0.1.0",
+        "layer": "generic",
+        "tier": null,
+        "signer": null
+      }
+    ],
+    "card_id": "card-render-fixture-cavity_closer",
+    "created_at": "2026-09-27T09:00:00Z"
+  },
+  "materials": [
+    {
+      "id": "block_dense",
+      "name": "Dense concrete block",
+      "category": "masonry",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "brick_facing",
+      "name": "Facing brick",
+      "category": "masonry",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "closer_ins",
+      "name": "Insulated cavity closer",
+      "category": "insulation",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "pir_board",
+      "name": "PIR insulation board",
+      "category": "insulation",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "plaster",
+      "name": "Plasterboard and skim",
+      "category": "finish",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "upvc_frame",
+      "name": "uPVC window frame",
+      "category": "frame",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "objects": [
+    {
+      "id": "brick",
+      "class": "masonry",
+      "label": "Outer leaf",
+      "material_id": "brick_facing",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            300,
+            0
+          ],
+          [
+            900,
+            0
+          ],
+          [
+            900,
+            102.5
+          ],
+          [
+            300,
+            102.5
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "cavity",
+      "class": "cavity",
+      "label": "Residual cavity",
+      "material_id": null,
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            300,
+            102.5
+          ],
+          [
+            900,
+            102.5
+          ],
+          [
+            900,
+            152.5
+          ],
+          [
+            300,
+            152.5
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "ins",
+      "class": "insulation",
+      "label": "Cavity insulation",
+      "material_id": "pir_board",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            300,
+            152.5
+          ],
+          [
+            900,
+            152.5
+          ],
+          [
+            900,
+            252.5
+          ],
+          [
+            300,
+            252.5
+          ]
+        ],
+        "closed": true
+      },
+      "source": "profile",
+      "confidence": 1.0,
+      "verify": false,
+      "source_detail": {
+        "profile": {
+          "id": "gb-eng-residential",
+          "version": "0.1.0"
+        }
+      },
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "block",
+      "class": "masonry",
+      "label": "Inner leaf",
+      "material_id": "block_dense",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            300,
+            252.5
+          ],
+          [
+            900,
+            252.5
+          ],
+          [
+            900,
+            352.5
+          ],
+          [
+            300,
+            352.5
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "plaster",
+      "class": "finish",
+      "label": "Internal finish",
+      "material_id": "plaster",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            300,
+            352.5
+          ],
+          [
+            900,
+            352.5
+          ],
+          [
+            900,
+            365
+          ],
+          [
+            300,
+            365
+          ]
+        ],
+        "closed": true
+      },
+      "source": "profile",
+      "confidence": 1.0,
+      "verify": false,
+      "source_detail": {
+        "profile": {
+          "id": "gb-eng-residential",
+          "version": "0.1.0"
+        }
+      },
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "closer",
+      "class": "cavity_closer",
+      "label": "Insulated cavity closer",
+      "material_id": "closer_ins",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            260,
+            102.5
+          ],
+          [
+            300,
+            102.5
+          ],
+          [
+            300,
+            252.5
+          ],
+          [
+            260,
+            252.5
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "reveal",
+      "class": "finish",
+      "label": "Reveal finish",
+      "material_id": "plaster",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            290,
+            252.5
+          ],
+          [
+            300,
+            252.5
+          ],
+          [
+            300,
+            365
+          ],
+          [
+            290,
+            365
+          ]
+        ],
+        "closed": true
+      },
+      "source": "profile",
+      "confidence": 1.0,
+      "verify": false,
+      "source_detail": {
+        "profile": {
+          "id": "gb-eng-residential",
+          "version": "0.1.0"
+        }
+      },
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "frame",
+      "class": "window_frame",
+      "label": "Frame",
+      "material_id": "upvc_frame",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            160,
+            40
+          ],
+          [
+            260,
+            40
+          ],
+          [
+            260,
+            120
+          ],
+          [
+            160,
+            120
+          ]
+        ],
+        "closed": true
+      },
+      "source": "ai_inferred",
+      "confidence": 0.7,
+      "verify": true,
+      "source_detail": {
+        "model": {
+          "provider": "anthropic",
+          "model_id": "claude-opus-5-5",
+          "task": "interpret"
+        },
+        "note": "Position read from the reference; confirm on site."
+      },
+      "rule_refs": [],
+      "layer_id": "openings"
+    }
+  ],
+  "connections": [],
+  "constraints": [],
+  "dimensions": [
+    {
+      "id": "closer_width",
+      "kind": "linear",
+      "refs": [
+        "closer",
+        "brick"
+      ],
+      "value": 40,
+      "driving": true,
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "display": true
+    },
+    {
+      "id": "wall_total",
+      "kind": "linear",
+      "refs": [
+        "brick",
+        "plaster"
+      ],
+      "value": 365,
+      "driving": true,
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "display": true
+    }
+  ],
+  "annotations": [
+    {
+      "id": "an_closer",
+      "kind": "leader",
+      "text": "Insulated cavity closer",
+      "targets": [
+        "closer"
+      ],
+      "position": [
+        -120.0,
+        327.5
+      ],
+      "layer_id": "anno",
+      "source": "user",
+      "confidence": 1
+    },
+    {
+      "id": "an_reveal",
+      "kind": "leader",
+      "text": "Reveal finish",
+      "targets": [
+        "reveal"
+      ],
+      "position": [
+        -105.0,
+        458.8
+      ],
+      "layer_id": "anno",
+      "source": "user",
+      "confidence": 1
+    }
+  ],
+  "layers": [
+    {
+      "id": "walls",
+      "name": "A-Walls"
+    },
+    {
+      "id": "openings",
+      "name": "A-Openings"
+    },
+    {
+      "id": "anno",
+      "name": "A-Anno"
+    }
+  ],
+  "schedules": [],
+  "solver": {
+    "status": "resolved",
+    "conflicts": [],
+    "resolved_at": "2026-09-27T09:00:01Z"
+  },
+  "checks": null,
+  "stamp": null
+}

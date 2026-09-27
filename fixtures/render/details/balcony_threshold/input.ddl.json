@@ -1,0 +1,462 @@
+{
+  "ddl_version": "0.1.0",
+  "drawing": {
+    "id": "677c6a9d-d9a6-579f-a593-d5287681ace3",
+    "title": "Balcony threshold",
+    "discipline": "architecture",
+    "type": "detail",
+    "detail_type": "balcony_threshold",
+    "mode": "draft",
+    "scale": 10,
+    "units": "mm",
+    "jurisdiction": "GB-ENG",
+    "rev": "A",
+    "hash": "sha256:1a415102ea41d7fa5bacaba01ffaaf9253c1fad1502828db1098efcd25c731c9",
+    "parent_hash": null,
+    "profile_stack": [
+      {
+        "id": "gb-eng-residential",
+        "name": "GB-ENG Residential",
+        "version": "0.1.0",
+        "layer": "jurisdiction",
+        "tier": 1,
+        "signer": null
+      },
+      {
+        "id": "generic",
+        "name": "Generic",
+        "version": "0.1.0",
+        "layer": "generic",
+        "tier": null,
+        "signer": null
+      }
+    ],
+    "card_id": "card-render-fixture-balcony_threshold",
+    "created_at": "2026-09-27T09:00:00Z"
+  },
+  "materials": [
+    {
+      "id": "alu_threshold",
+      "name": "Aluminium threshold",
+      "category": "metal",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "bitumen_membrane",
+      "name": "Reinforced bitumen membrane",
+      "category": "membrane",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "concrete_c25",
+      "name": "Concrete",
+      "category": "concrete",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "screed",
+      "name": "Sand and cement screed",
+      "category": "screed",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "thermal_break",
+      "name": "Structural thermal break unit",
+      "category": "insulation",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "timber_sw",
+      "name": "Softwood timber",
+      "category": "timber",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "objects": [
+    {
+      "id": "slab",
+      "class": "slab",
+      "label": "Internal slab",
+      "material_id": "concrete_c25",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            0,
+            -250
+          ],
+          [
+            1200,
+            -250
+          ],
+          [
+            1200,
+            -75
+          ],
+          [
+            0,
+            -75
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "structure"
+    },
+    {
+      "id": "break",
+      "class": "thermal_break",
+      "label": "Thermal break unit",
+      "material_id": "thermal_break",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            -80,
+            -250
+          ],
+          [
+            0,
+            -250
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            -80,
+            0
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "source_detail": {
+        "note": "Size supplied by the user from the structural engineer's schedule; Drawlogic never sizes structure."
+      },
+      "rule_refs": [],
+      "layer_id": "structure"
+    },
+    {
+      "id": "balcony",
+      "class": "slab",
+      "label": "Balcony slab",
+      "material_id": "concrete_c25",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            -1500,
+            -250
+          ],
+          [
+            -80,
+            -250
+          ],
+          [
+            -80,
+            -40
+          ],
+          [
+            -1500,
+            -70
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "source_detail": {
+        "note": "Size supplied by the user from the structural engineer's schedule; Drawlogic never sizes structure."
+      },
+      "rule_refs": [],
+      "layer_id": "structure"
+    },
+    {
+      "id": "membrane",
+      "class": "membrane",
+      "label": "Balcony membrane",
+      "material_id": "bitumen_membrane",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            -1500,
+            -70
+          ],
+          [
+            -80,
+            -40
+          ],
+          [
+            -80,
+            -36
+          ],
+          [
+            -1500,
+            -66
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "roof"
+    },
+    {
+      "id": "threshold",
+      "class": "threshold",
+      "label": "Threshold",
+      "material_id": "alu_threshold",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            0,
+            0
+          ],
+          [
+            150,
+            0
+          ],
+          [
+            150,
+            20
+          ],
+          [
+            0,
+            20
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "openings"
+    },
+    {
+      "id": "door_frame",
+      "class": "door_frame",
+      "label": "Door frame",
+      "material_id": "timber_sw",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            40,
+            20
+          ],
+          [
+            150,
+            20
+          ],
+          [
+            150,
+            300
+          ],
+          [
+            40,
+            300
+          ]
+        ],
+        "closed": true
+      },
+      "source": "ai_inferred",
+      "confidence": 0.7,
+      "verify": true,
+      "source_detail": {
+        "model": {
+          "provider": "anthropic",
+          "model_id": "claude-opus-5-5",
+          "task": "interpret"
+        },
+        "note": "Position read from the reference; confirm on site."
+      },
+      "rule_refs": [],
+      "layer_id": "openings"
+    },
+    {
+      "id": "screed",
+      "class": "screed",
+      "label": "Screed",
+      "material_id": "screed",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            150,
+            -75
+          ],
+          [
+            1200,
+            -75
+          ],
+          [
+            1200,
+            0
+          ],
+          [
+            150,
+            0
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "floor"
+    }
+  ],
+  "connections": [],
+  "constraints": [],
+  "dimensions": [
+    {
+      "id": "break_width",
+      "kind": "linear",
+      "refs": [
+        "break",
+        "break"
+      ],
+      "value": 80,
+      "driving": true,
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "display": true
+    },
+    {
+      "id": "drop",
+      "kind": "linear",
+      "refs": [
+        "membrane",
+        "screed"
+      ],
+      "value": 36,
+      "driving": true,
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "display": true
+    }
+  ],
+  "annotations": [
+    {
+      "id": "an_break",
+      "kind": "leader",
+      "text": "Thermal break unit to engineer's design",
+      "targets": [
+        "break"
+      ],
+      "position": [
+        -440.0,
+        25.0
+      ],
+      "layer_id": "anno",
+      "source": "user",
+      "confidence": 1
+    },
+    {
+      "id": "an_membrane",
+      "kind": "leader",
+      "text": "Membrane falls away from door",
+      "targets": [
+        "membrane"
+      ],
+      "position": [
+        -1190.0,
+        97.0
+      ],
+      "layer_id": "anno",
+      "source": "user",
+      "confidence": 1
+    }
+  ],
+  "layers": [
+    {
+      "id": "roof",
+      "name": "A-Roof"
+    },
+    {
+      "id": "floor",
+      "name": "A-Floor"
+    },
+    {
+      "id": "structure",
+      "name": "A-Structure"
+    },
+    {
+      "id": "openings",
+      "name": "A-Openings"
+    },
+    {
+      "id": "anno",
+      "name": "A-Anno"
+    }
+  ],
+  "schedules": [],
+  "solver": {
+    "status": "resolved",
+    "conflicts": [],
+    "resolved_at": "2026-09-27T09:00:01Z"
+  },
+  "checks": null,
+  "stamp": null
+}

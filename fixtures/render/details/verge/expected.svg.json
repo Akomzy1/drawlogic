@@ -1,0 +1,149 @@
+{
+  "detail_type": "verge",
+  "input": "input.ddl.json",
+  "drawing_id": "30f56ded-f448-5132-8f95-60e80696ead6",
+  "drawing_hash": "sha256:ef613cfa7bc6135b87787eb46411a0ef2e68044382afba893895f3fd1267766f",
+  "rev": "A",
+  "title": "Verge at gable",
+  "scale": 10,
+  "layers": [
+    {
+      "id": "walls",
+      "name": "A-Walls"
+    },
+    {
+      "id": "roof",
+      "name": "A-Roof"
+    },
+    {
+      "id": "anno",
+      "name": "A-Anno"
+    }
+  ],
+  "objects": [
+    {
+      "id": "brick",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "brick_facing",
+      "hatch_category": "masonry"
+    },
+    {
+      "id": "cavity",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": null,
+      "hatch_category": null
+    },
+    {
+      "id": "ins",
+      "layer_id": "walls",
+      "source": "profile",
+      "verify": false,
+      "material_id": "pir_board",
+      "hatch_category": "insulation"
+    },
+    {
+      "id": "block",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "block_dense",
+      "hatch_category": "masonry"
+    },
+    {
+      "id": "plaster",
+      "layer_id": "walls",
+      "source": "profile",
+      "verify": false,
+      "material_id": "plaster",
+      "hatch_category": null
+    },
+    {
+      "id": "undercloak",
+      "layer_id": "roof",
+      "source": "user",
+      "verify": false,
+      "material_id": "fibre_cement",
+      "hatch_category": null
+    },
+    {
+      "id": "battens",
+      "layer_id": "roof",
+      "source": "user",
+      "verify": false,
+      "material_id": "timber_sw",
+      "hatch_category": "timber"
+    },
+    {
+      "id": "tiles",
+      "layer_id": "roof",
+      "source": "profile",
+      "verify": false,
+      "material_id": "roof_tile",
+      "hatch_category": null
+    },
+    {
+      "id": "verge_trim",
+      "layer_id": "roof",
+      "source": "user",
+      "verify": false,
+      "material_id": "upvc_trim",
+      "hatch_category": null
+    },
+    {
+      "id": "rafter",
+      "layer_id": "roof",
+      "source": "user",
+      "verify": false,
+      "material_id": "timber_sw",
+      "hatch_category": "timber"
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "verge_overhang",
+      "value": 70,
+      "text": {
+        "gb-eng": "70",
+        "variant": "70.0"
+      },
+      "terminator": {
+        "gb-eng": "tick",
+        "variant": "arrow"
+      }
+    },
+    {
+      "id": "wall_total",
+      "value": 365,
+      "text": {
+        "gb-eng": "365",
+        "variant": "365.0"
+      },
+      "terminator": {
+        "gb-eng": "tick",
+        "variant": "arrow"
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "id": "an_trim",
+      "text": "Dry verge trim",
+      "leader": true,
+      "targets": [
+        "verge_trim"
+      ]
+    },
+    {
+      "id": "an_undercloak",
+      "text": "Undercloak",
+      "leader": true,
+      "targets": [
+        "undercloak"
+      ]
+    }
+  ]
+}

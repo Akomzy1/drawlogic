@@ -1,0 +1,744 @@
+{
+  "ddl_version": "0.1.0",
+  "drawing": {
+    "id": "53d4b07e-f73e-52d7-b5a4-b45a4e5d6b4c",
+    "title": "Warm flat roof abutment",
+    "discipline": "architecture",
+    "type": "detail",
+    "detail_type": "warm_flat_roof_abutment",
+    "mode": "draft",
+    "scale": 10,
+    "units": "mm",
+    "jurisdiction": "GB-ENG",
+    "rev": "A",
+    "hash": "sha256:be8601ff202395b46334757bc34ac604875e1d692e75c3d2375496ebbb1b74f9",
+    "parent_hash": null,
+    "profile_stack": [
+      {
+        "id": "gb-eng-residential",
+        "name": "GB-ENG Residential",
+        "version": "0.1.0",
+        "layer": "jurisdiction",
+        "tier": 1,
+        "signer": null
+      },
+      {
+        "id": "generic",
+        "name": "Generic",
+        "version": "0.1.0",
+        "layer": "generic",
+        "tier": null,
+        "signer": null
+      }
+    ],
+    "card_id": "card-render-fixture-warm_flat_roof_abutment",
+    "created_at": "2026-09-27T09:00:00Z"
+  },
+  "materials": [
+    {
+      "id": "bitumen_membrane",
+      "name": "Reinforced bitumen membrane",
+      "category": "membrane",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "block_dense",
+      "name": "Dense concrete block",
+      "category": "masonry",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "brick_facing",
+      "name": "Facing brick",
+      "category": "masonry",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "concrete_c25",
+      "name": "Concrete",
+      "category": "concrete",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "dpc_polymer",
+      "name": "Polymer damp-proof course",
+      "category": "dpc",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "lead_flashing",
+      "name": "Lead cover flashing",
+      "category": "metal",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "pir_board",
+      "name": "PIR insulation board",
+      "category": "insulation",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "plaster",
+      "name": "Plasterboard and skim",
+      "category": "finish",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "vcl_sheet",
+      "name": "Vapour control layer",
+      "category": "membrane",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "objects": [
+    {
+      "id": "brick_lower",
+      "class": "masonry",
+      "label": "Outer leaf",
+      "material_id": "brick_facing",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            0,
+            0
+          ],
+          [
+            102.5,
+            0
+          ],
+          [
+            102.5,
+            460
+          ],
+          [
+            0,
+            460
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "tray",
+      "class": "dpc",
+      "label": "Cavity tray",
+      "material_id": "dpc_polymer",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            0,
+            460
+          ],
+          [
+            152.5,
+            460
+          ],
+          [
+            152.5,
+            464
+          ],
+          [
+            0,
+            464
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "brick_upper",
+      "class": "masonry",
+      "label": "Outer leaf",
+      "material_id": "brick_facing",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            0,
+            464
+          ],
+          [
+            102.5,
+            464
+          ],
+          [
+            102.5,
+            1200
+          ],
+          [
+            0,
+            1200
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "cavity_lower",
+      "class": "cavity",
+      "label": "Residual cavity",
+      "material_id": null,
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            102.5,
+            0
+          ],
+          [
+            152.5,
+            0
+          ],
+          [
+            152.5,
+            460
+          ],
+          [
+            102.5,
+            460
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "cavity_upper",
+      "class": "cavity",
+      "label": "Residual cavity",
+      "material_id": null,
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            102.5,
+            464
+          ],
+          [
+            152.5,
+            464
+          ],
+          [
+            152.5,
+            1200
+          ],
+          [
+            102.5,
+            1200
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "ins",
+      "class": "insulation",
+      "label": "Cavity insulation",
+      "material_id": "pir_board",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            152.5,
+            0
+          ],
+          [
+            252.5,
+            0
+          ],
+          [
+            252.5,
+            1200
+          ],
+          [
+            152.5,
+            1200
+          ]
+        ],
+        "closed": true
+      },
+      "source": "profile",
+      "confidence": 1.0,
+      "verify": false,
+      "source_detail": {
+        "profile": {
+          "id": "gb-eng-residential",
+          "version": "0.1.0"
+        }
+      },
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "block",
+      "class": "masonry",
+      "label": "Inner leaf",
+      "material_id": "block_dense",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            252.5,
+            0
+          ],
+          [
+            352.5,
+            0
+          ],
+          [
+            352.5,
+            1200
+          ],
+          [
+            252.5,
+            1200
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "plaster",
+      "class": "finish",
+      "label": "Internal finish",
+      "material_id": "plaster",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            352.5,
+            0
+          ],
+          [
+            365,
+            0
+          ],
+          [
+            365,
+            1200
+          ],
+          [
+            352.5,
+            1200
+          ]
+        ],
+        "closed": true
+      },
+      "source": "profile",
+      "confidence": 1.0,
+      "verify": false,
+      "source_detail": {
+        "profile": {
+          "id": "gb-eng-residential",
+          "version": "0.1.0"
+        }
+      },
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "deck",
+      "class": "deck",
+      "label": "Roof deck",
+      "material_id": "concrete_c25",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            -1200,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            150
+          ],
+          [
+            -1200,
+            150
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "roof"
+    },
+    {
+      "id": "vcl",
+      "class": "membrane",
+      "label": "Vapour control layer",
+      "material_id": "vcl_sheet",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            -1200,
+            150
+          ],
+          [
+            0,
+            150
+          ],
+          [
+            0,
+            154
+          ],
+          [
+            -1200,
+            154
+          ]
+        ],
+        "closed": true
+      },
+      "source": "profile",
+      "confidence": 1.0,
+      "verify": false,
+      "source_detail": {
+        "profile": {
+          "id": "gb-eng-residential",
+          "version": "0.1.0"
+        }
+      },
+      "rule_refs": [],
+      "layer_id": "roof"
+    },
+    {
+      "id": "roof_ins",
+      "class": "insulation",
+      "label": "Roof insulation",
+      "material_id": "pir_board",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            -1200,
+            154
+          ],
+          [
+            0,
+            154
+          ],
+          [
+            0,
+            294
+          ],
+          [
+            -1200,
+            294
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "roof"
+    },
+    {
+      "id": "membrane",
+      "class": "membrane",
+      "label": "Roof membrane",
+      "material_id": "bitumen_membrane",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            -1200,
+            294
+          ],
+          [
+            0,
+            294
+          ],
+          [
+            0,
+            300
+          ],
+          [
+            -1200,
+            300
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "roof"
+    },
+    {
+      "id": "upstand",
+      "class": "upstand",
+      "label": "Membrane upstand",
+      "material_id": "bitumen_membrane",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            -6,
+            300
+          ],
+          [
+            0,
+            300
+          ],
+          [
+            0,
+            450
+          ],
+          [
+            -6,
+            450
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "roof"
+    },
+    {
+      "id": "flashing",
+      "class": "flashing",
+      "label": "Cover flashing",
+      "material_id": "lead_flashing",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            -25,
+            400
+          ],
+          [
+            -6,
+            400
+          ],
+          [
+            -6,
+            458
+          ],
+          [
+            -25,
+            458
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "roof"
+    }
+  ],
+  "connections": [],
+  "constraints": [],
+  "dimensions": [
+    {
+      "id": "upstand_height",
+      "kind": "linear",
+      "refs": [
+        "membrane",
+        "upstand"
+      ],
+      "value": 150,
+      "driving": true,
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "display": true
+    },
+    {
+      "id": "wall_total",
+      "kind": "linear",
+      "refs": [
+        "brick_lower",
+        "plaster"
+      ],
+      "value": 365,
+      "driving": true,
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "display": true
+    }
+  ],
+  "annotations": [
+    {
+      "id": "an_tray",
+      "kind": "leader",
+      "text": "Cavity tray above roof level",
+      "targets": [
+        "tray"
+      ],
+      "position": [
+        -323.8,
+        612.0
+      ],
+      "layer_id": "anno",
+      "source": "user",
+      "confidence": 1
+    },
+    {
+      "id": "an_flashing",
+      "kind": "leader",
+      "text": "Lead cover flashing over upstand",
+      "targets": [
+        "flashing"
+      ],
+      "position": [
+        -415.5,
+        579.0
+      ],
+      "layer_id": "anno",
+      "source": "user",
+      "confidence": 1
+    }
+  ],
+  "layers": [
+    {
+      "id": "walls",
+      "name": "A-Walls"
+    },
+    {
+      "id": "roof",
+      "name": "A-Roof"
+    },
+    {
+      "id": "anno",
+      "name": "A-Anno"
+    }
+  ],
+  "schedules": [],
+  "solver": {
+    "status": "resolved",
+    "conflicts": [],
+    "resolved_at": "2026-09-27T09:00:01Z"
+  },
+  "checks": null,
+  "stamp": null
+}

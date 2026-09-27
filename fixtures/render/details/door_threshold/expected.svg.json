@@ -1,0 +1,149 @@
+{
+  "detail_type": "door_threshold",
+  "input": "input.ddl.json",
+  "drawing_id": "25109ab0-3d83-5868-9b57-548f5852d69c",
+  "drawing_hash": "sha256:392741d16704226e3741e37ee7b8daf6264f441322068615c9ee5bc1d3055114",
+  "rev": "A",
+  "title": "Door threshold",
+  "scale": 10,
+  "layers": [
+    {
+      "id": "walls",
+      "name": "A-Walls"
+    },
+    {
+      "id": "floor",
+      "name": "A-Floor"
+    },
+    {
+      "id": "openings",
+      "name": "A-Openings"
+    },
+    {
+      "id": "ground",
+      "name": "A-Ground"
+    },
+    {
+      "id": "anno",
+      "name": "A-Anno"
+    }
+  ],
+  "objects": [
+    {
+      "id": "paving",
+      "layer_id": "ground",
+      "source": "user",
+      "verify": false,
+      "material_id": "paving",
+      "hatch_category": "stone"
+    },
+    {
+      "id": "brick",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "brick_facing",
+      "hatch_category": "masonry"
+    },
+    {
+      "id": "dpc",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "dpc_polymer",
+      "hatch_category": null
+    },
+    {
+      "id": "threshold",
+      "layer_id": "openings",
+      "source": "user",
+      "verify": false,
+      "material_id": "alu_threshold",
+      "hatch_category": null
+    },
+    {
+      "id": "door_frame",
+      "layer_id": "openings",
+      "source": "ai_inferred",
+      "verify": true,
+      "material_id": "timber_sw",
+      "hatch_category": "timber"
+    },
+    {
+      "id": "door_leaf",
+      "layer_id": "openings",
+      "source": "user",
+      "verify": false,
+      "material_id": "timber_door",
+      "hatch_category": "timber"
+    },
+    {
+      "id": "slab",
+      "layer_id": "floor",
+      "source": "user",
+      "verify": false,
+      "material_id": "concrete_c25",
+      "hatch_category": "concrete"
+    },
+    {
+      "id": "floor_ins",
+      "layer_id": "floor",
+      "source": "profile",
+      "verify": false,
+      "material_id": "pir_board",
+      "hatch_category": "insulation"
+    },
+    {
+      "id": "screed",
+      "layer_id": "floor",
+      "source": "user",
+      "verify": false,
+      "material_id": "screed",
+      "hatch_category": "screed"
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "step",
+      "value": 150,
+      "text": {
+        "gb-eng": "150",
+        "variant": "150.0"
+      },
+      "terminator": {
+        "gb-eng": "tick",
+        "variant": "arrow"
+      }
+    },
+    {
+      "id": "frame_setback",
+      "value": 60,
+      "text": {
+        "gb-eng": "60",
+        "variant": "60.0"
+      },
+      "terminator": {
+        "gb-eng": "tick",
+        "variant": "arrow"
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "id": "an_threshold",
+      "text": "Aluminium threshold",
+      "leader": true,
+      "targets": [
+        "threshold"
+      ]
+    },
+    {
+      "id": "an_dpc",
+      "text": "DPC linked to floor DPM",
+      "leader": true,
+      "targets": [
+        "dpc"
+      ]
+    }
+  ]
+}

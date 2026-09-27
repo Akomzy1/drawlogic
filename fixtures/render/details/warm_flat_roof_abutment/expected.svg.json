@@ -1,0 +1,181 @@
+{
+  "detail_type": "warm_flat_roof_abutment",
+  "input": "input.ddl.json",
+  "drawing_id": "53d4b07e-f73e-52d7-b5a4-b45a4e5d6b4c",
+  "drawing_hash": "sha256:be8601ff202395b46334757bc34ac604875e1d692e75c3d2375496ebbb1b74f9",
+  "rev": "A",
+  "title": "Warm flat roof abutment",
+  "scale": 10,
+  "layers": [
+    {
+      "id": "walls",
+      "name": "A-Walls"
+    },
+    {
+      "id": "roof",
+      "name": "A-Roof"
+    },
+    {
+      "id": "anno",
+      "name": "A-Anno"
+    }
+  ],
+  "objects": [
+    {
+      "id": "brick_lower",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "brick_facing",
+      "hatch_category": "masonry"
+    },
+    {
+      "id": "tray",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "dpc_polymer",
+      "hatch_category": null
+    },
+    {
+      "id": "brick_upper",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "brick_facing",
+      "hatch_category": "masonry"
+    },
+    {
+      "id": "cavity_lower",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": null,
+      "hatch_category": null
+    },
+    {
+      "id": "cavity_upper",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": null,
+      "hatch_category": null
+    },
+    {
+      "id": "ins",
+      "layer_id": "walls",
+      "source": "profile",
+      "verify": false,
+      "material_id": "pir_board",
+      "hatch_category": "insulation"
+    },
+    {
+      "id": "block",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "block_dense",
+      "hatch_category": "masonry"
+    },
+    {
+      "id": "plaster",
+      "layer_id": "walls",
+      "source": "profile",
+      "verify": false,
+      "material_id": "plaster",
+      "hatch_category": null
+    },
+    {
+      "id": "deck",
+      "layer_id": "roof",
+      "source": "user",
+      "verify": false,
+      "material_id": "concrete_c25",
+      "hatch_category": "concrete"
+    },
+    {
+      "id": "vcl",
+      "layer_id": "roof",
+      "source": "profile",
+      "verify": false,
+      "material_id": "vcl_sheet",
+      "hatch_category": null
+    },
+    {
+      "id": "roof_ins",
+      "layer_id": "roof",
+      "source": "user",
+      "verify": false,
+      "material_id": "pir_board",
+      "hatch_category": "insulation"
+    },
+    {
+      "id": "membrane",
+      "layer_id": "roof",
+      "source": "user",
+      "verify": false,
+      "material_id": "bitumen_membrane",
+      "hatch_category": null
+    },
+    {
+      "id": "upstand",
+      "layer_id": "roof",
+      "source": "user",
+      "verify": false,
+      "material_id": "bitumen_membrane",
+      "hatch_category": null
+    },
+    {
+      "id": "flashing",
+      "layer_id": "roof",
+      "source": "user",
+      "verify": false,
+      "material_id": "lead_flashing",
+      "hatch_category": null
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "upstand_height",
+      "value": 150,
+      "text": {
+        "gb-eng": "150",
+        "variant": "150.0"
+      },
+      "terminator": {
+        "gb-eng": "tick",
+        "variant": "arrow"
+      }
+    },
+    {
+      "id": "wall_total",
+      "value": 365,
+      "text": {
+        "gb-eng": "365",
+        "variant": "365.0"
+      },
+      "terminator": {
+        "gb-eng": "tick",
+        "variant": "arrow"
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "id": "an_tray",
+      "text": "Cavity tray above roof level",
+      "leader": true,
+      "targets": [
+        "tray"
+      ]
+    },
+    {
+      "id": "an_flashing",
+      "text": "Lead cover flashing over upstand",
+      "leader": true,
+      "targets": [
+        "flashing"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "detail_type": "steel_beam_bearing",
+  "input": "input.ddl.json",
+  "drawing_id": "291d47ec-72a3-5d12-833b-8d33ddf600e6",
+  "drawing_hash": "sha256:39f6a3ac803350a659f61e91c6690716772e48784f16a0cc4e69888c03bc8190",
+  "rev": "A",
+  "title": "Steel beam bearing on inner leaf",
+  "scale": 10,
+  "layers": [
+    {
+      "id": "walls",
+      "name": "A-Walls"
+    },
+    {
+      "id": "structure",
+      "name": "A-Structure"
+    },
+    {
+      "id": "anno",
+      "name": "A-Anno"
+    }
+  ],
+  "objects": [
+    {
+      "id": "brick",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "brick_facing",
+      "hatch_category": "masonry"
+    },
+    {
+      "id": "cavity",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": null,
+      "hatch_category": null
+    },
+    {
+      "id": "ins",
+      "layer_id": "walls",
+      "source": "profile",
+      "verify": false,
+      "material_id": "pir_board",
+      "hatch_category": "insulation"
+    },
+    {
+      "id": "block_lower",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "block_dense",
+      "hatch_category": "masonry"
+    },
+    {
+      "id": "padstone",
+      "layer_id": "structure",
+      "source": "user",
+      "verify": false,
+      "material_id": "concrete_c25",
+      "hatch_category": "concrete"
+    },
+    {
+      "id": "beam",
+      "layer_id": "structure",
+      "source": "user",
+      "verify": false,
+      "material_id": "steel_section",
+      "hatch_category": null
+    },
+    {
+      "id": "block_upper",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "block_dense",
+      "hatch_category": "masonry"
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "bearing",
+      "value": 90,
+      "text": {
+        "gb-eng": "90",
+        "variant": "90.0"
+      },
+      "terminator": {
+        "gb-eng": "tick",
+        "variant": "arrow"
+      }
+    },
+    {
+      "id": "padstone_height",
+      "value": 140,
+      "text": {
+        "gb-eng": "140",
+        "variant": "140.0"
+      },
+      "terminator": {
+        "gb-eng": "tick",
+        "variant": "arrow"
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "id": "an_beam",
+      "text": "Steel beam to engineer's schedule",
+      "leader": true,
+      "targets": [
+        "beam"
+      ]
+    },
+    {
+      "id": "an_padstone",
+      "text": "Padstone to engineer's design",
+      "leader": true,
+      "targets": [
+        "padstone"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,552 @@
+{
+  "ddl_version": "0.1.0",
+  "drawing": {
+    "id": "61caa4c4-5593-522c-b51d-6224ef816ca2",
+    "title": "Window sill, cavity wall",
+    "discipline": "architecture",
+    "type": "detail",
+    "detail_type": "window_sill",
+    "mode": "draft",
+    "scale": 10,
+    "units": "mm",
+    "jurisdiction": "GB-ENG",
+    "rev": "A",
+    "hash": "sha256:acb0cea8b4c3aa9a8b3d7896f5794e0937bbd9e917a7dc10e590ba6d2e3a28c0",
+    "parent_hash": null,
+    "profile_stack": [
+      {
+        "id": "gb-eng-residential",
+        "name": "GB-ENG Residential",
+        "version": "0.1.0",
+        "layer": "jurisdiction",
+        "tier": 1,
+        "signer": null
+      },
+      {
+        "id": "generic",
+        "name": "Generic",
+        "version": "0.1.0",
+        "layer": "generic",
+        "tier": null,
+        "signer": null
+      }
+    ],
+    "card_id": "card-render-fixture-window_sill",
+    "created_at": "2026-09-27T09:00:00Z"
+  },
+  "materials": [
+    {
+      "id": "block_dense",
+      "name": "Dense concrete block",
+      "category": "masonry",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "brick_facing",
+      "name": "Facing brick",
+      "category": "masonry",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "dpc_polymer",
+      "name": "Polymer damp-proof course",
+      "category": "dpc",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "pir_board",
+      "name": "PIR insulation board",
+      "category": "insulation",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "plaster",
+      "name": "Plasterboard and skim",
+      "category": "finish",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "stone_sill",
+      "name": "Reconstituted stone sill",
+      "category": "stone",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "timber_sw",
+      "name": "Softwood timber",
+      "category": "timber",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "upvc_frame",
+      "name": "uPVC window frame",
+      "category": "frame",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "objects": [
+    {
+      "id": "brick",
+      "class": "masonry",
+      "label": "Outer leaf",
+      "material_id": "brick_facing",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            0,
+            0
+          ],
+          [
+            102.5,
+            0
+          ],
+          [
+            102.5,
+            596
+          ],
+          [
+            0,
+            596
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "cavity",
+      "class": "cavity",
+      "label": "Residual cavity",
+      "material_id": null,
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            102.5,
+            0
+          ],
+          [
+            152.5,
+            0
+          ],
+          [
+            152.5,
+            596
+          ],
+          [
+            102.5,
+            596
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "ins",
+      "class": "insulation",
+      "label": "Cavity insulation",
+      "material_id": "pir_board",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            152.5,
+            0
+          ],
+          [
+            252.5,
+            0
+          ],
+          [
+            252.5,
+            596
+          ],
+          [
+            152.5,
+            596
+          ]
+        ],
+        "closed": true
+      },
+      "source": "profile",
+      "confidence": 1.0,
+      "verify": false,
+      "source_detail": {
+        "profile": {
+          "id": "gb-eng-residential",
+          "version": "0.1.0"
+        }
+      },
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "block",
+      "class": "masonry",
+      "label": "Inner leaf",
+      "material_id": "block_dense",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            252.5,
+            0
+          ],
+          [
+            352.5,
+            0
+          ],
+          [
+            352.5,
+            596
+          ],
+          [
+            252.5,
+            596
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "plaster",
+      "class": "finish",
+      "label": "Internal finish",
+      "material_id": "plaster",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            352.5,
+            0
+          ],
+          [
+            365,
+            0
+          ],
+          [
+            365,
+            596
+          ],
+          [
+            352.5,
+            596
+          ]
+        ],
+        "closed": true
+      },
+      "source": "profile",
+      "confidence": 1.0,
+      "verify": false,
+      "source_detail": {
+        "profile": {
+          "id": "gb-eng-residential",
+          "version": "0.1.0"
+        }
+      },
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "dpc",
+      "class": "dpc",
+      "label": "DPC under sill",
+      "material_id": "dpc_polymer",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            0,
+            596
+          ],
+          [
+            120,
+            596
+          ],
+          [
+            120,
+            600
+          ],
+          [
+            0,
+            600
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "sill",
+      "class": "sill",
+      "label": "External sill",
+      "material_id": "stone_sill",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            -40,
+            600
+          ],
+          [
+            120,
+            600
+          ],
+          [
+            120,
+            640
+          ],
+          [
+            -40,
+            620
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "openings"
+    },
+    {
+      "id": "frame",
+      "class": "window_frame",
+      "label": "Window frame sill",
+      "material_id": "upvc_frame",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            100,
+            640
+          ],
+          [
+            220,
+            640
+          ],
+          [
+            220,
+            720
+          ],
+          [
+            100,
+            720
+          ]
+        ],
+        "closed": true
+      },
+      "source": "ai_inferred",
+      "confidence": 0.7,
+      "verify": true,
+      "source_detail": {
+        "model": {
+          "provider": "anthropic",
+          "model_id": "claude-opus-5-5",
+          "task": "interpret"
+        },
+        "note": "Position read from the reference; confirm on site."
+      },
+      "rule_refs": [],
+      "layer_id": "openings"
+    },
+    {
+      "id": "board",
+      "class": "window_board",
+      "label": "Window board",
+      "material_id": "timber_sw",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            252.5,
+            700
+          ],
+          [
+            400,
+            700
+          ],
+          [
+            400,
+            725
+          ],
+          [
+            252.5,
+            725
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "openings"
+    }
+  ],
+  "connections": [],
+  "constraints": [],
+  "dimensions": [
+    {
+      "id": "wall_total",
+      "kind": "linear",
+      "refs": [
+        "brick",
+        "plaster"
+      ],
+      "value": 365,
+      "driving": true,
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "display": true
+    },
+    {
+      "id": "sill_projection",
+      "kind": "linear",
+      "refs": [
+        "sill",
+        "brick"
+      ],
+      "value": 40,
+      "driving": true,
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "display": true
+    }
+  ],
+  "annotations": [
+    {
+      "id": "an_sill",
+      "kind": "leader",
+      "text": "Sill falls outward with drip",
+      "targets": [
+        "sill"
+      ],
+      "position": [
+        -360.0,
+        765.0
+      ],
+      "layer_id": "anno",
+      "source": "user",
+      "confidence": 1
+    },
+    {
+      "id": "an_dpc",
+      "kind": "leader",
+      "text": "DPC under sill turned up at back",
+      "targets": [
+        "dpc"
+      ],
+      "position": [
+        -340.0,
+        748.0
+      ],
+      "layer_id": "anno",
+      "source": "user",
+      "confidence": 1
+    }
+  ],
+  "layers": [
+    {
+      "id": "walls",
+      "name": "A-Walls"
+    },
+    {
+      "id": "openings",
+      "name": "A-Openings"
+    },
+    {
+      "id": "anno",
+      "name": "A-Anno"
+    }
+  ],
+  "schedules": [],
+  "solver": {
+    "status": "resolved",
+    "conflicts": [],
+    "resolved_at": "2026-09-27T09:00:01Z"
+  },
+  "checks": null,
+  "stamp": null
+}

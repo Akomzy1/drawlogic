@@ -1,0 +1,133 @@
+{
+  "detail_type": "cavity_closer",
+  "input": "input.ddl.json",
+  "drawing_id": "ff409c83-4220-5356-90bc-af24d3339899",
+  "drawing_hash": "sha256:a3e2749434d0a41e2a6c2c9784dc676f610d6950f816707903a0811579280fa7",
+  "rev": "A",
+  "title": "Cavity closer at opening, plan",
+  "scale": 10,
+  "layers": [
+    {
+      "id": "walls",
+      "name": "A-Walls"
+    },
+    {
+      "id": "openings",
+      "name": "A-Openings"
+    },
+    {
+      "id": "anno",
+      "name": "A-Anno"
+    }
+  ],
+  "objects": [
+    {
+      "id": "brick",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "brick_facing",
+      "hatch_category": "masonry"
+    },
+    {
+      "id": "cavity",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": null,
+      "hatch_category": null
+    },
+    {
+      "id": "ins",
+      "layer_id": "walls",
+      "source": "profile",
+      "verify": false,
+      "material_id": "pir_board",
+      "hatch_category": "insulation"
+    },
+    {
+      "id": "block",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "block_dense",
+      "hatch_category": "masonry"
+    },
+    {
+      "id": "plaster",
+      "layer_id": "walls",
+      "source": "profile",
+      "verify": false,
+      "material_id": "plaster",
+      "hatch_category": null
+    },
+    {
+      "id": "closer",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "closer_ins",
+      "hatch_category": "insulation"
+    },
+    {
+      "id": "reveal",
+      "layer_id": "walls",
+      "source": "profile",
+      "verify": false,
+      "material_id": "plaster",
+      "hatch_category": null
+    },
+    {
+      "id": "frame",
+      "layer_id": "openings",
+      "source": "ai_inferred",
+      "verify": true,
+      "material_id": "upvc_frame",
+      "hatch_category": null
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "closer_width",
+      "value": 40,
+      "text": {
+        "gb-eng": "40",
+        "variant": "40.0"
+      },
+      "terminator": {
+        "gb-eng": "tick",
+        "variant": "arrow"
+      }
+    },
+    {
+      "id": "wall_total",
+      "value": 365,
+      "text": {
+        "gb-eng": "365",
+        "variant": "365.0"
+      },
+      "terminator": {
+        "gb-eng": "tick",
+        "variant": "arrow"
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "id": "an_closer",
+      "text": "Insulated cavity closer",
+      "leader": true,
+      "targets": [
+        "closer"
+      ]
+    },
+    {
+      "id": "an_reveal",
+      "text": "Reveal finish",
+      "leader": true,
+      "targets": [
+        "reveal"
+      ]
+    }
+  ]
+}

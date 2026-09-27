@@ -1,0 +1,77 @@
+{
+  "detail_type": "door_threshold",
+  "input": "input.ddl.json",
+  "drawing_id": "25109ab0-3d83-5868-9b57-548f5852d69c",
+  "drawing_hash": "sha256:392741d16704226e3741e37ee7b8daf6264f441322068615c9ee5bc1d3055114",
+  "rev": "A",
+  "title": "Door threshold",
+  "scale": 10,
+  "layers": [
+    "A-Anno",
+    "A-Floor",
+    "A-Ground",
+    "A-Openings",
+    "A-Walls"
+  ],
+  "objects": [
+    {
+      "id": "paving",
+      "layer": "A-Ground",
+      "hatch": true
+    },
+    {
+      "id": "brick",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "dpc",
+      "layer": "A-Walls",
+      "hatch": false
+    },
+    {
+      "id": "threshold",
+      "layer": "A-Openings",
+      "hatch": false
+    },
+    {
+      "id": "door_frame",
+      "layer": "A-Openings",
+      "hatch": true
+    },
+    {
+      "id": "door_leaf",
+      "layer": "A-Openings",
+      "hatch": true
+    },
+    {
+      "id": "slab",
+      "layer": "A-Floor",
+      "hatch": true
+    },
+    {
+      "id": "floor_ins",
+      "layer": "A-Floor",
+      "hatch": true
+    },
+    {
+      "id": "screed",
+      "layer": "A-Floor",
+      "hatch": true
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "step",
+      "value": 150
+    },
+    {
+      "id": "frame_setback",
+      "value": 60
+    }
+  ],
+  "texts": [
+    "Aluminium threshold",
+    "DPC linked to floor DPM"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "detail_type": "window_jamb",
+  "input": "input.ddl.json",
+  "drawing_id": "b3e0ba97-5e74-5220-b78b-4efab69c3ea1",
+  "drawing_hash": "sha256:f7ccb1c9892951ffba883254b63d9695b457b049ed9e37a4462a7690cf473e1f",
+  "rev": "A",
+  "title": "Window jamb, plan",
+  "scale": 10,
+  "layers": [
+    "A-Anno",
+    "A-Openings",
+    "A-Walls"
+  ],
+  "objects": [
+    {
+      "id": "brick",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "cavity",
+      "layer": "A-Walls",
+      "hatch": false
+    },
+    {
+      "id": "ins",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "block",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "plaster",
+      "layer": "A-Walls",
+      "hatch": false
+    },
+    {
+      "id": "closer",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "frame",
+      "layer": "A-Openings",
+      "hatch": false
+    },
+    {
+      "id": "glass",
+      "layer": "A-Openings",
+      "hatch": false
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "wall_total",
+      "value": 365
+    },
+    {
+      "id": "closer_width",
+      "value": 40
+    }
+  ],
+  "texts": [
+    "Insulated cavity closer",
+    "Frame overlaps closer (to be confirmed)"
+  ]
+}

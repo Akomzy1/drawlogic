@@ -1,0 +1,10 @@
+# Pinned tools for fixtures/render (build.py and tests). The engine's own dependencies are installed from engine/.
+rfc8785==0.1.4
+jsonschema==4.26.0
+referencing==0.37.0
+ezdxf==1.4.4
+pillow==12.3.0
+numpy==2.5.3
+pypdf==6.19.0
+httpx==0.28.1
+pytest==9.1.1

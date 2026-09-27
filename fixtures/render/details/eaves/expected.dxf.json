@@ -1,0 +1,90 @@
+{
+  "detail_type": "eaves",
+  "input": "input.ddl.json",
+  "drawing_id": "e063b986-2134-5ca4-b6ac-b31c3f34bd86",
+  "drawing_hash": "sha256:3b91a82ec92dd72e7f523a9f7fa6d7d37796ca2841c0ca445ed9e520ec83701c",
+  "rev": "A",
+  "title": "Eaves, pitched roof",
+  "scale": 10,
+  "layers": [
+    "A-Anno",
+    "A-Roof",
+    "A-Walls"
+  ],
+  "objects": [
+    {
+      "id": "brick",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "cavity",
+      "layer": "A-Walls",
+      "hatch": false
+    },
+    {
+      "id": "ins",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "block",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "plaster",
+      "layer": "A-Walls",
+      "hatch": false
+    },
+    {
+      "id": "wall_plate",
+      "layer": "A-Roof",
+      "hatch": true
+    },
+    {
+      "id": "rafter",
+      "layer": "A-Roof",
+      "hatch": true
+    },
+    {
+      "id": "joist",
+      "layer": "A-Roof",
+      "hatch": true
+    },
+    {
+      "id": "loft_ins",
+      "layer": "A-Roof",
+      "hatch": true
+    },
+    {
+      "id": "tiles",
+      "layer": "A-Roof",
+      "hatch": false
+    },
+    {
+      "id": "fascia",
+      "layer": "A-Roof",
+      "hatch": true
+    },
+    {
+      "id": "gutter",
+      "layer": "A-Roof",
+      "hatch": false
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "overhang",
+      "value": 320
+    },
+    {
+      "id": "wall_total",
+      "value": 365
+    }
+  ],
+  "texts": [
+    "Wall plate strapped to inner leaf",
+    "Loft insulation (profile default)"
+  ]
+}

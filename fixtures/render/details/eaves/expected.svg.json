@@ -1,0 +1,165 @@
+{
+  "detail_type": "eaves",
+  "input": "input.ddl.json",
+  "drawing_id": "e063b986-2134-5ca4-b6ac-b31c3f34bd86",
+  "drawing_hash": "sha256:3b91a82ec92dd72e7f523a9f7fa6d7d37796ca2841c0ca445ed9e520ec83701c",
+  "rev": "A",
+  "title": "Eaves, pitched roof",
+  "scale": 10,
+  "layers": [
+    {
+      "id": "walls",
+      "name": "A-Walls"
+    },
+    {
+      "id": "roof",
+      "name": "A-Roof"
+    },
+    {
+      "id": "anno",
+      "name": "A-Anno"
+    }
+  ],
+  "objects": [
+    {
+      "id": "brick",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "brick_facing",
+      "hatch_category": "masonry"
+    },
+    {
+      "id": "cavity",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": null,
+      "hatch_category": null
+    },
+    {
+      "id": "ins",
+      "layer_id": "walls",
+      "source": "profile",
+      "verify": false,
+      "material_id": "pir_board",
+      "hatch_category": "insulation"
+    },
+    {
+      "id": "block",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "block_dense",
+      "hatch_category": "masonry"
+    },
+    {
+      "id": "plaster",
+      "layer_id": "walls",
+      "source": "profile",
+      "verify": false,
+      "material_id": "plaster",
+      "hatch_category": null
+    },
+    {
+      "id": "wall_plate",
+      "layer_id": "roof",
+      "source": "user",
+      "verify": false,
+      "material_id": "timber_sw",
+      "hatch_category": "timber"
+    },
+    {
+      "id": "rafter",
+      "layer_id": "roof",
+      "source": "user",
+      "verify": false,
+      "material_id": "timber_sw",
+      "hatch_category": "timber"
+    },
+    {
+      "id": "joist",
+      "layer_id": "roof",
+      "source": "user",
+      "verify": false,
+      "material_id": "timber_sw",
+      "hatch_category": "timber"
+    },
+    {
+      "id": "loft_ins",
+      "layer_id": "roof",
+      "source": "profile",
+      "verify": false,
+      "material_id": "mineral_wool",
+      "hatch_category": "insulation"
+    },
+    {
+      "id": "tiles",
+      "layer_id": "roof",
+      "source": "profile",
+      "verify": false,
+      "material_id": "roof_tile",
+      "hatch_category": null
+    },
+    {
+      "id": "fascia",
+      "layer_id": "roof",
+      "source": "user",
+      "verify": false,
+      "material_id": "timber_sw",
+      "hatch_category": "timber"
+    },
+    {
+      "id": "gutter",
+      "layer_id": "roof",
+      "source": "user",
+      "verify": false,
+      "material_id": "upvc_gutter",
+      "hatch_category": null
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "overhang",
+      "value": 320,
+      "text": {
+        "gb-eng": "320",
+        "variant": "320.0"
+      },
+      "terminator": {
+        "gb-eng": "tick",
+        "variant": "arrow"
+      }
+    },
+    {
+      "id": "wall_total",
+      "value": 365,
+      "text": {
+        "gb-eng": "365",
+        "variant": "365.0"
+      },
+      "terminator": {
+        "gb-eng": "tick",
+        "variant": "arrow"
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "id": "an_plate",
+      "text": "Wall plate strapped to inner leaf",
+      "leader": true,
+      "targets": [
+        "wall_plate"
+      ]
+    },
+    {
+      "id": "an_loft",
+      "text": "Loft insulation (profile default)",
+      "leader": true,
+      "targets": [
+        "loft_ins"
+      ]
+    }
+  ]
+}

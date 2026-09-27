@@ -1,0 +1,70 @@
+{
+  "detail_type": "cavity_closer",
+  "input": "input.ddl.json",
+  "drawing_id": "ff409c83-4220-5356-90bc-af24d3339899",
+  "drawing_hash": "sha256:a3e2749434d0a41e2a6c2c9784dc676f610d6950f816707903a0811579280fa7",
+  "rev": "A",
+  "title": "Cavity closer at opening, plan",
+  "scale": 10,
+  "layers": [
+    "A-Anno",
+    "A-Openings",
+    "A-Walls"
+  ],
+  "objects": [
+    {
+      "id": "brick",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "cavity",
+      "layer": "A-Walls",
+      "hatch": false
+    },
+    {
+      "id": "ins",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "block",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "plaster",
+      "layer": "A-Walls",
+      "hatch": false
+    },
+    {
+      "id": "closer",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "reveal",
+      "layer": "A-Walls",
+      "hatch": false
+    },
+    {
+      "id": "frame",
+      "layer": "A-Openings",
+      "hatch": false
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "closer_width",
+      "value": 40
+    },
+    {
+      "id": "wall_total",
+      "value": 365
+    }
+  ],
+  "texts": [
+    "Insulated cavity closer",
+    "Reveal finish"
+  ]
+}

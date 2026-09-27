@@ -1,0 +1,570 @@
+{
+  "ddl_version": "0.1.0",
+  "drawing": {
+    "id": "25109ab0-3d83-5868-9b57-548f5852d69c",
+    "title": "Door threshold",
+    "discipline": "architecture",
+    "type": "detail",
+    "detail_type": "door_threshold",
+    "mode": "draft",
+    "scale": 10,
+    "units": "mm",
+    "jurisdiction": "GB-ENG",
+    "rev": "A",
+    "hash": "sha256:392741d16704226e3741e37ee7b8daf6264f441322068615c9ee5bc1d3055114",
+    "parent_hash": null,
+    "profile_stack": [
+      {
+        "id": "gb-eng-residential",
+        "name": "GB-ENG Residential",
+        "version": "0.1.0",
+        "layer": "jurisdiction",
+        "tier": 1,
+        "signer": null
+      },
+      {
+        "id": "generic",
+        "name": "Generic",
+        "version": "0.1.0",
+        "layer": "generic",
+        "tier": null,
+        "signer": null
+      }
+    ],
+    "card_id": "card-render-fixture-door_threshold",
+    "created_at": "2026-09-27T09:00:00Z"
+  },
+  "materials": [
+    {
+      "id": "alu_threshold",
+      "name": "Aluminium threshold",
+      "category": "metal",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "brick_facing",
+      "name": "Facing brick",
+      "category": "masonry",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "concrete_c25",
+      "name": "Concrete",
+      "category": "concrete",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "dpc_polymer",
+      "name": "Polymer damp-proof course",
+      "category": "dpc",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "paving",
+      "name": "Concrete paving slab",
+      "category": "stone",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "pir_board",
+      "name": "PIR insulation board",
+      "category": "insulation",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "screed",
+      "name": "Sand and cement screed",
+      "category": "screed",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "timber_door",
+      "name": "Timber door leaf",
+      "category": "timber",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "timber_sw",
+      "name": "Softwood timber",
+      "category": "timber",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "objects": [
+    {
+      "id": "paving",
+      "class": "paving",
+      "label": "External paving",
+      "material_id": "paving",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            -600,
+            -200
+          ],
+          [
+            0,
+            -200
+          ],
+          [
+            0,
+            -150
+          ],
+          [
+            -600,
+            -150
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "ground"
+    },
+    {
+      "id": "brick",
+      "class": "masonry",
+      "label": "Outer leaf below threshold",
+      "material_id": "brick_facing",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            0,
+            -600
+          ],
+          [
+            102.5,
+            -600
+          ],
+          [
+            102.5,
+            -30
+          ],
+          [
+            0,
+            -30
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "dpc",
+      "class": "dpc",
+      "label": "DPC below threshold",
+      "material_id": "dpc_polymer",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            0,
+            -30
+          ],
+          [
+            180,
+            -30
+          ],
+          [
+            180,
+            -20
+          ],
+          [
+            0,
+            -20
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "threshold",
+      "class": "threshold",
+      "label": "Threshold",
+      "material_id": "alu_threshold",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            0,
+            -20
+          ],
+          [
+            180,
+            -20
+          ],
+          [
+            180,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "openings"
+    },
+    {
+      "id": "door_frame",
+      "class": "door_frame",
+      "label": "Door frame",
+      "material_id": "timber_sw",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            60,
+            0
+          ],
+          [
+            180,
+            0
+          ],
+          [
+            180,
+            300
+          ],
+          [
+            60,
+            300
+          ]
+        ],
+        "closed": true
+      },
+      "source": "ai_inferred",
+      "confidence": 0.7,
+      "verify": true,
+      "source_detail": {
+        "model": {
+          "provider": "anthropic",
+          "model_id": "claude-opus-5-5",
+          "task": "interpret"
+        },
+        "note": "Position read from the reference; confirm on site."
+      },
+      "rule_refs": [],
+      "layer_id": "openings"
+    },
+    {
+      "id": "door_leaf",
+      "class": "door_leaf",
+      "label": "Door leaf",
+      "material_id": "timber_door",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            90,
+            10
+          ],
+          [
+            130,
+            10
+          ],
+          [
+            130,
+            300
+          ],
+          [
+            90,
+            300
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "openings"
+    },
+    {
+      "id": "slab",
+      "class": "slab",
+      "label": "Floor slab",
+      "material_id": "concrete_c25",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            180,
+            -300
+          ],
+          [
+            1000,
+            -300
+          ],
+          [
+            1000,
+            -150
+          ],
+          [
+            180,
+            -150
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "floor"
+    },
+    {
+      "id": "floor_ins",
+      "class": "insulation",
+      "label": "Floor insulation",
+      "material_id": "pir_board",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            180,
+            -150
+          ],
+          [
+            1000,
+            -150
+          ],
+          [
+            1000,
+            -75
+          ],
+          [
+            180,
+            -75
+          ]
+        ],
+        "closed": true
+      },
+      "source": "profile",
+      "confidence": 1.0,
+      "verify": false,
+      "source_detail": {
+        "profile": {
+          "id": "gb-eng-residential",
+          "version": "0.1.0"
+        }
+      },
+      "rule_refs": [],
+      "layer_id": "floor"
+    },
+    {
+      "id": "screed",
+      "class": "screed",
+      "label": "Screed",
+      "material_id": "screed",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            180,
+            -75
+          ],
+          [
+            1000,
+            -75
+          ],
+          [
+            1000,
+            0
+          ],
+          [
+            180,
+            0
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "floor"
+    }
+  ],
+  "connections": [],
+  "constraints": [],
+  "dimensions": [
+    {
+      "id": "step",
+      "kind": "linear",
+      "refs": [
+        "paving",
+        "screed"
+      ],
+      "value": 150,
+      "driving": true,
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "display": true
+    },
+    {
+      "id": "frame_setback",
+      "kind": "linear",
+      "refs": [
+        "brick",
+        "door_frame"
+      ],
+      "value": 60,
+      "driving": false,
+      "source": "ai_inferred",
+      "confidence": 0.7,
+      "verify": true,
+      "source_detail": {
+        "model": {
+          "provider": "anthropic",
+          "model_id": "claude-opus-5-5",
+          "task": "interpret"
+        }
+      },
+      "display": true
+    }
+  ],
+  "annotations": [
+    {
+      "id": "an_threshold",
+      "kind": "leader",
+      "text": "Aluminium threshold",
+      "targets": [
+        "threshold"
+      ],
+      "position": [
+        -310.0,
+        140.0
+      ],
+      "layer_id": "anno",
+      "source": "user",
+      "confidence": 1
+    },
+    {
+      "id": "an_dpc",
+      "kind": "leader",
+      "text": "DPC linked to floor DPM",
+      "targets": [
+        "dpc"
+      ],
+      "position": [
+        -310.0,
+        125.0
+      ],
+      "layer_id": "anno",
+      "source": "user",
+      "confidence": 1
+    }
+  ],
+  "layers": [
+    {
+      "id": "walls",
+      "name": "A-Walls"
+    },
+    {
+      "id": "floor",
+      "name": "A-Floor"
+    },
+    {
+      "id": "openings",
+      "name": "A-Openings"
+    },
+    {
+      "id": "ground",
+      "name": "A-Ground"
+    },
+    {
+      "id": "anno",
+      "name": "A-Anno"
+    }
+  ],
+  "schedules": [],
+  "solver": {
+    "status": "resolved",
+    "conflicts": [],
+    "resolved_at": "2026-09-27T09:00:01Z"
+  },
+  "checks": null,
+  "stamp": null
+}

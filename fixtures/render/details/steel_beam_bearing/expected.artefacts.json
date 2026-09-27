@@ -1,0 +1,16 @@
+{
+  "detail_type": "steel_beam_bearing",
+  "input": "input.ddl.json",
+  "drawing_id": "291d47ec-72a3-5d12-833b-8d33ddf600e6",
+  "drawing_hash": "sha256:39f6a3ac803350a659f61e91c6690716772e48784f16a0cc4e69888c03bc8190",
+  "rev": "A",
+  "title": "Steel beam bearing on inner leaf",
+  "scale": 10,
+  "legend_material_ids": [
+    "block_dense",
+    "brick_facing",
+    "concrete_c25",
+    "pir_board",
+    "steel_section"
+  ]
+}

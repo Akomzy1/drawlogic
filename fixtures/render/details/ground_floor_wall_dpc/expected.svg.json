@@ -1,0 +1,213 @@
+{
+  "detail_type": "ground_floor_wall_dpc",
+  "input": "input.ddl.json",
+  "drawing_id": "6eb3dda4-da43-580a-b648-1edbff2f8a34",
+  "drawing_hash": "sha256:8a1d03910e714ade4c4d721311971daccd883490d8b721c9ea8bebbcf9a79f3a",
+  "rev": "A",
+  "title": "Ground floor and wall junction with DPC",
+  "scale": 10,
+  "layers": [
+    {
+      "id": "walls",
+      "name": "A-Walls"
+    },
+    {
+      "id": "floor",
+      "name": "A-Floor"
+    },
+    {
+      "id": "ground",
+      "name": "A-Ground"
+    },
+    {
+      "id": "anno",
+      "name": "A-Anno"
+    }
+  ],
+  "objects": [
+    {
+      "id": "ground",
+      "layer_id": "ground",
+      "source": "user",
+      "verify": false,
+      "material_id": "topsoil",
+      "hatch_category": "earth"
+    },
+    {
+      "id": "brick_lower",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "brick_facing",
+      "hatch_category": "masonry"
+    },
+    {
+      "id": "dpc_outer",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "dpc_polymer",
+      "hatch_category": null
+    },
+    {
+      "id": "brick_upper",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "brick_facing",
+      "hatch_category": "masonry"
+    },
+    {
+      "id": "cavity_fill",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "lean_mix",
+      "hatch_category": "concrete"
+    },
+    {
+      "id": "cavity",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": null,
+      "hatch_category": null
+    },
+    {
+      "id": "ins",
+      "layer_id": "walls",
+      "source": "profile",
+      "verify": false,
+      "material_id": "pir_board",
+      "hatch_category": "insulation"
+    },
+    {
+      "id": "block_lower",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "block_dense",
+      "hatch_category": "masonry"
+    },
+    {
+      "id": "dpc_inner",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "dpc_polymer",
+      "hatch_category": null
+    },
+    {
+      "id": "block_upper",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "block_dense",
+      "hatch_category": "masonry"
+    },
+    {
+      "id": "plaster",
+      "layer_id": "walls",
+      "source": "profile",
+      "verify": false,
+      "material_id": "plaster",
+      "hatch_category": null
+    },
+    {
+      "id": "dpm",
+      "layer_id": "floor",
+      "source": "user",
+      "verify": false,
+      "material_id": "dpm_sheet",
+      "hatch_category": null
+    },
+    {
+      "id": "slab",
+      "layer_id": "floor",
+      "source": "user",
+      "verify": false,
+      "material_id": "concrete_c25",
+      "hatch_category": "concrete"
+    },
+    {
+      "id": "floor_ins",
+      "layer_id": "floor",
+      "source": "ai_inferred",
+      "verify": true,
+      "material_id": "pir_board",
+      "hatch_category": "insulation"
+    },
+    {
+      "id": "screed",
+      "layer_id": "floor",
+      "source": "user",
+      "verify": false,
+      "material_id": "screed",
+      "hatch_category": "screed"
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "dpc_height",
+      "value": 150,
+      "text": {
+        "gb-eng": "150",
+        "variant": "150.0"
+      },
+      "terminator": {
+        "gb-eng": "tick",
+        "variant": "arrow"
+      }
+    },
+    {
+      "id": "ffl",
+      "value": 175,
+      "text": {
+        "gb-eng": "175",
+        "variant": "175.0"
+      },
+      "terminator": {
+        "gb-eng": "tick",
+        "variant": "arrow"
+      }
+    },
+    {
+      "id": "wall_total",
+      "value": 365,
+      "text": {
+        "gb-eng": "365",
+        "variant": "365.0"
+      },
+      "terminator": {
+        "gb-eng": "tick",
+        "variant": "arrow"
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "id": "an_dpc",
+      "text": "DPC 150 above ground",
+      "leader": true,
+      "targets": [
+        "dpc_outer"
+      ]
+    },
+    {
+      "id": "an_fill",
+      "text": "Lean-mix cavity fill",
+      "leader": true,
+      "targets": [
+        "cavity_fill"
+      ]
+    },
+    {
+      "id": "an_ins",
+      "text": "Floor insulation (to be confirmed)",
+      "leader": true,
+      "targets": [
+        "floor_ins"
+      ]
+    }
+  ]
+}

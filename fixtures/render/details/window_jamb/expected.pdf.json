@@ -1,0 +1,14 @@
+{
+  "detail_type": "window_jamb",
+  "input": "input.ddl.json",
+  "drawing_id": "b3e0ba97-5e74-5220-b78b-4efab69c3ea1",
+  "drawing_hash": "sha256:f7ccb1c9892951ffba883254b63d9695b457b049ed9e37a4462a7690cf473e1f",
+  "rev": "A",
+  "title": "Window jamb, plan",
+  "scale": 10,
+  "must_contain": [
+    "Window jamb, plan",
+    "Rev A",
+    "1:10"
+  ]
+}

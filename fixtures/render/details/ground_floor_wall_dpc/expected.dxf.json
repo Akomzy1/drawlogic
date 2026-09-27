@@ -1,0 +1,111 @@
+{
+  "detail_type": "ground_floor_wall_dpc",
+  "input": "input.ddl.json",
+  "drawing_id": "6eb3dda4-da43-580a-b648-1edbff2f8a34",
+  "drawing_hash": "sha256:8a1d03910e714ade4c4d721311971daccd883490d8b721c9ea8bebbcf9a79f3a",
+  "rev": "A",
+  "title": "Ground floor and wall junction with DPC",
+  "scale": 10,
+  "layers": [
+    "A-Anno",
+    "A-Floor",
+    "A-Ground",
+    "A-Walls"
+  ],
+  "objects": [
+    {
+      "id": "ground",
+      "layer": "A-Ground",
+      "hatch": true
+    },
+    {
+      "id": "brick_lower",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "dpc_outer",
+      "layer": "A-Walls",
+      "hatch": false
+    },
+    {
+      "id": "brick_upper",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "cavity_fill",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "cavity",
+      "layer": "A-Walls",
+      "hatch": false
+    },
+    {
+      "id": "ins",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "block_lower",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "dpc_inner",
+      "layer": "A-Walls",
+      "hatch": false
+    },
+    {
+      "id": "block_upper",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "plaster",
+      "layer": "A-Walls",
+      "hatch": false
+    },
+    {
+      "id": "dpm",
+      "layer": "A-Floor",
+      "hatch": false
+    },
+    {
+      "id": "slab",
+      "layer": "A-Floor",
+      "hatch": true
+    },
+    {
+      "id": "floor_ins",
+      "layer": "A-Floor",
+      "hatch": true
+    },
+    {
+      "id": "screed",
+      "layer": "A-Floor",
+      "hatch": true
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "dpc_height",
+      "value": 150
+    },
+    {
+      "id": "ffl",
+      "value": 175
+    },
+    {
+      "id": "wall_total",
+      "value": 365
+    }
+  ],
+  "texts": [
+    "DPC 150 above ground",
+    "Lean-mix cavity fill",
+    "Floor insulation (to be confirmed)"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "detail_type": "window_head",
+  "input": "input.ddl.json",
+  "drawing_id": "88fc1870-7b12-503e-8281-f393d1061b13",
+  "drawing_hash": "sha256:eedb9c3948b4307f0779edcd70886af84eb3505880941f7da2b9d1977dec3bc5",
+  "rev": "A",
+  "title": "Window head, cavity wall",
+  "scale": 10,
+  "must_contain": [
+    "Window head, cavity wall",
+    "Rev A",
+    "1:10"
+  ]
+}

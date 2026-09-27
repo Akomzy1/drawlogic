@@ -1,0 +1,61 @@
+{
+  "detail_type": "wall_to_foundation",
+  "input": "input.ddl.json",
+  "drawing_id": "bde591b2-4483-5842-b52e-1e5ec488da64",
+  "drawing_hash": "sha256:ea12494fd6037ddd9be5215d7a9e51a04182b6504d57c397d0ebcf4502a3906c",
+  "rev": "A",
+  "title": "Wall to strip foundation",
+  "scale": 10,
+  "layers": [
+    "A-Anno",
+    "A-Ground",
+    "A-Structure",
+    "A-Walls"
+  ],
+  "objects": [
+    {
+      "id": "footing",
+      "layer": "A-Structure",
+      "hatch": true
+    },
+    {
+      "id": "backfill",
+      "layer": "A-Ground",
+      "hatch": true
+    },
+    {
+      "id": "block_outer",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "cavity_fill",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "block_inner",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "brick",
+      "layer": "A-Walls",
+      "hatch": true
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "foundation_depth",
+      "value": 1000
+    },
+    {
+      "id": "footing_width",
+      "value": 665
+    }
+  ],
+  "texts": [
+    "Strip foundation to engineer's design",
+    "Lean-mix cavity fill"
+  ]
+}
