@@ -40,6 +40,9 @@ Re-exports from Claude Design are dropped into design/prototype/ with their expo
 | `profiles.standalone.html` | Browse cards; Authoring Studio with unverified rules, signing, publish | Profiles |
 | `signers.standalone.html` | Requester view; signer onboarding steps and mismatch state | Signing |
 | `lagos-readiness.standalone.html` | EPPPS checklist split "Drawlogic produces / you provide" | Draft |
+| `qs-cost-plan.standalone.html` | Elemental cost plan (FR-181): Idea summary and Draft full view, jurisdiction switch, "Items not priced", "Indicative — not a quote", no-cost-data state (FR-159) | Idea + Draft |
+| `qs-review.standalone.html` | QS review and signing (FR-182): gated signing control, rate confirmation, "Items not priced" review, signature line, review evidence | Signing |
+| `qs-onboarding.standalone.html` | QS signer onboarding with cost credentials (FR-111): RICS, NIQS, AACE/ASPE; identity, registry and contact matching | Signing |
 | `settings.standalone.html` | Roles, profile stack, data, billing, audit log, plan gates | — |
 | `index.html` | Journeys A/B/C and the fidelity statement | — |
 
