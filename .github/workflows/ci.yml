@@ -82,11 +82,12 @@ jobs:
       - name: ruff
         run: |
           ruff check engine contracts trust profiles fixtures
-          ruff format --check engine contracts/scripts trust fixtures
+          ruff format --check engine contracts/scripts trust fixtures profiles
 
       - name: mypy (strict)
         run: |
           mypy --strict contracts/scripts/condition_text.py contracts/scripts/gen_py.py contracts/scripts/check_py.py
+          mypy --strict profiles/coverage.py profiles/tools.py
           if [ -n "$(find engine trust -name '*.py' -not -path '*/tests/*' | head -1)" ]; then
             mypy --strict --config-file engine/pyproject.toml engine trust
           else
@@ -103,6 +104,14 @@ jobs:
             python -m pytest -c trust/tests/pytest.ini -m fixtures
           else
             echo "::notice::No core/trust examiner suite yet (Codex, Prompt 2)."
+          fi
+
+      - name: profiles (Prompt 3) — derived fields current, examiner profile tests
+        run: |
+          python -m profiles.tools --check
+          if [ -f trust/tests/pytest.ini ]; then
+            python -m pytest -c trust/tests/pytest.ini -m "profiles and not runtime"
+            # The profile runtime tests (-m profiles) need core interpretation; they join CI with Prompt 9.
           fi
 
       - name: examiner runtime — engine/core (Prompts 4, 6, 9)

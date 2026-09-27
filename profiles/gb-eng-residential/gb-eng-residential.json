@@ -1,0 +1,2196 @@
+{
+  "schema_version": "0.1.0",
+  "metadata": {
+    "id": "gb-eng-residential",
+    "name": "GB-ENG Residential",
+    "version": "0.1.0",
+    "type": "jurisdiction",
+    "jurisdiction": "GB-ENG",
+    "tier": 1,
+    "disciplines": [
+      "architecture"
+    ],
+    "building_types": [
+      "residential"
+    ],
+    "scope": "Residential architecture in England: conventions, required constraints for the thirteen architecture detail types, construction defaults and unverified rules referencing the Approved Documents and British Standards. No rule is verified until a signer record is added.",
+    "author": "Drawlogic",
+    "publish": "private",
+    "changelog": [
+      {
+        "version": "0.1.0",
+        "date": "2026-09-28",
+        "summary": "First authored version. Every rule is unverified until a signer record is added."
+      }
+    ]
+  },
+  "conventions": {
+    "units": "mm",
+    "sheets": [
+      {
+        "size": "A3",
+        "orientation": "landscape"
+      },
+      {
+        "size": "A1",
+        "orientation": "landscape"
+      }
+    ],
+    "title_block": "drawlogic-a3",
+    "layer_standard": "BS EN ISO 13567",
+    "symbol_set": "BS 8541-2",
+    "dimension_style": {
+      "terminator": "tick",
+      "text_height_mm": 2.5,
+      "precision": 0
+    },
+    "text_heights_mm": {
+      "annotation": 2.5,
+      "dimension": 2.5,
+      "title": 5.0
+    },
+    "annotation_language": "en-GB"
+  },
+  "applicable_documents": [
+    {
+      "ref": "Approved Document L",
+      "edition": "Volume 1: Dwellings (edition to be confirmed by the signer)"
+    },
+    {
+      "ref": "Approved Document F",
+      "edition": "Volume 1: Dwellings (edition to be confirmed by the signer)"
+    },
+    {
+      "ref": "Approved Document C",
+      "edition": "Edition to be confirmed by the signer"
+    },
+    {
+      "ref": "Approved Document B",
+      "edition": "Volume 1: Dwellings (edition to be confirmed by the signer)"
+    },
+    {
+      "ref": "Approved Document M",
+      "edition": "Volume 1: Dwellings (edition to be confirmed by the signer)"
+    },
+    {
+      "ref": "BS 6229",
+      "edition": "2018"
+    },
+    {
+      "ref": "BS 5534",
+      "edition": "Edition to be confirmed by the signer"
+    },
+    {
+      "ref": "BS 5250",
+      "edition": "Edition to be confirmed by the signer"
+    }
+  ],
+  "provenance_settings": {
+    "verify_threshold": 0.8
+  },
+  "required_constraints": {
+    "window_head": {
+      "draft": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry"
+        },
+        {
+          "key": "opening_width",
+          "label": "Structural opening width",
+          "plain_label": "How wide the opening in the wall is",
+          "kind": "dimension"
+        },
+        {
+          "key": "lintel",
+          "label": "Lintel specification",
+          "plain_label": "The beam over the opening, chosen by the engineer or lintel maker",
+          "kind": "engineering",
+          "engineering_kind": "member_size",
+          "object_class": "lintel"
+        },
+        {
+          "key": "cavity_tray",
+          "label": "Cavity tray",
+          "plain_label": "The layer that sheds water out of the cavity above the opening",
+          "kind": "system",
+          "object_class": "cavity_tray"
+        },
+        {
+          "key": "frame_position",
+          "label": "Frame position in the wall",
+          "plain_label": "Where the window or door frame sits in the wall",
+          "kind": "dimension"
+        }
+      ],
+      "idea": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry",
+          "default_from": "construction_defaults"
+        },
+        {
+          "key": "frame_position",
+          "label": "Frame position in the wall",
+          "plain_label": "Where the window or door frame sits in the wall",
+          "kind": "dimension",
+          "default_from": "typical_detail"
+        }
+      ]
+    },
+    "window_jamb": {
+      "draft": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry"
+        },
+        {
+          "key": "opening_width",
+          "label": "Structural opening width",
+          "plain_label": "How wide the opening in the wall is",
+          "kind": "dimension"
+        },
+        {
+          "key": "cavity_closer",
+          "label": "Cavity closer",
+          "plain_label": "What closes the cavity at the side of the opening",
+          "kind": "system",
+          "object_class": "cavity_closer"
+        },
+        {
+          "key": "frame_position",
+          "label": "Frame position in the wall",
+          "plain_label": "Where the window or door frame sits in the wall",
+          "kind": "dimension"
+        }
+      ],
+      "idea": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry",
+          "default_from": "construction_defaults"
+        }
+      ]
+    },
+    "window_sill": {
+      "draft": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry"
+        },
+        {
+          "key": "sill",
+          "label": "Sill type",
+          "plain_label": "What the outside sill is made of",
+          "kind": "material",
+          "object_class": "sill"
+        },
+        {
+          "key": "frame_position",
+          "label": "Frame position in the wall",
+          "plain_label": "Where the window or door frame sits in the wall",
+          "kind": "dimension"
+        }
+      ],
+      "idea": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry",
+          "default_from": "construction_defaults"
+        }
+      ]
+    },
+    "door_threshold": {
+      "draft": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry"
+        },
+        {
+          "key": "floor_build_up",
+          "label": "Floor build-up",
+          "plain_label": "What the floor is made of",
+          "kind": "system"
+        },
+        {
+          "key": "threshold_upstand",
+          "label": "Threshold upstand",
+          "plain_label": "How much the door threshold stands up above the floor",
+          "kind": "dimension"
+        },
+        {
+          "key": "frame_position",
+          "label": "Frame position in the wall",
+          "plain_label": "Where the window or door frame sits in the wall",
+          "kind": "dimension"
+        }
+      ],
+      "idea": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry",
+          "default_from": "construction_defaults"
+        },
+        {
+          "key": "floor_build_up",
+          "label": "Floor build-up",
+          "plain_label": "What the floor is made of",
+          "kind": "system",
+          "default_from": "construction_defaults"
+        }
+      ]
+    },
+    "eaves": {
+      "draft": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry"
+        },
+        {
+          "key": "roof_build_up",
+          "label": "Roof build-up",
+          "plain_label": "What the roof is made of",
+          "kind": "system"
+        },
+        {
+          "key": "roof_pitch",
+          "label": "Roof pitch",
+          "plain_label": "How steep the roof is",
+          "kind": "dimension"
+        },
+        {
+          "key": "eaves_overhang",
+          "label": "Eaves overhang",
+          "plain_label": "How far the roof edge sticks out",
+          "kind": "dimension"
+        }
+      ],
+      "idea": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry",
+          "default_from": "construction_defaults"
+        },
+        {
+          "key": "roof_build_up",
+          "label": "Roof build-up",
+          "plain_label": "What the roof is made of",
+          "kind": "system",
+          "default_from": "construction_defaults"
+        }
+      ]
+    },
+    "verge": {
+      "draft": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry"
+        },
+        {
+          "key": "roof_build_up",
+          "label": "Roof build-up",
+          "plain_label": "What the roof is made of",
+          "kind": "system"
+        },
+        {
+          "key": "verge_system",
+          "label": "Verge system",
+          "plain_label": "How the roof edge at the gable is finished and fixed",
+          "kind": "system",
+          "object_class": "verge_trim"
+        },
+        {
+          "key": "verge_overhang",
+          "label": "Verge overhang",
+          "plain_label": "How far the roof edge sticks out past the gable",
+          "kind": "dimension"
+        }
+      ],
+      "idea": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry",
+          "default_from": "construction_defaults"
+        },
+        {
+          "key": "roof_build_up",
+          "label": "Roof build-up",
+          "plain_label": "What the roof is made of",
+          "kind": "system",
+          "default_from": "construction_defaults"
+        }
+      ]
+    },
+    "parapet": {
+      "draft": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry"
+        },
+        {
+          "key": "parapet_height",
+          "label": "Parapet height above membrane",
+          "plain_label": "How high the wall goes above the roof",
+          "kind": "dimension"
+        },
+        {
+          "key": "membrane_system",
+          "label": "Membrane system",
+          "plain_label": "The waterproof layer on the roof",
+          "kind": "system",
+          "object_class": "membrane"
+        },
+        {
+          "key": "coping_material",
+          "label": "Coping material",
+          "plain_label": "What caps the top of the wall",
+          "kind": "material",
+          "object_class": "coping"
+        },
+        {
+          "key": "fall_direction",
+          "label": "Coping fall direction",
+          "plain_label": "Which way the top of the wall sheds water",
+          "kind": "direction",
+          "object_class": "coping"
+        }
+      ],
+      "idea": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry",
+          "default_from": "construction_defaults"
+        },
+        {
+          "key": "parapet_height",
+          "label": "Parapet height above membrane",
+          "plain_label": "How high the wall goes above the roof",
+          "kind": "dimension",
+          "default_from": "typical_detail"
+        }
+      ]
+    },
+    "warm_flat_roof_abutment": {
+      "draft": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry"
+        },
+        {
+          "key": "roof_build_up",
+          "label": "Roof build-up",
+          "plain_label": "What the roof is made of",
+          "kind": "system"
+        },
+        {
+          "key": "membrane_system",
+          "label": "Membrane system",
+          "plain_label": "The waterproof layer on the roof",
+          "kind": "system",
+          "object_class": "membrane"
+        },
+        {
+          "key": "upstand_height",
+          "label": "Upstand height",
+          "plain_label": "How far the waterproof layer turns up the wall",
+          "kind": "dimension"
+        },
+        {
+          "key": "flashing",
+          "label": "Cover flashing",
+          "plain_label": "The strip that covers the top of the upstand",
+          "kind": "material",
+          "object_class": "flashing"
+        }
+      ],
+      "idea": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry",
+          "default_from": "construction_defaults"
+        },
+        {
+          "key": "roof_build_up",
+          "label": "Roof build-up",
+          "plain_label": "What the roof is made of",
+          "kind": "system",
+          "default_from": "construction_defaults"
+        }
+      ]
+    },
+    "ground_floor_wall_dpc": {
+      "draft": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry"
+        },
+        {
+          "key": "floor_build_up",
+          "label": "Floor build-up",
+          "plain_label": "What the floor is made of",
+          "kind": "system"
+        },
+        {
+          "key": "external_ground_level",
+          "label": "External ground level",
+          "plain_label": "Where the outside ground is",
+          "kind": "dimension"
+        },
+        {
+          "key": "dpc_level",
+          "label": "DPC level",
+          "plain_label": "Where the damp-proof course sits in the wall",
+          "kind": "dimension"
+        }
+      ],
+      "idea": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry",
+          "default_from": "construction_defaults"
+        },
+        {
+          "key": "floor_build_up",
+          "label": "Floor build-up",
+          "plain_label": "What the floor is made of",
+          "kind": "system",
+          "default_from": "construction_defaults"
+        }
+      ]
+    },
+    "cavity_closer": {
+      "draft": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry"
+        },
+        {
+          "key": "cavity_closer",
+          "label": "Cavity closer",
+          "plain_label": "What closes the cavity at the side of the opening",
+          "kind": "system",
+          "object_class": "cavity_closer"
+        },
+        {
+          "key": "frame_position",
+          "label": "Frame position in the wall",
+          "plain_label": "Where the window or door frame sits in the wall",
+          "kind": "dimension"
+        }
+      ],
+      "idea": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry",
+          "default_from": "construction_defaults"
+        }
+      ]
+    },
+    "wall_to_foundation": {
+      "draft": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry"
+        },
+        {
+          "key": "foundation",
+          "label": "Foundation design",
+          "plain_label": "The foundation size and depth, set by the engineer",
+          "kind": "engineering",
+          "engineering_kind": "member_size",
+          "object_class": "foundation"
+        },
+        {
+          "key": "ground_conditions",
+          "label": "Ground conditions",
+          "plain_label": "What the soil can carry, from a site investigation",
+          "kind": "engineering",
+          "engineering_kind": "other_engineering"
+        },
+        {
+          "key": "ground_level",
+          "label": "External ground level",
+          "plain_label": "Where the outside ground is",
+          "kind": "dimension"
+        }
+      ],
+      "idea": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry",
+          "default_from": "construction_defaults"
+        }
+      ]
+    },
+    "balcony_threshold": {
+      "draft": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry"
+        },
+        {
+          "key": "balcony_connection",
+          "label": "Balcony structural connection",
+          "plain_label": "How the balcony is held up, designed by the engineer",
+          "kind": "engineering",
+          "engineering_kind": "structural_connection"
+        },
+        {
+          "key": "thermal_break",
+          "label": "Thermal break",
+          "plain_label": "What stops heat escaping through the balcony connection",
+          "kind": "system",
+          "object_class": "thermal_break"
+        },
+        {
+          "key": "threshold_upstand",
+          "label": "Threshold upstand",
+          "plain_label": "How much the door threshold stands up",
+          "kind": "dimension"
+        },
+        {
+          "key": "membrane_system",
+          "label": "Membrane system",
+          "plain_label": "The waterproof layer on the roof",
+          "kind": "system",
+          "object_class": "membrane"
+        }
+      ],
+      "idea": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry",
+          "default_from": "construction_defaults"
+        }
+      ]
+    },
+    "steel_beam_bearing": {
+      "draft": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry"
+        },
+        {
+          "key": "beam",
+          "label": "Beam section",
+          "plain_label": "The steel beam size, from the engineer",
+          "kind": "engineering",
+          "engineering_kind": "member_size",
+          "object_class": "steel_beam"
+        },
+        {
+          "key": "padstone",
+          "label": "Padstone",
+          "plain_label": "The block that spreads the beam's load into the wall, from the engineer",
+          "kind": "engineering",
+          "engineering_kind": "member_size",
+          "object_class": "padstone"
+        },
+        {
+          "key": "bearing_length",
+          "label": "Bearing length",
+          "plain_label": "How far the beam sits on the wall, from the engineer",
+          "kind": "engineering",
+          "engineering_kind": "structural_connection"
+        },
+        {
+          "key": "fire_protection",
+          "label": "Fire protection to the beam",
+          "plain_label": "How the beam is protected in a fire, from the fire engineer",
+          "kind": "engineering",
+          "engineering_kind": "fire_period"
+        }
+      ],
+      "idea": [
+        {
+          "key": "wall_build_up",
+          "label": "Wall build-up",
+          "plain_label": "What the walls are made of",
+          "kind": "material",
+          "object_class": "masonry",
+          "default_from": "construction_defaults"
+        }
+      ]
+    }
+  },
+  "rules": [
+    {
+      "id": "gb-eng-L-thermal-line",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "thermal",
+      "document": {
+        "ref": "Approved Document L",
+        "edition": "Volume 1: Dwellings (edition to be confirmed by the signer)"
+      },
+      "applies_to": {
+        "drawing_type": "detail"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "measure": "is_continuous",
+            "args": {
+              "path": "thermal_line"
+            }
+          },
+          "op": "==",
+          "right": {
+            "value": true
+          }
+        }
+      },
+      "condition_text": "is_continuous(path=thermal_line) == true",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "The insulation line should run unbroken through this junction.",
+      "why": "Where the insulation stops or has a gap, heat leaks out and the cold spot can gather condensation and mould.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ]
+    },
+    {
+      "id": "gb-eng-C-dpc-150",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "moisture",
+      "document": {
+        "ref": "Approved Document C",
+        "edition": "Edition to be confirmed by the signer"
+      },
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "ground_floor_wall_dpc",
+        "object_class": "dpc"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "measure": "vertical_distance",
+            "args": {
+              "from_class": "external_ground",
+              "from": "max",
+              "to_class": "dpc",
+              "to": "min"
+            }
+          },
+          "op": ">=",
+          "right": {
+            "value": 150,
+            "unit": "mm"
+          }
+        }
+      },
+      "condition_text": "vertical_distance(from=max, from_class=external_ground, to=min, to_class=dpc) >= 150 mm",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "The damp-proof course should be at least 150 mm above the adjoining ground level.",
+      "why": "Rain splashes up from the ground and soil gets banked against walls; keeping the damp-proof course well above it stops water rising into the wall.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ],
+      "requires_inputs": [
+        "external_ground"
+      ]
+    },
+    {
+      "id": "gb-eng-C-dpm-linked-to-dpc",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "moisture",
+      "document": {
+        "ref": "Approved Document C",
+        "edition": "Edition to be confirmed by the signer"
+      },
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "ground_floor_wall_dpc"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "measure": "is_connected",
+            "args": {
+              "from_class": "damp_proof_membrane",
+              "to_class": "dpc"
+            }
+          },
+          "op": "==",
+          "right": {
+            "value": true
+          }
+        }
+      },
+      "condition_text": "is_connected(from_class=damp_proof_membrane, to_class=dpc) == true",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "The floor's damp-proof membrane should link to the wall's damp-proof course.",
+      "why": "If there is a gap between the floor membrane and the wall's damp-proof course, ground moisture can find its way round the join.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ]
+    },
+    {
+      "id": "gb-eng-C-cavity-tray-over-opening",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "moisture",
+      "document": {
+        "ref": "Approved Document C",
+        "edition": "Edition to be confirmed by the signer"
+      },
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "window_head"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "measure": "count",
+            "args": {
+              "object_class": "cavity_tray"
+            }
+          },
+          "op": ">=",
+          "right": {
+            "value": 1
+          }
+        }
+      },
+      "condition_text": "count(object_class=cavity_tray) >= 1",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "A cavity tray should be shown over the opening.",
+      "why": "Water that gets into the cavity runs down the inside of the outer wall; over an opening it needs a tray to lead it back outside instead of onto the frame.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ]
+    },
+    {
+      "id": "gb-eng-F-background-ventilator",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "ventilation",
+      "document": {
+        "ref": "Approved Document F",
+        "edition": "Volume 1: Dwellings (edition to be confirmed by the signer)"
+      },
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "window_head"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "measure": "count",
+            "args": {
+              "object_class": "background_ventilator"
+            }
+          },
+          "op": ">=",
+          "right": {
+            "value": 1
+          }
+        }
+      },
+      "condition_text": "count(object_class=background_ventilator) >= 1",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "Where the ventilation strategy relies on background ventilators, the window should show one.",
+      "why": "Homes need a steady supply of fresh air to clear moisture and pollutants; whether a vent is needed here depends on the ventilation system chosen.",
+      "judgement": true,
+      "modes": [
+        "draft",
+        "learn"
+      ]
+    },
+    {
+      "id": "gb-eng-B-cavity-closer-at-jamb",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "cavity_barriers",
+      "document": {
+        "ref": "Approved Document B",
+        "edition": "Volume 1: Dwellings (edition to be confirmed by the signer)"
+      },
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "window_jamb"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "measure": "count",
+            "args": {
+              "object_class": "cavity_closer"
+            }
+          },
+          "op": ">=",
+          "right": {
+            "value": 1
+          }
+        }
+      },
+      "condition_text": "count(object_class=cavity_closer) >= 1",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "The cavity should be closed around the opening.",
+      "why": "An open cavity at the edge of an opening lets fire and smoke travel through the wall unseen, so the cavity is closed around openings.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ]
+    },
+    {
+      "id": "gb-eng-B-cavity-closer",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "cavity_barriers",
+      "document": {
+        "ref": "Approved Document B",
+        "edition": "Volume 1: Dwellings (edition to be confirmed by the signer)"
+      },
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "cavity_closer"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "measure": "count",
+            "args": {
+              "object_class": "cavity_closer"
+            }
+          },
+          "op": ">=",
+          "right": {
+            "value": 1
+          }
+        }
+      },
+      "condition_text": "count(object_class=cavity_closer) >= 1",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "The detail should show a cavity closer.",
+      "why": "Closing the cavity at openings stops fire and smoke spreading through the hidden space inside the wall.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ]
+    },
+    {
+      "id": "gb-eng-C-dpc-under-sill",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "moisture",
+      "document": {
+        "ref": "Approved Document C",
+        "edition": "Edition to be confirmed by the signer"
+      },
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "window_sill"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "measure": "count",
+            "args": {
+              "object_class": "dpc"
+            }
+          },
+          "op": ">=",
+          "right": {
+            "value": 1
+          }
+        }
+      },
+      "condition_text": "count(object_class=dpc) >= 1",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "A damp-proof course should be shown under the sill.",
+      "why": "Sills collect rain and their joints can leak; a damp-proof layer beneath stops that water soaking down into the wall.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ]
+    },
+    {
+      "id": "gb-eng-C-sill-projects",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "moisture",
+      "document": {
+        "ref": "Approved Document C",
+        "edition": "Edition to be confirmed by the signer"
+      },
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "window_sill",
+        "object_class": "sill"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "measure": "horizontal_distance",
+            "args": {
+              "from_class": "sill",
+              "from": "min",
+              "to_class": "masonry",
+              "to": "min"
+            }
+          },
+          "op": ">",
+          "right": {
+            "value": 0,
+            "unit": "mm"
+          }
+        }
+      },
+      "condition_text": "horizontal_distance(from=min, from_class=sill, to=min, to_class=masonry) > 0 mm",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "The sill should project beyond the face of the wall.",
+      "why": "A sill that sticks out, ideally with a drip underneath, throws rainwater clear of the wall instead of letting it run down the face.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ]
+    },
+    {
+      "id": "gb-eng-M-threshold-upstand",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "access",
+      "document": {
+        "ref": "Approved Document M",
+        "edition": "Volume 1: Dwellings (edition to be confirmed by the signer)"
+      },
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "door_threshold",
+        "object_class": "threshold"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "field": "upstand_height"
+          },
+          "op": "<=",
+          "right": {
+            "value": 15,
+            "unit": "mm"
+          }
+        }
+      },
+      "condition_text": "threshold.upstand_height <= 15 mm",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "At a principal entrance, the threshold upstand should total no more than 15 mm.",
+      "why": "A higher step at the front door is a trip hazard and a barrier to wheelchairs, buggies and anyone unsteady on their feet.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ],
+      "requires_inputs": [
+        "upstand_height"
+      ]
+    },
+    {
+      "id": "gb-eng-C-dpc-at-threshold",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "moisture",
+      "document": {
+        "ref": "Approved Document C",
+        "edition": "Edition to be confirmed by the signer"
+      },
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "door_threshold"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "measure": "count",
+            "args": {
+              "object_class": "dpc"
+            }
+          },
+          "op": ">=",
+          "right": {
+            "value": 1
+          }
+        }
+      },
+      "condition_text": "count(object_class=dpc) >= 1",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "A damp-proof course should be shown below the threshold.",
+      "why": "Door thresholds sit close to the ground where water collects, so the wall below needs a damp-proof layer linked to the floor.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ]
+    },
+    {
+      "id": "gb-eng-BS5250-eaves-ventilation",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "condensation",
+      "document": {
+        "ref": "BS 5250",
+        "edition": "Edition to be confirmed by the signer"
+      },
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "eaves"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "measure": "count",
+            "args": {
+              "object_class": "ventilation_path"
+            }
+          },
+          "op": ">=",
+          "right": {
+            "value": 1
+          }
+        }
+      },
+      "condition_text": "count(object_class=ventilation_path) >= 1",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "Where the roof space is ventilated, the eaves should show a clear ventilation path.",
+      "why": "Warm moist air from the house can condense in a cold roof space; air moving through at the eaves carries that moisture away.",
+      "judgement": true,
+      "modes": [
+        "draft",
+        "learn"
+      ]
+    },
+    {
+      "id": "gb-eng-BS5534-verge-fixing",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "weathertightness",
+      "document": {
+        "ref": "BS 5534",
+        "edition": "Edition to be confirmed by the signer"
+      },
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "verge"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "measure": "count",
+            "args": {
+              "object_class": "verge_trim"
+            }
+          },
+          "op": ">=",
+          "right": {
+            "value": 1
+          }
+        }
+      },
+      "condition_text": "count(object_class=verge_trim) >= 1",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "The verge should be mechanically fixed, for example with a dry verge system, not held by mortar alone.",
+      "why": "Wind pulls hardest at the edges of a roof; tiles held only by mortar can loosen and blow off.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ]
+    },
+    {
+      "id": "gb-eng-BS6229-upstand-parapet",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "moisture",
+      "document": {
+        "ref": "BS 6229",
+        "edition": "2018"
+      },
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "parapet",
+        "object_class": "upstand"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "field": "height"
+          },
+          "op": ">=",
+          "right": {
+            "value": 150,
+            "unit": "mm"
+          }
+        }
+      },
+      "condition_text": "upstand.height >= 150 mm",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "The membrane upstand should be at least 150 mm above the finished roof surface.",
+      "why": "Water can pond or be blown against the parapet; the waterproof layer has to turn up high enough that it cannot get over the top into the wall.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ],
+      "requires_inputs": [
+        "height"
+      ]
+    },
+    {
+      "id": "gb-eng-C-dpc-under-coping",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "moisture",
+      "document": {
+        "ref": "Approved Document C",
+        "edition": "Edition to be confirmed by the signer"
+      },
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "parapet"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "measure": "count",
+            "args": {
+              "object_class": "dpc"
+            }
+          },
+          "op": ">=",
+          "right": {
+            "value": 1
+          }
+        }
+      },
+      "condition_text": "count(object_class=dpc) >= 1",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "A damp-proof course should be shown under the coping.",
+      "why": "Coping joints are not watertight for ever; a damp-proof layer underneath stops water that gets through from soaking down the wall.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ]
+    },
+    {
+      "id": "gb-eng-BS6229-upstand-abutment",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "moisture",
+      "document": {
+        "ref": "BS 6229",
+        "edition": "2018"
+      },
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "warm_flat_roof_abutment",
+        "object_class": "upstand"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "field": "height"
+          },
+          "op": ">=",
+          "right": {
+            "value": 150,
+            "unit": "mm"
+          }
+        }
+      },
+      "condition_text": "upstand.height >= 150 mm",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "The membrane upstand should be at least 150 mm above the finished roof surface.",
+      "why": "Where a flat roof meets a wall, water pools against it; the waterproof layer must turn up the wall high enough to stay above it.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ],
+      "requires_inputs": [
+        "height"
+      ]
+    },
+    {
+      "id": "gb-eng-BS6229-flashing-over-upstand",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "moisture",
+      "document": {
+        "ref": "BS 6229",
+        "edition": "2018"
+      },
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "warm_flat_roof_abutment"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "measure": "overlap_length",
+            "args": {
+              "from_class": "flashing",
+              "to_class": "upstand"
+            }
+          },
+          "op": ">",
+          "right": {
+            "value": 0,
+            "unit": "mm"
+          }
+        }
+      },
+      "condition_text": "overlap_length(from_class=flashing, to_class=upstand) > 0 mm",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "A cover flashing should overlap the top of the upstand.",
+      "why": "The top edge of the upstand is a weak point; a flashing over it stops rain running down the wall and in behind the membrane.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ]
+    },
+    {
+      "id": "gb-eng-C-cavity-tray-at-abutment",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "moisture",
+      "document": {
+        "ref": "Approved Document C",
+        "edition": "Edition to be confirmed by the signer"
+      },
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "warm_flat_roof_abutment"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "measure": "count",
+            "args": {
+              "object_class": "cavity_tray"
+            }
+          },
+          "op": ">=",
+          "right": {
+            "value": 1
+          }
+        }
+      },
+      "condition_text": "count(object_class=cavity_tray) >= 1",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "A cavity tray should be shown in the wall above the roof.",
+      "why": "Water in the cavity above a lower roof would otherwise run down behind the roof finish; a tray leads it out above the flashing.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ]
+    },
+    {
+      "id": "gb-eng-L-balcony-thermal-break",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "thermal",
+      "document": {
+        "ref": "Approved Document L",
+        "edition": "Volume 1: Dwellings (edition to be confirmed by the signer)"
+      },
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "balcony_threshold"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "measure": "count",
+            "args": {
+              "object_class": "thermal_break"
+            }
+          },
+          "op": ">=",
+          "right": {
+            "value": 1
+          }
+        }
+      },
+      "condition_text": "count(object_class=thermal_break) >= 1",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "Where the balcony structure passes through the wall, a thermal break should be shown.",
+      "why": "A balcony slab running straight through the wall carries heat out like a radiator fin, making a cold patch inside that can grow mould.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ]
+    }
+  ],
+  "check_categories": [
+    "moisture",
+    "thermal",
+    "ventilation",
+    "condensation",
+    "cavity_barriers",
+    "access",
+    "weathertightness",
+    "structural",
+    "fire_stopping",
+    "acoustic",
+    "drainage"
+  ],
+  "typical_details": [
+    {
+      "id": "gb-eng-window_head",
+      "detail_type": "window_head",
+      "construction_method": "gb_cavity_brick_block",
+      "title": "Window head in a cavity wall",
+      "principles": [
+        "A lintel carries both leaves over the opening.",
+        "A cavity tray with stop ends sheds water from the cavity outwards.",
+        "The frame sits in line with the cavity insulation so the insulation line is unbroken."
+      ]
+    },
+    {
+      "id": "gb-eng-window_jamb",
+      "detail_type": "window_jamb",
+      "construction_method": "gb_cavity_brick_block",
+      "title": "Window jamb in a cavity wall",
+      "principles": [
+        "The cavity is closed at the reveal with an insulated cavity closer.",
+        "The frame overlaps the closer so there is no gap in the insulation line."
+      ]
+    },
+    {
+      "id": "gb-eng-window_sill",
+      "detail_type": "window_sill",
+      "construction_method": "gb_cavity_brick_block",
+      "title": "Window sill in a cavity wall",
+      "principles": [
+        "The sill projects beyond the wall face and has a drip.",
+        "A damp-proof course under the sill is turned up at the back."
+      ]
+    },
+    {
+      "id": "gb-eng-door_threshold",
+      "detail_type": "door_threshold",
+      "construction_method": "gb_ground_bearing_slab",
+      "title": "Door threshold at ground floor",
+      "principles": [
+        "A damp-proof course below the threshold links to the floor's damp-proof membrane.",
+        "At a principal entrance the threshold upstand is kept low for level access."
+      ]
+    },
+    {
+      "id": "gb-eng-eaves",
+      "detail_type": "eaves",
+      "construction_method": "gb_pitched_tiled",
+      "title": "Eaves of a pitched tiled roof",
+      "principles": [
+        "Loft insulation meets the wall insulation so the insulation line is unbroken.",
+        "A ventilation path at the eaves keeps a cold roof space dry.",
+        "The fascia and gutter collect water clear of the wall."
+      ]
+    },
+    {
+      "id": "gb-eng-verge",
+      "detail_type": "verge",
+      "construction_method": "gb_pitched_tiled",
+      "title": "Verge at a gable",
+      "principles": [
+        "Verge tiles are mechanically fixed, for example with a dry verge system.",
+        "The verge overhangs the gable to throw water clear of the wall."
+      ]
+    },
+    {
+      "id": "gb-eng-parapet",
+      "detail_type": "parapet",
+      "construction_method": "gb_warm_flat_roof",
+      "title": "Parapet at a warm flat roof",
+      "principles": [
+        "Insulation sits above the deck; the membrane sits above the insulation.",
+        "The membrane turns up the parapet as an upstand.",
+        "A coping with a drip caps the wall, with a damp-proof course beneath it."
+      ]
+    },
+    {
+      "id": "gb-eng-warm_flat_roof_abutment",
+      "detail_type": "warm_flat_roof_abutment",
+      "construction_method": "gb_warm_flat_roof",
+      "title": "Warm flat roof abutting a wall",
+      "principles": [
+        "The membrane turns up the wall as an upstand.",
+        "A cover flashing overlaps the top of the upstand.",
+        "A cavity tray in the wall above leads cavity water out over the flashing."
+      ]
+    },
+    {
+      "id": "gb-eng-ground_floor_wall_dpc",
+      "detail_type": "ground_floor_wall_dpc",
+      "construction_method": "gb_ground_bearing_slab",
+      "title": "Ground floor to wall junction with DPC",
+      "principles": [
+        "The damp-proof course sits well above the outside ground.",
+        "The floor's damp-proof membrane links to the damp-proof course.",
+        "Floor and wall insulation meet so the insulation line is unbroken."
+      ]
+    },
+    {
+      "id": "gb-eng-cavity_closer",
+      "detail_type": "cavity_closer",
+      "construction_method": "gb_cavity_brick_block",
+      "title": "Cavity closer at an opening",
+      "principles": [
+        "An insulated cavity closer closes the cavity at the reveal.",
+        "The closer keeps the insulation line continuous to the frame."
+      ]
+    },
+    {
+      "id": "gb-eng-wall_to_foundation",
+      "detail_type": "wall_to_foundation",
+      "construction_method": "gb_cavity_brick_block",
+      "title": "Cavity wall to foundation",
+      "principles": [
+        "The foundation is designed by the engineer for the ground conditions.",
+        "The cavity below ground is filled so the leaves are supported and water cannot collect."
+      ]
+    },
+    {
+      "id": "gb-eng-balcony_threshold",
+      "detail_type": "balcony_threshold",
+      "construction_method": "gb_cavity_brick_block",
+      "title": "Balcony threshold",
+      "principles": [
+        "A thermal break separates the balcony structure from the floor inside.",
+        "The balcony surface falls away from the door.",
+        "The membrane turns up at the threshold under the door frame."
+      ]
+    },
+    {
+      "id": "gb-eng-steel_beam_bearing",
+      "detail_type": "steel_beam_bearing",
+      "construction_method": "gb_cavity_brick_block",
+      "title": "Steel beam bearing on an inner leaf",
+      "principles": [
+        "The beam, padstone and bearing length come from the engineer.",
+        "The beam bears on the inner leaf, never bridging the cavity."
+      ]
+    }
+  ],
+  "construction_defaults": {
+    "materials": [
+      {
+        "id": "brick_facing",
+        "name": "Facing brick",
+        "category": "masonry",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "gb-eng-residential",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "block_inner",
+        "name": "Concrete block (dense or lightweight, to be confirmed)",
+        "category": "masonry",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "gb-eng-residential",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "cavity_insulation",
+        "name": "Cavity insulation (type and thickness to be confirmed)",
+        "category": "insulation",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "gb-eng-residential",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "plasterboard_skim",
+        "name": "Plasterboard and skim",
+        "category": "finish",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "gb-eng-residential",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "timber_truss",
+        "name": "Timber trussed rafters",
+        "category": "timber",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "gb-eng-residential",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "roof_underlay",
+        "name": "Roof underlay",
+        "category": "membrane",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "gb-eng-residential",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "roof_tile",
+        "name": "Concrete or clay roof tiles",
+        "category": "tile",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "gb-eng-residential",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "flat_roof_deck",
+        "name": "Roof deck (timber or concrete, to be confirmed)",
+        "category": "board",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "gb-eng-residential",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "vapour_control_layer",
+        "name": "Vapour control layer",
+        "category": "membrane",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "gb-eng-residential",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "roof_insulation",
+        "name": "Roof insulation (type and thickness to be confirmed)",
+        "category": "insulation",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "gb-eng-residential",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "roof_membrane",
+        "name": "Roof waterproofing membrane (single-ply or reinforced bitumen, to be confirmed)",
+        "category": "membrane",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "gb-eng-residential",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "damp_proof_membrane",
+        "name": "Damp-proof membrane",
+        "category": "membrane",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "gb-eng-residential",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "concrete_slab",
+        "name": "Concrete ground-bearing slab",
+        "category": "concrete",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "gb-eng-residential",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "floor_insulation",
+        "name": "Floor insulation (type and thickness to be confirmed)",
+        "category": "insulation",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "gb-eng-residential",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "screed",
+        "name": "Sand and cement screed",
+        "category": "screed",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "gb-eng-residential",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "timber_joists",
+        "name": "Timber floor joists",
+        "category": "timber",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "gb-eng-residential",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "timber_floor_deck",
+        "name": "Timber floor deck",
+        "category": "board",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "gb-eng-residential",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "window_upvc_aluminium",
+        "name": "uPVC or aluminium window",
+        "category": "frame",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "gb-eng-residential",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "door_external",
+        "name": "External door (uPVC, aluminium, composite or timber, to be confirmed)",
+        "category": "frame",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "gb-eng-residential",
+            "version": "0.1.0"
+          }
+        }
+      }
+    ],
+    "walls": [
+      {
+        "id": "gb_cavity_brick_block",
+        "name": "Brick / insulated cavity / block",
+        "plain_description": "brick outer wall, an insulated cavity and a block inner wall — the usual construction in England",
+        "layers": [
+          {
+            "role": "outer_leaf",
+            "material_id": "brick_facing",
+            "thickness": 102.5
+          },
+          {
+            "role": "cavity",
+            "material_id": null,
+            "thickness": null
+          },
+          {
+            "role": "insulation",
+            "material_id": "cavity_insulation",
+            "thickness": null
+          },
+          {
+            "role": "inner_leaf",
+            "material_id": "block_inner",
+            "thickness": 100
+          },
+          {
+            "role": "finish",
+            "material_id": "plasterboard_skim",
+            "thickness": null
+          }
+        ]
+      }
+    ],
+    "frame": {
+      "id": "gb_loadbearing_masonry",
+      "name": "Loadbearing masonry",
+      "plain_description": "the walls carry the floors and roof — there is no separate frame",
+      "layers": []
+    },
+    "roofs": [
+      {
+        "id": "gb_pitched_tiled",
+        "name": "Timber trussed pitched roof, tiled",
+        "plain_description": "a pitched timber roof with concrete or clay tiles",
+        "layers": [
+          {
+            "role": "structure",
+            "material_id": "timber_truss",
+            "thickness": null
+          },
+          {
+            "role": "underlay",
+            "material_id": "roof_underlay",
+            "thickness": null
+          },
+          {
+            "role": "covering",
+            "material_id": "roof_tile",
+            "thickness": null
+          }
+        ]
+      },
+      {
+        "id": "gb_warm_flat_roof",
+        "name": "Warm flat roof",
+        "plain_description": "a flat roof with the insulation above the deck and the waterproof layer on top",
+        "layers": [
+          {
+            "role": "deck",
+            "material_id": "flat_roof_deck",
+            "thickness": null
+          },
+          {
+            "role": "vapour_control",
+            "material_id": "vapour_control_layer",
+            "thickness": null
+          },
+          {
+            "role": "insulation",
+            "material_id": "roof_insulation",
+            "thickness": null
+          },
+          {
+            "role": "waterproofing",
+            "material_id": "roof_membrane",
+            "thickness": null
+          }
+        ],
+        "applies_to": [
+          "flat roofs"
+        ]
+      }
+    ],
+    "floors": [
+      {
+        "id": "gb_ground_bearing_slab",
+        "name": "Ground-bearing concrete slab",
+        "plain_description": "a concrete ground floor on a damp-proof membrane, with insulation and a screed",
+        "layers": [
+          {
+            "role": "damp_proofing",
+            "material_id": "damp_proof_membrane",
+            "thickness": null
+          },
+          {
+            "role": "structure",
+            "material_id": "concrete_slab",
+            "thickness": null
+          },
+          {
+            "role": "insulation",
+            "material_id": "floor_insulation",
+            "thickness": null
+          },
+          {
+            "role": "finish",
+            "material_id": "screed",
+            "thickness": null
+          }
+        ],
+        "applies_to": [
+          "ground floor"
+        ]
+      },
+      {
+        "id": "gb_timber_upper_floor",
+        "name": "Timber joist upper floor",
+        "plain_description": "timber joists with a timber deck, plasterboard ceiling below",
+        "layers": [
+          {
+            "role": "structure",
+            "material_id": "timber_joists",
+            "thickness": null
+          },
+          {
+            "role": "deck",
+            "material_id": "timber_floor_deck",
+            "thickness": null
+          },
+          {
+            "role": "ceiling",
+            "material_id": "plasterboard_skim",
+            "thickness": null
+          }
+        ],
+        "applies_to": [
+          "upper floors"
+        ]
+      }
+    ],
+    "windows": [
+      {
+        "id": "gb_window_upvc_aluminium",
+        "name": "uPVC or aluminium windows",
+        "plain_description": "uPVC or aluminium windows",
+        "layers": [
+          {
+            "role": "frame",
+            "material_id": "window_upvc_aluminium",
+            "thickness": null
+          }
+        ]
+      }
+    ],
+    "doors": [
+      {
+        "id": "gb_door_external",
+        "name": "External doors",
+        "plain_description": "external doors in uPVC, aluminium, composite or timber — to be confirmed",
+        "layers": [
+          {
+            "role": "frame",
+            "material_id": "door_external",
+            "thickness": null
+          }
+        ]
+      }
+    ],
+    "finishes": {
+      "external": [
+        {
+          "id": "gb_facing_brickwork",
+          "name": "Facing brickwork",
+          "plain_description": "the brick outer wall is the finished face",
+          "layers": [
+            {
+              "role": "finish",
+              "material_id": "brick_facing",
+              "thickness": null
+            }
+          ]
+        }
+      ],
+      "internal": [
+        {
+          "id": "gb_plasterboard_skim",
+          "name": "Plasterboard and skim",
+          "plain_description": "plasterboard walls and ceilings with a skim coat",
+          "layers": [
+            {
+              "role": "finish",
+              "material_id": "plasterboard_skim",
+              "thickness": null
+            }
+          ]
+        }
+      ]
+    },
+    "typical_detail_ids": [
+      "gb-eng-window_head",
+      "gb-eng-window_jamb",
+      "gb-eng-window_sill",
+      "gb-eng-door_threshold",
+      "gb-eng-eaves",
+      "gb-eng-verge",
+      "gb-eng-parapet",
+      "gb-eng-warm_flat_roof_abutment",
+      "gb-eng-ground_floor_wall_dpc",
+      "gb-eng-cavity_closer",
+      "gb-eng-wall_to_foundation",
+      "gb-eng-balcony_threshold",
+      "gb-eng-steel_beam_bearing"
+    ]
+  },
+  "coverage": {
+    "statement": "GB-ENG Residential v0.1.0 (Tier 1) runs 19 automated checks covering moisture, thermal, ventilation, condensation, cavity barriers, access, weathertightness. All are unverified and unsigned, so every result is a flag for professional review, never a pass. Checks not available: structural, fire stopping, acoustic, drainage.",
+    "checks_available": [
+      "moisture",
+      "thermal",
+      "ventilation",
+      "condensation",
+      "cavity_barriers",
+      "access",
+      "weathertightness"
+    ],
+    "checks_not_available": [
+      "structural",
+      "fire_stopping",
+      "acoustic",
+      "drainage"
+    ],
+    "rules_total": 19,
+    "rules_verified": 0
+  }
+}
