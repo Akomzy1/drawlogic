@@ -93,16 +93,36 @@ jobs:
             echo "::notice::No engine or trust source yet; mypy runs on them once code lands."
           fi
 
-      - name: examiner tests (trust/tests, engine/tests)
+      # Codex's examiner suite for engine/core and trust (fixtures/core, trust/tests). Its pytest.ini marks tests
+      # `fixtures` (offline, always green) or `runtime` (need the real implementation). Runtime tests run once the
+      # module they gate exists, and are never skipped or mocked when it does.
+      - name: examiner fixtures (core and trust)
         run: |
-          dirs=""
-          for d in trust/tests engine/tests; do
-            if [ -n "$(find "$d" -name 'test_*.py' -o -name '*_test.py' | head -1)" ]; then dirs="$dirs $d"; fi
-          done
-          if [ -z "$dirs" ]; then
-            echo "::notice::No examiner tests yet. Codex's trust-rule, gate and golden tests run here once they land (Prompt 2)."
+          if [ -f trust/tests/pytest.ini ]; then
+            pip install -r trust/tests/requirements.txt
+            python -m pytest -c trust/tests/pytest.ini -m fixtures
           else
-            python -m pytest $dirs
+            echo "::notice::No core/trust examiner suite yet (Codex, Prompt 2)."
+          fi
+
+      - name: examiner runtime — engine/core (Prompts 4, 6, 9)
+        run: |
+          if [ -f trust/tests/pytest.ini ] && [ -f engine/core/main.py ]; then
+            pip install -e engine
+            DRAWLOGIC_CORE_APP=engine.core.main:app python -m pytest -c trust/tests/pytest.ini -m runtime trust/tests/test_core_goldens.py trust/tests/test_core_properties.py
+          else
+            echo "::notice::engine/core/main.py not present yet; core runtime tests fail with CORE_UNAVAILABLE until Prompt 4."
+          fi
+
+      - name: examiner runtime — trust (Prompts 7, 11)
+        run: |
+          if [ -f trust/tests/pytest.ini ] && [ -f trust/main.py ]; then
+            pip install -e engine
+            python -m uvicorn trust.main:app --port 8765 &
+            for i in $(seq 1 30); do curl -sf http://127.0.0.1:8765/health && break; sleep 1; done
+            DRAWLOGIC_TRUST_URL=http://127.0.0.1:8765 python -m pytest -c trust/tests/pytest.ini -m runtime trust/tests/test_signing_gate.py trust/tests/test_audit_chain.py
+          else
+            echo "::notice::trust/main.py not present yet; trust runtime tests fail with TRUST_UNAVAILABLE until Prompt 7."
           fi
 
   render-fixtures:
