@@ -1,0 +1,121 @@
+{
+  "detail_type": "wall_to_foundation",
+  "input": "input.ddl.json",
+  "drawing_id": "bde591b2-4483-5842-b52e-1e5ec488da64",
+  "drawing_hash": "sha256:ea12494fd6037ddd9be5215d7a9e51a04182b6504d57c397d0ebcf4502a3906c",
+  "rev": "A",
+  "title": "Wall to strip foundation",
+  "scale": 10,
+  "layers": [
+    {
+      "id": "walls",
+      "name": "A-Walls"
+    },
+    {
+      "id": "structure",
+      "name": "A-Structure"
+    },
+    {
+      "id": "ground",
+      "name": "A-Ground"
+    },
+    {
+      "id": "anno",
+      "name": "A-Anno"
+    }
+  ],
+  "objects": [
+    {
+      "id": "footing",
+      "layer_id": "structure",
+      "source": "user",
+      "verify": false,
+      "material_id": "concrete_c25",
+      "hatch_category": "concrete"
+    },
+    {
+      "id": "backfill",
+      "layer_id": "ground",
+      "source": "user",
+      "verify": false,
+      "material_id": "backfill",
+      "hatch_category": "earth"
+    },
+    {
+      "id": "block_outer",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "block_dense",
+      "hatch_category": "masonry"
+    },
+    {
+      "id": "cavity_fill",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "lean_mix",
+      "hatch_category": "concrete"
+    },
+    {
+      "id": "block_inner",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "block_dense",
+      "hatch_category": "masonry"
+    },
+    {
+      "id": "brick",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "brick_facing",
+      "hatch_category": "masonry"
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "foundation_depth",
+      "value": 1000,
+      "text": {
+        "gb-eng": "1000",
+        "variant": "1000.0"
+      },
+      "terminator": {
+        "gb-eng": "tick",
+        "variant": "arrow"
+      }
+    },
+    {
+      "id": "footing_width",
+      "value": 665,
+      "text": {
+        "gb-eng": "665",
+        "variant": "665.0"
+      },
+      "terminator": {
+        "gb-eng": "tick",
+        "variant": "arrow"
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "id": "an_footing",
+      "text": "Strip foundation to engineer's design",
+      "leader": true,
+      "targets": [
+        "footing"
+      ]
+    },
+    {
+      "id": "an_fill",
+      "text": "Lean-mix cavity fill",
+      "leader": true,
+      "targets": [
+        "cavity_fill"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "detail_type": "door_threshold",
+  "input": "input.ddl.json",
+  "drawing_id": "25109ab0-3d83-5868-9b57-548f5852d69c",
+  "drawing_hash": "sha256:392741d16704226e3741e37ee7b8daf6264f441322068615c9ee5bc1d3055114",
+  "rev": "A",
+  "title": "Door threshold",
+  "scale": 10,
+  "legend_material_ids": [
+    "alu_threshold",
+    "brick_facing",
+    "concrete_c25",
+    "dpc_polymer",
+    "paving",
+    "pir_board",
+    "screed",
+    "timber_door",
+    "timber_sw"
+  ]
+}

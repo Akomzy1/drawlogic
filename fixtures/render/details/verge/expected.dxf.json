@@ -1,0 +1,80 @@
+{
+  "detail_type": "verge",
+  "input": "input.ddl.json",
+  "drawing_id": "30f56ded-f448-5132-8f95-60e80696ead6",
+  "drawing_hash": "sha256:ef613cfa7bc6135b87787eb46411a0ef2e68044382afba893895f3fd1267766f",
+  "rev": "A",
+  "title": "Verge at gable",
+  "scale": 10,
+  "layers": [
+    "A-Anno",
+    "A-Roof",
+    "A-Walls"
+  ],
+  "objects": [
+    {
+      "id": "brick",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "cavity",
+      "layer": "A-Walls",
+      "hatch": false
+    },
+    {
+      "id": "ins",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "block",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "plaster",
+      "layer": "A-Walls",
+      "hatch": false
+    },
+    {
+      "id": "undercloak",
+      "layer": "A-Roof",
+      "hatch": false
+    },
+    {
+      "id": "battens",
+      "layer": "A-Roof",
+      "hatch": true
+    },
+    {
+      "id": "tiles",
+      "layer": "A-Roof",
+      "hatch": false
+    },
+    {
+      "id": "verge_trim",
+      "layer": "A-Roof",
+      "hatch": false
+    },
+    {
+      "id": "rafter",
+      "layer": "A-Roof",
+      "hatch": true
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "verge_overhang",
+      "value": 70
+    },
+    {
+      "id": "wall_total",
+      "value": 365
+    }
+  ],
+  "texts": [
+    "Dry verge trim",
+    "Undercloak"
+  ]
+}

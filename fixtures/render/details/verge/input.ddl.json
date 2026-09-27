@@ -1,0 +1,587 @@
+{
+  "ddl_version": "0.1.0",
+  "drawing": {
+    "id": "30f56ded-f448-5132-8f95-60e80696ead6",
+    "title": "Verge at gable",
+    "discipline": "architecture",
+    "type": "detail",
+    "detail_type": "verge",
+    "mode": "draft",
+    "scale": 10,
+    "units": "mm",
+    "jurisdiction": "GB-ENG",
+    "rev": "A",
+    "hash": "sha256:ef613cfa7bc6135b87787eb46411a0ef2e68044382afba893895f3fd1267766f",
+    "parent_hash": null,
+    "profile_stack": [
+      {
+        "id": "gb-eng-residential",
+        "name": "GB-ENG Residential",
+        "version": "0.1.0",
+        "layer": "jurisdiction",
+        "tier": 1,
+        "signer": null
+      },
+      {
+        "id": "generic",
+        "name": "Generic",
+        "version": "0.1.0",
+        "layer": "generic",
+        "tier": null,
+        "signer": null
+      }
+    ],
+    "card_id": "card-render-fixture-verge",
+    "created_at": "2026-09-27T09:00:00Z"
+  },
+  "materials": [
+    {
+      "id": "block_dense",
+      "name": "Dense concrete block",
+      "category": "masonry",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "brick_facing",
+      "name": "Facing brick",
+      "category": "masonry",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "fibre_cement",
+      "name": "Fibre cement undercloak",
+      "category": "board",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "pir_board",
+      "name": "PIR insulation board",
+      "category": "insulation",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "plaster",
+      "name": "Plasterboard and skim",
+      "category": "finish",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "roof_tile",
+      "name": "Concrete roof tile",
+      "category": "tile",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "timber_sw",
+      "name": "Softwood timber",
+      "category": "timber",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "upvc_trim",
+      "name": "uPVC dry verge trim",
+      "category": "trim",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "objects": [
+    {
+      "id": "brick",
+      "class": "masonry",
+      "label": "Outer leaf",
+      "material_id": "brick_facing",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            0,
+            0
+          ],
+          [
+            102.5,
+            0
+          ],
+          [
+            102.5,
+            600
+          ],
+          [
+            0,
+            600
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "cavity",
+      "class": "cavity",
+      "label": "Residual cavity",
+      "material_id": null,
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            102.5,
+            0
+          ],
+          [
+            152.5,
+            0
+          ],
+          [
+            152.5,
+            600
+          ],
+          [
+            102.5,
+            600
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "ins",
+      "class": "insulation",
+      "label": "Cavity insulation",
+      "material_id": "pir_board",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            152.5,
+            0
+          ],
+          [
+            252.5,
+            0
+          ],
+          [
+            252.5,
+            600
+          ],
+          [
+            152.5,
+            600
+          ]
+        ],
+        "closed": true
+      },
+      "source": "profile",
+      "confidence": 1.0,
+      "verify": false,
+      "source_detail": {
+        "profile": {
+          "id": "gb-eng-residential",
+          "version": "0.1.0"
+        }
+      },
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "block",
+      "class": "masonry",
+      "label": "Inner leaf",
+      "material_id": "block_dense",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            252.5,
+            0
+          ],
+          [
+            352.5,
+            0
+          ],
+          [
+            352.5,
+            600
+          ],
+          [
+            252.5,
+            600
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "plaster",
+      "class": "finish",
+      "label": "Internal finish",
+      "material_id": "plaster",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            352.5,
+            0
+          ],
+          [
+            365,
+            0
+          ],
+          [
+            365,
+            600
+          ],
+          [
+            352.5,
+            600
+          ]
+        ],
+        "closed": true
+      },
+      "source": "profile",
+      "confidence": 1.0,
+      "verify": false,
+      "source_detail": {
+        "profile": {
+          "id": "gb-eng-residential",
+          "version": "0.1.0"
+        }
+      },
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "undercloak",
+      "class": "undercloak",
+      "label": "Undercloak",
+      "material_id": "fibre_cement",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            -50,
+            620
+          ],
+          [
+            300,
+            620
+          ],
+          [
+            300,
+            630
+          ],
+          [
+            -50,
+            630
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "roof"
+    },
+    {
+      "id": "battens",
+      "class": "batten",
+      "label": "Tile battens",
+      "material_id": "timber_sw",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            -50,
+            630
+          ],
+          [
+            1000,
+            630
+          ],
+          [
+            1000,
+            655
+          ],
+          [
+            -50,
+            655
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "roof"
+    },
+    {
+      "id": "tiles",
+      "class": "roof_tile",
+      "label": "Roof tiles",
+      "material_id": "roof_tile",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            -50,
+            655
+          ],
+          [
+            1000,
+            655
+          ],
+          [
+            1000,
+            675
+          ],
+          [
+            -50,
+            675
+          ]
+        ],
+        "closed": true
+      },
+      "source": "profile",
+      "confidence": 1.0,
+      "verify": false,
+      "source_detail": {
+        "profile": {
+          "id": "gb-eng-residential",
+          "version": "0.1.0"
+        }
+      },
+      "rule_refs": [],
+      "layer_id": "roof"
+    },
+    {
+      "id": "verge_trim",
+      "class": "verge_trim",
+      "label": "Dry verge trim",
+      "material_id": "upvc_trim",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            -70,
+            610
+          ],
+          [
+            -50,
+            610
+          ],
+          [
+            -50,
+            690
+          ],
+          [
+            -70,
+            690
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "roof"
+    },
+    {
+      "id": "rafter",
+      "class": "rafter",
+      "label": "Gable rafter",
+      "material_id": "timber_sw",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            365,
+            480
+          ],
+          [
+            415,
+            480
+          ],
+          [
+            415,
+            630
+          ],
+          [
+            365,
+            630
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "roof"
+    }
+  ],
+  "connections": [],
+  "constraints": [],
+  "dimensions": [
+    {
+      "id": "verge_overhang",
+      "kind": "linear",
+      "refs": [
+        "verge_trim",
+        "brick"
+      ],
+      "value": 70,
+      "driving": true,
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "display": true
+    },
+    {
+      "id": "wall_total",
+      "kind": "linear",
+      "refs": [
+        "brick",
+        "plaster"
+      ],
+      "value": 365,
+      "driving": true,
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "display": true
+    }
+  ],
+  "annotations": [
+    {
+      "id": "an_trim",
+      "kind": "leader",
+      "text": "Dry verge trim",
+      "targets": [
+        "verge_trim"
+      ],
+      "position": [
+        -460.0,
+        800.0
+      ],
+      "layer_id": "anno",
+      "source": "user",
+      "confidence": 1
+    },
+    {
+      "id": "an_undercloak",
+      "kind": "leader",
+      "text": "Undercloak",
+      "targets": [
+        "undercloak"
+      ],
+      "position": [
+        -275.0,
+        775.0
+      ],
+      "layer_id": "anno",
+      "source": "user",
+      "confidence": 1
+    }
+  ],
+  "layers": [
+    {
+      "id": "walls",
+      "name": "A-Walls"
+    },
+    {
+      "id": "roof",
+      "name": "A-Roof"
+    },
+    {
+      "id": "anno",
+      "name": "A-Anno"
+    }
+  ],
+  "schedules": [],
+  "solver": {
+    "status": "resolved",
+    "conflicts": [],
+    "resolved_at": "2026-09-27T09:00:01Z"
+  },
+  "checks": null,
+  "stamp": null
+}

@@ -1,0 +1,630 @@
+{
+  "ddl_version": "0.1.0",
+  "drawing": {
+    "id": "88fc1870-7b12-503e-8281-f393d1061b13",
+    "title": "Window head, cavity wall",
+    "discipline": "architecture",
+    "type": "detail",
+    "detail_type": "window_head",
+    "mode": "draft",
+    "scale": 10,
+    "units": "mm",
+    "jurisdiction": "GB-ENG",
+    "rev": "A",
+    "hash": "sha256:eedb9c3948b4307f0779edcd70886af84eb3505880941f7da2b9d1977dec3bc5",
+    "parent_hash": null,
+    "profile_stack": [
+      {
+        "id": "gb-eng-residential",
+        "name": "GB-ENG Residential",
+        "version": "0.1.0",
+        "layer": "jurisdiction",
+        "tier": 1,
+        "signer": null
+      },
+      {
+        "id": "generic",
+        "name": "Generic",
+        "version": "0.1.0",
+        "layer": "generic",
+        "tier": null,
+        "signer": null
+      }
+    ],
+    "card_id": "card-render-fixture-window_head",
+    "created_at": "2026-09-27T09:00:00Z"
+  },
+  "materials": [
+    {
+      "id": "block_dense",
+      "name": "Dense concrete block",
+      "category": "masonry",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "brick_facing",
+      "name": "Facing brick",
+      "category": "masonry",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "concrete_c25",
+      "name": "Concrete",
+      "category": "concrete",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "dpc_polymer",
+      "name": "Polymer damp-proof course",
+      "category": "dpc",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "glazing_dg",
+      "name": "Double glazed unit",
+      "category": "glazing",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "pir_board",
+      "name": "PIR insulation board",
+      "category": "insulation",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "plaster",
+      "name": "Plasterboard and skim",
+      "category": "finish",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "steel_lintel",
+      "name": "Steel cavity lintel",
+      "category": "steel",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "upvc_frame",
+      "name": "uPVC window frame",
+      "category": "frame",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "objects": [
+    {
+      "id": "brick",
+      "class": "masonry",
+      "label": "Outer leaf",
+      "material_id": "brick_facing",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            0,
+            604
+          ],
+          [
+            102.5,
+            604
+          ],
+          [
+            102.5,
+            1200
+          ],
+          [
+            0,
+            1200
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "cavity",
+      "class": "cavity",
+      "label": "Residual cavity",
+      "material_id": null,
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            102.5,
+            604
+          ],
+          [
+            152.5,
+            604
+          ],
+          [
+            152.5,
+            1200
+          ],
+          [
+            102.5,
+            1200
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "ins",
+      "class": "insulation",
+      "label": "Cavity insulation",
+      "material_id": "pir_board",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            152.5,
+            604
+          ],
+          [
+            252.5,
+            604
+          ],
+          [
+            252.5,
+            1200
+          ],
+          [
+            152.5,
+            1200
+          ]
+        ],
+        "closed": true
+      },
+      "source": "profile",
+      "confidence": 1.0,
+      "verify": false,
+      "source_detail": {
+        "profile": {
+          "id": "gb-eng-residential",
+          "version": "0.1.0"
+        }
+      },
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "block",
+      "class": "masonry",
+      "label": "Inner leaf",
+      "material_id": "block_dense",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            252.5,
+            604
+          ],
+          [
+            352.5,
+            604
+          ],
+          [
+            352.5,
+            1200
+          ],
+          [
+            252.5,
+            1200
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "plaster",
+      "class": "finish",
+      "label": "Internal finish",
+      "material_id": "plaster",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            352.5,
+            454
+          ],
+          [
+            365,
+            454
+          ],
+          [
+            365,
+            1200
+          ],
+          [
+            352.5,
+            1200
+          ]
+        ],
+        "closed": true
+      },
+      "source": "profile",
+      "confidence": 1.0,
+      "verify": false,
+      "source_detail": {
+        "profile": {
+          "id": "gb-eng-residential",
+          "version": "0.1.0"
+        }
+      },
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "lintel",
+      "class": "lintel",
+      "label": "Steel cavity lintel",
+      "material_id": "steel_lintel",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            0,
+            560
+          ],
+          [
+            252.5,
+            560
+          ],
+          [
+            252.5,
+            600
+          ],
+          [
+            0,
+            600
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "source_detail": {
+        "note": "Size supplied by the user from the structural engineer's schedule; Drawlogic never sizes structure."
+      },
+      "rule_refs": [],
+      "layer_id": "structure"
+    },
+    {
+      "id": "tray",
+      "class": "dpc",
+      "label": "Cavity tray",
+      "material_id": "dpc_polymer",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            0,
+            600
+          ],
+          [
+            252.5,
+            600
+          ],
+          [
+            252.5,
+            604
+          ],
+          [
+            0,
+            604
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "inner_lintel",
+      "class": "lintel",
+      "label": "Inner leaf lintel",
+      "material_id": "concrete_c25",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            252.5,
+            454
+          ],
+          [
+            352.5,
+            454
+          ],
+          [
+            352.5,
+            604
+          ],
+          [
+            252.5,
+            604
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "source_detail": {
+        "note": "Size supplied by the user from the structural engineer's schedule; Drawlogic never sizes structure."
+      },
+      "rule_refs": [],
+      "layer_id": "structure"
+    },
+    {
+      "id": "frame",
+      "class": "window_frame",
+      "label": "Window frame head",
+      "material_id": "upvc_frame",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            60,
+            400
+          ],
+          [
+            200,
+            400
+          ],
+          [
+            200,
+            560
+          ],
+          [
+            60,
+            560
+          ]
+        ],
+        "closed": true
+      },
+      "source": "ai_inferred",
+      "confidence": 0.7,
+      "verify": true,
+      "source_detail": {
+        "model": {
+          "provider": "anthropic",
+          "model_id": "claude-opus-5-5",
+          "task": "interpret"
+        },
+        "note": "Position read from the reference; confirm on site."
+      },
+      "rule_refs": [],
+      "layer_id": "openings"
+    },
+    {
+      "id": "glass",
+      "class": "glazing",
+      "label": "Glazing",
+      "material_id": "glazing_dg",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            100,
+            0
+          ],
+          [
+            160,
+            0
+          ],
+          [
+            160,
+            400
+          ],
+          [
+            100,
+            400
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "openings"
+    }
+  ],
+  "connections": [],
+  "constraints": [],
+  "dimensions": [
+    {
+      "id": "wall_total",
+      "kind": "linear",
+      "refs": [
+        "brick",
+        "plaster"
+      ],
+      "value": 365,
+      "driving": true,
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "display": true
+    },
+    {
+      "id": "frame_setback",
+      "kind": "linear",
+      "refs": [
+        "brick",
+        "frame"
+      ],
+      "value": 60,
+      "driving": false,
+      "source": "ai_inferred",
+      "confidence": 0.7,
+      "verify": true,
+      "source_detail": {
+        "model": {
+          "provider": "anthropic",
+          "model_id": "claude-opus-5-5",
+          "task": "interpret"
+        }
+      },
+      "display": true
+    }
+  ],
+  "annotations": [
+    {
+      "id": "an_lintel",
+      "kind": "leader",
+      "text": "Steel cavity lintel",
+      "targets": [
+        "lintel"
+      ],
+      "position": [
+        -273.8,
+        730.0
+      ],
+      "layer_id": "anno",
+      "source": "user",
+      "confidence": 1
+    },
+    {
+      "id": "an_tray",
+      "kind": "leader",
+      "text": "Cavity tray with stop ends",
+      "targets": [
+        "tray"
+      ],
+      "position": [
+        -273.8,
+        752.0
+      ],
+      "layer_id": "anno",
+      "source": "user",
+      "confidence": 1
+    },
+    {
+      "id": "an_frame",
+      "kind": "leader",
+      "text": "Frame set back 60 (to be confirmed)",
+      "targets": [
+        "frame"
+      ],
+      "position": [
+        -270.0,
+        630.0
+      ],
+      "layer_id": "anno",
+      "source": "user",
+      "confidence": 1
+    }
+  ],
+  "layers": [
+    {
+      "id": "walls",
+      "name": "A-Walls"
+    },
+    {
+      "id": "structure",
+      "name": "A-Structure"
+    },
+    {
+      "id": "openings",
+      "name": "A-Openings"
+    },
+    {
+      "id": "anno",
+      "name": "A-Anno"
+    }
+  ],
+  "schedules": [],
+  "solver": {
+    "status": "resolved",
+    "conflicts": [],
+    "resolved_at": "2026-09-27T09:00:01Z"
+  },
+  "checks": null,
+  "stamp": null
+}

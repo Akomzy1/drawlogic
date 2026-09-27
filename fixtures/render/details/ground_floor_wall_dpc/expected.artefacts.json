@@ -1,0 +1,21 @@
+{
+  "detail_type": "ground_floor_wall_dpc",
+  "input": "input.ddl.json",
+  "drawing_id": "6eb3dda4-da43-580a-b648-1edbff2f8a34",
+  "drawing_hash": "sha256:8a1d03910e714ade4c4d721311971daccd883490d8b721c9ea8bebbcf9a79f3a",
+  "rev": "A",
+  "title": "Ground floor and wall junction with DPC",
+  "scale": 10,
+  "legend_material_ids": [
+    "block_dense",
+    "brick_facing",
+    "concrete_c25",
+    "dpc_polymer",
+    "dpm_sheet",
+    "lean_mix",
+    "pir_board",
+    "plaster",
+    "screed",
+    "topsoil"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "detail_type": "wall_to_foundation",
+  "input": "input.ddl.json",
+  "drawing_id": "bde591b2-4483-5842-b52e-1e5ec488da64",
+  "drawing_hash": "sha256:ea12494fd6037ddd9be5215d7a9e51a04182b6504d57c397d0ebcf4502a3906c",
+  "rev": "A",
+  "title": "Wall to strip foundation",
+  "scale": 10,
+  "must_contain": [
+    "Wall to strip foundation",
+    "Rev A",
+    "1:10"
+  ]
+}

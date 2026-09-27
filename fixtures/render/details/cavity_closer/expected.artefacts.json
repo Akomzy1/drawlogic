@@ -1,0 +1,17 @@
+{
+  "detail_type": "cavity_closer",
+  "input": "input.ddl.json",
+  "drawing_id": "ff409c83-4220-5356-90bc-af24d3339899",
+  "drawing_hash": "sha256:a3e2749434d0a41e2a6c2c9784dc676f610d6950f816707903a0811579280fa7",
+  "rev": "A",
+  "title": "Cavity closer at opening, plan",
+  "scale": 10,
+  "legend_material_ids": [
+    "block_dense",
+    "brick_facing",
+    "closer_ins",
+    "pir_board",
+    "plaster",
+    "upvc_frame"
+  ]
+}

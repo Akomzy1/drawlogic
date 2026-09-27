@@ -2,3 +2,6 @@
 design/prototype/*.html -text
 # Contracts: hashes, generated types and CI staleness checks assume LF everywhere.
 contracts/** text eol=lf
+# Render fixtures: build.py --check compares generated JSON byte for byte; images are binary.
+fixtures/** text eol=lf
+fixtures/**/*.png binary

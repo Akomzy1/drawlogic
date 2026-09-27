@@ -1,0 +1,133 @@
+{
+  "detail_type": "window_jamb",
+  "input": "input.ddl.json",
+  "drawing_id": "b3e0ba97-5e74-5220-b78b-4efab69c3ea1",
+  "drawing_hash": "sha256:f7ccb1c9892951ffba883254b63d9695b457b049ed9e37a4462a7690cf473e1f",
+  "rev": "A",
+  "title": "Window jamb, plan",
+  "scale": 10,
+  "layers": [
+    {
+      "id": "walls",
+      "name": "A-Walls"
+    },
+    {
+      "id": "openings",
+      "name": "A-Openings"
+    },
+    {
+      "id": "anno",
+      "name": "A-Anno"
+    }
+  ],
+  "objects": [
+    {
+      "id": "brick",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "brick_facing",
+      "hatch_category": "masonry"
+    },
+    {
+      "id": "cavity",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": null,
+      "hatch_category": null
+    },
+    {
+      "id": "ins",
+      "layer_id": "walls",
+      "source": "profile",
+      "verify": false,
+      "material_id": "pir_board",
+      "hatch_category": "insulation"
+    },
+    {
+      "id": "block",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "block_dense",
+      "hatch_category": "masonry"
+    },
+    {
+      "id": "plaster",
+      "layer_id": "walls",
+      "source": "profile",
+      "verify": false,
+      "material_id": "plaster",
+      "hatch_category": null
+    },
+    {
+      "id": "closer",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "closer_ins",
+      "hatch_category": "insulation"
+    },
+    {
+      "id": "frame",
+      "layer_id": "openings",
+      "source": "ai_inferred",
+      "verify": true,
+      "material_id": "upvc_frame",
+      "hatch_category": null
+    },
+    {
+      "id": "glass",
+      "layer_id": "openings",
+      "source": "user",
+      "verify": false,
+      "material_id": "glazing_dg",
+      "hatch_category": null
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "wall_total",
+      "value": 365,
+      "text": {
+        "gb-eng": "365",
+        "variant": "365.0"
+      },
+      "terminator": {
+        "gb-eng": "tick",
+        "variant": "arrow"
+      }
+    },
+    {
+      "id": "closer_width",
+      "value": 40,
+      "text": {
+        "gb-eng": "40",
+        "variant": "40.0"
+      },
+      "terminator": {
+        "gb-eng": "tick",
+        "variant": "arrow"
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "id": "an_closer",
+      "text": "Insulated cavity closer",
+      "leader": true,
+      "targets": [
+        "closer"
+      ]
+    },
+    {
+      "id": "an_frame",
+      "text": "Frame overlaps closer (to be confirmed)",
+      "leader": true,
+      "targets": [
+        "frame"
+      ]
+    }
+  ]
+}

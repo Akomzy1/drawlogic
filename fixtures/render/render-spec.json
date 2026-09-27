@@ -1,0 +1,144 @@
+{
+  "version": "0.1.0",
+  "status": "Examiner's spec for engine/render and engine/providers/render, for Codex's review. Where it assumes an interface the contract does not yet define, README.md says so.",
+  "hatched_categories": [
+    "masonry",
+    "insulation",
+    "concrete",
+    "screed",
+    "timber",
+    "stone",
+    "earth"
+  ],
+  "api": {
+    "base_url_env": "DRAWLOGIC_ENGINE_URL",
+    "asgi_app": "engine.app:app",
+    "svg": {
+      "method": "POST",
+      "path": "/render/svg",
+      "body": [
+        "ddl",
+        "conventions"
+      ],
+      "returns": "image/svg+xml"
+    },
+    "dxf": {
+      "method": "POST",
+      "path": "/render/dxf",
+      "body": [
+        "ddl",
+        "conventions"
+      ],
+      "returns": "application/dxf"
+    },
+    "pdf": {
+      "method": "POST",
+      "path": "/render/pdf",
+      "body": [
+        "ddl",
+        "conventions"
+      ],
+      "returns": "application/pdf"
+    },
+    "artefacts": {
+      "method": "POST",
+      "path": "/render/artefacts",
+      "body": [
+        "ddl",
+        "conventions"
+      ],
+      "returns": "application/json {line_art, depth, material_map: base64 PNG; legend: {material_id: \"#RRGGBB\"}}"
+    },
+    "still": {
+      "method": "POST",
+      "path": "/render/still",
+      "body": [
+        "ddl",
+        "conventions",
+        "job"
+      ],
+      "returns": "application/json RenderJobStatus (contracts/providers/render.ts), after the job settles",
+      "job_example": {
+        "engine": "diffusion",
+        "mode": "drawing_to_photoreal",
+        "variants": 1,
+        "camera_id": "cam-01",
+        "resolution": "low"
+      }
+    },
+    "preview_video": {
+      "method": "POST",
+      "path": "/render/preview-video",
+      "body": [
+        "job"
+      ],
+      "returns": "application/json RenderJobStatus (contracts/providers/render.ts), after the job settles",
+      "job_example": {
+        "engine": "generative_video",
+        "start_still": {
+          "asset_id": "<asset_id of a delivered still>",
+          "drawing_hash": "<its drawing_hash>",
+          "drawing_rev": "<its rev>"
+        },
+        "camera_move": "push_in",
+        "seconds": 10,
+        "idea_mode": true
+      }
+    },
+    "fixture_provider": {
+      "env": "DRAWLOGIC_RENDER_PROVIDER",
+      "value": "fixture",
+      "image_env": "DRAWLOGIC_FIXTURE_RENDER",
+      "video_outcomes_env": "DRAWLOGIC_FIXTURE_VIDEO_OUTCOMES",
+      "meaning": "The engine's provider abstraction selects a test provider. For stills it returns, per attempt, the next file in the comma-separated list DRAWLOGIC_FIXTURE_RENDER (the last file repeats). For preview video it replays the comma-separated outcomes in DRAWLOGIC_FIXTURE_VIDEO_OUTCOMES (ok | moderation_failed), one per attempt, each attempt on a different catalogue model. Everything after the provider — fidelity scoring, retries, labels, material basis, metering — is the production path."
+    }
+  },
+  "svg": {
+    "root_attributes": [
+      "data-drawing-id",
+      "data-drawing-hash",
+      "data-rev"
+    ],
+    "layer_group": {
+      "class": "layer",
+      "attributes": [
+        "data-layer-id",
+        "data-layer-name"
+      ]
+    },
+    "object_group": {
+      "class": "object",
+      "attributes": [
+        "data-object-id",
+        "data-source",
+        "data-verify",
+        "data-material-id"
+      ]
+    },
+    "hatch": "an element inside the object group whose fill is url(#id), where #id is a <pattern> in <defs>",
+    "dimension_group": {
+      "class": "dimension",
+      "attributes": [
+        "data-dimension-id"
+      ],
+      "text": "the value, formatted with conventions.dimension_style.precision",
+      "terminator_class": "terminator terminator-<conventions.dimension_style.terminator>"
+    },
+    "annotation_group": {
+      "class": "annotation",
+      "attributes": [
+        "data-annotation-id"
+      ],
+      "leader_class": "leader"
+    },
+    "line_weights": "stroke-width of each layer's geometry is proportional to conventions.line_weights_mm[layer name]; dimensions use line_weights_mm[\"A-Dims\"]",
+    "units_note": "Only ratios of stroke widths are tested, so any scale or unit choice passes."
+  },
+  "dxf": {
+    "appid": "DRAWLOGIC",
+    "xdata": "1000-group strings \"object_id:<id>\", \"dimension_id:<id>\" or \"annotation_id:<id>\", plus \"source:<source>\" and \"verify:<true|false>\" on objects",
+    "layers": "one DXF layer per DDL layer, named with the layer's name",
+    "hatch": "a HATCH entity carrying the object's xdata for every object whose material category is hatched",
+    "dimensions": "a DIMENSION entity per displayed DDL dimension whose measurement equals the value"
+  }
+}

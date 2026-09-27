@@ -1,0 +1,401 @@
+{
+  "ddl_version": "0.1.0",
+  "drawing": {
+    "id": "bde591b2-4483-5842-b52e-1e5ec488da64",
+    "title": "Wall to strip foundation",
+    "discipline": "architecture",
+    "type": "detail",
+    "detail_type": "wall_to_foundation",
+    "mode": "draft",
+    "scale": 10,
+    "units": "mm",
+    "jurisdiction": "GB-ENG",
+    "rev": "A",
+    "hash": "sha256:ea12494fd6037ddd9be5215d7a9e51a04182b6504d57c397d0ebcf4502a3906c",
+    "parent_hash": null,
+    "profile_stack": [
+      {
+        "id": "gb-eng-residential",
+        "name": "GB-ENG Residential",
+        "version": "0.1.0",
+        "layer": "jurisdiction",
+        "tier": 1,
+        "signer": null
+      },
+      {
+        "id": "generic",
+        "name": "Generic",
+        "version": "0.1.0",
+        "layer": "generic",
+        "tier": null,
+        "signer": null
+      }
+    ],
+    "card_id": "card-render-fixture-wall_to_foundation",
+    "created_at": "2026-09-27T09:00:00Z"
+  },
+  "materials": [
+    {
+      "id": "backfill",
+      "name": "Backfill",
+      "category": "earth",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "block_dense",
+      "name": "Dense concrete block",
+      "category": "masonry",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "brick_facing",
+      "name": "Facing brick",
+      "category": "masonry",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "concrete_c25",
+      "name": "Concrete",
+      "category": "concrete",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "lean_mix",
+      "name": "Lean-mix concrete cavity fill",
+      "category": "concrete",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "objects": [
+    {
+      "id": "footing",
+      "class": "foundation",
+      "label": "Strip foundation",
+      "material_id": "concrete_c25",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            -150,
+            -1000
+          ],
+          [
+            515,
+            -1000
+          ],
+          [
+            515,
+            -775
+          ],
+          [
+            -150,
+            -775
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "source_detail": {
+        "note": "Size supplied by the user from the structural engineer's schedule; Drawlogic never sizes structure."
+      },
+      "rule_refs": [],
+      "layer_id": "structure"
+    },
+    {
+      "id": "backfill",
+      "class": "backfill",
+      "label": "Backfill",
+      "material_id": "backfill",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            -600,
+            -775
+          ],
+          [
+            0,
+            -775
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            -600,
+            0
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "ground"
+    },
+    {
+      "id": "block_outer",
+      "class": "masonry",
+      "label": "Trench block, outer",
+      "material_id": "block_dense",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            0,
+            -775
+          ],
+          [
+            102.5,
+            -775
+          ],
+          [
+            102.5,
+            -150
+          ],
+          [
+            0,
+            -150
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "cavity_fill",
+      "class": "cavity_fill",
+      "label": "Cavity fill",
+      "material_id": "lean_mix",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            102.5,
+            -775
+          ],
+          [
+            252.5,
+            -775
+          ],
+          [
+            252.5,
+            -225
+          ],
+          [
+            102.5,
+            -225
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "block_inner",
+      "class": "masonry",
+      "label": "Trench block, inner",
+      "material_id": "block_dense",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            252.5,
+            -775
+          ],
+          [
+            352.5,
+            -775
+          ],
+          [
+            352.5,
+            -150
+          ],
+          [
+            252.5,
+            -150
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "brick",
+      "class": "masonry",
+      "label": "Outer leaf",
+      "material_id": "brick_facing",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            0,
+            -150
+          ],
+          [
+            102.5,
+            -150
+          ],
+          [
+            102.5,
+            300
+          ],
+          [
+            0,
+            300
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    }
+  ],
+  "connections": [],
+  "constraints": [],
+  "dimensions": [
+    {
+      "id": "foundation_depth",
+      "kind": "linear",
+      "refs": [
+        "footing",
+        "backfill"
+      ],
+      "value": 1000,
+      "driving": true,
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "display": true
+    },
+    {
+      "id": "footing_width",
+      "kind": "linear",
+      "refs": [
+        "footing",
+        "footing"
+      ],
+      "value": 665,
+      "driving": true,
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "display": true
+    }
+  ],
+  "annotations": [
+    {
+      "id": "an_footing",
+      "kind": "leader",
+      "text": "Strip foundation to engineer's design",
+      "targets": [
+        "footing"
+      ],
+      "position": [
+        -217.5,
+        -737.5
+      ],
+      "layer_id": "anno",
+      "source": "user",
+      "confidence": 1
+    },
+    {
+      "id": "an_fill",
+      "kind": "leader",
+      "text": "Lean-mix cavity fill",
+      "targets": [
+        "cavity_fill"
+      ],
+      "position": [
+        -222.5,
+        -350.0
+      ],
+      "layer_id": "anno",
+      "source": "user",
+      "confidence": 1
+    }
+  ],
+  "layers": [
+    {
+      "id": "walls",
+      "name": "A-Walls"
+    },
+    {
+      "id": "structure",
+      "name": "A-Structure"
+    },
+    {
+      "id": "ground",
+      "name": "A-Ground"
+    },
+    {
+      "id": "anno",
+      "name": "A-Anno"
+    }
+  ],
+  "schedules": [],
+  "solver": {
+    "status": "resolved",
+    "conflicts": [],
+    "resolved_at": "2026-09-27T09:00:01Z"
+  },
+  "checks": null,
+  "stamp": null
+}

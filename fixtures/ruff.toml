@@ -1,0 +1,6 @@
+# Same lint rules as engine/pyproject.toml; fixture data reads better with long lines.
+target-version = "py312"
+line-length = 160
+
+[lint]
+select = ["E", "F", "W", "I", "B", "UP"]

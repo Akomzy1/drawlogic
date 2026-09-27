@@ -1,0 +1,75 @@
+{
+  "detail_type": "window_sill",
+  "input": "input.ddl.json",
+  "drawing_id": "61caa4c4-5593-522c-b51d-6224ef816ca2",
+  "drawing_hash": "sha256:acb0cea8b4c3aa9a8b3d7896f5794e0937bbd9e917a7dc10e590ba6d2e3a28c0",
+  "rev": "A",
+  "title": "Window sill, cavity wall",
+  "scale": 10,
+  "layers": [
+    "A-Anno",
+    "A-Openings",
+    "A-Walls"
+  ],
+  "objects": [
+    {
+      "id": "brick",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "cavity",
+      "layer": "A-Walls",
+      "hatch": false
+    },
+    {
+      "id": "ins",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "block",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "plaster",
+      "layer": "A-Walls",
+      "hatch": false
+    },
+    {
+      "id": "dpc",
+      "layer": "A-Walls",
+      "hatch": false
+    },
+    {
+      "id": "sill",
+      "layer": "A-Openings",
+      "hatch": true
+    },
+    {
+      "id": "frame",
+      "layer": "A-Openings",
+      "hatch": false
+    },
+    {
+      "id": "board",
+      "layer": "A-Openings",
+      "hatch": true
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "wall_total",
+      "value": 365
+    },
+    {
+      "id": "sill_projection",
+      "value": 40
+    }
+  ],
+  "texts": [
+    "Sill falls outward with drip",
+    "DPC under sill turned up at back"
+  ]
+}

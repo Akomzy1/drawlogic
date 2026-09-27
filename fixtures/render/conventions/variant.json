@@ -1,0 +1,19 @@
+{
+  "units": "mm",
+  "sheets": [{ "size": "A1", "orientation": "landscape" }],
+  "title_block": "drawlogic-a1",
+  "layer_standard": "Drawlogic fixture layers",
+  "dimension_style": { "terminator": "arrow", "text_height_mm": 3.5, "precision": 1 },
+  "text_heights_mm": { "annotation": 3.5, "dimension": 3.5, "title": 7 },
+  "line_weights_mm": {
+    "A-Walls": 0.7,
+    "A-Roof": 0.35,
+    "A-Floor": 1.0,
+    "A-Structure": 0.5,
+    "A-Openings": 0.25,
+    "A-Ground": 0.5,
+    "A-Anno": 0.25,
+    "A-Dims": 0.13
+  },
+  "annotation_language": "en-GB"
+}

@@ -1,0 +1,133 @@
+{
+  "detail_type": "balcony_threshold",
+  "input": "input.ddl.json",
+  "drawing_id": "677c6a9d-d9a6-579f-a593-d5287681ace3",
+  "drawing_hash": "sha256:1a415102ea41d7fa5bacaba01ffaaf9253c1fad1502828db1098efcd25c731c9",
+  "rev": "A",
+  "title": "Balcony threshold",
+  "scale": 10,
+  "layers": [
+    {
+      "id": "roof",
+      "name": "A-Roof"
+    },
+    {
+      "id": "floor",
+      "name": "A-Floor"
+    },
+    {
+      "id": "structure",
+      "name": "A-Structure"
+    },
+    {
+      "id": "openings",
+      "name": "A-Openings"
+    },
+    {
+      "id": "anno",
+      "name": "A-Anno"
+    }
+  ],
+  "objects": [
+    {
+      "id": "slab",
+      "layer_id": "structure",
+      "source": "user",
+      "verify": false,
+      "material_id": "concrete_c25",
+      "hatch_category": "concrete"
+    },
+    {
+      "id": "break",
+      "layer_id": "structure",
+      "source": "user",
+      "verify": false,
+      "material_id": "thermal_break",
+      "hatch_category": "insulation"
+    },
+    {
+      "id": "balcony",
+      "layer_id": "structure",
+      "source": "user",
+      "verify": false,
+      "material_id": "concrete_c25",
+      "hatch_category": "concrete"
+    },
+    {
+      "id": "membrane",
+      "layer_id": "roof",
+      "source": "user",
+      "verify": false,
+      "material_id": "bitumen_membrane",
+      "hatch_category": null
+    },
+    {
+      "id": "threshold",
+      "layer_id": "openings",
+      "source": "user",
+      "verify": false,
+      "material_id": "alu_threshold",
+      "hatch_category": null
+    },
+    {
+      "id": "door_frame",
+      "layer_id": "openings",
+      "source": "ai_inferred",
+      "verify": true,
+      "material_id": "timber_sw",
+      "hatch_category": "timber"
+    },
+    {
+      "id": "screed",
+      "layer_id": "floor",
+      "source": "user",
+      "verify": false,
+      "material_id": "screed",
+      "hatch_category": "screed"
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "break_width",
+      "value": 80,
+      "text": {
+        "gb-eng": "80",
+        "variant": "80.0"
+      },
+      "terminator": {
+        "gb-eng": "tick",
+        "variant": "arrow"
+      }
+    },
+    {
+      "id": "drop",
+      "value": 36,
+      "text": {
+        "gb-eng": "36",
+        "variant": "36.0"
+      },
+      "terminator": {
+        "gb-eng": "tick",
+        "variant": "arrow"
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "id": "an_break",
+      "text": "Thermal break unit to engineer's design",
+      "leader": true,
+      "targets": [
+        "break"
+      ]
+    },
+    {
+      "id": "an_membrane",
+      "text": "Membrane falls away from door",
+      "leader": true,
+      "targets": [
+        "membrane"
+      ]
+    }
+  ]
+}

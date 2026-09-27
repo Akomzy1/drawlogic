@@ -81,8 +81,8 @@ jobs:
 
       - name: ruff
         run: |
-          ruff check engine contracts trust profiles
-          ruff format --check engine contracts/scripts trust
+          ruff check engine contracts trust profiles fixtures
+          ruff format --check engine contracts/scripts trust fixtures
 
       - name: mypy (strict)
         run: |
@@ -103,6 +103,34 @@ jobs:
             echo "::notice::No examiner tests yet. Codex's trust-rule, gate and golden tests run here once they land (Prompt 2)."
           else
             python -m pytest $dirs
+          fi
+
+  render-fixtures:
+    name: render fixtures (examiner, for engine/render)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+
+      - name: Install
+        run: pip install -r fixtures/render/requirements.txt
+
+      - name: Fixtures are current and valid against the contract
+        run: |
+          python fixtures/render/scripts/build.py --check
+          python -m pytest fixtures/render/tests/test_fixtures.py
+
+      - name: Render tests against the engine
+        run: |
+          if [ -f engine/app.py ]; then
+            pip install -e engine
+            python -m pytest fixtures/render/tests
+          else
+            echo "::notice::No engine/app.py yet (Prompt 5). The render tests exist and fail with 'engine render API not available' until it lands."
           fi
 
   app:

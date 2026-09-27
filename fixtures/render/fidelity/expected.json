@@ -1,0 +1,15 @@
+{
+  "source": "source-line-art.png",
+  "threshold_ref": "contracts/render.thresholds.json → fidelity.modes.drawing_to_photoreal.min",
+  "cases": {
+    "faithful.png": {
+      "verdict": "deliver",
+      "reference_iou": 1.0
+    },
+    "drifted.png": {
+      "verdict": "fail",
+      "reference_iou": 0.046
+    }
+  },
+  "note": "reference_iou comes from scripts/build.py (3 px tolerance) and only proves the fixture is well-formed. The engine's scorer must reach the same verdicts: deliver faithful.png, fail drifted.png."
+}

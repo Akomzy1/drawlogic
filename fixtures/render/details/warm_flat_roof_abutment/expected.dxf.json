@@ -1,0 +1,100 @@
+{
+  "detail_type": "warm_flat_roof_abutment",
+  "input": "input.ddl.json",
+  "drawing_id": "53d4b07e-f73e-52d7-b5a4-b45a4e5d6b4c",
+  "drawing_hash": "sha256:be8601ff202395b46334757bc34ac604875e1d692e75c3d2375496ebbb1b74f9",
+  "rev": "A",
+  "title": "Warm flat roof abutment",
+  "scale": 10,
+  "layers": [
+    "A-Anno",
+    "A-Roof",
+    "A-Walls"
+  ],
+  "objects": [
+    {
+      "id": "brick_lower",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "tray",
+      "layer": "A-Walls",
+      "hatch": false
+    },
+    {
+      "id": "brick_upper",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "cavity_lower",
+      "layer": "A-Walls",
+      "hatch": false
+    },
+    {
+      "id": "cavity_upper",
+      "layer": "A-Walls",
+      "hatch": false
+    },
+    {
+      "id": "ins",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "block",
+      "layer": "A-Walls",
+      "hatch": true
+    },
+    {
+      "id": "plaster",
+      "layer": "A-Walls",
+      "hatch": false
+    },
+    {
+      "id": "deck",
+      "layer": "A-Roof",
+      "hatch": true
+    },
+    {
+      "id": "vcl",
+      "layer": "A-Roof",
+      "hatch": false
+    },
+    {
+      "id": "roof_ins",
+      "layer": "A-Roof",
+      "hatch": true
+    },
+    {
+      "id": "membrane",
+      "layer": "A-Roof",
+      "hatch": false
+    },
+    {
+      "id": "upstand",
+      "layer": "A-Roof",
+      "hatch": false
+    },
+    {
+      "id": "flashing",
+      "layer": "A-Roof",
+      "hatch": false
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "upstand_height",
+      "value": 150
+    },
+    {
+      "id": "wall_total",
+      "value": 365
+    }
+  ],
+  "texts": [
+    "Cavity tray above roof level",
+    "Lead cover flashing over upstand"
+  ]
+}

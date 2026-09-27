@@ -1,0 +1,443 @@
+{
+  "ddl_version": "0.1.0",
+  "drawing": {
+    "id": "291d47ec-72a3-5d12-833b-8d33ddf600e6",
+    "title": "Steel beam bearing on inner leaf",
+    "discipline": "architecture",
+    "type": "detail",
+    "detail_type": "steel_beam_bearing",
+    "mode": "draft",
+    "scale": 10,
+    "units": "mm",
+    "jurisdiction": "GB-ENG",
+    "rev": "A",
+    "hash": "sha256:39f6a3ac803350a659f61e91c6690716772e48784f16a0cc4e69888c03bc8190",
+    "parent_hash": null,
+    "profile_stack": [
+      {
+        "id": "gb-eng-residential",
+        "name": "GB-ENG Residential",
+        "version": "0.1.0",
+        "layer": "jurisdiction",
+        "tier": 1,
+        "signer": null
+      },
+      {
+        "id": "generic",
+        "name": "Generic",
+        "version": "0.1.0",
+        "layer": "generic",
+        "tier": null,
+        "signer": null
+      }
+    ],
+    "card_id": "card-render-fixture-steel_beam_bearing",
+    "created_at": "2026-09-27T09:00:00Z"
+  },
+  "materials": [
+    {
+      "id": "block_dense",
+      "name": "Dense concrete block",
+      "category": "masonry",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "brick_facing",
+      "name": "Facing brick",
+      "category": "masonry",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "concrete_c25",
+      "name": "Concrete",
+      "category": "concrete",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "pir_board",
+      "name": "PIR insulation board",
+      "category": "insulation",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "steel_section",
+      "name": "Steel beam (engineer's schedule)",
+      "category": "steel",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "objects": [
+    {
+      "id": "brick",
+      "class": "masonry",
+      "label": "Outer leaf",
+      "material_id": "brick_facing",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            0,
+            0
+          ],
+          [
+            102.5,
+            0
+          ],
+          [
+            102.5,
+            1600
+          ],
+          [
+            0,
+            1600
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "cavity",
+      "class": "cavity",
+      "label": "Residual cavity",
+      "material_id": null,
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            102.5,
+            0
+          ],
+          [
+            152.5,
+            0
+          ],
+          [
+            152.5,
+            1600
+          ],
+          [
+            102.5,
+            1600
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "ins",
+      "class": "insulation",
+      "label": "Cavity insulation",
+      "material_id": "pir_board",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            152.5,
+            0
+          ],
+          [
+            252.5,
+            0
+          ],
+          [
+            252.5,
+            1600
+          ],
+          [
+            152.5,
+            1600
+          ]
+        ],
+        "closed": true
+      },
+      "source": "profile",
+      "confidence": 1.0,
+      "verify": false,
+      "source_detail": {
+        "profile": {
+          "id": "gb-eng-residential",
+          "version": "0.1.0"
+        }
+      },
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "block_lower",
+      "class": "masonry",
+      "label": "Inner leaf",
+      "material_id": "block_dense",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            252.5,
+            0
+          ],
+          [
+            352.5,
+            0
+          ],
+          [
+            352.5,
+            1000
+          ],
+          [
+            252.5,
+            1000
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    },
+    {
+      "id": "padstone",
+      "class": "padstone",
+      "label": "Padstone",
+      "material_id": "concrete_c25",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            252.5,
+            1000
+          ],
+          [
+            352.5,
+            1000
+          ],
+          [
+            352.5,
+            1140
+          ],
+          [
+            252.5,
+            1140
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "source_detail": {
+        "note": "Size supplied by the user from the structural engineer's schedule; Drawlogic never sizes structure."
+      },
+      "rule_refs": [],
+      "layer_id": "structure"
+    },
+    {
+      "id": "beam",
+      "class": "steel_beam",
+      "label": "Steel beam",
+      "material_id": "steel_section",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            262.5,
+            1140
+          ],
+          [
+            1500,
+            1140
+          ],
+          [
+            1500,
+            1343
+          ],
+          [
+            262.5,
+            1343
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "source_detail": {
+        "note": "Size supplied by the user from the structural engineer's schedule; Drawlogic never sizes structure."
+      },
+      "rule_refs": [],
+      "layer_id": "structure"
+    },
+    {
+      "id": "block_upper",
+      "class": "masonry",
+      "label": "Inner leaf above beam",
+      "material_id": "block_dense",
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polygon",
+        "points": [
+          [
+            252.5,
+            1343
+          ],
+          [
+            352.5,
+            1343
+          ],
+          [
+            352.5,
+            1600
+          ],
+          [
+            252.5,
+            1600
+          ]
+        ],
+        "closed": true
+      },
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "walls"
+    }
+  ],
+  "connections": [],
+  "constraints": [],
+  "dimensions": [
+    {
+      "id": "bearing",
+      "kind": "linear",
+      "refs": [
+        "beam",
+        "block_lower"
+      ],
+      "value": 90,
+      "driving": true,
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "display": true
+    },
+    {
+      "id": "padstone_height",
+      "kind": "linear",
+      "refs": [
+        "padstone",
+        "padstone"
+      ],
+      "value": 140,
+      "driving": true,
+      "source": "user",
+      "confidence": 1.0,
+      "verify": false,
+      "display": true
+    }
+  ],
+  "annotations": [
+    {
+      "id": "an_beam",
+      "kind": "leader",
+      "text": "Steel beam to engineer's schedule",
+      "targets": [
+        "beam"
+      ],
+      "position": [
+        481.2,
+        1391.5
+      ],
+      "layer_id": "anno",
+      "source": "user",
+      "confidence": 1
+    },
+    {
+      "id": "an_padstone",
+      "kind": "leader",
+      "text": "Padstone to engineer's design",
+      "targets": [
+        "padstone"
+      ],
+      "position": [
+        -97.5,
+        1220.0
+      ],
+      "layer_id": "anno",
+      "source": "user",
+      "confidence": 1
+    }
+  ],
+  "layers": [
+    {
+      "id": "walls",
+      "name": "A-Walls"
+    },
+    {
+      "id": "structure",
+      "name": "A-Structure"
+    },
+    {
+      "id": "anno",
+      "name": "A-Anno"
+    }
+  ],
+  "schedules": [],
+  "solver": {
+    "status": "resolved",
+    "conflicts": [],
+    "resolved_at": "2026-09-27T09:00:01Z"
+  },
+  "checks": null,
+  "stamp": null
+}

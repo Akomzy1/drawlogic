@@ -1,0 +1,67 @@
+{
+  "detail_type": "balcony_threshold",
+  "input": "input.ddl.json",
+  "drawing_id": "677c6a9d-d9a6-579f-a593-d5287681ace3",
+  "drawing_hash": "sha256:1a415102ea41d7fa5bacaba01ffaaf9253c1fad1502828db1098efcd25c731c9",
+  "rev": "A",
+  "title": "Balcony threshold",
+  "scale": 10,
+  "layers": [
+    "A-Anno",
+    "A-Floor",
+    "A-Openings",
+    "A-Roof",
+    "A-Structure"
+  ],
+  "objects": [
+    {
+      "id": "slab",
+      "layer": "A-Structure",
+      "hatch": true
+    },
+    {
+      "id": "break",
+      "layer": "A-Structure",
+      "hatch": true
+    },
+    {
+      "id": "balcony",
+      "layer": "A-Structure",
+      "hatch": true
+    },
+    {
+      "id": "membrane",
+      "layer": "A-Roof",
+      "hatch": false
+    },
+    {
+      "id": "threshold",
+      "layer": "A-Openings",
+      "hatch": false
+    },
+    {
+      "id": "door_frame",
+      "layer": "A-Openings",
+      "hatch": true
+    },
+    {
+      "id": "screed",
+      "layer": "A-Floor",
+      "hatch": true
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "break_width",
+      "value": 80
+    },
+    {
+      "id": "drop",
+      "value": 36
+    }
+  ],
+  "texts": [
+    "Thermal break unit to engineer's design",
+    "Membrane falls away from door"
+  ]
+}

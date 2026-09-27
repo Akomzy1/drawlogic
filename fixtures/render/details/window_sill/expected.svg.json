@@ -1,0 +1,141 @@
+{
+  "detail_type": "window_sill",
+  "input": "input.ddl.json",
+  "drawing_id": "61caa4c4-5593-522c-b51d-6224ef816ca2",
+  "drawing_hash": "sha256:acb0cea8b4c3aa9a8b3d7896f5794e0937bbd9e917a7dc10e590ba6d2e3a28c0",
+  "rev": "A",
+  "title": "Window sill, cavity wall",
+  "scale": 10,
+  "layers": [
+    {
+      "id": "walls",
+      "name": "A-Walls"
+    },
+    {
+      "id": "openings",
+      "name": "A-Openings"
+    },
+    {
+      "id": "anno",
+      "name": "A-Anno"
+    }
+  ],
+  "objects": [
+    {
+      "id": "brick",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "brick_facing",
+      "hatch_category": "masonry"
+    },
+    {
+      "id": "cavity",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": null,
+      "hatch_category": null
+    },
+    {
+      "id": "ins",
+      "layer_id": "walls",
+      "source": "profile",
+      "verify": false,
+      "material_id": "pir_board",
+      "hatch_category": "insulation"
+    },
+    {
+      "id": "block",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "block_dense",
+      "hatch_category": "masonry"
+    },
+    {
+      "id": "plaster",
+      "layer_id": "walls",
+      "source": "profile",
+      "verify": false,
+      "material_id": "plaster",
+      "hatch_category": null
+    },
+    {
+      "id": "dpc",
+      "layer_id": "walls",
+      "source": "user",
+      "verify": false,
+      "material_id": "dpc_polymer",
+      "hatch_category": null
+    },
+    {
+      "id": "sill",
+      "layer_id": "openings",
+      "source": "user",
+      "verify": false,
+      "material_id": "stone_sill",
+      "hatch_category": "stone"
+    },
+    {
+      "id": "frame",
+      "layer_id": "openings",
+      "source": "ai_inferred",
+      "verify": true,
+      "material_id": "upvc_frame",
+      "hatch_category": null
+    },
+    {
+      "id": "board",
+      "layer_id": "openings",
+      "source": "user",
+      "verify": false,
+      "material_id": "timber_sw",
+      "hatch_category": "timber"
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "wall_total",
+      "value": 365,
+      "text": {
+        "gb-eng": "365",
+        "variant": "365.0"
+      },
+      "terminator": {
+        "gb-eng": "tick",
+        "variant": "arrow"
+      }
+    },
+    {
+      "id": "sill_projection",
+      "value": 40,
+      "text": {
+        "gb-eng": "40",
+        "variant": "40.0"
+      },
+      "terminator": {
+        "gb-eng": "tick",
+        "variant": "arrow"
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "id": "an_sill",
+      "text": "Sill falls outward with drip",
+      "leader": true,
+      "targets": [
+        "sill"
+      ]
+    },
+    {
+      "id": "an_dpc",
+      "text": "DPC under sill turned up at back",
+      "leader": true,
+      "targets": [
+        "dpc"
+      ]
+    }
+  ]
+}

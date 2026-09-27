@@ -1,0 +1,19 @@
+{
+  "detail_type": "parapet",
+  "input": "input.ddl.json",
+  "drawing_id": "1b31546a-7732-5045-9714-c8f05badc633",
+  "drawing_hash": "sha256:84893e473056c0863d3a557a66d42a90131b4da201e6975e2d9d0acac3c054ce",
+  "rev": "A",
+  "title": "Parapet at warm flat roof",
+  "scale": 10,
+  "legend_material_ids": [
+    "alu_coping",
+    "bitumen_membrane",
+    "block_dense",
+    "brick_facing",
+    "concrete_c25",
+    "dpc_polymer",
+    "pir_board",
+    "vcl_sheet"
+  ]
+}
