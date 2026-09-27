@@ -1,0 +1,26 @@
+{
+  "exercise_id": "exercise-steel-beam-bearing",
+  "detail_type": "steel_beam_bearing",
+  "submission": {
+    "description": "A steel beam rests on masonry. I have not provided a load, member size or connection design."
+  },
+  "cycle": 0,
+  "profile_stack": [
+    {
+      "id": "gb-eng-residential",
+      "name": "GB-ENG Residential",
+      "version": "0.1.0",
+      "layer": "jurisdiction",
+      "tier": 1,
+      "signer": null
+    },
+    {
+      "id": "generic",
+      "name": "Generic",
+      "version": "0.1.0",
+      "layer": "generic",
+      "tier": null,
+      "signer": null
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+[
+  {
+    "id": "as-setbacks",
+    "key": "setbacks",
+    "text": "I assumed setbacks of 6 m at the front and 3 m at the sides and rear",
+    "technical_term": "Building setbacks",
+    "value": "6.0 / 3.0 / 3.0",
+    "unit": "m",
+    "source": "ai_inferred",
+    "confidence": 0.7,
+    "verify": true,
+    "editable": true,
+    "source_detail": {
+      "profile": {
+        "id": "ng-la-residential",
+        "version": "0.1.0"
+      },
+      "note": "NG-LA Tier 2 profile default, not a signed rule."
+    }
+  },
+  {
+    "id": "as-floors",
+    "key": "floors",
+    "text": "I assumed the duplex has two floors",
+    "value": 2,
+    "source": "ai_inferred",
+    "confidence": 0.85,
+    "verify": true,
+    "editable": true,
+    "source_detail": {
+      "model": {
+        "provider": "anthropic",
+        "model_id": "claude-sonnet-5",
+        "task": "idea"
+      }
+    }
+  },
+  {
+    "id": "as-walls",
+    "key": "wall_build_up",
+    "text": "I assumed sandcrete block walls with cement render — the usual construction in Lagos",
+    "technical_term": "Sandcrete block, rendered",
+    "value": "ng_sandcrete_render",
+    "source": "profile",
+    "confidence": 1,
+    "verify": false,
+    "editable": true,
+    "source_detail": {
+      "profile": {
+        "id": "ng-la-residential",
+        "version": "0.1.0"
+      }
+    }
+  },
+  {
+    "id": "as-frame",
+    "key": "frame",
+    "text": "I assumed a reinforced concrete frame",
+    "technical_term": "RC frame and slabs",
+    "value": "ng_rc_frame",
+    "source": "profile",
+    "confidence": 1,
+    "verify": false,
+    "editable": true,
+    "source_detail": {
+      "profile": {
+        "id": "ng-la-residential",
+        "version": "0.1.0"
+      }
+    }
+  },
+  {
+    "id": "as-roof",
+    "key": "roof_type",
+    "text": "I assumed a long-span aluminium sheet roof",
+    "technical_term": "Long-span aluminium roofing sheet",
+    "value": "ng_longspan_alu",
+    "source": "profile",
+    "confidence": 1,
+    "verify": false,
+    "editable": true,
+    "source_detail": {
+      "profile": {
+        "id": "ng-la-residential",
+        "version": "0.1.0"
+      }
+    }
+  },
+  {
+    "id": "as-boundary",
+    "key": "boundary",
+    "text": "I drew the plot from the size you typed; a survey plan would replace it",
+    "value": "dimensions",
+    "source": "ai_inferred",
+    "confidence": 0.9,
+    "verify": true,
+    "editable": true,
+    "source_detail": {
+      "model": {
+        "provider": "anthropic",
+        "model_id": "claude-sonnet-5",
+        "task": "idea"
+      }
+    }
+  }
+]

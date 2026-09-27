@@ -1,0 +1,799 @@
+{
+  "schema_version": "0.1.0",
+  "metadata": {
+    "id": "gb-eng-residential",
+    "name": "gb-eng-residential",
+    "version": "0.1.0",
+    "type": "jurisdiction",
+    "jurisdiction": "GB-ENG",
+    "tier": 1,
+    "disciplines": [
+      "architecture"
+    ],
+    "building_types": [
+      "residential"
+    ],
+    "scope": "Examiner-only input profile, not a published regulatory standard.",
+    "author": "Drawlogic",
+    "signers": [],
+    "publish": "private",
+    "price": null,
+    "changelog": [
+      {
+        "version": "0.1.0",
+        "date": "2026-09-27",
+        "summary": "Independent Prompt 2 fixture input."
+      }
+    ]
+  },
+  "conventions": {
+    "units": "mm",
+    "sheets": [
+      {
+        "size": "A3",
+        "orientation": "landscape"
+      }
+    ],
+    "title_block": "drawlogic-a3",
+    "layer_standard": "BS EN ISO 13567",
+    "dimension_style": {
+      "terminator": "tick",
+      "text_height_mm": 2.5,
+      "precision": 0
+    },
+    "annotation_language": "en-GB"
+  },
+  "applicable_documents": [],
+  "provenance_settings": {
+    "verify_threshold": 0.8
+  },
+  "required_constraints": {},
+  "rules": [
+    {
+      "id": "gb-eng-residential-window_head-continuity",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "thermal",
+      "document": null,
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "window_head",
+        "object_class": "masonry"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "field": "height"
+          },
+          "op": ">=",
+          "right": {
+            "value": 0,
+            "unit": "mm"
+          }
+        }
+      },
+      "condition_text": "masonry.height >= 0 mm",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "Examiner detail continuity rule requires professional verification.",
+      "why": "This unsigned fixture tests fail-closed dispatch, not a regulatory minimum.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ],
+      "requires_inputs": [
+        "height"
+      ]
+    },
+    {
+      "id": "gb-eng-residential-window_jamb-continuity",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "thermal",
+      "document": null,
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "window_jamb",
+        "object_class": "masonry"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "field": "height"
+          },
+          "op": ">=",
+          "right": {
+            "value": 0,
+            "unit": "mm"
+          }
+        }
+      },
+      "condition_text": "masonry.height >= 0 mm",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "Examiner detail continuity rule requires professional verification.",
+      "why": "This unsigned fixture tests fail-closed dispatch, not a regulatory minimum.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ],
+      "requires_inputs": [
+        "height"
+      ]
+    },
+    {
+      "id": "gb-eng-residential-window_sill-continuity",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "thermal",
+      "document": null,
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "window_sill",
+        "object_class": "masonry"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "field": "height"
+          },
+          "op": ">=",
+          "right": {
+            "value": 0,
+            "unit": "mm"
+          }
+        }
+      },
+      "condition_text": "masonry.height >= 0 mm",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "Examiner detail continuity rule requires professional verification.",
+      "why": "This unsigned fixture tests fail-closed dispatch, not a regulatory minimum.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ],
+      "requires_inputs": [
+        "height"
+      ]
+    },
+    {
+      "id": "gb-eng-residential-door_threshold-continuity",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "thermal",
+      "document": null,
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "door_threshold",
+        "object_class": "slab"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "field": "height"
+          },
+          "op": ">=",
+          "right": {
+            "value": 0,
+            "unit": "mm"
+          }
+        }
+      },
+      "condition_text": "slab.height >= 0 mm",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "Examiner detail continuity rule requires professional verification.",
+      "why": "This unsigned fixture tests fail-closed dispatch, not a regulatory minimum.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ],
+      "requires_inputs": [
+        "height"
+      ]
+    },
+    {
+      "id": "gb-eng-residential-eaves-continuity",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "thermal",
+      "document": null,
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "eaves",
+        "object_class": "masonry"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "field": "height"
+          },
+          "op": ">=",
+          "right": {
+            "value": 0,
+            "unit": "mm"
+          }
+        }
+      },
+      "condition_text": "masonry.height >= 0 mm",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "Examiner detail continuity rule requires professional verification.",
+      "why": "This unsigned fixture tests fail-closed dispatch, not a regulatory minimum.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ],
+      "requires_inputs": [
+        "height"
+      ]
+    },
+    {
+      "id": "gb-eng-residential-verge-continuity",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "thermal",
+      "document": null,
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "verge",
+        "object_class": "masonry"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "field": "height"
+          },
+          "op": ">=",
+          "right": {
+            "value": 0,
+            "unit": "mm"
+          }
+        }
+      },
+      "condition_text": "masonry.height >= 0 mm",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "Examiner detail continuity rule requires professional verification.",
+      "why": "This unsigned fixture tests fail-closed dispatch, not a regulatory minimum.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ],
+      "requires_inputs": [
+        "height"
+      ]
+    },
+    {
+      "id": "gb-eng-residential-parapet-continuity",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "thermal",
+      "document": null,
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "parapet",
+        "object_class": "masonry"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "field": "height"
+          },
+          "op": ">=",
+          "right": {
+            "value": 0,
+            "unit": "mm"
+          }
+        }
+      },
+      "condition_text": "masonry.height >= 0 mm",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "Examiner detail continuity rule requires professional verification.",
+      "why": "This unsigned fixture tests fail-closed dispatch, not a regulatory minimum.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ],
+      "requires_inputs": [
+        "height"
+      ]
+    },
+    {
+      "id": "gb-eng-residential-warm_flat_roof_abutment-continuity",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "thermal",
+      "document": null,
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "warm_flat_roof_abutment",
+        "object_class": "masonry"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "field": "height"
+          },
+          "op": ">=",
+          "right": {
+            "value": 0,
+            "unit": "mm"
+          }
+        }
+      },
+      "condition_text": "masonry.height >= 0 mm",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "Examiner detail continuity rule requires professional verification.",
+      "why": "This unsigned fixture tests fail-closed dispatch, not a regulatory minimum.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ],
+      "requires_inputs": [
+        "height"
+      ]
+    },
+    {
+      "id": "gb-eng-residential-ground_floor_wall_dpc-continuity",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "thermal",
+      "document": null,
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "ground_floor_wall_dpc",
+        "object_class": "masonry"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "field": "height"
+          },
+          "op": ">=",
+          "right": {
+            "value": 0,
+            "unit": "mm"
+          }
+        }
+      },
+      "condition_text": "masonry.height >= 0 mm",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "Examiner detail continuity rule requires professional verification.",
+      "why": "This unsigned fixture tests fail-closed dispatch, not a regulatory minimum.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ],
+      "requires_inputs": [
+        "height"
+      ]
+    },
+    {
+      "id": "gb-eng-residential-cavity_closer-continuity",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "thermal",
+      "document": null,
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "cavity_closer",
+        "object_class": "masonry"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "field": "height"
+          },
+          "op": ">=",
+          "right": {
+            "value": 0,
+            "unit": "mm"
+          }
+        }
+      },
+      "condition_text": "masonry.height >= 0 mm",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "Examiner detail continuity rule requires professional verification.",
+      "why": "This unsigned fixture tests fail-closed dispatch, not a regulatory minimum.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ],
+      "requires_inputs": [
+        "height"
+      ]
+    },
+    {
+      "id": "gb-eng-residential-wall_to_foundation-continuity",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "thermal",
+      "document": null,
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "wall_to_foundation",
+        "object_class": "masonry"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "field": "height"
+          },
+          "op": ">=",
+          "right": {
+            "value": 0,
+            "unit": "mm"
+          }
+        }
+      },
+      "condition_text": "masonry.height >= 0 mm",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "Examiner detail continuity rule requires professional verification.",
+      "why": "This unsigned fixture tests fail-closed dispatch, not a regulatory minimum.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ],
+      "requires_inputs": [
+        "height"
+      ]
+    },
+    {
+      "id": "gb-eng-residential-balcony_threshold-continuity",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "thermal",
+      "document": null,
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "balcony_threshold",
+        "object_class": "slab"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "field": "height"
+          },
+          "op": ">=",
+          "right": {
+            "value": 0,
+            "unit": "mm"
+          }
+        }
+      },
+      "condition_text": "slab.height >= 0 mm",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "Examiner detail continuity rule requires professional verification.",
+      "why": "This unsigned fixture tests fail-closed dispatch, not a regulatory minimum.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ],
+      "requires_inputs": [
+        "height"
+      ]
+    },
+    {
+      "id": "gb-eng-residential-steel_beam_bearing-continuity",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "state": "unverified",
+      "signer": null,
+      "category": "thermal",
+      "document": null,
+      "applies_to": {
+        "drawing_type": "detail",
+        "detail_type": "steel_beam_bearing",
+        "object_class": "masonry"
+      },
+      "condition": {
+        "cmp": {
+          "left": {
+            "field": "height"
+          },
+          "op": ">=",
+          "right": {
+            "value": 0,
+            "unit": "mm"
+          }
+        }
+      },
+      "condition_text": "masonry.height >= 0 mm",
+      "severity": "flag",
+      "auto_fix": null,
+      "message": "Examiner detail continuity rule requires professional verification.",
+      "why": "This unsigned fixture tests fail-closed dispatch, not a regulatory minimum.",
+      "judgement": false,
+      "modes": [
+        "draft",
+        "learn"
+      ],
+      "requires_inputs": [
+        "height"
+      ]
+    }
+  ],
+  "check_categories": [
+    "geometry",
+    "thermal",
+    "structural",
+    "fire_stopping",
+    "acoustic"
+  ],
+  "typical_details": [],
+  "construction_defaults": {
+    "materials": [
+      {
+        "id": "brick_facing",
+        "name": "Facing brick",
+        "category": "masonry",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "gb-eng-residential",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "block_inner",
+        "name": "Concrete block",
+        "category": "masonry",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "gb-eng-residential",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "roof_tile",
+        "name": "Concrete or clay roof tile",
+        "category": "tile",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "gb-eng-residential",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "timber_truss",
+        "name": "Timber trussed rafters",
+        "category": "timber",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "gb-eng-residential",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "upvc_window",
+        "name": "uPVC or aluminium window",
+        "category": "glazing",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "gb-eng-residential",
+            "version": "0.1.0"
+          }
+        }
+      },
+      {
+        "id": "plasterboard_skim",
+        "name": "Plasterboard and skim",
+        "category": "finish",
+        "basis": "description_only",
+        "source": "profile",
+        "confidence": 1,
+        "verify": false,
+        "source_detail": {
+          "profile": {
+            "id": "gb-eng-residential",
+            "version": "0.1.0"
+          }
+        }
+      }
+    ],
+    "walls": [
+      {
+        "id": "gb_cavity_brick_block",
+        "name": "Brick / cavity / block",
+        "plain_description": "brick outer wall, a cavity, and a block inner wall — the usual construction in England",
+        "layers": [
+          {
+            "role": "outer_leaf",
+            "material_id": "brick_facing",
+            "thickness": 102.5
+          },
+          {
+            "role": "cavity",
+            "material_id": null,
+            "thickness": null
+          },
+          {
+            "role": "inner_leaf",
+            "material_id": "block_inner",
+            "thickness": null
+          }
+        ]
+      }
+    ],
+    "frame": {
+      "id": "gb_loadbearing_masonry",
+      "name": "Loadbearing masonry",
+      "plain_description": "the walls carry the floors and roof — no separate frame",
+      "layers": []
+    },
+    "roofs": [
+      {
+        "id": "gb_pitched_tiled",
+        "name": "Timber trussed pitched roof, tiled",
+        "plain_description": "a pitched timber roof with concrete or clay tiles",
+        "layers": [
+          {
+            "role": "structure",
+            "material_id": "timber_truss",
+            "thickness": null
+          },
+          {
+            "role": "covering",
+            "material_id": "roof_tile",
+            "thickness": null
+          }
+        ]
+      }
+    ],
+    "floors": [
+      {
+        "id": "gb_floor_example",
+        "name": "Example excerpt — floors authored in Prompt 3",
+        "plain_description": "floor construction from the profile",
+        "layers": []
+      }
+    ],
+    "windows": [
+      {
+        "id": "gb_window_upvc_alu",
+        "name": "uPVC or aluminium windows",
+        "plain_description": "uPVC or aluminium windows",
+        "layers": [
+          {
+            "role": "frame",
+            "material_id": "upvc_window",
+            "thickness": null
+          }
+        ]
+      }
+    ],
+    "doors": [
+      {
+        "id": "gb_door_example",
+        "name": "Example excerpt — doors authored in Prompt 3",
+        "plain_description": "door system from the profile",
+        "layers": []
+      }
+    ],
+    "finishes": {
+      "internal": [
+        {
+          "id": "gb_plasterboard_skim",
+          "name": "Plasterboard and skim",
+          "plain_description": "plasterboard walls with a skim coat",
+          "layers": [
+            {
+              "role": "finish",
+              "material_id": "plasterboard_skim",
+              "thickness": null
+            }
+          ]
+        }
+      ]
+    },
+    "typical_detail_ids": []
+  },
+  "coverage": {
+    "statement": "Unsigned examiner checks only; no structural, fire or acoustic assessment.",
+    "checks_available": [
+      "geometry",
+      "thermal"
+    ],
+    "checks_not_available": [
+      "structural",
+      "fire_stopping",
+      "acoustic"
+    ],
+    "rules_total": 13,
+    "rules_verified": 0,
+    "generated_at": "2026-09-27T00:00:00Z"
+  }
+}

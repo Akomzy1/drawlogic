@@ -1,0 +1,244 @@
+{
+  "ddl_version": "0.1.0",
+  "drawing": {
+    "id": "10000000-0000-4000-8000-000000000009",
+    "title": "ground floor wall dpc",
+    "discipline": "architecture",
+    "type": "detail",
+    "detail_type": "ground_floor_wall_dpc",
+    "mode": "draft",
+    "scale": 10,
+    "units": "mm",
+    "jurisdiction": "GB-ENG",
+    "rev": "A",
+    "hash": "sha256:0c3daa2cebb837b53abe604fade3ee82fbbb3db8c4f84a8712a88b6bc8cf719a",
+    "parent_hash": null,
+    "profile_stack": [
+      {
+        "id": "gb-eng-residential",
+        "name": "GB-ENG Residential",
+        "version": "0.1.0",
+        "layer": "jurisdiction",
+        "tier": 1,
+        "signer": null
+      },
+      {
+        "id": "generic",
+        "name": "Generic",
+        "version": "0.1.0",
+        "layer": "generic",
+        "tier": null,
+        "signer": null
+      }
+    ],
+    "card_id": "card-ground_floor_wall_dpc",
+    "created_at": "2026-09-27T00:00:00Z"
+  },
+  "materials": [
+    {
+      "id": "mat_masonry",
+      "name": "masonry",
+      "category": "test_material",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "mat_dpc",
+      "name": "dpc",
+      "category": "test_material",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "mat_slab",
+      "name": "slab",
+      "category": "test_material",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "mat_insulation",
+      "name": "insulation",
+      "category": "test_material",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "objects": [
+    {
+      "id": "wall",
+      "class": "masonry",
+      "label": "wall",
+      "material_id": "mat_masonry",
+      "thickness": 102.5,
+      "height": 600,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "rect",
+        "origin": [
+          0,
+          0
+        ],
+        "width": 300,
+        "height": 600
+      },
+      "source": "user",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": [
+        "generic-ground_floor_wall_dpc-geometry",
+        "gb-eng-residential-ground_floor_wall_dpc-continuity"
+      ],
+      "layer_id": "detail"
+    },
+    {
+      "id": "dpc",
+      "class": "dpc",
+      "label": "dpc",
+      "material_id": "mat_dpc",
+      "thickness": 2,
+      "height": 2,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "rect",
+        "origin": [
+          0,
+          150
+        ],
+        "width": 300,
+        "height": 2
+      },
+      "source": "user",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "detail"
+    },
+    {
+      "id": "slab",
+      "class": "slab",
+      "label": "slab",
+      "material_id": "mat_slab",
+      "thickness": 150,
+      "height": 150,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "rect",
+        "origin": [
+          300,
+          0
+        ],
+        "width": 600,
+        "height": 150
+      },
+      "source": "user",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "detail"
+    },
+    {
+      "id": "insulation",
+      "class": "insulation",
+      "label": "insulation",
+      "material_id": "mat_insulation",
+      "thickness": 100,
+      "height": 100,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "rect",
+        "origin": [
+          300,
+          150
+        ],
+        "width": 600,
+        "height": 100
+      },
+      "source": "user",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "detail"
+    }
+  ],
+  "connections": [
+    {
+      "id": "connection-1",
+      "kind": "abuts",
+      "from": "dpc",
+      "to": "wall",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "constraints": [
+    {
+      "id": "sum-thickness",
+      "type": "sum",
+      "of": [
+        "wall.thickness",
+        "dpc.thickness",
+        "slab.thickness",
+        "insulation.thickness"
+      ],
+      "equals": "assembly_total",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "assembly_total",
+      "kind": "linear",
+      "refs": [
+        "wall",
+        "dpc",
+        "slab",
+        "insulation"
+      ],
+      "value": 354.5,
+      "driving": false,
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "annotations": [
+    {
+      "id": "note-supplied",
+      "kind": "note",
+      "text": "All dimensions are synthetic user-supplied test inputs, not design recommendations.",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "layers": [
+    {
+      "id": "detail",
+      "name": "Detail",
+      "line_weight_mm": 0.35
+    }
+  ],
+  "schedules": [],
+  "solver": {
+    "status": "resolved",
+    "conflicts": []
+  },
+  "checks": null,
+  "stamp": null
+}

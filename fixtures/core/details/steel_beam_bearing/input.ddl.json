@@ -1,0 +1,244 @@
+{
+  "ddl_version": "0.1.0",
+  "drawing": {
+    "id": "10000000-0000-4000-8000-000000000013",
+    "title": "steel beam bearing",
+    "discipline": "architecture",
+    "type": "detail",
+    "detail_type": "steel_beam_bearing",
+    "mode": "draft",
+    "scale": 10,
+    "units": "mm",
+    "jurisdiction": "GB-ENG",
+    "rev": "A",
+    "hash": "sha256:641545e56cde25c772de255652391870f3b484c8cee4b493740d257a4cf5d249",
+    "parent_hash": null,
+    "profile_stack": [
+      {
+        "id": "gb-eng-residential",
+        "name": "GB-ENG Residential",
+        "version": "0.1.0",
+        "layer": "jurisdiction",
+        "tier": 1,
+        "signer": null
+      },
+      {
+        "id": "generic",
+        "name": "Generic",
+        "version": "0.1.0",
+        "layer": "generic",
+        "tier": null,
+        "signer": null
+      }
+    ],
+    "card_id": "card-steel_beam_bearing",
+    "created_at": "2026-09-27T00:00:00Z"
+  },
+  "materials": [
+    {
+      "id": "mat_masonry",
+      "name": "masonry",
+      "category": "test_material",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "mat_padstone",
+      "name": "padstone",
+      "category": "test_material",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "mat_steel_beam",
+      "name": "steel beam",
+      "category": "test_material",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "mat_bearing_zone",
+      "name": "bearing zone",
+      "category": "test_material",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "objects": [
+    {
+      "id": "wall",
+      "class": "masonry",
+      "label": "wall",
+      "material_id": "mat_masonry",
+      "thickness": 102.5,
+      "height": 500,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "rect",
+        "origin": [
+          0,
+          0
+        ],
+        "width": 300,
+        "height": 500
+      },
+      "source": "user",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": [
+        "generic-steel_beam_bearing-geometry",
+        "gb-eng-residential-steel_beam_bearing-continuity"
+      ],
+      "layer_id": "detail"
+    },
+    {
+      "id": "padstone",
+      "class": "padstone",
+      "label": "padstone",
+      "material_id": "mat_padstone",
+      "thickness": 150,
+      "height": 150,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "rect",
+        "origin": [
+          0,
+          500
+        ],
+        "width": 300,
+        "height": 150
+      },
+      "source": "user",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "detail"
+    },
+    {
+      "id": "beam",
+      "class": "steel_beam",
+      "label": "beam",
+      "material_id": "mat_steel_beam",
+      "thickness": 200,
+      "height": 200,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "rect",
+        "origin": [
+          150,
+          650
+        ],
+        "width": 600,
+        "height": 200
+      },
+      "source": "user",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "detail"
+    },
+    {
+      "id": "bearing",
+      "class": "bearing_zone",
+      "label": "bearing",
+      "material_id": "mat_bearing_zone",
+      "thickness": 150,
+      "height": 20,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "rect",
+        "origin": [
+          150,
+          650
+        ],
+        "width": 150,
+        "height": 20
+      },
+      "source": "user",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "detail"
+    }
+  ],
+  "connections": [
+    {
+      "id": "connection-1",
+      "kind": "bears_on",
+      "from": "padstone",
+      "to": "wall",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "constraints": [
+    {
+      "id": "sum-thickness",
+      "type": "sum",
+      "of": [
+        "wall.thickness",
+        "padstone.thickness",
+        "beam.thickness",
+        "bearing.thickness"
+      ],
+      "equals": "assembly_total",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "assembly_total",
+      "kind": "linear",
+      "refs": [
+        "wall",
+        "padstone",
+        "beam",
+        "bearing"
+      ],
+      "value": null,
+      "driving": false,
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "annotations": [
+    {
+      "id": "note-supplied",
+      "kind": "note",
+      "text": "All dimensions are synthetic user-supplied test inputs, not design recommendations.",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "layers": [
+    {
+      "id": "detail",
+      "name": "Detail",
+      "line_weight_mm": 0.35
+    }
+  ],
+  "schedules": [],
+  "solver": {
+    "status": "unresolved",
+    "conflicts": []
+  },
+  "checks": null,
+  "stamp": null
+}

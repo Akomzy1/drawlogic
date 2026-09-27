@@ -1,0 +1,28 @@
+{
+  "mode": "idea",
+  "jurisdiction": "GB-ENG",
+  "inputs": [
+    {
+      "kind": "text",
+      "text": "Extend my kitchen 3 m into the garden in Banbury with bifold doors."
+    }
+  ],
+  "profile_stack": [
+    {
+      "id": "gb-eng-residential",
+      "name": "GB-ENG Residential",
+      "version": "0.1.0",
+      "layer": "jurisdiction",
+      "tier": 1,
+      "signer": null
+    },
+    {
+      "id": "generic",
+      "name": "Generic",
+      "version": "0.1.0",
+      "layer": "generic",
+      "tier": null,
+      "signer": null
+    }
+  ]
+}

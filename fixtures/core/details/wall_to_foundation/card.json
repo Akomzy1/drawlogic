@@ -1,0 +1,84 @@
+{
+  "schema_version": "0.1.0",
+  "card_id": "card-wall_to_foundation",
+  "mode": "draft",
+  "status": "confirmed",
+  "confirmed_by": "fixture-user",
+  "confirmed_at": "2026-09-27T00:00:00Z",
+  "discipline": "architecture",
+  "drawing_type": "detail",
+  "detail_type": "wall_to_foundation",
+  "scale": 10,
+  "units": "mm",
+  "jurisdiction": "GB-ENG",
+  "profile_stack": [
+    {
+      "id": "gb-eng-residential",
+      "name": "GB-ENG Residential",
+      "version": "0.1.0",
+      "layer": "jurisdiction",
+      "tier": 1,
+      "signer": null
+    },
+    {
+      "id": "generic",
+      "name": "Generic",
+      "version": "0.1.0",
+      "layer": "generic",
+      "tier": null,
+      "signer": null
+    }
+  ],
+  "inputs": [
+    {
+      "kind": "text",
+      "text": "Draw the supplied schematic wall_to_foundation using only the supplied component dimensions."
+    }
+  ],
+  "recognised": [
+    {
+      "key": "wall.thickness",
+      "object_id": "wall",
+      "label": "wall",
+      "value": 102.5,
+      "unit": "mm",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "key": "footing.thickness",
+      "object_id": "footing",
+      "label": "footing",
+      "value": 300,
+      "unit": "mm",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "key": "dpc.thickness",
+      "object_id": "dpc",
+      "label": "dpc",
+      "value": 2,
+      "unit": "mm",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "key": "ground.thickness",
+      "object_id": "ground",
+      "label": "ground",
+      "value": 1,
+      "unit": "mm",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "missing": [],
+  "blocked": [],
+  "assumptions": [],
+  "created_at": "2026-09-27T00:00:00Z"
+}

@@ -1,0 +1,15 @@
+{
+  "fixture_checks_passed": 85,
+  "runtime_cases_intentionally_red": 71,
+  "runtime_error_reasons": [
+    "CORE_UNAVAILABLE",
+    "TRUST_UNAVAILABLE"
+  ],
+  "fixture_generation_byte_identical_across_two_runs": true,
+  "json_files_compared": 76,
+  "python": "3.12.14",
+  "contracts_root": "contracts",
+  "logs_location": "system temporary directory / drawlogic-prompt2-examiner",
+  "production_implementation_changed": false,
+  "contract_changed": false
+}

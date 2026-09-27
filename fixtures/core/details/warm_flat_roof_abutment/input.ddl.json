@@ -1,0 +1,244 @@
+{
+  "ddl_version": "0.1.0",
+  "drawing": {
+    "id": "10000000-0000-4000-8000-000000000008",
+    "title": "warm flat roof abutment",
+    "discipline": "architecture",
+    "type": "detail",
+    "detail_type": "warm_flat_roof_abutment",
+    "mode": "draft",
+    "scale": 10,
+    "units": "mm",
+    "jurisdiction": "GB-ENG",
+    "rev": "A",
+    "hash": "sha256:633b89b532b1c384e76c9de0efff7dd8385708d0e38c3e32f7d8a35ff3da6693",
+    "parent_hash": null,
+    "profile_stack": [
+      {
+        "id": "gb-eng-residential",
+        "name": "GB-ENG Residential",
+        "version": "0.1.0",
+        "layer": "jurisdiction",
+        "tier": 1,
+        "signer": null
+      },
+      {
+        "id": "generic",
+        "name": "Generic",
+        "version": "0.1.0",
+        "layer": "generic",
+        "tier": null,
+        "signer": null
+      }
+    ],
+    "card_id": "card-warm_flat_roof_abutment",
+    "created_at": "2026-09-27T00:00:00Z"
+  },
+  "materials": [
+    {
+      "id": "mat_masonry",
+      "name": "masonry",
+      "category": "test_material",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "mat_deck",
+      "name": "deck",
+      "category": "test_material",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "mat_insulation",
+      "name": "insulation",
+      "category": "test_material",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "mat_upstand",
+      "name": "upstand",
+      "category": "test_material",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "objects": [
+    {
+      "id": "wall",
+      "class": "masonry",
+      "label": "wall",
+      "material_id": "mat_masonry",
+      "thickness": 102.5,
+      "height": 650,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "rect",
+        "origin": [
+          0,
+          0
+        ],
+        "width": 300,
+        "height": 650
+      },
+      "source": "user",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": [
+        "generic-warm_flat_roof_abutment-geometry",
+        "gb-eng-residential-warm_flat_roof_abutment-continuity"
+      ],
+      "layer_id": "detail"
+    },
+    {
+      "id": "deck",
+      "class": "deck",
+      "label": "deck",
+      "material_id": "mat_deck",
+      "thickness": 150,
+      "height": 150,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "rect",
+        "origin": [
+          300,
+          0
+        ],
+        "width": 600,
+        "height": 150
+      },
+      "source": "user",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "detail"
+    },
+    {
+      "id": "insulation",
+      "class": "insulation",
+      "label": "insulation",
+      "material_id": "mat_insulation",
+      "thickness": 120,
+      "height": 120,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "rect",
+        "origin": [
+          300,
+          150
+        ],
+        "width": 600,
+        "height": 120
+      },
+      "source": "user",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "detail"
+    },
+    {
+      "id": "upstand",
+      "class": "upstand",
+      "label": "upstand",
+      "material_id": "mat_upstand",
+      "thickness": 2,
+      "height": 150,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "rect",
+        "origin": [
+          300,
+          270
+        ],
+        "width": 2,
+        "height": 150
+      },
+      "source": "user",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "detail"
+    }
+  ],
+  "connections": [
+    {
+      "id": "connection-1",
+      "kind": "abuts",
+      "from": "deck",
+      "to": "wall",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "constraints": [
+    {
+      "id": "sum-thickness",
+      "type": "sum",
+      "of": [
+        "wall.thickness",
+        "deck.thickness",
+        "insulation.thickness",
+        "upstand.thickness"
+      ],
+      "equals": "assembly_total",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "assembly_total",
+      "kind": "linear",
+      "refs": [
+        "wall",
+        "deck",
+        "insulation",
+        "upstand"
+      ],
+      "value": null,
+      "driving": false,
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "annotations": [
+    {
+      "id": "note-supplied",
+      "kind": "note",
+      "text": "All dimensions are synthetic user-supplied test inputs, not design recommendations.",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "layers": [
+    {
+      "id": "detail",
+      "name": "Detail",
+      "line_weight_mm": 0.35
+    }
+  ],
+  "schedules": [],
+  "solver": {
+    "status": "unresolved",
+    "conflicts": []
+  },
+  "checks": null,
+  "stamp": null
+}

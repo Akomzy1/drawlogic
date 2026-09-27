@@ -1,0 +1,74 @@
+[
+  {
+    "id": "as-ceiling",
+    "key": "ceiling_height",
+    "text": "I assumed a 2.4 m ceiling",
+    "technical_term": "Floor-to-ceiling height",
+    "value": 2.4,
+    "unit": "m",
+    "source": "ai_inferred",
+    "confidence": 0.6,
+    "verify": true,
+    "editable": true,
+    "source_detail": {
+      "model": {
+        "provider": "anthropic",
+        "model_id": "claude-sonnet-5",
+        "task": "idea"
+      }
+    }
+  },
+  {
+    "id": "as-width",
+    "key": "extension_width",
+    "text": "I assumed the extension is 3.2 m wide",
+    "value": 3.2,
+    "unit": "m",
+    "source": "ai_inferred",
+    "confidence": 0.6,
+    "verify": true,
+    "editable": true,
+    "source_detail": {
+      "reference": {
+        "asset_id": "ast-kitchen-photo",
+        "origin": "own_work",
+        "rights_confirmed": true
+      },
+      "note": "Estimated from the photo."
+    }
+  },
+  {
+    "id": "as-walls",
+    "key": "wall_build_up",
+    "text": "I assumed brick walls with a cavity and a block inner wall — the usual construction in England",
+    "technical_term": "Brick / cavity / block",
+    "value": "gb_cavity_brick_block",
+    "source": "profile",
+    "confidence": 1,
+    "verify": false,
+    "editable": true,
+    "source_detail": {
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      }
+    }
+  },
+  {
+    "id": "as-roof",
+    "key": "roof_type",
+    "text": "I assumed a pitched roof with tiles",
+    "technical_term": "Timber trussed pitched roof, tiled",
+    "value": "gb_pitched_tiled",
+    "source": "profile",
+    "confidence": 1,
+    "verify": false,
+    "editable": true,
+    "source_detail": {
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      }
+    }
+  }
+]

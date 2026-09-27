@@ -1,0 +1,28 @@
+{
+  "mode": "idea",
+  "jurisdiction": "NG-LA",
+  "inputs": [
+    {
+      "kind": "text",
+      "text": "Place a duplex and boys quarters on my 60 by 120 ft Lekki plot."
+    }
+  ],
+  "profile_stack": [
+    {
+      "id": "ng-la",
+      "name": "NG-LA",
+      "version": "0.1.0",
+      "layer": "jurisdiction",
+      "tier": 1,
+      "signer": null
+    },
+    {
+      "id": "generic",
+      "name": "Generic",
+      "version": "0.1.0",
+      "layer": "generic",
+      "tier": null,
+      "signer": null
+    }
+  ]
+}
