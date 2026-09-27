@@ -86,7 +86,8 @@ jobs:
 
       - name: mypy (strict)
         run: |
-          mypy --strict contracts/scripts/condition_text.py contracts/scripts/gen_py.py contracts/scripts/check_py.py profiles/coverage.py profiles/tools.py
+          mypy --strict contracts/scripts/condition_text.py contracts/scripts/gen_py.py contracts/scripts/check_py.py
+          mypy --strict profiles/coverage.py profiles/tools.py
           if [ -n "$(find engine trust -name '*.py' -not -path '*/tests/*' | head -1)" ]; then
             mypy --strict --config-file engine/pyproject.toml engine trust
           else
