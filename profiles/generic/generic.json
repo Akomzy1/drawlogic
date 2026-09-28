@@ -53,7 +53,31 @@
           "dimension": 2.5,
           "title": 5.0
         },
-        "annotation_language": "en"
+        "annotation_language": "en",
+        "hatches": {
+          "concrete": {
+            "pattern_id": "concrete",
+            "scale": 3,
+            "angle_deg": 0,
+            "line_weight_mm": 0.13
+          },
+          "frame": null,
+          "masonry": {
+            "pattern_id": "block",
+            "scale": 3,
+            "angle_deg": 45,
+            "line_weight_mm": 0.18
+          },
+          "metal": null,
+          "render": null,
+          "tile": null,
+          "timber": {
+            "pattern_id": "timber_grain",
+            "scale": 3,
+            "angle_deg": 0,
+            "line_weight_mm": 0.13
+          }
+        }
       },
       "gulf": {
         "units": "mm",
@@ -80,7 +104,31 @@
           "dimension": 2.5,
           "title": 5.0
         },
-        "annotation_language": "en"
+        "annotation_language": "en",
+        "hatches": {
+          "concrete": {
+            "pattern_id": "concrete",
+            "scale": 3,
+            "angle_deg": 0,
+            "line_weight_mm": 0.13
+          },
+          "frame": null,
+          "insulation": {
+            "pattern_id": "insulation_rigid",
+            "scale": 3,
+            "angle_deg": 0,
+            "line_weight_mm": 0.18
+          },
+          "masonry": {
+            "pattern_id": "block",
+            "scale": 3,
+            "angle_deg": 45,
+            "line_weight_mm": 0.18
+          },
+          "membrane": null,
+          "render": null,
+          "tile": null
+        }
       },
       "northern_europe": {
         "units": "mm",
@@ -107,7 +155,36 @@
           "dimension": 2.5,
           "title": 5.0
         },
-        "annotation_language": "en"
+        "annotation_language": "en",
+        "hatches": {
+          "concrete": {
+            "pattern_id": "concrete",
+            "scale": 3,
+            "angle_deg": 0,
+            "line_weight_mm": 0.13
+          },
+          "finish": null,
+          "frame": null,
+          "insulation": {
+            "pattern_id": "insulation_rigid",
+            "scale": 3,
+            "angle_deg": 0,
+            "line_weight_mm": 0.18
+          },
+          "masonry": {
+            "pattern_id": "brick",
+            "scale": 2.5,
+            "angle_deg": 45,
+            "line_weight_mm": 0.18
+          },
+          "tile": null,
+          "timber": {
+            "pattern_id": "timber_grain",
+            "scale": 3,
+            "angle_deg": 0,
+            "line_weight_mm": 0.13
+          }
+        }
       }
     }
   },
