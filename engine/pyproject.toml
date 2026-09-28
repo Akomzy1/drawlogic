@@ -8,6 +8,10 @@ dependencies = [
   "jsonschema==4.26.0",
   "referencing==0.37.0",
   "rfc8785==0.1.4",
+  "ezdxf==1.4.4",
+  "pillow==12.3.0",
+  "pycairo==1.29.1",
+  "uvicorn==0.41.0",
 ]
 
 [project.optional-dependencies]

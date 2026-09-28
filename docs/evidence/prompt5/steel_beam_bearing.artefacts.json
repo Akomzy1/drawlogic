@@ -1,0 +1,26 @@
+{
+  "drawing_hash": "sha256:39f6a3ac803350a659f61e91c6690716772e48784f16a0cc4e69888c03bc8190",
+  "drawing_rev": "A",
+  "grid": {
+    "width_px": 964,
+    "height_px": 1024,
+    "mm_per_px": 1.640625,
+    "origin": [
+      -40.0,
+      1640.0
+    ]
+  },
+  "depth_encoding": {
+    "bits": 8,
+    "near_mm": 0,
+    "far_mm": 0
+  },
+  "legend": {
+    "block_dense": "#BEC812",
+    "brick_facing": "#ACA19B",
+    "concrete_c25": "#FBFDBB",
+    "pir_board": "#D64778",
+    "steel_section": "#F55E45"
+  },
+  "background": "#FFFFFF"
+}
