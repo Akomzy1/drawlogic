@@ -57,11 +57,12 @@ explicit `null` mapping means unhatched.
 
 ## Gate status
 
-The independent examiner suite is unchanged. Its current result is **46 passed,
-257 failed**: 253 failures reject duplicate IDs in 11 fixture DDLs, and four hit
-the examiner's SVG annotation text-join error. See
-[issue #12](https://github.com/Akomzy1/drawlogic/issues/12).
+The independent examiner suite passes **303 tests** against Claude Code's
+corrected fixtures at `f6d2623`. Fixture generation also passes its freshness
+check and the core validator.
 
-[Evidence](../../docs/evidence/prompt5/README.md) includes the two valid fixture
-exports, CAD-viewer screenshots and determinism hashes. Prompt 5 remains pending
-until Claude Code corrects the examiner fixtures and the complete gate passes.
+[Evidence](../../docs/evidence/prompt5/README.md) includes two sample exports,
+CAD-viewer screenshots and determinism hashes. All 104 combinations of 13
+details, two conventions and four routes produce identical bytes across two
+complete runs. Both sample DXFs open in the reference CAD viewer with clean
+audits, satisfying Prompt 5's visual inspection requirement.

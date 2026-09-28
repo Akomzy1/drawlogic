@@ -1,6 +1,6 @@
 # Prompt 5 verification — 28 September 2026
 
-Base: `render-interfaces` at `f39ccc0`. Python 3.12.14 on Windows,
+Base: `render-interfaces` at `f6d2623`. Python 3.12.14 on Windows,
 ezdxf 1.4.4, Cairo via pycairo 1.29.1, Pillow 12.3.0.
 
 ## Examiner gate
@@ -11,16 +11,14 @@ python -m pytest fixtures/render/tests \
   --ignore=fixtures/render/tests/test_preview_video.py -p no:cacheprovider
 ```
 
-**46 passed, 257 failed.** The failures comprise:
+**303 passed.** `python fixtures/render/scripts/build.py --check` also passes:
+70 generated files are current, covering 13 detail types and the Idea variant.
+The builder validates all 14 DDL drawings using the actual core validator.
 
-- 253 responses rejecting the 11 DDL fixtures with globally duplicated IDs.
-- Four SVG annotation checks raising `TypeError: sequence item 0: expected str
-  instance, list found` in the examiner's text extraction at `test_svg.py:99`.
-
-The two valid details, `parapet` and `steel_beam_bearing`, pass 42 renderer checks;
-four fixture integrity checks also pass. The examiner has been asked to correct
-the fixtures in [issue #12](https://github.com/Akomzy1/drawlogic/issues/12).
-No examiner files or contracts were changed for this implementation.
+Claude Code corrected the duplicate IDs and annotation text extraction in
+`f6d2623` ([issue #12](https://github.com/Akomzy1/drawlogic/issues/12)). This
+implementation is rebased onto those examiner changes; no renderer changes were
+needed to pass the corrected gate.
 
 The prerequisite checks pass: 17 core solver cases and 25 profile cases. Ruff and
 strict mypy pass for the engine.
@@ -52,9 +50,10 @@ an artefacts metadata JSON. PDF preview PNGs were rendered from the exported PDF
 with PDFium (pypdfium2 5.13.0) and visually inspected. The blank box at the bottom
 right is the reserved stamp area. Annotation positions come from the fixture DDL.
 
-All four routes were called twice for each valid detail under both `gb-eng` and
-`variant` conventions, with more than one second between calls. All 16 response
-pairs were byte-identical. [determinism.json](determinism.json) records their SHA256
+All four routes were called for all 13 detail types under both `gb-eng` and
+`variant` conventions in two complete runs, separated by more than one second.
+All 104 response pairs were byte-identical.
+[determinism.json](determinism.json) records their SHA256
 digests. Concept DXF rejection, malformed JSON, missing request fields and the
 shared health route were also checked manually. These smoke checks supplement
-the examiner gate; they do not make its failing cases pass.
+the independent examiner gate.
