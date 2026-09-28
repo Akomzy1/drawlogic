@@ -96,7 +96,8 @@ def test_annotations_are_leaders_with_their_text(render, detail, conv):
     for a in expected(detail, "svg")["annotations"]:
         g = anns.get(a["id"])
         assert g is not None, f"annotation {a['id']} not drawn"
-        text = " ".join(" ".join(el.itertext()).split() for el in g.iter() if tag(el) == "text").strip()
+        # Every word of every <text> in the group, whitespace-normalised (issue #12: the old join raised TypeError).
+        text = " ".join(word for el in g.iter() if tag(el) == "text" for word in " ".join(el.itertext()).split())
         assert a["text"] in text, f"{a['id']}: expected {a['text']!r}, found {text!r}"
         if a["leader"]:
             assert any("leader" in classes(el) for el in g.iter()), f"{a['id']}: leader line missing"

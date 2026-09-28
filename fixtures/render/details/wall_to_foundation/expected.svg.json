@@ -2,7 +2,7 @@
   "detail_type": "wall_to_foundation",
   "input": "input.ddl.json",
   "drawing_id": "bde591b2-4483-5842-b52e-1e5ec488da64",
-  "drawing_hash": "sha256:ea12494fd6037ddd9be5215d7a9e51a04182b6504d57c397d0ebcf4502a3906c",
+  "drawing_hash": "sha256:d6bc78ba85a868113f87eb043f8e75380795753fa8668227187a46414a2b944f",
   "rev": "A",
   "title": "Wall to strip foundation",
   "scale": 10,
@@ -42,7 +42,7 @@
       "layer_id": "ground",
       "source": "user",
       "verify": false,
-      "material_id": "backfill",
+      "material_id": "granular_backfill",
       "category": "earth",
       "hatch": {
         "gb-eng": "earth",

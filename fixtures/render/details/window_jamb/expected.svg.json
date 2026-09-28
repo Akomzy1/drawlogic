@@ -2,7 +2,7 @@
   "detail_type": "window_jamb",
   "input": "input.ddl.json",
   "drawing_id": "b3e0ba97-5e74-5220-b78b-4efab69c3ea1",
-  "drawing_hash": "sha256:f7ccb1c9892951ffba883254b63d9695b457b049ed9e37a4462a7690cf473e1f",
+  "drawing_hash": "sha256:583148fbcb850848680622b28bd52eb6cf0c7e9a2cdb783eda4ff8cf13314342",
   "rev": "A",
   "title": "Window jamb, plan",
   "scale": 10,
@@ -74,7 +74,7 @@
       "layer_id": "walls",
       "source": "profile",
       "verify": false,
-      "material_id": "plaster",
+      "material_id": "plasterboard_skim",
       "category": "finish",
       "hatch": {
         "gb-eng": null,

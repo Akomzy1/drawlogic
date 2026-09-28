@@ -2,7 +2,7 @@
   "detail_type": "eaves",
   "input": "input.ddl.json",
   "drawing_id": "e063b986-2134-5ca4-b6ac-b31c3f34bd86",
-  "drawing_hash": "sha256:3b91a82ec92dd72e7f523a9f7fa6d7d37796ca2841c0ca445ed9e520ec83701c",
+  "drawing_hash": "sha256:c650450d88764fe2ca55aac71d59574a058927db16e41c1e1337f2fa3cae7c66",
   "rev": "A",
   "title": "Eaves, pitched roof",
   "scale": 10,
@@ -74,7 +74,7 @@
       "layer_id": "walls",
       "source": "profile",
       "verify": false,
-      "material_id": "plaster",
+      "material_id": "plasterboard_skim",
       "category": "finish",
       "hatch": {
         "gb-eng": null,

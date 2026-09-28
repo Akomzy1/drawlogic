@@ -2,7 +2,7 @@
   "detail_type": "ground_floor_wall_dpc",
   "input": "input.ddl.json",
   "drawing_id": "6eb3dda4-da43-580a-b648-1edbff2f8a34",
-  "drawing_hash": "sha256:8a1d03910e714ade4c4d721311971daccd883490d8b721c9ea8bebbcf9a79f3a",
+  "drawing_hash": "sha256:3834e5b33573b8fe2b0d847c8fe1ecd443efdbb46f38e98ed23f543f199a2edd",
   "rev": "A",
   "title": "Ground floor and wall junction with DPC",
   "scale": 10,
@@ -26,7 +26,7 @@
   ],
   "objects": [
     {
-      "id": "ground",
+      "id": "external_ground",
       "layer_id": "ground",
       "source": "user",
       "verify": false,
@@ -150,7 +150,7 @@
       "layer_id": "walls",
       "source": "profile",
       "verify": false,
-      "material_id": "plaster",
+      "material_id": "plasterboard_skim",
       "category": "finish",
       "hatch": {
         "gb-eng": null,
@@ -198,7 +198,7 @@
       "layer_id": "floor",
       "source": "user",
       "verify": false,
-      "material_id": "screed",
+      "material_id": "sand_cement_screed",
       "category": "screed",
       "hatch": {
         "gb-eng": "screed",

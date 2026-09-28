@@ -2,7 +2,7 @@
   "detail_type": "cavity_closer",
   "input": "input.ddl.json",
   "drawing_id": "ff409c83-4220-5356-90bc-af24d3339899",
-  "drawing_hash": "sha256:a3e2749434d0a41e2a6c2c9784dc676f610d6950f816707903a0811579280fa7",
+  "drawing_hash": "sha256:76fd3441ee265371ae70069c2c6f5b513b13257119bc5def1edb015d11bdf92b",
   "rev": "A",
   "title": "Cavity closer at opening, plan",
   "scale": 10,
@@ -74,7 +74,7 @@
       "layer_id": "walls",
       "source": "profile",
       "verify": false,
-      "material_id": "plaster",
+      "material_id": "plasterboard_skim",
       "category": "finish",
       "hatch": {
         "gb-eng": null,
@@ -98,7 +98,7 @@
       "layer_id": "walls",
       "source": "profile",
       "verify": false,
-      "material_id": "plaster",
+      "material_id": "plasterboard_skim",
       "category": "finish",
       "hatch": {
         "gb-eng": null,

@@ -11,7 +11,7 @@
     "units": "mm",
     "jurisdiction": "GB-ENG",
     "rev": "A",
-    "hash": "sha256:1a415102ea41d7fa5bacaba01ffaaf9253c1fad1502828db1098efcd25c731c9",
+    "hash": "sha256:89c4f2b84ba97e24fd6472ada1da45f7fa4a5a86549abe44a53a736e3cd3fddb",
     "parent_hash": null,
     "profile_stack": [
       {
@@ -63,7 +63,7 @@
       "verify": false
     },
     {
-      "id": "screed",
+      "id": "sand_cement_screed",
       "name": "Sand and cement screed",
       "category": "screed",
       "basis": "description_only",
@@ -331,7 +331,7 @@
       "id": "screed",
       "class": "screed",
       "label": "Screed",
-      "material_id": "screed",
+      "material_id": "sand_cement_screed",
       "thickness": null,
       "height": null,
       "level": null,
