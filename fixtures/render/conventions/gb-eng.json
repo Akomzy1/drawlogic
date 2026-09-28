@@ -1,10 +1,23 @@
 {
   "units": "mm",
-  "sheets": [{ "size": "A3", "orientation": "landscape" }],
+  "sheets": [
+    {
+      "size": "A3",
+      "orientation": "landscape"
+    }
+  ],
   "title_block": "drawlogic-a3",
   "layer_standard": "Drawlogic fixture layers",
-  "dimension_style": { "terminator": "tick", "text_height_mm": 2.5, "precision": 0 },
-  "text_heights_mm": { "annotation": 2.5, "dimension": 2.5, "title": 5 },
+  "dimension_style": {
+    "terminator": "tick",
+    "text_height_mm": 2.5,
+    "precision": 0
+  },
+  "text_heights_mm": {
+    "annotation": 2.5,
+    "dimension": 2.5,
+    "title": 5
+  },
   "line_weights_mm": {
     "A-Walls": 0.5,
     "A-Roof": 0.5,
@@ -15,5 +28,59 @@
     "A-Anno": 0.18,
     "A-Dims": 0.18
   },
-  "annotation_language": "en-GB"
+  "annotation_language": "en-GB",
+  "hatches": {
+    "board": null,
+    "concrete": {
+      "pattern_id": "concrete",
+      "scale": 3,
+      "angle_deg": 0,
+      "line_weight_mm": 0.13
+    },
+    "dpc": null,
+    "earth": {
+      "pattern_id": "earth",
+      "scale": 4,
+      "angle_deg": 45,
+      "line_weight_mm": 0.13
+    },
+    "finish": null,
+    "frame": null,
+    "glazing": null,
+    "insulation": {
+      "pattern_id": "insulation_rigid",
+      "scale": 3,
+      "angle_deg": 0,
+      "line_weight_mm": 0.18
+    },
+    "masonry": {
+      "pattern_id": "brick",
+      "scale": 2.5,
+      "angle_deg": 45,
+      "line_weight_mm": 0.18
+    },
+    "membrane": null,
+    "metal": null,
+    "screed": {
+      "pattern_id": "screed",
+      "scale": 1.5,
+      "angle_deg": 0,
+      "line_weight_mm": 0.13
+    },
+    "steel": null,
+    "stone": {
+      "pattern_id": "stone",
+      "scale": 3,
+      "angle_deg": 30,
+      "line_weight_mm": 0.13
+    },
+    "tile": null,
+    "timber": {
+      "pattern_id": "timber_grain",
+      "scale": 3,
+      "angle_deg": 0,
+      "line_weight_mm": 0.13
+    },
+    "trim": null
+  }
 }

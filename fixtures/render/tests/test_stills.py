@@ -2,14 +2,15 @@
 
 PRD FR-52 (drift fails, retries, never delivered), FR-53 (drawing hash and revision), FR-56 and the contract review of
 27 Sept 2026 (charged once per delivered render; retries and failed jobs never consume credits), FR-96 (Concept
-watermark on Idea images), FR-161–164 and trust rule 11a (material basis; colour approximate)."""
+watermark on Idea images), FR-161–164 and trust rule 11a (material basis; colour approximate). Every status is validated
+against contracts/render-api.schema.json by the harness.
+"""
 
 from __future__ import annotations
 
-import json
+from typing import Any
 
-import pytest
-from conftest import ROOT, THRESHOLDS, ddl, expected, load
+from conftest import CONVENTIONS, ROOT, THRESHOLDS, ddl, expected, load
 
 MODE = "detail_to_built"
 MIN = THRESHOLDS["fidelity"]["modes"][MODE]["min"]
@@ -17,16 +18,13 @@ MAX_ATTEMPTS = THRESHOLDS["fidelity"]["max_attempts"]
 JOB = {"engine": "diffusion", "mode": MODE, "variants": 1, "camera_id": "cam-01", "resolution": "low"}
 
 
-def still(engine, drawing, job=JOB):
-    r = engine.post("still", {"ddl": drawing, "conventions": json.loads((ROOT / "conventions" / "gb-eng.json").read_text(encoding="utf-8")), "job": job})
-    assert r.status_code == 200, f"/render/still returned {r.status_code}: {r.text[:300]}"
-    return r.json()
+def still_request(drawing: dict[str, Any], job: dict[str, Any] = JOB) -> dict[str, Any]:
+    return {"ddl": drawing, "conventions": CONVENTIONS["gb-eng"], "job": job}
 
 
-def test_faithful_render_is_delivered_with_its_drawing_hash(in_process_engine, fixture_provider):
-    fixture_provider(stills=["faithful.png"])
+def test_faithful_render_is_delivered_with_its_drawing_hash(provider_engine):
     d = ddl("parapet")
-    status = still(in_process_engine, d)
+    status = provider_engine(stills=["faithful.png"]).run("still", still_request(d))
     assert status["state"] == "delivered", status
     [out] = status["outputs"]
     assert out["engine"] == "diffusion"
@@ -35,9 +33,8 @@ def test_faithful_render_is_delivered_with_its_drawing_hash(in_process_engine, f
     assert status["credits_charged"] == 1, "one credit per delivered variant (PRD §10)"
 
 
-def test_drifted_render_fails_and_is_never_delivered(in_process_engine, fixture_provider):
-    fixture_provider(stills=["drifted.png"])
-    status = still(in_process_engine, ddl("parapet"))
+def test_drifted_render_fails_and_is_never_delivered(provider_engine):
+    status = provider_engine(stills=["drifted.png"]).run("still", still_request(ddl("parapet")))
     assert status["state"] == "failed", f"FR-52: a drifted render must fail, got {status['state']}"
     assert status["reason"] == "fidelity"
     assert status["attempts"] == MAX_ATTEMPTS, "it retries up to max_attempts before failing"
@@ -46,25 +43,27 @@ def test_drifted_render_fails_and_is_never_delivered(in_process_engine, fixture_
     assert "outputs" not in status
 
 
-def test_retries_never_consume_credits(in_process_engine, fixture_provider):
-    fixture_provider(stills=["drifted.png", "faithful.png"])
-    status = still(in_process_engine, ddl("parapet"))
+def test_retries_never_consume_credits(provider_engine):
+    status = provider_engine(stills=["drifted.png", "faithful.png"]).run("still", still_request(ddl("parapet")))
     assert status["state"] == "delivered"
     assert status["attempts_total"] == 2
     assert status["credits_charged"] == 1, "the failed first attempt must not be charged"
 
 
-def test_idea_mode_images_carry_the_concept_watermark(in_process_engine, fixture_provider):
-    fixture_provider(stills=["faithful.png"])
-    status = still(in_process_engine, load(ROOT / "idea" / "parapet.idea.ddl.json"))
+def test_idea_mode_images_carry_the_concept_watermark(provider_engine):
+    status = provider_engine(stills=["faithful.png"]).run("still", still_request(load(ROOT / "idea" / "parapet.idea.ddl.json")))
     assert status["state"] == "delivered"
     assert "watermark.concept" in status["outputs"][0]["label_keys"], "FR-96"
 
 
-def test_every_material_states_its_basis(in_process_engine, fixture_provider):
-    fixture_provider(stills=["faithful.png"])
+def test_draft_images_do_not_carry_the_concept_watermark(provider_engine):
+    status = provider_engine(stills=["faithful.png"]).run("still", still_request(ddl("parapet")))
+    assert "watermark.concept" not in status["outputs"][0]["label_keys"], "a Draft render is not a concept"
+
+
+def test_every_material_states_its_basis(provider_engine):
     d = ddl("parapet")
-    status = still(in_process_engine, d)
+    status = provider_engine(stills=["faithful.png"]).run("still", still_request(d))
     materials = {m["material_id"]: m for m in status["outputs"][0]["materials"]}
     assert sorted(materials) == expected("parapet", "artefacts")["legend_material_ids"], "FR-163: every visible material states a basis"
     declared = {m["id"]: m for m in d["materials"]}
@@ -83,9 +82,7 @@ def test_every_material_states_its_basis(in_process_engine, fixture_provider):
             assert m["delta_e"] is None, f"{mid}: ΔE only for colour-coded materials"
 
 
-@pytest.mark.parametrize("variants", [2])
-def test_each_delivered_variant_is_charged_once(in_process_engine, fixture_provider, variants):
-    fixture_provider(stills=["faithful.png"])
-    status = still(in_process_engine, ddl("parapet"), {**JOB, "variants": variants})
-    assert status["state"] == "delivered" and len(status["outputs"]) == variants
-    assert status["credits_charged"] == variants
+def test_each_delivered_variant_is_charged_once(provider_engine):
+    status = provider_engine(stills=["faithful.png"]).run("still", still_request(ddl("parapet"), {**JOB, "variants": 2}))
+    assert status["state"] == "delivered" and len(status["outputs"]) == 2
+    assert status["credits_charged"] == 2

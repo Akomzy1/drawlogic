@@ -9,7 +9,7 @@ import json
 
 import numpy as np
 import pytest
-from conftest import DETAILS, ddl, expected
+from conftest import DETAILS, api_valid, ddl, expected
 from PIL import Image
 
 MIN_VISIBLE_MM = 20  # objects thinner than this may vanish at artefact resolution; everything thicker must appear
@@ -22,9 +22,9 @@ def decode(b64: str) -> Image.Image:
 @pytest.fixture
 def artefacts(render):
     def load(detail: str):
-        body = json.loads(render("artefacts", detail))
-        for key in ("line_art", "depth", "material_map", "legend"):
-            assert key in body, f"artefacts response lacks {key}"
+        body = api_valid("artefacts_response", json.loads(render("artefacts", detail)))
+        drawing = ddl(detail)["drawing"]
+        assert body["drawing_hash"] == drawing["hash"] and body["drawing_rev"] == drawing["rev"], "FR-53: artefacts carry their drawing"
         return body
 
     return load
@@ -39,7 +39,8 @@ def hexrgb(h: str) -> tuple[int, int, int]:
 def test_images_align(artefacts, detail):
     a = artefacts(detail)
     sizes = {k: decode(a[k]).size for k in ("line_art", "depth", "material_map")}
-    assert len(set(sizes.values())) == 1, f"artefacts must share one pixel grid: {sizes}"
+    grid = (a["grid"]["width_px"], a["grid"]["height_px"])
+    assert set(sizes.values()) == {grid}, f"artefacts must share the declared {grid} pixel grid: {sizes}"
     line = np.asarray(decode(a["line_art"]).convert("L"))
     assert line.min() < 128 < line.max(), "line-art is blank"
 
@@ -53,8 +54,8 @@ def test_material_map_is_keyed_by_material_id(artefacts, detail):
     assert len(set(colours)) == len(colours), "each material needs its own colour"
     img = np.asarray(decode(a["material_map"]).convert("RGB")).reshape(-1, 3)
     present = {tuple(int(c) for c in px) for px in np.unique(img, axis=0)}
-    extra = present - set(colours)
-    assert len(extra) <= 1, f"material map has colours outside the legend (blending or anti-aliasing?): {sorted(extra)[:5]}"
+    extra = present - set(colours) - {hexrgb(a["background"])}
+    assert not extra, f"material map has colours outside the legend and background (blending or anti-aliasing?): {sorted(extra)[:5]}"
     thick = set()
     for o in ddl(detail)["objects"]:
         pts = o["geometry"]["points"]

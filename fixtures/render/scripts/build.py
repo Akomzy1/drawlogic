@@ -25,8 +25,6 @@ from referencing import Registry, Resource
 ROOT = Path(__file__).resolve().parent.parent
 REPO = ROOT.parent.parent
 CONTRACTS = REPO / "contracts"
-SPEC = json.loads((ROOT / "render-spec.json").read_text(encoding="utf-8"))
-HATCHED = set(SPEC["hatched_categories"])
 
 # ---------------------------------------------------------------------------------------------------------------------
 # Materials. category drives hatching (render-spec.json); basis follows FR-163.
@@ -476,6 +474,16 @@ def build_ddl(name: str, spec: dict[str, Any]) -> dict[str, Any]:
     return ddl
 
 
+def hatch_of(conventions: dict[str, Any], category: str | None) -> str | None:
+    """The pattern a category is hatched with, or None. An unmapped category is a configuration error, never a guess."""
+    if category is None:
+        return None
+    if category not in conventions["hatches"]:
+        raise AssertionError(f"conventions.hatches has no entry for material category {category!r}")
+    entry = conventions["hatches"][category]
+    return None if entry is None else str(entry["pattern_id"])
+
+
 def dim_text(value: float, precision: int) -> str:
     return f"{value:.{precision}f}"
 
@@ -502,7 +510,9 @@ def goldens(name: str, ddl: dict[str, Any], conventions: dict[str, dict[str, Any
                 "source": o["source"],
                 "verify": o["verify"],
                 "material_id": o["material_id"],
-                "hatch_category": cat[o["material_id"]] if o["material_id"] and cat[o["material_id"]] in HATCHED else None,
+                "category": cat[o["material_id"]] if o["material_id"] else None,
+                # Pattern per convention set, from conventions.hatches (profile.schema 0.2.0); null = drawn unhatched.
+                "hatch": {k: hatch_of(c, cat.get(o["material_id"])) for k, c in conventions.items()},
             }
             for o in ddl["objects"]
         ],
@@ -521,7 +531,12 @@ def goldens(name: str, ddl: dict[str, Any], conventions: dict[str, dict[str, Any
         **head,
         "layers": sorted({layer["name"] for layer in ddl["layers"]}),
         "objects": [
-            {"id": o["id"], "layer": layer_name[o["layer_id"]], "hatch": bool(o["material_id"] and cat[o["material_id"]] in HATCHED)} for o in ddl["objects"]
+            {
+                "id": o["id"],
+                "layer": layer_name[o["layer_id"]],
+                "hatch": {k: hatch_of(c, cat.get(o["material_id"])) is not None for k, c in conventions.items()},
+            }
+            for o in ddl["objects"]
         ],
         "dimensions": [{"id": d["id"], "value": d["value"]} for d in ddl["dimensions"]],
         "texts": [a["text"] for a in ddl["annotations"]],

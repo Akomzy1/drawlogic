@@ -35,7 +35,11 @@
       "source": "user",
       "verify": false,
       "material_id": "paving",
-      "hatch_category": "stone"
+      "category": "stone",
+      "hatch": {
+        "gb-eng": "stone",
+        "variant": "concrete"
+      }
     },
     {
       "id": "brick",
@@ -43,7 +47,11 @@
       "source": "user",
       "verify": false,
       "material_id": "brick_facing",
-      "hatch_category": "masonry"
+      "category": "masonry",
+      "hatch": {
+        "gb-eng": "brick",
+        "variant": "cross_diagonal"
+      }
     },
     {
       "id": "dpc",
@@ -51,7 +59,11 @@
       "source": "user",
       "verify": false,
       "material_id": "dpc_polymer",
-      "hatch_category": null
+      "category": "dpc",
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     },
     {
       "id": "threshold",
@@ -59,7 +71,11 @@
       "source": "user",
       "verify": false,
       "material_id": "alu_threshold",
-      "hatch_category": null
+      "category": "metal",
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     },
     {
       "id": "door_frame",
@@ -67,7 +83,11 @@
       "source": "ai_inferred",
       "verify": true,
       "material_id": "timber_sw",
-      "hatch_category": "timber"
+      "category": "timber",
+      "hatch": {
+        "gb-eng": "timber_grain",
+        "variant": "block"
+      }
     },
     {
       "id": "door_leaf",
@@ -75,7 +95,11 @@
       "source": "user",
       "verify": false,
       "material_id": "timber_door",
-      "hatch_category": "timber"
+      "category": "timber",
+      "hatch": {
+        "gb-eng": "timber_grain",
+        "variant": "block"
+      }
     },
     {
       "id": "slab",
@@ -83,7 +107,11 @@
       "source": "user",
       "verify": false,
       "material_id": "concrete_c25",
-      "hatch_category": "concrete"
+      "category": "concrete",
+      "hatch": {
+        "gb-eng": "concrete",
+        "variant": "diagonal"
+      }
     },
     {
       "id": "floor_ins",
@@ -91,7 +119,11 @@
       "source": "profile",
       "verify": false,
       "material_id": "pir_board",
-      "hatch_category": "insulation"
+      "category": "insulation",
+      "hatch": {
+        "gb-eng": "insulation_rigid",
+        "variant": "insulation_batt"
+      }
     },
     {
       "id": "screed",
@@ -99,7 +131,11 @@
       "source": "user",
       "verify": false,
       "material_id": "screed",
-      "hatch_category": "screed"
+      "category": "screed",
+      "hatch": {
+        "gb-eng": "screed",
+        "variant": "stone"
+      }
     }
   ],
   "dimensions": [

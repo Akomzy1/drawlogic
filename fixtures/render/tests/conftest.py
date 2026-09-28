@@ -1,24 +1,31 @@
 """Shared harness for the render examiner tests (fixtures/render). Written by Claude Code; gates Codex's engine/render and
-engine/providers/render (PRD §8A.3). The tests call the engine through its HTTP API only (render-spec.json → api).
+engine/providers/render (PRD §8A.3). The tests call the engine through its HTTP API only; every response is validated
+against contracts/render-api.schema.json (render-spec.json → api).
 
 Engine discovery:
-  DRAWLOGIC_ENGINE_URL=http://host:port   a running engine; or
-  engine.app:app                          the FastAPI app, imported in process (needed for the provider tests).
-Neither → every engine test errors with "engine render API not available" — the right reason to fail before Prompt 5.
+  DRAWLOGIC_ENGINE_URL=http://host:port   a running engine (structure tests only); or
+  engine.app:app                          the FastAPI app, imported in process.
+Provider tests (stills, preview video) build their own app per case with engine.app:create_app(render_provider=...), so
+the fixture provider is bound before the app exists and nothing carries over between jobs. With no engine, every engine
+test errors with "engine render API not available" — the right reason to fail before Prompts 5 and 12.
 """
 
 from __future__ import annotations
 
 import functools
+import importlib
 import json
 import os
 import re
 import sys
+import time
 from pathlib import Path
 from typing import Any
 from xml.etree import ElementTree as ET
 
 import pytest
+from jsonschema import Draft202012Validator
+from referencing import Registry, Resource
 
 ROOT = Path(__file__).resolve().parent.parent
 REPO = ROOT.parent.parent
@@ -28,6 +35,8 @@ THRESHOLDS = json.loads((REPO / "contracts" / "render.thresholds.json").read_tex
 DETAILS = sorted(p.name for p in (ROOT / "details").iterdir() if p.is_dir())
 CONVENTIONS = {p.stem: json.loads(p.read_text(encoding="utf-8")) for p in sorted((ROOT / "conventions").glob("*.json"))}
 SVG_NS = "{http://www.w3.org/2000/svg}"
+POLL_SECONDS = 120
+sys.path.insert(0, str(REPO))
 
 
 def load(path: Path) -> Any:
@@ -43,31 +52,86 @@ def expected(detail: str, kind: str) -> dict[str, Any]:
 
 
 # ----------------------------------------------------------------------------------------------------------------------
-# Engine client
+# Contract validation of responses
+
+
+@functools.cache
+def _api_validator(definition: str) -> Draft202012Validator:
+    schemas = [json.loads(p.read_text(encoding="utf-8")) for p in (REPO / "contracts").glob("*.schema.json")]
+    registry = Registry().with_resources((s["$id"], Resource.from_contents(s)) for s in schemas)
+    base = "https://drawlogic.invalid/contracts/render-api.schema.json"
+    return Draft202012Validator({"$ref": f"{base}#/$defs/{definition}"}, registry=registry)
+
+
+def api_valid(definition: str, document: Any) -> Any:
+    """Asserts the document matches contracts/render-api.schema.json#/$defs/<definition> and returns it."""
+    errors = [f"{'/'.join(map(str, e.absolute_path))}: {e.message}" for e in _api_validator(definition).iter_errors(document)]
+    assert not errors, f"response does not match render-api {definition}: {errors[:5]}"
+    return document
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Engine clients
+
+
+def _import(target: str) -> Any:
+    module, _, attr = target.partition(":")
+    try:
+        return getattr(importlib.import_module(module), attr)
+    except Exception as exc:  # noqa: BLE001 — any import failure means the engine is not there yet
+        raise RuntimeError(f"engine render API not available: set {SPEC['api']['base_url_env']} or provide {target} ({exc!r})") from exc
 
 
 class Engine:
+    """Structure endpoints (SVG, DXF, PDF, artefacts): a running engine, or engine.app:app in process."""
+
     def __init__(self) -> None:
-        self.in_process = False
         url = os.environ.get(SPEC["api"]["base_url_env"])
         if url:
             import httpx
 
             self.client: Any = httpx.Client(base_url=url, timeout=600)
             return
-        module, _, attr = SPEC["api"]["asgi_app"].partition(":")
-        sys.path.insert(0, str(REPO))
-        try:
-            app = getattr(__import__(module, fromlist=[attr]), attr)
-        except Exception as exc:  # noqa: BLE001 — any import failure means the engine is not there yet
-            raise RuntimeError(f"engine render API not available: set {SPEC['api']['base_url_env']} or provide {SPEC['api']['asgi_app']} ({exc!r})") from exc
         from starlette.testclient import TestClient
 
-        self.client = TestClient(app)
-        self.in_process = True
+        self.client = TestClient(_import(SPEC["api"]["asgi_app"]))
 
     def post(self, endpoint: str, body: dict[str, Any]) -> Any:
         return self.client.post(SPEC["api"][endpoint]["path"], json=body)
+
+
+class ProviderEngine:
+    """A fresh in-process app with the fixture provider bound at construction (Codex review of PR #6, point 4)."""
+
+    def __init__(self, *, stills: list[str] | None, video: list[str] | None) -> None:
+        fp = SPEC["api"]["fixture_provider"]
+        factory = _import(fp["app_factory"])
+        provider = _import(fp["provider"])(stills=[str(ROOT / "fidelity" / s) for s in (stills or [])], video_outcomes=list(video or []))
+        from starlette.testclient import TestClient
+
+        self.client = TestClient(factory(**{fp["factory_kwarg"]: provider}))
+
+    def submit(self, endpoint: str, body: dict[str, Any]) -> Any:
+        """POST a job; returns the raw response (202 with job_accepted, or an error)."""
+        return self.client.post(SPEC["api"][endpoint]["path"], json=body)
+
+    def settle(self, accepted: dict[str, Any]) -> dict[str, Any]:
+        """Polls the job until it is no longer queued or running; every status must match the contract."""
+        api_valid("job_accepted", accepted)
+        deadline = time.monotonic() + POLL_SECONDS
+        while True:
+            response = self.client.get(accepted["status_url"])
+            assert response.status_code == 200, f"GET {accepted['status_url']} returned {response.status_code}: {response.text[:300]}"
+            status = api_valid("job_status", response.json())
+            if status["state"] not in ("queued", "running"):
+                return status
+            assert time.monotonic() < deadline, f"job {accepted['job_id']} did not settle within {POLL_SECONDS} s"
+            time.sleep(0.05)
+
+    def run(self, endpoint: str, body: dict[str, Any]) -> dict[str, Any]:
+        response = self.submit(endpoint, body)
+        assert response.status_code == 202, f"POST {SPEC['api'][endpoint]['path']} returned {response.status_code}: {response.text[:300]}"
+        return self.settle(response.json())
 
 
 @pytest.fixture(scope="session")
@@ -79,28 +143,16 @@ def engine() -> Engine:
 
 
 @pytest.fixture
-def in_process_engine(engine: Engine) -> Engine:
-    if not engine.in_process:
-        pytest.fail(
-            "provider tests set the fixture provider through the environment, so they need the in-process app "
-            f"({SPEC['api']['asgi_app']}), not {SPEC['api']['base_url_env']}",
-            pytrace=False,
-        )
-    return engine
+def provider_engine() -> Any:
+    """provider_engine(stills=[...], video=[...]) → a ProviderEngine with a fresh app and a fresh fixture provider."""
 
+    def build(*, stills: list[str] | None = None, video: list[str] | None = None) -> ProviderEngine:
+        try:
+            return ProviderEngine(stills=stills, video=video)
+        except RuntimeError as exc:
+            pytest.fail(str(exc), pytrace=False)
 
-@pytest.fixture
-def fixture_provider(monkeypatch: pytest.MonkeyPatch) -> Any:
-    fp = SPEC["api"]["fixture_provider"]
-
-    def use(*, stills: list[str] | None = None, video: list[str] | None = None) -> None:
-        monkeypatch.setenv(fp["env"], fp["value"])
-        if stills is not None:
-            monkeypatch.setenv(fp["image_env"], ",".join(str(ROOT / "fidelity" / s) for s in stills))
-        if video is not None:
-            monkeypatch.setenv(fp["video_outcomes_env"], ",".join(video))
-
-    return use
+    return build
 
 
 @functools.cache

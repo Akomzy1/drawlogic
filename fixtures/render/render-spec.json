@@ -1,144 +1,48 @@
 {
-  "version": "0.1.0",
-  "status": "Examiner's spec for engine/render and engine/providers/render, for Codex's review. Where it assumes an interface the contract does not yet define, README.md says so.",
-  "hatched_categories": [
-    "masonry",
-    "insulation",
-    "concrete",
-    "screed",
-    "timber",
-    "stone",
-    "earth"
-  ],
+  "version": "0.2.0",
+  "status": "Examiner's spec for engine/render and engine/providers/render. 0.2.0 applies Codex's review of PR #6 (fixtures/core/RENDER_INTERFACE_REVIEW.md): request and response shapes are now contracts/render-api.schema.json; hatching comes from conventions.hatches (profile.schema 0.2.0); the fixture provider is bound when the test app is built.",
   "api": {
+    "schema": "contracts/render-api.schema.json",
     "base_url_env": "DRAWLOGIC_ENGINE_URL",
     "asgi_app": "engine.app:app",
-    "svg": {
-      "method": "POST",
-      "path": "/render/svg",
-      "body": [
-        "ddl",
-        "conventions"
-      ],
-      "returns": "image/svg+xml"
-    },
-    "dxf": {
-      "method": "POST",
-      "path": "/render/dxf",
-      "body": [
-        "ddl",
-        "conventions"
-      ],
-      "returns": "application/dxf"
-    },
-    "pdf": {
-      "method": "POST",
-      "path": "/render/pdf",
-      "body": [
-        "ddl",
-        "conventions"
-      ],
-      "returns": "application/pdf"
-    },
-    "artefacts": {
-      "method": "POST",
-      "path": "/render/artefacts",
-      "body": [
-        "ddl",
-        "conventions"
-      ],
-      "returns": "application/json {line_art, depth, material_map: base64 PNG; legend: {material_id: \"#RRGGBB\"}}"
-    },
-    "still": {
-      "method": "POST",
-      "path": "/render/still",
-      "body": [
-        "ddl",
-        "conventions",
-        "job"
-      ],
-      "returns": "application/json RenderJobStatus (contracts/providers/render.ts), after the job settles",
-      "job_example": {
-        "engine": "diffusion",
-        "mode": "drawing_to_photoreal",
-        "variants": 1,
-        "camera_id": "cam-01",
-        "resolution": "low"
-      }
-    },
-    "preview_video": {
-      "method": "POST",
-      "path": "/render/preview-video",
-      "body": [
-        "job"
-      ],
-      "returns": "application/json RenderJobStatus (contracts/providers/render.ts), after the job settles",
-      "job_example": {
-        "engine": "generative_video",
-        "start_still": {
-          "asset_id": "<asset_id of a delivered still>",
-          "drawing_hash": "<its drawing_hash>",
-          "drawing_rev": "<its rev>"
-        },
-        "camera_move": "push_in",
-        "seconds": 10,
-        "idea_mode": true
-      }
-    },
+    "svg": { "method": "POST", "path": "/render/svg", "request": "drawing_request", "returns": "image/svg+xml" },
+    "dxf": { "method": "POST", "path": "/render/dxf", "request": "drawing_request", "returns": "application/dxf" },
+    "pdf": { "method": "POST", "path": "/render/pdf", "request": "drawing_request", "returns": "application/pdf" },
+    "artefacts": { "method": "POST", "path": "/render/artefacts", "request": "drawing_request", "returns": "artefacts_response" },
+    "still": { "method": "POST", "path": "/render/still", "request": "still_request", "returns": "202 job_accepted" },
+    "preview_video": { "method": "POST", "path": "/render/preview-video", "request": "preview_request", "returns": "202 job_accepted, or 4xx error" },
+    "job_status": { "method": "GET", "path": "/render/jobs/{job_id}", "returns": "job_status; the tests poll until the state is no longer queued or running" },
     "fixture_provider": {
-      "env": "DRAWLOGIC_RENDER_PROVIDER",
-      "value": "fixture",
-      "image_env": "DRAWLOGIC_FIXTURE_RENDER",
-      "video_outcomes_env": "DRAWLOGIC_FIXTURE_VIDEO_OUTCOMES",
-      "meaning": "The engine's provider abstraction selects a test provider. For stills it returns, per attempt, the next file in the comma-separated list DRAWLOGIC_FIXTURE_RENDER (the last file repeats). For preview video it replays the comma-separated outcomes in DRAWLOGIC_FIXTURE_VIDEO_OUTCOMES (ok | moderation_failed), one per attempt, each attempt on a different catalogue model. Everything after the provider — fidelity scoring, retries, labels, material basis, metering — is the production path."
+      "app_factory": "engine.app:create_app",
+      "factory_kwarg": "render_provider",
+      "provider": "engine.providers.render.fixture:FixtureProvider",
+      "provider_kwargs": {
+        "stills": "list of image paths inside fixtures/render/fidelity, one per still attempt; the last repeats",
+        "video_outcomes": "list of ok | moderation_failed, one per preview attempt, each attempt on a different catalogue model"
+      },
+      "rules": [
+        "Tests build a fresh app per case with create_app(render_provider=FixtureProvider(...)), so sequences never carry over between jobs or tests.",
+        "Only the provider's output is substituted. Conditioning, fidelity scoring, retries, alternate-model selection, labels, start-still checks, material basis and metering run on the production path.",
+        "Production configuration cannot select the fixture provider: no environment variable or request field reaches it.",
+        "The provider reads only files inside fixtures/render/fidelity and makes no network calls."
+      ]
     }
   },
   "svg": {
-    "root_attributes": [
-      "data-drawing-id",
-      "data-drawing-hash",
-      "data-rev"
-    ],
-    "layer_group": {
-      "class": "layer",
-      "attributes": [
-        "data-layer-id",
-        "data-layer-name"
-      ]
-    },
-    "object_group": {
-      "class": "object",
-      "attributes": [
-        "data-object-id",
-        "data-source",
-        "data-verify",
-        "data-material-id"
-      ]
-    },
-    "hatch": "an element inside the object group whose fill is url(#id), where #id is a <pattern> in <defs>",
-    "dimension_group": {
-      "class": "dimension",
-      "attributes": [
-        "data-dimension-id"
-      ],
-      "text": "the value, formatted with conventions.dimension_style.precision",
-      "terminator_class": "terminator terminator-<conventions.dimension_style.terminator>"
-    },
-    "annotation_group": {
-      "class": "annotation",
-      "attributes": [
-        "data-annotation-id"
-      ],
-      "leader_class": "leader"
-    },
+    "root_attributes": ["data-drawing-id", "data-drawing-hash", "data-rev"],
+    "layer_group": { "class": "layer", "attributes": ["data-layer-id", "data-layer-name"] },
+    "object_group": { "class": "object", "attributes": ["data-object-id", "data-source", "data-verify", "data-material-id"], "note": "data-material-id is empty when the object has no material" },
+    "hatch": "an element inside the object group whose fill is url(#id), where #id is a <pattern> in <defs> carrying data-hatch-pattern=<conventions.hatches[category].pattern_id>. Pattern ids are prefixed per drawing so several SVGs can share a page.",
+    "dimension_group": { "class": "dimension", "attributes": ["data-dimension-id"], "text": "the value, formatted with conventions.dimension_style.precision", "terminator_class": "terminator terminator-<conventions.dimension_style.terminator>" },
+    "annotation_group": { "class": "annotation", "attributes": ["data-annotation-id"], "leader_class": "leader" },
     "line_weights": "stroke-width of each layer's geometry is proportional to conventions.line_weights_mm[layer name]; dimensions use line_weights_mm[\"A-Dims\"]",
     "units_note": "Only ratios of stroke widths are tested, so any scale or unit choice passes."
   },
   "dxf": {
     "appid": "DRAWLOGIC",
-    "xdata": "1000-group strings \"object_id:<id>\", \"dimension_id:<id>\" or \"annotation_id:<id>\", plus \"source:<source>\" and \"verify:<true|false>\" on objects",
+    "xdata": "1000-group strings \"object_id:<id>\", \"dimension_id:<id>\" or \"annotation_id:<id>\", plus \"source:<source>\" and \"verify:<true|false>\" on objects and their HATCH entities",
     "layers": "one DXF layer per DDL layer, named with the layer's name",
-    "hatch": "a HATCH entity carrying the object's xdata for every object whose material category is hatched",
+    "hatch": "a HATCH entity carrying the object's xdata for every object whose material category has a pattern in conventions.hatches",
     "dimensions": "a DIMENSION entity per displayed DDL dimension whose measurement equals the value"
   }
 }

@@ -31,7 +31,11 @@
       "source": "user",
       "verify": false,
       "material_id": "concrete_c25",
-      "hatch_category": "concrete"
+      "category": "concrete",
+      "hatch": {
+        "gb-eng": "concrete",
+        "variant": "diagonal"
+      }
     },
     {
       "id": "backfill",
@@ -39,7 +43,11 @@
       "source": "user",
       "verify": false,
       "material_id": "backfill",
-      "hatch_category": "earth"
+      "category": "earth",
+      "hatch": {
+        "gb-eng": "earth",
+        "variant": "brick"
+      }
     },
     {
       "id": "block_outer",
@@ -47,7 +55,11 @@
       "source": "user",
       "verify": false,
       "material_id": "block_dense",
-      "hatch_category": "masonry"
+      "category": "masonry",
+      "hatch": {
+        "gb-eng": "brick",
+        "variant": "cross_diagonal"
+      }
     },
     {
       "id": "cavity_fill",
@@ -55,7 +67,11 @@
       "source": "user",
       "verify": false,
       "material_id": "lean_mix",
-      "hatch_category": "concrete"
+      "category": "concrete",
+      "hatch": {
+        "gb-eng": "concrete",
+        "variant": "diagonal"
+      }
     },
     {
       "id": "block_inner",
@@ -63,7 +79,11 @@
       "source": "user",
       "verify": false,
       "material_id": "block_dense",
-      "hatch_category": "masonry"
+      "category": "masonry",
+      "hatch": {
+        "gb-eng": "brick",
+        "variant": "cross_diagonal"
+      }
     },
     {
       "id": "brick",
@@ -71,7 +91,11 @@
       "source": "user",
       "verify": false,
       "material_id": "brick_facing",
-      "hatch_category": "masonry"
+      "category": "masonry",
+      "hatch": {
+        "gb-eng": "brick",
+        "variant": "cross_diagonal"
+      }
     }
   ],
   "dimensions": [

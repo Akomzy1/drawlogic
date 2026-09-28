@@ -27,7 +27,11 @@
       "source": "user",
       "verify": false,
       "material_id": "brick_facing",
-      "hatch_category": "masonry"
+      "category": "masonry",
+      "hatch": {
+        "gb-eng": "brick",
+        "variant": "cross_diagonal"
+      }
     },
     {
       "id": "cavity",
@@ -35,7 +39,11 @@
       "source": "user",
       "verify": false,
       "material_id": null,
-      "hatch_category": null
+      "category": null,
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     },
     {
       "id": "ins",
@@ -43,7 +51,11 @@
       "source": "profile",
       "verify": false,
       "material_id": "pir_board",
-      "hatch_category": "insulation"
+      "category": "insulation",
+      "hatch": {
+        "gb-eng": "insulation_rigid",
+        "variant": "insulation_batt"
+      }
     },
     {
       "id": "block",
@@ -51,7 +63,11 @@
       "source": "user",
       "verify": false,
       "material_id": "block_dense",
-      "hatch_category": "masonry"
+      "category": "masonry",
+      "hatch": {
+        "gb-eng": "brick",
+        "variant": "cross_diagonal"
+      }
     },
     {
       "id": "plaster",
@@ -59,7 +75,11 @@
       "source": "profile",
       "verify": false,
       "material_id": "plaster",
-      "hatch_category": null
+      "category": "finish",
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     },
     {
       "id": "dpc",
@@ -67,7 +87,11 @@
       "source": "user",
       "verify": false,
       "material_id": "dpc_polymer",
-      "hatch_category": null
+      "category": "dpc",
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     },
     {
       "id": "sill",
@@ -75,7 +99,11 @@
       "source": "user",
       "verify": false,
       "material_id": "stone_sill",
-      "hatch_category": "stone"
+      "category": "stone",
+      "hatch": {
+        "gb-eng": "stone",
+        "variant": "concrete"
+      }
     },
     {
       "id": "frame",
@@ -83,7 +111,11 @@
       "source": "ai_inferred",
       "verify": true,
       "material_id": "upvc_frame",
-      "hatch_category": null
+      "category": "frame",
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     },
     {
       "id": "board",
@@ -91,7 +123,11 @@
       "source": "user",
       "verify": false,
       "material_id": "timber_sw",
-      "hatch_category": "timber"
+      "category": "timber",
+      "hatch": {
+        "gb-eng": "timber_grain",
+        "variant": "block"
+      }
     }
   ],
   "dimensions": [

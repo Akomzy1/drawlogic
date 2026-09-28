@@ -31,7 +31,11 @@
       "source": "user",
       "verify": false,
       "material_id": "topsoil",
-      "hatch_category": "earth"
+      "category": "earth",
+      "hatch": {
+        "gb-eng": "earth",
+        "variant": "brick"
+      }
     },
     {
       "id": "brick_lower",
@@ -39,7 +43,11 @@
       "source": "user",
       "verify": false,
       "material_id": "brick_facing",
-      "hatch_category": "masonry"
+      "category": "masonry",
+      "hatch": {
+        "gb-eng": "brick",
+        "variant": "cross_diagonal"
+      }
     },
     {
       "id": "dpc_outer",
@@ -47,7 +55,11 @@
       "source": "user",
       "verify": false,
       "material_id": "dpc_polymer",
-      "hatch_category": null
+      "category": "dpc",
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     },
     {
       "id": "brick_upper",
@@ -55,7 +67,11 @@
       "source": "user",
       "verify": false,
       "material_id": "brick_facing",
-      "hatch_category": "masonry"
+      "category": "masonry",
+      "hatch": {
+        "gb-eng": "brick",
+        "variant": "cross_diagonal"
+      }
     },
     {
       "id": "cavity_fill",
@@ -63,7 +79,11 @@
       "source": "user",
       "verify": false,
       "material_id": "lean_mix",
-      "hatch_category": "concrete"
+      "category": "concrete",
+      "hatch": {
+        "gb-eng": "concrete",
+        "variant": "diagonal"
+      }
     },
     {
       "id": "cavity",
@@ -71,7 +91,11 @@
       "source": "user",
       "verify": false,
       "material_id": null,
-      "hatch_category": null
+      "category": null,
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     },
     {
       "id": "ins",
@@ -79,7 +103,11 @@
       "source": "profile",
       "verify": false,
       "material_id": "pir_board",
-      "hatch_category": "insulation"
+      "category": "insulation",
+      "hatch": {
+        "gb-eng": "insulation_rigid",
+        "variant": "insulation_batt"
+      }
     },
     {
       "id": "block_lower",
@@ -87,7 +115,11 @@
       "source": "user",
       "verify": false,
       "material_id": "block_dense",
-      "hatch_category": "masonry"
+      "category": "masonry",
+      "hatch": {
+        "gb-eng": "brick",
+        "variant": "cross_diagonal"
+      }
     },
     {
       "id": "dpc_inner",
@@ -95,7 +127,11 @@
       "source": "user",
       "verify": false,
       "material_id": "dpc_polymer",
-      "hatch_category": null
+      "category": "dpc",
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     },
     {
       "id": "block_upper",
@@ -103,7 +139,11 @@
       "source": "user",
       "verify": false,
       "material_id": "block_dense",
-      "hatch_category": "masonry"
+      "category": "masonry",
+      "hatch": {
+        "gb-eng": "brick",
+        "variant": "cross_diagonal"
+      }
     },
     {
       "id": "plaster",
@@ -111,7 +151,11 @@
       "source": "profile",
       "verify": false,
       "material_id": "plaster",
-      "hatch_category": null
+      "category": "finish",
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     },
     {
       "id": "dpm",
@@ -119,7 +163,11 @@
       "source": "user",
       "verify": false,
       "material_id": "dpm_sheet",
-      "hatch_category": null
+      "category": "membrane",
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     },
     {
       "id": "slab",
@@ -127,7 +175,11 @@
       "source": "user",
       "verify": false,
       "material_id": "concrete_c25",
-      "hatch_category": "concrete"
+      "category": "concrete",
+      "hatch": {
+        "gb-eng": "concrete",
+        "variant": "diagonal"
+      }
     },
     {
       "id": "floor_ins",
@@ -135,7 +187,11 @@
       "source": "ai_inferred",
       "verify": true,
       "material_id": "pir_board",
-      "hatch_category": "insulation"
+      "category": "insulation",
+      "hatch": {
+        "gb-eng": "insulation_rigid",
+        "variant": "insulation_batt"
+      }
     },
     {
       "id": "screed",
@@ -143,7 +199,11 @@
       "source": "user",
       "verify": false,
       "material_id": "screed",
-      "hatch_category": "screed"
+      "category": "screed",
+      "hatch": {
+        "gb-eng": "screed",
+        "variant": "stone"
+      }
     }
   ],
   "dimensions": [
