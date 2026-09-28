@@ -1,0 +1,8 @@
+{
+  "job": {
+    "engine": "generative_video",
+    "start_still": { "asset_id": "ast-still-parapet-01", "drawing_hash": "sha256:6c9dda3baaab349f23a5e252894f2c1af55ec1757d221dc49adfeec9dffbcedb", "drawing_rev": "B" },
+    "camera_move": "push_in",
+    "seconds": 10
+  }
+}

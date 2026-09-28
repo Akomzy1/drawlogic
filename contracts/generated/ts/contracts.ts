@@ -525,7 +525,7 @@ export type Expr =
       };
     };
 /**
- * A versioned profile: jurisdiction, regional amendment, client, office, manufacturer or Generic. Version 0.1.0. PRD §6 principle 1, FR-03–09, FR-13, FR-24, FR-60–66, FR-152, FR-159. Config is law: everything jurisdiction- or discipline-specific lives here.
+ * A versioned profile: jurisdiction, regional amendment, client, office, manufacturer or Generic. Version 0.2.0 (0.1.0 plus conventions.hatches, additive). PRD §6 principle 1, FR-03–09, FR-13, FR-24, FR-60–66, FR-152, FR-159. Config is law: everything jurisdiction- or discipline-specific lives here.
  */
 export type Profile = {
   schema_version: string;
@@ -889,6 +889,93 @@ export type Critique = {
    */
   created_at: string;
 };
+/**
+ * Drawing coordinate of the top-left pixel's top-left corner.
+ *
+ * @minItems 2
+ * @maxItems 3
+ */
+export type Point1 = [number, number] | [number, number, number];
+/**
+ * Mirrors contracts/providers/render.ts. Credits follow render.thresholds.json → metering: only a delivered job is charged, once per delivered output.
+ */
+export type RenderJobStatus =
+  | {
+      state: "queued" | "running";
+      job_id: string;
+      credits_charged: 0;
+    }
+  | {
+      state: "delivered";
+      job_id: string;
+      /**
+       * @minItems 1
+       */
+      outputs: [RenderOutput, ...RenderOutput[]];
+      attempts_total: number;
+      credits_charged: number;
+    }
+  | {
+      state: "failed";
+      job_id: string;
+      reason: "fidelity" | "moderation" | "provider_error";
+      attempts: number;
+      last_fidelity?: number | null;
+      credits_charged: 0;
+    }
+  | {
+      state: "not_available";
+      job_id: string;
+      engine: "diffusion" | "generative_video" | "raytraced" | "voice";
+      credits_charged: 0;
+    };
+export type RenderOutput = {
+  engine: "diffusion" | "generative_video" | "raytraced" | "voice";
+  asset_id: string;
+  /**
+   * sha256 of the RFC 8785 (JCS) canonical JSON of the hashed document, hex, prefixed. See contracts/README.md for what each hash covers.
+   */
+  drawing_hash: string;
+  drawing_rev: string;
+  /**
+   * Edge-overlay IoU for diffusion; null for every other engine (FR-124, FR-130).
+   */
+  fidelity: number | null;
+  /**
+   * copy.json keys shown with the asset, e.g. label.preview, watermark.concept.
+   *
+   * Items: Dotted path into contracts/copy.json. Code never hard-codes stamp, label or watermark text.
+   */
+  label_keys: string[];
+  materials: MaterialOutcome[];
+  pinning?: "start_only" | "start_and_end";
+  provider: string;
+  provider_model: string;
+  attempts: number;
+} & {
+  engine: "diffusion" | "generative_video" | "raytraced" | "voice";
+  asset_id: string;
+  /**
+   * sha256 of the RFC 8785 (JCS) canonical JSON of the hashed document, hex, prefixed. See contracts/README.md for what each hash covers.
+   */
+  drawing_hash: string;
+  drawing_rev: string;
+  /**
+   * Edge-overlay IoU for diffusion; null for every other engine (FR-124, FR-130).
+   */
+  fidelity: number | null;
+  /**
+   * copy.json keys shown with the asset, e.g. label.preview, watermark.concept.
+   *
+   * Items: Dotted path into contracts/copy.json. Code never hard-codes stamp, label or watermark text.
+   */
+  label_keys: string[];
+  materials: MaterialOutcome[];
+  pinning?: "start_only" | "start_and_end";
+  provider: string;
+  provider_model: string;
+  attempts: number;
+};
 
 export interface DrawlogicContracts {
   ddl?: DDL;
@@ -914,6 +1001,13 @@ export interface DrawlogicContracts {
   explanation?: Explanation;
   profile_draft_result?: ProfileDraftResult;
   precedent_search_result?: PrecedentSearchResult;
+  render_drawing_request?: RenderDrawingRequest;
+  render_artefacts_response?: RenderArtefacts;
+  render_still_request?: RenderStillRequest;
+  render_preview_request?: RenderPreviewRequest;
+  render_job_accepted?: RenderJobAccepted;
+  render_job_status?: RenderJobStatus;
+  render_error?: RenderError;
 }
 /**
  * Drawing Description Language v0.1 — the source of truth for a drawing. Version 0.1.0. PRD App. A, §5A.3, FR-20–26, FR-102–105. drawing.hash covers the document with drawing.hash, checks and stamp removed (contracts/README.md).
@@ -1458,6 +1552,42 @@ export interface Conventions {
   by_region?: {
     [k: string]: Conventions | undefined;
   };
+  /**
+   * Section hatching by material category (FR-24; Codex review of PR #6, 28 Sept 2026). Keys are material categories from the pack vocabulary. A hatch object draws that category with the named pattern; null draws it unhatched (outline only). Rendering an object whose material category has no entry here is a configuration error, never a guess. SVG and DXF output use the same resolved map.
+   */
+  hatches?: {
+    [k: string]: Hatch | null | undefined;
+  };
+}
+/**
+ * One hatch. Units are paper millimetres at the drawing's scale; angle is degrees counter-clockwise from the drawing's +x axis.
+ */
+export interface Hatch {
+  /**
+   * From the renderer's pattern library. Adding a pattern is a contract change.
+   */
+  pattern_id:
+    | "diagonal"
+    | "cross_diagonal"
+    | "brick"
+    | "block"
+    | "insulation_batt"
+    | "insulation_rigid"
+    | "concrete"
+    | "screed"
+    | "timber_grain"
+    | "stone"
+    | "earth"
+    | "solid";
+  /**
+   * Pattern repeat on paper, mm.
+   */
+  scale: number;
+  angle_deg: number;
+  /**
+   * Pattern line weight on paper, mm.
+   */
+  line_weight_mm: number;
 }
 export interface RequiredConstraint {
   key: string;
@@ -2784,4 +2914,125 @@ export interface PrecedentSearchResult {
     work?: string;
     offered_qualities: string[];
   } | null;
+}
+export interface RenderDrawingRequest {
+  ddl: DDL;
+  conventions: Conventions;
+}
+/**
+ * Conditioning artefacts on one pixel grid (FR-50, 5A.3 hook 3). The material map is an ID map: exact legend colours, no blending.
+ */
+export interface RenderArtefacts {
+  /**
+   * sha256 of the RFC 8785 (JCS) canonical JSON of the hashed document, hex, prefixed. See contracts/README.md for what each hash covers.
+   */
+  drawing_hash: string;
+  drawing_rev: string;
+  grid: {
+    width_px: number;
+    height_px: number;
+    /**
+     * Drawing units (mm) per pixel, the same on both axes.
+     */
+    mm_per_px: number;
+    origin: Point1;
+  };
+  line_art: string;
+  depth: string;
+  /**
+   * Greyscale depth: pixel value 0 is near_mm, the maximum value is far_mm, linear between.
+   */
+  depth_encoding: {
+    bits: 8 | 16;
+    near_mm: number;
+    far_mm: number;
+  };
+  material_map: string;
+  /**
+   * material_id → its exact colour in material_map.
+   */
+  legend: {
+    [k: string]: string | undefined;
+  };
+  background: string;
+}
+export interface RenderStillRequest {
+  ddl: DDL;
+  conventions: Conventions;
+  job: StillJobInput;
+}
+export interface StillJobInput {
+  engine: "diffusion";
+  /**
+   * A key of render.thresholds.json → fidelity.modes.
+   */
+  mode: "detail_to_built" | "drawing_to_photoreal" | "idea_concept";
+  variants: number;
+  camera_id: string;
+  resolution: "low" | "high";
+}
+export interface RenderPreviewRequest {
+  job: PreviewJobInput;
+}
+/**
+ * FR-128–131. Idea or Draft mode, materials and drawing provenance come from the stored start still, so no client field can remove the preview label or the Concept watermark.
+ */
+export interface PreviewJobInput {
+  engine: "generative_video";
+  start_still: StillRef;
+  end_still?: StillRef;
+  camera_move: "push_in" | "orbit" | "drift";
+  /**
+   * At most render.thresholds.json → generative_video.max_clip_seconds; longer is refused (FR-127).
+   */
+  seconds: number;
+}
+/**
+ * A delivered Render Studio still. The engine looks it up and rejects the request if the hash or revision does not match what it stored.
+ */
+export interface StillRef {
+  asset_id: string;
+  /**
+   * sha256 of the RFC 8785 (JCS) canonical JSON of the hashed document, hex, prefixed. See contracts/README.md for what each hash covers.
+   */
+  drawing_hash: string;
+  drawing_rev: string;
+}
+export interface RenderJobAccepted {
+  job_id: string;
+  /**
+   * GET this for job_status, e.g. /render/jobs/{job_id}.
+   */
+  status_url: string;
+}
+export interface MaterialOutcome {
+  material_id: string;
+  /**
+   * FR-163. What a rendered material is based on. Labels in copy.json → material_basis.
+   */
+  basis: "manufacturer_texture" | "sample_photo" | "colour_code" | "description_only";
+  /**
+   * ΔE2000 of the rendered region against the target; null unless basis is colour_code.
+   */
+  delta_e: number | null;
+  colour_approximate: boolean;
+}
+export interface RenderError {
+  error: {
+    code:
+      | "invalid_request"
+      | "invalid_ddl"
+      | "invalid_conventions"
+      | "missing_hatch_mapping"
+      | "unknown_start_still"
+      | "start_still_mismatch"
+      | "clip_too_long"
+      | "job_not_found"
+      | "provider_unavailable";
+    message: string;
+    details?: {
+      path: string;
+      message: string;
+    }[];
+  };
 }

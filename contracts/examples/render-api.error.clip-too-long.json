@@ -1,0 +1,7 @@
+{
+  "error": {
+    "code": "clip_too_long",
+    "message": "Preview clips are at most 10 seconds.",
+    "details": [{ "path": "/job/seconds", "message": "12 is more than 10" }]
+  }
+}

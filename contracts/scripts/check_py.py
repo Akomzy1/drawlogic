@@ -37,6 +37,10 @@ MODELS = {
     "thread-state": ("thread_state_schema", "ThreadState"),
     "llm-outputs.route_result": ("llm_outputs_schema", "RouteResult"),
     "llm-outputs.explanation": ("llm_outputs_schema", "Explanation"),
+    "render-api.job_status": ("render_api_schema", "JobStatus"),
+    "render-api.preview_request": ("render_api_schema", "RenderPreviewRequest"),
+    "render-api.job_accepted": ("render_api_schema", "RenderJobAccepted"),
+    "render-api.error": ("render_api_schema", "RenderError"),
 }
 CONFIG = {
     "copy.json": ("copy_schema", "Copy"),
@@ -54,7 +58,7 @@ def main() -> int:
     checked = 0
     for path in sorted((ROOT / "examples").glob("*.json")):
         parts = path.stem.split(".")
-        key = ".".join(parts[:2]) if parts[0] == "llm-outputs" else parts[0]
+        key = ".".join(parts[:2]) if parts[0] in ("llm-outputs", "render-api") else parts[0]
         if key not in MODELS:
             failures.append(f"{path.name}: no pydantic model mapped for {key}")
             continue

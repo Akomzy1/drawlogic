@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from enum import StrEnum
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, constr
 
 from . import common_schema, object_schema, rule_schema
 
@@ -151,24 +151,6 @@ class DimensionStyle(BaseModel):
     precision: int | None = Field(None, ge=0)
 
 
-class Conventions(BaseModel):
-    model_config = ConfigDict(
-        extra='forbid',
-    )
-    units: Units | None = None
-    sheets: list[Sheet] | None = None
-    title_block: str | None = None
-    layer_standard: str | None = Field(
-        None, description='e.g. "BS EN ISO 13567", "AIA CAD Layer Guidelines".'
-    )
-    symbol_set: str | None = None
-    dimension_style: DimensionStyle | None = None
-    text_heights_mm: dict[str, float] | None = None
-    line_weights_mm: dict[str, float] | None = None
-    annotation_language: str | None = Field(None, description='BCP 47 tag.')
-    by_region: dict[str, Conventions] | None = None
-
-
 class Kind(StrEnum):
     dimension = 'dimension'
     material = 'material'
@@ -282,6 +264,36 @@ class Coverage(BaseModel):
     generated_at: common_schema.Timestamp | None = None
 
 
+class PatternId(StrEnum):
+    diagonal = 'diagonal'
+    cross_diagonal = 'cross_diagonal'
+    brick = 'brick'
+    block = 'block'
+    insulation_batt = 'insulation_batt'
+    insulation_rigid = 'insulation_rigid'
+    concrete = 'concrete'
+    screed = 'screed'
+    timber_grain = 'timber_grain'
+    stone = 'stone'
+    earth = 'earth'
+    solid = 'solid'
+
+
+class Hatch(BaseModel):
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    pattern_id: PatternId = Field(
+        ...,
+        description="From the renderer's pattern library. Adding a pattern is a contract change.",
+    )
+    scale: float = Field(..., description='Pattern repeat on paper, mm.', gt=0.0)
+    angle_deg: float = Field(..., ge=-180.0, le=180.0)
+    line_weight_mm: float = Field(
+        ..., description='Pattern line weight on paper, mm.', gt=0.0
+    )
+
+
 class RequiredConstraints(BaseModel):
     model_config = ConfigDict(
         extra='forbid',
@@ -289,6 +301,28 @@ class RequiredConstraints(BaseModel):
     draft: list[RequiredConstraint]
     idea: list[RequiredConstraint]
     learn: list[RequiredConstraint] | None = None
+
+
+class Conventions(BaseModel):
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    units: Units | None = None
+    sheets: list[Sheet] | None = None
+    title_block: str | None = None
+    layer_standard: str | None = Field(
+        None, description='e.g. "BS EN ISO 13567", "AIA CAD Layer Guidelines".'
+    )
+    symbol_set: str | None = None
+    dimension_style: DimensionStyle | None = None
+    text_heights_mm: dict[str, float] | None = None
+    line_weights_mm: dict[str, float] | None = None
+    annotation_language: str | None = Field(None, description='BCP 47 tag.')
+    by_region: dict[str, Conventions] | None = None
+    hatches: dict[constr(pattern=r'^[a-z][a-z0-9_]*$'), Hatch | None] | None = Field(
+        None,
+        description='Section hatching by material category (FR-24; Codex review of PR #6, 28 Sept 2026). Keys are material categories from the pack vocabulary. A hatch object draws that category with the named pattern; null draws it unhatched (outline only). Rendering an object whose material category has no entry here is a configuration error, never a guess. SVG and DXF output use the same resolved map.',
+    )
 
 
 class ConstructionDefaults(BaseModel):
