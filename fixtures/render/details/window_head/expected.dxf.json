@@ -2,7 +2,7 @@
   "detail_type": "window_head",
   "input": "input.ddl.json",
   "drawing_id": "88fc1870-7b12-503e-8281-f393d1061b13",
-  "drawing_hash": "sha256:eedb9c3948b4307f0779edcd70886af84eb3505880941f7da2b9d1977dec3bc5",
+  "drawing_hash": "sha256:214cbb99ad7b4f3425c71982e8e5933a6041a2c9a1bdcb3d546f1742c596e45f",
   "rev": "A",
   "title": "Window head, cavity wall",
   "scale": 10,
@@ -16,52 +16,82 @@
     {
       "id": "brick",
       "layer": "A-Walls",
-      "hatch": true
+      "hatch": {
+        "gb-eng": true,
+        "variant": true
+      }
     },
     {
       "id": "cavity",
       "layer": "A-Walls",
-      "hatch": false
+      "hatch": {
+        "gb-eng": false,
+        "variant": false
+      }
     },
     {
       "id": "ins",
       "layer": "A-Walls",
-      "hatch": true
+      "hatch": {
+        "gb-eng": true,
+        "variant": true
+      }
     },
     {
       "id": "block",
       "layer": "A-Walls",
-      "hatch": true
+      "hatch": {
+        "gb-eng": true,
+        "variant": true
+      }
     },
     {
       "id": "plaster",
       "layer": "A-Walls",
-      "hatch": false
+      "hatch": {
+        "gb-eng": false,
+        "variant": false
+      }
     },
     {
       "id": "lintel",
       "layer": "A-Structure",
-      "hatch": false
+      "hatch": {
+        "gb-eng": false,
+        "variant": false
+      }
     },
     {
       "id": "tray",
       "layer": "A-Walls",
-      "hatch": false
+      "hatch": {
+        "gb-eng": false,
+        "variant": false
+      }
     },
     {
       "id": "inner_lintel",
       "layer": "A-Structure",
-      "hatch": true
+      "hatch": {
+        "gb-eng": true,
+        "variant": true
+      }
     },
     {
       "id": "frame",
       "layer": "A-Openings",
-      "hatch": false
+      "hatch": {
+        "gb-eng": false,
+        "variant": false
+      }
     },
     {
       "id": "glass",
       "layer": "A-Openings",
-      "hatch": false
+      "hatch": {
+        "gb-eng": false,
+        "variant": false
+      }
     }
   ],
   "dimensions": [

@@ -59,7 +59,7 @@ def test_every_object_is_on_its_layer_with_provenance(dxf, detail):
         x = xdata(ents[0])
         src, verify = ddl_sources[o["id"]]
         assert x.get("source") == src and x.get("verify") == str(verify).lower(), f"{o['id']}: provenance xdata {x}"
-        if o["hatch"]:
+        if o["hatch"]["gb-eng"]:
             assert any(e.dxftype() == "HATCH" for e in ents), f"{o['id']} must be hatched"
 
 

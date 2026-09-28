@@ -53,19 +53,25 @@ def test_every_object_is_drawn_on_its_layer_with_provenance(render, detail, conv
 @pytest.mark.parametrize("detail,conv", CASES)
 def test_hatching_follows_material_category(render, detail, conv):
     root, parents = parse_svg(render("svg", detail, conv))
-    patterns = {el.get("id") for el in root.iter() if tag(el) == "pattern"}
+    # conventions.hatches (profile.schema 0.2.0) decides the pattern per material category; null means unhatched.
+    patterns = {el.get("id"): el for el in root.iter() if tag(el) == "pattern"}
     objs = {g.get("data-object-id"): g for g in groups(root, "object")}
     by_category: dict[str, set[str]] = {}
     for o in expected(detail, "svg")["objects"]:
         fills = {(inherited(el, "fill", parents) or "") for el in objs[o["id"]].iter() if tag(el) in {"path", "polygon", "rect"}}
         refs = {f[5:-1] for f in fills if f.startswith("url(#") and f.endswith(")")}
-        hatches = refs & patterns
-        if o["hatch_category"]:
-            assert len(hatches) == 1, f"{o['id']} ({o['hatch_category']}) must be hatched with one pattern, found {hatches or fills}"
-            by_category.setdefault(o["hatch_category"], set()).update(hatches)
+        hatches = refs & patterns.keys()
+        want = o["hatch"][conv]
+        if want is None:
+            assert not hatches, f"{o['id']} ({o['category']}) is unhatched in conventions {conv}, found {hatches}"
+            continue
+        assert len(hatches) == 1, f"{o['id']} ({o['category']}) must be hatched with one pattern, found {hatches or fills}"
+        (pid,) = hatches
+        got = patterns[pid].get("data-hatch-pattern")
+        assert got == want, f"{o['id']} ({o['category']}): conventions {conv} give pattern {want!r}, SVG uses {got!r}"
+        by_category.setdefault(o["category"], set()).add(pid)
     for category, ids in by_category.items():
         assert len(ids) == 1, f"every {category} object must share one hatch pattern, found {ids}"
-    assert len({next(iter(v)) for v in by_category.values()}) == len(by_category), "different categories must use different hatches"
 
 
 @pytest.mark.parametrize("detail,conv", CASES)
@@ -90,7 +96,8 @@ def test_annotations_are_leaders_with_their_text(render, detail, conv):
     for a in expected(detail, "svg")["annotations"]:
         g = anns.get(a["id"])
         assert g is not None, f"annotation {a['id']} not drawn"
-        text = " ".join(" ".join(el.itertext()).split() for el in g.iter() if tag(el) == "text").strip()
+        # Every word of every <text> in the group, whitespace-normalised (issue #12: the old join raised TypeError).
+        text = " ".join(word for el in g.iter() if tag(el) == "text" for word in " ".join(el.itertext()).split())
         assert a["text"] in text, f"{a['id']}: expected {a['text']!r}, found {text!r}"
         if a["leader"]:
             assert any("leader" in classes(el) for el in g.iter()), f"{a['id']}: leader line missing"

@@ -2,7 +2,7 @@
   "detail_type": "verge",
   "input": "input.ddl.json",
   "drawing_id": "30f56ded-f448-5132-8f95-60e80696ead6",
-  "drawing_hash": "sha256:ef613cfa7bc6135b87787eb46411a0ef2e68044382afba893895f3fd1267766f",
+  "drawing_hash": "sha256:1afddccb45f674c18f744c488e59d6874e56e1dcaafe39331153b0305bd89034",
   "rev": "A",
   "title": "Verge at gable",
   "scale": 10,
@@ -27,7 +27,11 @@
       "source": "user",
       "verify": false,
       "material_id": "brick_facing",
-      "hatch_category": "masonry"
+      "category": "masonry",
+      "hatch": {
+        "gb-eng": "brick",
+        "variant": "cross_diagonal"
+      }
     },
     {
       "id": "cavity",
@@ -35,7 +39,11 @@
       "source": "user",
       "verify": false,
       "material_id": null,
-      "hatch_category": null
+      "category": null,
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     },
     {
       "id": "ins",
@@ -43,7 +51,11 @@
       "source": "profile",
       "verify": false,
       "material_id": "pir_board",
-      "hatch_category": "insulation"
+      "category": "insulation",
+      "hatch": {
+        "gb-eng": "insulation_rigid",
+        "variant": "insulation_batt"
+      }
     },
     {
       "id": "block",
@@ -51,15 +63,23 @@
       "source": "user",
       "verify": false,
       "material_id": "block_dense",
-      "hatch_category": "masonry"
+      "category": "masonry",
+      "hatch": {
+        "gb-eng": "brick",
+        "variant": "cross_diagonal"
+      }
     },
     {
       "id": "plaster",
       "layer_id": "walls",
       "source": "profile",
       "verify": false,
-      "material_id": "plaster",
-      "hatch_category": null
+      "material_id": "plasterboard_skim",
+      "category": "finish",
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     },
     {
       "id": "undercloak",
@@ -67,7 +87,11 @@
       "source": "user",
       "verify": false,
       "material_id": "fibre_cement",
-      "hatch_category": null
+      "category": "board",
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     },
     {
       "id": "battens",
@@ -75,7 +99,11 @@
       "source": "user",
       "verify": false,
       "material_id": "timber_sw",
-      "hatch_category": "timber"
+      "category": "timber",
+      "hatch": {
+        "gb-eng": "timber_grain",
+        "variant": "block"
+      }
     },
     {
       "id": "tiles",
@@ -83,7 +111,11 @@
       "source": "profile",
       "verify": false,
       "material_id": "roof_tile",
-      "hatch_category": null
+      "category": "tile",
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     },
     {
       "id": "verge_trim",
@@ -91,7 +123,11 @@
       "source": "user",
       "verify": false,
       "material_id": "upvc_trim",
-      "hatch_category": null
+      "category": "trim",
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     },
     {
       "id": "rafter",
@@ -99,7 +135,11 @@
       "source": "user",
       "verify": false,
       "material_id": "timber_sw",
-      "hatch_category": "timber"
+      "category": "timber",
+      "hatch": {
+        "gb-eng": "timber_grain",
+        "variant": "block"
+      }
     }
   ],
   "dimensions": [

@@ -2,7 +2,7 @@
   "detail_type": "door_threshold",
   "input": "input.ddl.json",
   "drawing_id": "25109ab0-3d83-5868-9b57-548f5852d69c",
-  "drawing_hash": "sha256:392741d16704226e3741e37ee7b8daf6264f441322068615c9ee5bc1d3055114",
+  "drawing_hash": "sha256:10d78adeb6397ec6b1d0b06be9d2f3494e9a95c70dbb91a0ac464c28b9c4b266",
   "rev": "A",
   "title": "Door threshold",
   "scale": 10,
@@ -17,47 +17,74 @@
     {
       "id": "paving",
       "layer": "A-Ground",
-      "hatch": true
+      "hatch": {
+        "gb-eng": true,
+        "variant": true
+      }
     },
     {
       "id": "brick",
       "layer": "A-Walls",
-      "hatch": true
+      "hatch": {
+        "gb-eng": true,
+        "variant": true
+      }
     },
     {
       "id": "dpc",
       "layer": "A-Walls",
-      "hatch": false
+      "hatch": {
+        "gb-eng": false,
+        "variant": false
+      }
     },
     {
       "id": "threshold",
       "layer": "A-Openings",
-      "hatch": false
+      "hatch": {
+        "gb-eng": false,
+        "variant": false
+      }
     },
     {
       "id": "door_frame",
       "layer": "A-Openings",
-      "hatch": true
+      "hatch": {
+        "gb-eng": true,
+        "variant": true
+      }
     },
     {
       "id": "door_leaf",
       "layer": "A-Openings",
-      "hatch": true
+      "hatch": {
+        "gb-eng": true,
+        "variant": true
+      }
     },
     {
       "id": "slab",
       "layer": "A-Floor",
-      "hatch": true
+      "hatch": {
+        "gb-eng": true,
+        "variant": true
+      }
     },
     {
       "id": "floor_ins",
       "layer": "A-Floor",
-      "hatch": true
+      "hatch": {
+        "gb-eng": true,
+        "variant": true
+      }
     },
     {
       "id": "screed",
       "layer": "A-Floor",
-      "hatch": true
+      "hatch": {
+        "gb-eng": true,
+        "variant": true
+      }
     }
   ],
   "dimensions": [

@@ -2,7 +2,7 @@
   "detail_type": "window_jamb",
   "input": "input.ddl.json",
   "drawing_id": "b3e0ba97-5e74-5220-b78b-4efab69c3ea1",
-  "drawing_hash": "sha256:f7ccb1c9892951ffba883254b63d9695b457b049ed9e37a4462a7690cf473e1f",
+  "drawing_hash": "sha256:583148fbcb850848680622b28bd52eb6cf0c7e9a2cdb783eda4ff8cf13314342",
   "rev": "A",
   "title": "Window jamb, plan",
   "scale": 10,
@@ -27,7 +27,11 @@
       "source": "user",
       "verify": false,
       "material_id": "brick_facing",
-      "hatch_category": "masonry"
+      "category": "masonry",
+      "hatch": {
+        "gb-eng": "brick",
+        "variant": "cross_diagonal"
+      }
     },
     {
       "id": "cavity",
@@ -35,7 +39,11 @@
       "source": "user",
       "verify": false,
       "material_id": null,
-      "hatch_category": null
+      "category": null,
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     },
     {
       "id": "ins",
@@ -43,7 +51,11 @@
       "source": "profile",
       "verify": false,
       "material_id": "pir_board",
-      "hatch_category": "insulation"
+      "category": "insulation",
+      "hatch": {
+        "gb-eng": "insulation_rigid",
+        "variant": "insulation_batt"
+      }
     },
     {
       "id": "block",
@@ -51,15 +63,23 @@
       "source": "user",
       "verify": false,
       "material_id": "block_dense",
-      "hatch_category": "masonry"
+      "category": "masonry",
+      "hatch": {
+        "gb-eng": "brick",
+        "variant": "cross_diagonal"
+      }
     },
     {
       "id": "plaster",
       "layer_id": "walls",
       "source": "profile",
       "verify": false,
-      "material_id": "plaster",
-      "hatch_category": null
+      "material_id": "plasterboard_skim",
+      "category": "finish",
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     },
     {
       "id": "closer",
@@ -67,7 +87,11 @@
       "source": "user",
       "verify": false,
       "material_id": "closer_ins",
-      "hatch_category": "insulation"
+      "category": "insulation",
+      "hatch": {
+        "gb-eng": "insulation_rigid",
+        "variant": "insulation_batt"
+      }
     },
     {
       "id": "frame",
@@ -75,7 +99,11 @@
       "source": "ai_inferred",
       "verify": true,
       "material_id": "upvc_frame",
-      "hatch_category": null
+      "category": "frame",
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     },
     {
       "id": "glass",
@@ -83,7 +111,11 @@
       "source": "user",
       "verify": false,
       "material_id": "glazing_dg",
-      "hatch_category": null
+      "category": "glazing",
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     }
   ],
   "dimensions": [

@@ -1,5 +1,6 @@
 // Render provider interface. Version 0.1.0. PRD §7.6 FR-50–56, FR-57a, FR-160–164, §5A.1a FR-128–131, FR-123, FR-134, 5A.3 hook 4.
 // One interface, engine type chosen per job. No provider-specific code outside the adapter. Labels are copy.json keys.
+// This is the provider interface. The HTTP boundary clients call (request, job and status shapes) is contracts/render-api.schema.json.
 
 import type { NarrationScript } from "../generated/ts/contracts";
 

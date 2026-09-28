@@ -2,7 +2,7 @@
   "detail_type": "door_threshold",
   "input": "input.ddl.json",
   "drawing_id": "25109ab0-3d83-5868-9b57-548f5852d69c",
-  "drawing_hash": "sha256:392741d16704226e3741e37ee7b8daf6264f441322068615c9ee5bc1d3055114",
+  "drawing_hash": "sha256:10d78adeb6397ec6b1d0b06be9d2f3494e9a95c70dbb91a0ac464c28b9c4b266",
   "rev": "A",
   "title": "Door threshold",
   "scale": 10,
@@ -34,8 +34,12 @@
       "layer_id": "ground",
       "source": "user",
       "verify": false,
-      "material_id": "paving",
-      "hatch_category": "stone"
+      "material_id": "concrete_paving",
+      "category": "stone",
+      "hatch": {
+        "gb-eng": "stone",
+        "variant": "concrete"
+      }
     },
     {
       "id": "brick",
@@ -43,7 +47,11 @@
       "source": "user",
       "verify": false,
       "material_id": "brick_facing",
-      "hatch_category": "masonry"
+      "category": "masonry",
+      "hatch": {
+        "gb-eng": "brick",
+        "variant": "cross_diagonal"
+      }
     },
     {
       "id": "dpc",
@@ -51,7 +59,11 @@
       "source": "user",
       "verify": false,
       "material_id": "dpc_polymer",
-      "hatch_category": null
+      "category": "dpc",
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     },
     {
       "id": "threshold",
@@ -59,7 +71,11 @@
       "source": "user",
       "verify": false,
       "material_id": "alu_threshold",
-      "hatch_category": null
+      "category": "metal",
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     },
     {
       "id": "door_frame",
@@ -67,7 +83,11 @@
       "source": "ai_inferred",
       "verify": true,
       "material_id": "timber_sw",
-      "hatch_category": "timber"
+      "category": "timber",
+      "hatch": {
+        "gb-eng": "timber_grain",
+        "variant": "block"
+      }
     },
     {
       "id": "door_leaf",
@@ -75,7 +95,11 @@
       "source": "user",
       "verify": false,
       "material_id": "timber_door",
-      "hatch_category": "timber"
+      "category": "timber",
+      "hatch": {
+        "gb-eng": "timber_grain",
+        "variant": "block"
+      }
     },
     {
       "id": "slab",
@@ -83,7 +107,11 @@
       "source": "user",
       "verify": false,
       "material_id": "concrete_c25",
-      "hatch_category": "concrete"
+      "category": "concrete",
+      "hatch": {
+        "gb-eng": "concrete",
+        "variant": "diagonal"
+      }
     },
     {
       "id": "floor_ins",
@@ -91,15 +119,23 @@
       "source": "profile",
       "verify": false,
       "material_id": "pir_board",
-      "hatch_category": "insulation"
+      "category": "insulation",
+      "hatch": {
+        "gb-eng": "insulation_rigid",
+        "variant": "insulation_batt"
+      }
     },
     {
       "id": "screed",
       "layer_id": "floor",
       "source": "user",
       "verify": false,
-      "material_id": "screed",
-      "hatch_category": "screed"
+      "material_id": "sand_cement_screed",
+      "category": "screed",
+      "hatch": {
+        "gb-eng": "screed",
+        "variant": "stone"
+      }
     }
   ],
   "dimensions": [

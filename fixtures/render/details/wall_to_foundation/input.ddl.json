@@ -11,7 +11,7 @@
     "units": "mm",
     "jurisdiction": "GB-ENG",
     "rev": "A",
-    "hash": "sha256:ea12494fd6037ddd9be5215d7a9e51a04182b6504d57c397d0ebcf4502a3906c",
+    "hash": "sha256:d6bc78ba85a868113f87eb043f8e75380795753fa8668227187a46414a2b944f",
     "parent_hash": null,
     "profile_stack": [
       {
@@ -36,15 +36,6 @@
   },
   "materials": [
     {
-      "id": "backfill",
-      "name": "Backfill",
-      "category": "earth",
-      "basis": "description_only",
-      "source": "user",
-      "confidence": 1,
-      "verify": false
-    },
-    {
       "id": "block_dense",
       "name": "Dense concrete block",
       "category": "masonry",
@@ -66,6 +57,15 @@
       "id": "concrete_c25",
       "name": "Concrete",
       "category": "concrete",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "granular_backfill",
+      "name": "Backfill",
+      "category": "earth",
       "basis": "description_only",
       "source": "user",
       "confidence": 1,
@@ -126,7 +126,7 @@
       "id": "backfill",
       "class": "backfill",
       "label": "Backfill",
-      "material_id": "backfill",
+      "material_id": "granular_backfill",
       "thickness": null,
       "height": null,
       "level": null,

@@ -49,7 +49,33 @@
       "dimension": 2.5,
       "title": 5.0
     },
-    "annotation_language": "en-NG"
+    "annotation_language": "en-NG",
+    "hatches": {
+      "concrete": {
+        "pattern_id": "concrete",
+        "scale": 3,
+        "angle_deg": 0,
+        "line_weight_mm": 0.13
+      },
+      "frame": null,
+      "masonry": {
+        "pattern_id": "block",
+        "scale": 3,
+        "angle_deg": 45,
+        "line_weight_mm": 0.18
+      },
+      "membrane": null,
+      "metal": null,
+      "paint": null,
+      "render": null,
+      "tile": null,
+      "timber": {
+        "pattern_id": "timber_grain",
+        "scale": 3,
+        "angle_deg": 0,
+        "line_weight_mm": 0.13
+      }
+    }
   },
   "applicable_documents": [],
   "provenance_settings": {

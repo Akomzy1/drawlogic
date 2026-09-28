@@ -5,3 +5,5 @@ contracts/** text eol=lf
 # Render fixtures: build.py --check compares generated JSON byte for byte; images are binary.
 fixtures/** text eol=lf
 fixtures/**/*.png binary
+# Profiles: profiles.tools --check compares the JSON byte for byte.
+profiles/** text eol=lf

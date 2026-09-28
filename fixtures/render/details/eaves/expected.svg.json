@@ -2,7 +2,7 @@
   "detail_type": "eaves",
   "input": "input.ddl.json",
   "drawing_id": "e063b986-2134-5ca4-b6ac-b31c3f34bd86",
-  "drawing_hash": "sha256:3b91a82ec92dd72e7f523a9f7fa6d7d37796ca2841c0ca445ed9e520ec83701c",
+  "drawing_hash": "sha256:c650450d88764fe2ca55aac71d59574a058927db16e41c1e1337f2fa3cae7c66",
   "rev": "A",
   "title": "Eaves, pitched roof",
   "scale": 10,
@@ -27,7 +27,11 @@
       "source": "user",
       "verify": false,
       "material_id": "brick_facing",
-      "hatch_category": "masonry"
+      "category": "masonry",
+      "hatch": {
+        "gb-eng": "brick",
+        "variant": "cross_diagonal"
+      }
     },
     {
       "id": "cavity",
@@ -35,7 +39,11 @@
       "source": "user",
       "verify": false,
       "material_id": null,
-      "hatch_category": null
+      "category": null,
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     },
     {
       "id": "ins",
@@ -43,7 +51,11 @@
       "source": "profile",
       "verify": false,
       "material_id": "pir_board",
-      "hatch_category": "insulation"
+      "category": "insulation",
+      "hatch": {
+        "gb-eng": "insulation_rigid",
+        "variant": "insulation_batt"
+      }
     },
     {
       "id": "block",
@@ -51,15 +63,23 @@
       "source": "user",
       "verify": false,
       "material_id": "block_dense",
-      "hatch_category": "masonry"
+      "category": "masonry",
+      "hatch": {
+        "gb-eng": "brick",
+        "variant": "cross_diagonal"
+      }
     },
     {
       "id": "plaster",
       "layer_id": "walls",
       "source": "profile",
       "verify": false,
-      "material_id": "plaster",
-      "hatch_category": null
+      "material_id": "plasterboard_skim",
+      "category": "finish",
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     },
     {
       "id": "wall_plate",
@@ -67,7 +87,11 @@
       "source": "user",
       "verify": false,
       "material_id": "timber_sw",
-      "hatch_category": "timber"
+      "category": "timber",
+      "hatch": {
+        "gb-eng": "timber_grain",
+        "variant": "block"
+      }
     },
     {
       "id": "rafter",
@@ -75,7 +99,11 @@
       "source": "user",
       "verify": false,
       "material_id": "timber_sw",
-      "hatch_category": "timber"
+      "category": "timber",
+      "hatch": {
+        "gb-eng": "timber_grain",
+        "variant": "block"
+      }
     },
     {
       "id": "joist",
@@ -83,7 +111,11 @@
       "source": "user",
       "verify": false,
       "material_id": "timber_sw",
-      "hatch_category": "timber"
+      "category": "timber",
+      "hatch": {
+        "gb-eng": "timber_grain",
+        "variant": "block"
+      }
     },
     {
       "id": "loft_ins",
@@ -91,7 +123,11 @@
       "source": "profile",
       "verify": false,
       "material_id": "mineral_wool",
-      "hatch_category": "insulation"
+      "category": "insulation",
+      "hatch": {
+        "gb-eng": "insulation_rigid",
+        "variant": "insulation_batt"
+      }
     },
     {
       "id": "tiles",
@@ -99,7 +135,11 @@
       "source": "profile",
       "verify": false,
       "material_id": "roof_tile",
-      "hatch_category": null
+      "category": "tile",
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     },
     {
       "id": "fascia",
@@ -107,7 +147,11 @@
       "source": "user",
       "verify": false,
       "material_id": "timber_sw",
-      "hatch_category": "timber"
+      "category": "timber",
+      "hatch": {
+        "gb-eng": "timber_grain",
+        "variant": "block"
+      }
     },
     {
       "id": "gutter",
@@ -115,7 +159,11 @@
       "source": "user",
       "verify": false,
       "material_id": "upvc_gutter",
-      "hatch_category": null
+      "category": "trim",
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     }
   ],
   "dimensions": [

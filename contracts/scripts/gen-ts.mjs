@@ -10,6 +10,7 @@ const OUT = path.join(ROOT, "generated/ts/contracts.ts");
 // Every document schema plus the task-output definitions, as properties of one root so each type is emitted once.
 const DOCUMENTS = ["ddl", "object", "rule", "profile", "check-result", "interpretation", "stamp", "signing-gate", "audit-record", "precedent-card", "narration-script", "idea-result", "critique", "ddl-diff", "thread-state", "copy", "models", "render-thresholds"];
 const OUTPUTS = ["route_result", "plain_rewrite", "explanation", "profile_draft_result", "precedent_search_result"];
+const RENDER_API = ["drawing_request", "artefacts_response", "still_request", "preview_request", "job_accepted", "job_status", "error"];
 const root = {
   title: "DrawlogicContracts",
   type: "object",
@@ -17,6 +18,7 @@ const root = {
   properties: {
     ...Object.fromEntries(DOCUMENTS.map((d) => [d, { $ref: `${d}.schema.json` }])),
     ...Object.fromEntries(OUTPUTS.map((o) => [o, { $ref: `llm-outputs.schema.json#/$defs/${o}` }])),
+    ...Object.fromEntries(RENDER_API.map((r) => [`render_${r}`, { $ref: `render-api.schema.json#/$defs/${r}` }])),
   },
 };
 

@@ -2,7 +2,7 @@
   "detail_type": "cavity_closer",
   "input": "input.ddl.json",
   "drawing_id": "ff409c83-4220-5356-90bc-af24d3339899",
-  "drawing_hash": "sha256:a3e2749434d0a41e2a6c2c9784dc676f610d6950f816707903a0811579280fa7",
+  "drawing_hash": "sha256:76fd3441ee265371ae70069c2c6f5b513b13257119bc5def1edb015d11bdf92b",
   "rev": "A",
   "title": "Cavity closer at opening, plan",
   "scale": 10,
@@ -15,42 +15,66 @@
     {
       "id": "brick",
       "layer": "A-Walls",
-      "hatch": true
+      "hatch": {
+        "gb-eng": true,
+        "variant": true
+      }
     },
     {
       "id": "cavity",
       "layer": "A-Walls",
-      "hatch": false
+      "hatch": {
+        "gb-eng": false,
+        "variant": false
+      }
     },
     {
       "id": "ins",
       "layer": "A-Walls",
-      "hatch": true
+      "hatch": {
+        "gb-eng": true,
+        "variant": true
+      }
     },
     {
       "id": "block",
       "layer": "A-Walls",
-      "hatch": true
+      "hatch": {
+        "gb-eng": true,
+        "variant": true
+      }
     },
     {
       "id": "plaster",
       "layer": "A-Walls",
-      "hatch": false
+      "hatch": {
+        "gb-eng": false,
+        "variant": false
+      }
     },
     {
       "id": "closer",
       "layer": "A-Walls",
-      "hatch": true
+      "hatch": {
+        "gb-eng": true,
+        "variant": true
+      }
     },
     {
       "id": "reveal",
       "layer": "A-Walls",
-      "hatch": false
+      "hatch": {
+        "gb-eng": false,
+        "variant": false
+      }
     },
     {
       "id": "frame",
       "layer": "A-Openings",
-      "hatch": false
+      "hatch": {
+        "gb-eng": false,
+        "variant": false
+      }
     }
   ],
   "dimensions": [

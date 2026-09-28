@@ -11,7 +11,7 @@
     "units": "mm",
     "jurisdiction": "GB-ENG",
     "rev": "A",
-    "hash": "sha256:acb0cea8b4c3aa9a8b3d7896f5794e0937bbd9e917a7dc10e590ba6d2e3a28c0",
+    "hash": "sha256:9fb38a2c6bea7014da6bc77506ac2c2b9cca17445d9a374f842c03f3f21a5964",
     "parent_hash": null,
     "profile_stack": [
       {
@@ -72,7 +72,7 @@
       "verify": false
     },
     {
-      "id": "plaster",
+      "id": "plasterboard_skim",
       "name": "Plasterboard and skim",
       "category": "finish",
       "basis": "description_only",
@@ -267,7 +267,7 @@
       "id": "plaster",
       "class": "finish",
       "label": "Internal finish",
-      "material_id": "plaster",
+      "material_id": "plasterboard_skim",
       "thickness": null,
       "height": null,
       "level": null,

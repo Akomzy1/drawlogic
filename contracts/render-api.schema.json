@@ -1,0 +1,234 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://drawlogic.invalid/contracts/render-api.schema.json",
+  "title": "RenderApi",
+  "description": "HTTP boundary of engine/render and engine/providers/render. Version 0.1.0 (28 Sept 2026, from Codex's review of PR #6). API inputs are not the provider interface (contracts/providers/render.ts): the engine builds conditioning from the DDL and resolves materials itself. Endpoints: POST /render/svg, /render/dxf, /render/pdf take drawing_request and return the bytes (image/svg+xml, application/dxf, application/pdf). POST /render/artefacts takes drawing_request and returns artefacts_response. POST /render/still takes still_request; POST /render/preview-video takes preview_request; both return 202 job_accepted after validating the request, and GET /render/jobs/{job_id} returns job_status. Every error is 4xx or 5xx with error. PRD FR-50–57a, FR-127–131, FR-160–164.",
+  "$defs": {
+    "drawing_request": {
+      "title": "RenderDrawingRequest",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ddl", "conventions"],
+      "properties": {
+        "ddl": { "$ref": "ddl.schema.json" },
+        "conventions": { "$ref": "profile.schema.json#/$defs/conventions" }
+      }
+    },
+    "png_base64": {
+      "type": "string",
+      "contentEncoding": "base64",
+      "contentMediaType": "image/png",
+      "minLength": 1
+    },
+    "hex_colour": { "type": "string", "pattern": "^#[0-9A-F]{6}$" },
+    "artefacts_response": {
+      "title": "RenderArtefacts",
+      "description": "Conditioning artefacts on one pixel grid (FR-50, 5A.3 hook 3). The material map is an ID map: exact legend colours, no blending.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["drawing_hash", "drawing_rev", "grid", "line_art", "depth", "depth_encoding", "material_map", "legend", "background"],
+      "properties": {
+        "drawing_hash": { "$ref": "common.schema.json#/$defs/hash" },
+        "drawing_rev": { "type": "string" },
+        "grid": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["width_px", "height_px", "mm_per_px", "origin"],
+          "properties": {
+            "width_px": { "type": "integer", "minimum": 1 },
+            "height_px": { "type": "integer", "minimum": 1 },
+            "mm_per_px": { "description": "Drawing units (mm) per pixel, the same on both axes.", "type": "number", "exclusiveMinimum": 0 },
+            "origin": { "description": "Drawing coordinate of the top-left pixel's top-left corner.", "$ref": "common.schema.json#/$defs/point" }
+          }
+        },
+        "line_art": { "$ref": "#/$defs/png_base64" },
+        "depth": { "$ref": "#/$defs/png_base64" },
+        "depth_encoding": {
+          "description": "Greyscale depth: pixel value 0 is near_mm, the maximum value is far_mm, linear between.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["bits", "near_mm", "far_mm"],
+          "properties": {
+            "bits": { "type": "integer", "enum": [8, 16] },
+            "near_mm": { "type": "number" },
+            "far_mm": { "type": "number" }
+          }
+        },
+        "material_map": { "$ref": "#/$defs/png_base64" },
+        "legend": {
+          "description": "material_id → its exact colour in material_map.",
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/hex_colour" }
+        },
+        "background": { "$ref": "#/$defs/hex_colour" }
+      }
+    },
+    "still_job": {
+      "title": "StillJobInput",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["engine", "mode", "variants", "camera_id", "resolution"],
+      "properties": {
+        "engine": { "const": "diffusion" },
+        "mode": { "description": "A key of render.thresholds.json → fidelity.modes.", "type": "string", "enum": ["detail_to_built", "drawing_to_photoreal", "idea_concept"] },
+        "variants": { "type": "integer", "minimum": 1, "maximum": 16 },
+        "camera_id": { "type": "string", "minLength": 1 },
+        "resolution": { "type": "string", "enum": ["low", "high"] }
+      }
+    },
+    "still_request": {
+      "title": "RenderStillRequest",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ddl", "conventions", "job"],
+      "properties": {
+        "ddl": { "$ref": "ddl.schema.json" },
+        "conventions": { "$ref": "profile.schema.json#/$defs/conventions" },
+        "job": { "$ref": "#/$defs/still_job" }
+      }
+    },
+    "still_ref": {
+      "description": "A delivered Render Studio still. The engine looks it up and rejects the request if the hash or revision does not match what it stored.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["asset_id", "drawing_hash", "drawing_rev"],
+      "properties": {
+        "asset_id": { "type": "string", "minLength": 1 },
+        "drawing_hash": { "$ref": "common.schema.json#/$defs/hash" },
+        "drawing_rev": { "type": "string" }
+      }
+    },
+    "preview_job": {
+      "title": "PreviewJobInput",
+      "description": "FR-128–131. Idea or Draft mode, materials and drawing provenance come from the stored start still, so no client field can remove the preview label or the Concept watermark.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["engine", "start_still", "camera_move", "seconds"],
+      "properties": {
+        "engine": { "const": "generative_video" },
+        "start_still": { "$ref": "#/$defs/still_ref" },
+        "end_still": { "$ref": "#/$defs/still_ref" },
+        "camera_move": { "type": "string", "enum": ["push_in", "orbit", "drift"] },
+        "seconds": { "description": "At most render.thresholds.json → generative_video.max_clip_seconds; longer is refused (FR-127).", "type": "integer", "minimum": 1 }
+      }
+    },
+    "preview_request": {
+      "title": "RenderPreviewRequest",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["job"],
+      "properties": { "job": { "$ref": "#/$defs/preview_job" } }
+    },
+    "job_accepted": {
+      "title": "RenderJobAccepted",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["job_id", "status_url"],
+      "properties": {
+        "job_id": { "type": "string", "minLength": 1 },
+        "status_url": { "description": "GET this for job_status, e.g. /render/jobs/{job_id}.", "type": "string" }
+      }
+    },
+    "material_outcome": {
+      "title": "MaterialOutcome",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["material_id", "basis", "delta_e", "colour_approximate"],
+      "properties": {
+        "material_id": { "type": "string" },
+        "basis": { "$ref": "common.schema.json#/$defs/material_basis" },
+        "delta_e": { "description": "ΔE2000 of the rendered region against the target; null unless basis is colour_code.", "type": ["number", "null"] },
+        "colour_approximate": { "type": "boolean" }
+      }
+    },
+    "render_output": {
+      "title": "RenderOutput",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["engine", "asset_id", "drawing_hash", "drawing_rev", "fidelity", "label_keys", "materials", "provider", "provider_model", "attempts"],
+      "properties": {
+        "engine": { "type": "string", "enum": ["diffusion", "generative_video", "raytraced", "voice"] },
+        "asset_id": { "type": "string" },
+        "drawing_hash": { "$ref": "common.schema.json#/$defs/hash" },
+        "drawing_rev": { "type": "string" },
+        "fidelity": { "description": "Edge-overlay IoU for diffusion; null for every other engine (FR-124, FR-130).", "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "label_keys": { "description": "copy.json keys shown with the asset, e.g. label.preview, watermark.concept.", "type": "array", "items": { "$ref": "common.schema.json#/$defs/copy_key" } },
+        "materials": { "type": "array", "items": { "$ref": "#/$defs/material_outcome" } },
+        "pinning": { "type": "string", "enum": ["start_only", "start_and_end"] },
+        "provider": { "type": "string" },
+        "provider_model": { "type": "string" },
+        "attempts": { "type": "integer", "minimum": 1 }
+      },
+      "allOf": [
+        { "if": { "properties": { "engine": { "const": "diffusion" } } }, "then": { "properties": { "fidelity": { "type": "number" } } }, "else": { "properties": { "fidelity": { "type": "null" } } } },
+        { "if": { "properties": { "engine": { "const": "generative_video" } } }, "then": { "required": ["pinning"], "properties": { "label_keys": { "contains": { "const": "label.preview" } } } } }
+      ]
+    },
+    "job_status": {
+      "title": "RenderJobStatus",
+      "description": "Mirrors contracts/providers/render.ts. Credits follow render.thresholds.json → metering: only a delivered job is charged, once per delivered output.",
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state", "job_id", "credits_charged"],
+          "properties": { "state": { "enum": ["queued", "running"] }, "job_id": { "type": "string" }, "credits_charged": { "const": 0 } }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state", "job_id", "outputs", "attempts_total", "credits_charged"],
+          "properties": {
+            "state": { "const": "delivered" },
+            "job_id": { "type": "string" },
+            "outputs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/render_output" } },
+            "attempts_total": { "type": "integer", "minimum": 1 },
+            "credits_charged": { "type": "integer", "minimum": 0 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state", "job_id", "reason", "attempts", "credits_charged"],
+          "properties": {
+            "state": { "const": "failed" },
+            "job_id": { "type": "string" },
+            "reason": { "type": "string", "enum": ["fidelity", "moderation", "provider_error"] },
+            "attempts": { "type": "integer", "minimum": 1 },
+            "last_fidelity": { "type": ["number", "null"] },
+            "credits_charged": { "const": 0 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state", "job_id", "engine", "credits_charged"],
+          "properties": {
+            "state": { "const": "not_available" },
+            "job_id": { "type": "string" },
+            "engine": { "type": "string", "enum": ["diffusion", "generative_video", "raytraced", "voice"] },
+            "credits_charged": { "const": 0 }
+          }
+        }
+      ]
+    },
+    "error": {
+      "title": "RenderError",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["error"],
+      "properties": {
+        "error": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "message"],
+          "properties": {
+            "code": { "type": "string", "enum": ["invalid_request", "invalid_ddl", "invalid_conventions", "missing_hatch_mapping", "unknown_start_still", "start_still_mismatch", "clip_too_long", "job_not_found", "provider_unavailable"] },
+            "message": { "type": "string", "minLength": 1 },
+            "details": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["path", "message"], "properties": { "path": { "type": "string" }, "message": { "type": "string" } } } }
+          }
+        }
+      }
+    }
+  }
+}

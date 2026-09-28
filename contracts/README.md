@@ -37,6 +37,9 @@ The JSON Schemas are the authority. The generated TypeScript and pydantic types 
 - **Render credits** (`render.thresholds.json → metering`): charged once per delivered render; retries and failed jobs never consume credits.
 - **GPT-6 Astra** stays `null` in `models.json` until Decision 20 is closed.
 
+## Changes after v0.1.0
+- **28 Sept 2026 (Codex's review of PR #6):** `render-api.schema.json` defines the render HTTP boundary (requests, artefacts, job submission and polling, errors). `profile.schema.json` 0.2.0 adds `conventions.hatches`. Both are additive; no example changed.
+
 ## Hashes
 All hashes are `sha256:` + hex of the RFC 8785 (JCS) canonical JSON. Python must use an RFC 8785 implementation, not `json.dumps(sort_keys=True)` (number formatting differs, e.g. `1.0` vs `1`).
 - **`drawing.hash`**: the DDL document with `drawing.hash`, `checks` and `stamp` removed.

@@ -1,0 +1,8 @@
+{
+  "state": "failed",
+  "job_id": "job-still-0002",
+  "reason": "fidelity",
+  "attempts": 3,
+  "last_fidelity": 0.41,
+  "credits_charged": 0
+}

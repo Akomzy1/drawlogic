@@ -2,7 +2,7 @@
   "detail_type": "balcony_threshold",
   "input": "input.ddl.json",
   "drawing_id": "677c6a9d-d9a6-579f-a593-d5287681ace3",
-  "drawing_hash": "sha256:1a415102ea41d7fa5bacaba01ffaaf9253c1fad1502828db1098efcd25c731c9",
+  "drawing_hash": "sha256:89c4f2b84ba97e24fd6472ada1da45f7fa4a5a86549abe44a53a736e3cd3fddb",
   "rev": "A",
   "title": "Balcony threshold",
   "scale": 10,
@@ -17,37 +17,58 @@
     {
       "id": "slab",
       "layer": "A-Structure",
-      "hatch": true
+      "hatch": {
+        "gb-eng": true,
+        "variant": true
+      }
     },
     {
       "id": "break",
       "layer": "A-Structure",
-      "hatch": true
+      "hatch": {
+        "gb-eng": true,
+        "variant": true
+      }
     },
     {
       "id": "balcony",
       "layer": "A-Structure",
-      "hatch": true
+      "hatch": {
+        "gb-eng": true,
+        "variant": true
+      }
     },
     {
       "id": "membrane",
       "layer": "A-Roof",
-      "hatch": false
+      "hatch": {
+        "gb-eng": false,
+        "variant": false
+      }
     },
     {
       "id": "threshold",
       "layer": "A-Openings",
-      "hatch": false
+      "hatch": {
+        "gb-eng": false,
+        "variant": false
+      }
     },
     {
       "id": "door_frame",
       "layer": "A-Openings",
-      "hatch": true
+      "hatch": {
+        "gb-eng": true,
+        "variant": true
+      }
     },
     {
       "id": "screed",
       "layer": "A-Floor",
-      "hatch": true
+      "hatch": {
+        "gb-eng": true,
+        "variant": true
+      }
     }
   ],
   "dimensions": [

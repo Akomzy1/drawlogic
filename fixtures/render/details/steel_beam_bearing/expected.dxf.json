@@ -15,37 +15,58 @@
     {
       "id": "brick",
       "layer": "A-Walls",
-      "hatch": true
+      "hatch": {
+        "gb-eng": true,
+        "variant": true
+      }
     },
     {
       "id": "cavity",
       "layer": "A-Walls",
-      "hatch": false
+      "hatch": {
+        "gb-eng": false,
+        "variant": false
+      }
     },
     {
       "id": "ins",
       "layer": "A-Walls",
-      "hatch": true
+      "hatch": {
+        "gb-eng": true,
+        "variant": true
+      }
     },
     {
       "id": "block_lower",
       "layer": "A-Walls",
-      "hatch": true
+      "hatch": {
+        "gb-eng": true,
+        "variant": true
+      }
     },
     {
       "id": "padstone",
       "layer": "A-Structure",
-      "hatch": true
+      "hatch": {
+        "gb-eng": true,
+        "variant": true
+      }
     },
     {
       "id": "beam",
       "layer": "A-Structure",
-      "hatch": false
+      "hatch": {
+        "gb-eng": false,
+        "variant": false
+      }
     },
     {
       "id": "block_upper",
       "layer": "A-Walls",
-      "hatch": true
+      "hatch": {
+        "gb-eng": true,
+        "variant": true
+      }
     }
   ],
   "dimensions": [

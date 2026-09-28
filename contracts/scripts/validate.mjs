@@ -42,12 +42,13 @@ for (const [file, schema] of Object.entries(CONFIG)) {
   check(file, schema, config[file]);
 }
 
-// 3. Examples: <schema>.<subject>.json, or llm-outputs.<def>.<subject>.json.
+// 3. Examples: <schema>.<subject>.json, or <defs-only schema>.<def>.<subject>.json (llm-outputs, render-api).
+const DEFS_ONLY = new Set(["llm-outputs", "render-api"]);
 const examples = {};
 for (const f of fs.readdirSync(EXAMPLES).filter((f) => f.endsWith(".json")).sort()) {
   const doc = read(path.join(EXAMPLES, f));
   const [schema, ...rest] = f.replace(/\.json$/, "").split(".");
-  const ref = schema === "llm-outputs" ? `llm-outputs.schema.json#/$defs/${rest[0]}` : `${schema}.schema.json`;
+  const ref = DEFS_ONLY.has(schema) ? `${schema}.schema.json#/$defs/${rest[0]}` : `${schema}.schema.json`;
   if (!schemaFiles.includes(`${schema}.schema.json`)) { fail(`examples/${f}`, `no schema named ${schema}`); continue; }
   check(`examples/${f}`, ref, doc);
   (examples[schema] ??= []).push({ file: `examples/${f}`, doc });
@@ -220,6 +221,11 @@ const MUTATIONS = [
   ["failed renders charge nothing (review 27 Sept)", "render-thresholds.schema.json", () => { const d = read(path.join(ROOT, "render.thresholds.json")); d.metering.failed_jobs_charged = true; return d; }],
   ["Generate anyway is logged (FR-140)", "thread-state.schema.json", () => { const d = ex("thread-state.parapet-learn.json"); d.generate_anyway = { used: true, audit_record_id: null }; return d; }],
   ["new threads seed from DDL plus thread state (review 27 Sept)", "models.schema.json", () => { const d = read(path.join(ROOT, "models.json")); d.defaults.new_thread_seed.thread_state = null; return d; }],
+  ["unknown hatch pattern is refused (review 28 Sept)", "profile.schema.json#/$defs/conventions", () => ({ units: "mm", hatches: { masonry: { pattern_id: "zigzag", scale: 1, angle_deg: 45, line_weight_mm: 0.18 } } })],
+  ["preview clips carry no fidelity score (FR-130)", "render-api.schema.json#/$defs/job_status", () => { const d = ex("render-api.job_status.delivered-preview.json"); d.outputs[0].fidelity = 0.9; return d; }],
+  ["preview clips carry the preview label (FR-130)", "render-api.schema.json#/$defs/job_status", () => { const d = ex("render-api.job_status.delivered-preview.json"); d.outputs[0].label_keys = ["watermark.concept"]; return d; }],
+  ["a failed render charges nothing (review 27 Sept)", "render-api.schema.json#/$defs/job_status", () => { const d = ex("render-api.job_status.failed-drift.json"); d.credits_charged = 1; return d; }],
+  ["the client cannot set Idea or Draft on a preview (review 28 Sept)", "render-api.schema.json#/$defs/preview_request", () => { const d = ex("render-api.preview_request.parapet.json"); d.job.idea_mode = false; return d; }],
   ["refusal is always logged (§8A.2)", "models.schema.json", () => { const d = read(path.join(ROOT, "models.json")); d.defaults.on_refusal.log = false; return d; }],
 ];
 let holes = 0;

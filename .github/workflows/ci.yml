@@ -158,13 +158,23 @@ jobs:
           python fixtures/render/scripts/build.py --check
           python -m pytest fixtures/render/tests/test_fixtures.py
 
-      - name: Render tests against the engine
+      # Two gates (Codex review of PR #6): the renderers land at Prompt 5, the render providers at Prompt 12.
+      - name: Render structure tests (Prompt 5) — SVG, DXF, PDF, artefacts
         run: |
           if [ -f engine/app.py ]; then
             pip install $(python .github/scripts/engine-deps.py)
-            python -m pytest fixtures/render/tests
+            python -m pytest fixtures/render/tests --ignore=fixtures/render/tests/test_stills.py --ignore=fixtures/render/tests/test_preview_video.py
           else
-            echo "::notice::No engine/app.py yet (Prompt 5). The render tests exist and fail with 'engine render API not available' until it lands."
+            echo "::notice::No engine/app.py yet (Prompt 5). The structure tests fail with 'engine render API not available' until it lands."
+          fi
+
+      - name: Render provider tests (Prompt 12) — stills, fidelity, preview video
+        run: |
+          if [ -f engine/providers/render/fixture.py ]; then
+            pip install $(python .github/scripts/engine-deps.py)
+            python -m pytest fixtures/render/tests/test_stills.py fixtures/render/tests/test_preview_video.py
+          else
+            echo "::notice::No render fixture provider yet (Prompt 12). The provider tests fail with 'engine render API not available' until it lands."
           fi
 
   app:

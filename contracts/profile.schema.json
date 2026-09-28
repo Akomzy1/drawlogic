@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://drawlogic.invalid/contracts/profile.schema.json",
   "title": "Profile",
-  "description": "A versioned profile: jurisdiction, regional amendment, client, office, manufacturer or Generic. Version 0.1.0. PRD §6 principle 1, FR-03–09, FR-13, FR-24, FR-60–66, FR-152, FR-159. Config is law: everything jurisdiction- or discipline-specific lives here.",
+  "description": "A versioned profile: jurisdiction, regional amendment, client, office, manufacturer or Generic. Version 0.2.0 (0.1.0 plus conventions.hatches, additive). PRD §6 principle 1, FR-03–09, FR-13, FR-24, FR-60–66, FR-152, FR-159. Config is law: everything jurisdiction- or discipline-specific lives here.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -441,6 +441,23 @@
           "additionalProperties": {
             "$ref": "#/$defs/conventions"
           }
+        },
+        "hatches": {
+          "description": "Section hatching by material category (FR-24; Codex review of PR #6, 28 Sept 2026). Keys are material categories from the pack vocabulary. A hatch object draws that category with the named pattern; null draws it unhatched (outline only). Rendering an object whose material category has no entry here is a configuration error, never a guess. SVG and DXF output use the same resolved map.",
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/hatch"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
         }
       }
     },
@@ -749,6 +766,53 @@
         },
         "generated_at": {
           "$ref": "common.schema.json#/$defs/timestamp"
+        }
+      }
+    },
+    "hatch": {
+      "title": "Hatch",
+      "description": "One hatch. Units are paper millimetres at the drawing's scale; angle is degrees counter-clockwise from the drawing's +x axis.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pattern_id",
+        "scale",
+        "angle_deg",
+        "line_weight_mm"
+      ],
+      "properties": {
+        "pattern_id": {
+          "description": "From the renderer's pattern library. Adding a pattern is a contract change.",
+          "type": "string",
+          "enum": [
+            "diagonal",
+            "cross_diagonal",
+            "brick",
+            "block",
+            "insulation_batt",
+            "insulation_rigid",
+            "concrete",
+            "screed",
+            "timber_grain",
+            "stone",
+            "earth",
+            "solid"
+          ]
+        },
+        "scale": {
+          "description": "Pattern repeat on paper, mm.",
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "angle_deg": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "line_weight_mm": {
+          "description": "Pattern line weight on paper, mm.",
+          "type": "number",
+          "exclusiveMinimum": 0
         }
       }
     }

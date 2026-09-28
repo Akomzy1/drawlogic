@@ -27,7 +27,11 @@
       "source": "user",
       "verify": false,
       "material_id": "brick_facing",
-      "hatch_category": "masonry"
+      "category": "masonry",
+      "hatch": {
+        "gb-eng": "brick",
+        "variant": "cross_diagonal"
+      }
     },
     {
       "id": "cavity",
@@ -35,7 +39,11 @@
       "source": "user",
       "verify": false,
       "material_id": null,
-      "hatch_category": null
+      "category": null,
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     },
     {
       "id": "ins",
@@ -43,7 +51,11 @@
       "source": "profile",
       "verify": false,
       "material_id": "pir_board",
-      "hatch_category": "insulation"
+      "category": "insulation",
+      "hatch": {
+        "gb-eng": "insulation_rigid",
+        "variant": "insulation_batt"
+      }
     },
     {
       "id": "block_lower",
@@ -51,7 +63,11 @@
       "source": "user",
       "verify": false,
       "material_id": "block_dense",
-      "hatch_category": "masonry"
+      "category": "masonry",
+      "hatch": {
+        "gb-eng": "brick",
+        "variant": "cross_diagonal"
+      }
     },
     {
       "id": "padstone",
@@ -59,7 +75,11 @@
       "source": "user",
       "verify": false,
       "material_id": "concrete_c25",
-      "hatch_category": "concrete"
+      "category": "concrete",
+      "hatch": {
+        "gb-eng": "concrete",
+        "variant": "diagonal"
+      }
     },
     {
       "id": "beam",
@@ -67,7 +87,11 @@
       "source": "user",
       "verify": false,
       "material_id": "steel_section",
-      "hatch_category": null
+      "category": "steel",
+      "hatch": {
+        "gb-eng": null,
+        "variant": null
+      }
     },
     {
       "id": "block_upper",
@@ -75,7 +99,11 @@
       "source": "user",
       "verify": false,
       "material_id": "block_dense",
-      "hatch_category": "masonry"
+      "category": "masonry",
+      "hatch": {
+        "gb-eng": "brick",
+        "variant": "cross_diagonal"
+      }
     }
   ],
   "dimensions": [

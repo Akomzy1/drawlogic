@@ -1,0 +1,24 @@
+{
+  "state": "delivered",
+  "job_id": "job-preview-0001",
+  "outputs": [
+    {
+      "engine": "generative_video",
+      "asset_id": "ast-clip-parapet-01",
+      "drawing_hash": "sha256:6c9dda3baaab349f23a5e252894f2c1af55ec1757d221dc49adfeec9dffbcedb",
+      "drawing_rev": "B",
+      "fidelity": null,
+      "label_keys": ["label.preview"],
+      "materials": [
+        { "material_id": "brick_red_multi", "basis": "description_only", "delta_e": null, "colour_approximate": false },
+        { "material_id": "alu_coping", "basis": "colour_code", "delta_e": null, "colour_approximate": true }
+      ],
+      "pinning": "start_only",
+      "provider": "higgsfield",
+      "provider_model": "catalogue-model-a",
+      "attempts": 1
+    }
+  ],
+  "attempts_total": 1,
+  "credits_charged": 15
+}

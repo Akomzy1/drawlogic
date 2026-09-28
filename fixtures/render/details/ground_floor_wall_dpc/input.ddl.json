@@ -11,7 +11,7 @@
     "units": "mm",
     "jurisdiction": "GB-ENG",
     "rev": "A",
-    "hash": "sha256:8a1d03910e714ade4c4d721311971daccd883490d8b721c9ea8bebbcf9a79f3a",
+    "hash": "sha256:3834e5b33573b8fe2b0d847c8fe1ecd443efdbb46f38e98ed23f543f199a2edd",
     "parent_hash": null,
     "profile_stack": [
       {
@@ -99,7 +99,7 @@
       "verify": false
     },
     {
-      "id": "plaster",
+      "id": "plasterboard_skim",
       "name": "Plasterboard and skim",
       "category": "finish",
       "basis": "description_only",
@@ -108,7 +108,7 @@
       "verify": false
     },
     {
-      "id": "screed",
+      "id": "sand_cement_screed",
       "name": "Sand and cement screed",
       "category": "screed",
       "basis": "description_only",
@@ -128,7 +128,7 @@
   ],
   "objects": [
     {
-      "id": "ground",
+      "id": "external_ground",
       "class": "external_ground",
       "label": "External ground",
       "material_id": "topsoil",
@@ -507,7 +507,7 @@
       "id": "plaster",
       "class": "finish",
       "label": "Internal finish",
-      "material_id": "plaster",
+      "material_id": "plasterboard_skim",
       "thickness": null,
       "height": null,
       "level": null,
@@ -669,7 +669,7 @@
       "id": "screed",
       "class": "screed",
       "label": "Screed",
-      "material_id": "screed",
+      "material_id": "sand_cement_screed",
       "thickness": null,
       "height": null,
       "level": null,
@@ -710,7 +710,7 @@
       "id": "dpc_height",
       "kind": "linear",
       "refs": [
-        "ground",
+        "external_ground",
         "dpc_outer"
       ],
       "value": 150,
@@ -724,7 +724,7 @@
       "id": "ffl",
       "kind": "linear",
       "refs": [
-        "ground",
+        "external_ground",
         "screed"
       ],
       "value": 175,

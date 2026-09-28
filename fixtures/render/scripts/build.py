@@ -22,11 +22,12 @@ from jsonschema import Draft202012Validator
 from PIL import Image, ImageDraw
 from referencing import Registry, Resource
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from engine.core.ddl import validate as core_validate  # noqa: E402 — the real core validator (issue #12)
+
 ROOT = Path(__file__).resolve().parent.parent
 REPO = ROOT.parent.parent
 CONTRACTS = REPO / "contracts"
-SPEC = json.loads((ROOT / "render-spec.json").read_text(encoding="utf-8"))
-HATCHED = set(SPEC["hatched_categories"])
 
 # ---------------------------------------------------------------------------------------------------------------------
 # Materials. category drives hatching (render-spec.json); basis follows FR-163.
@@ -39,8 +40,8 @@ MATERIALS: dict[str, dict[str, Any]] = {
     "closer_ins": {"name": "Insulated cavity closer", "category": "insulation"},
     "concrete_c25": {"name": "Concrete", "category": "concrete"},
     "lean_mix": {"name": "Lean-mix concrete cavity fill", "category": "concrete"},
-    "screed": {"name": "Sand and cement screed", "category": "screed"},
-    "plaster": {"name": "Plasterboard and skim", "category": "finish"},
+    "sand_cement_screed": {"name": "Sand and cement screed", "category": "screed"},
+    "plasterboard_skim": {"name": "Plasterboard and skim", "category": "finish"},
     "timber_sw": {"name": "Softwood timber", "category": "timber"},
     "timber_door": {"name": "Timber door leaf", "category": "timber"},
     "steel_lintel": {"name": "Steel cavity lintel", "category": "steel"},
@@ -55,13 +56,13 @@ MATERIALS: dict[str, dict[str, Any]] = {
     "upvc_frame": {"name": "uPVC window frame", "category": "frame"},
     "glazing_dg": {"name": "Double glazed unit", "category": "glazing"},
     "stone_sill": {"name": "Reconstituted stone sill", "category": "stone"},
-    "paving": {"name": "Concrete paving slab", "category": "stone"},
+    "concrete_paving": {"name": "Concrete paving slab", "category": "stone"},
     "roof_tile": {"name": "Concrete roof tile", "category": "tile"},
     "fibre_cement": {"name": "Fibre cement undercloak", "category": "board"},
     "upvc_trim": {"name": "uPVC dry verge trim", "category": "trim"},
     "upvc_gutter": {"name": "uPVC gutter", "category": "trim"},
     "thermal_break": {"name": "Structural thermal break unit", "category": "insulation"},
-    "backfill": {"name": "Backfill", "category": "earth"},
+    "granular_backfill": {"name": "Backfill", "category": "earth"},
     "topsoil": {"name": "Topsoil", "category": "earth"},
 }
 
@@ -96,7 +97,7 @@ def cavity_wall(y0: float, y1: float, suffix: str = "", *, plaster: bool = True,
         ("block", "masonry", "Inner leaf", "block_dense", 252.5, 352.5),
     ]
     if plaster:
-        bands.append(("plaster", "finish", "Internal finish", "plaster", 352.5, 365))
+        bands.append(("plaster", "finish", "Internal finish", "plasterboard_skim", 352.5, 365))
     out = []
     for key, cls, label, mat, a, b in bands:
         pts = rect(y0, a, y1, b) if plan else rect(a, y0, b, y1)
@@ -123,7 +124,7 @@ DETAILS: dict[str, dict[str, Any]] = {
         "title": "Window head, cavity wall",
         "objects": [
             *[o for o in cavity_wall(604, 1200) if o["id"] != "plaster"],
-            obj("plaster", "finish", "Internal finish", "plaster", "walls", rect(352.5, 454, 365, 1200), src="profile"),
+            obj("plaster", "finish", "Internal finish", "plasterboard_skim", "walls", rect(352.5, 454, 365, 1200), src="profile"),
             obj("lintel", "lintel", "Steel cavity lintel", "steel_lintel", "structure", rect(0, 560, 252.5, 600), note=ENGINEER),
             obj("tray", "dpc", "Cavity tray", "dpc_polymer", "walls", rect(0, 600, 252.5, 604)),
             obj("inner_lintel", "lintel", "Inner leaf lintel", "concrete_c25", "structure", rect(252.5, 454, 352.5, 604), note=ENGINEER),
@@ -166,7 +167,7 @@ DETAILS: dict[str, dict[str, Any]] = {
     "door_threshold": {
         "title": "Door threshold",
         "objects": [
-            obj("paving", "paving", "External paving", "paving", "ground", rect(-600, -200, 0, -150)),
+            obj("paving", "paving", "External paving", "concrete_paving", "ground", rect(-600, -200, 0, -150)),
             obj("brick", "masonry", "Outer leaf below threshold", "brick_facing", "walls", rect(0, -600, 102.5, -30)),
             obj("dpc", "dpc", "DPC below threshold", "dpc_polymer", "walls", rect(0, -30, 180, -20)),
             obj("threshold", "threshold", "Threshold", "alu_threshold", "openings", rect(0, -20, 180, 0)),
@@ -174,7 +175,7 @@ DETAILS: dict[str, dict[str, Any]] = {
             obj("door_leaf", "door_leaf", "Door leaf", "timber_door", "openings", rect(90, 10, 130, 300)),
             obj("slab", "slab", "Floor slab", "concrete_c25", "floor", rect(180, -300, 1000, -150)),
             obj("floor_ins", "insulation", "Floor insulation", "pir_board", "floor", rect(180, -150, 1000, -75), src="profile"),
-            obj("screed", "screed", "Screed", "screed", "floor", rect(180, -75, 1000, 0)),
+            obj("screed", "screed", "Screed", "sand_cement_screed", "floor", rect(180, -75, 1000, 0)),
         ],
         "dims": [dim("step", "v", ("paving", "max"), ("screed", "max")), dim("frame_setback", "h", ("brick", "min"), ("door_frame", "min"), src="ai_inferred")],
         "anns": [ann("an_threshold", "threshold", "Aluminium threshold"), ann("an_dpc", "dpc", "DPC linked to floor DPM")],
@@ -240,7 +241,7 @@ DETAILS: dict[str, dict[str, Any]] = {
             obj("cavity_upper", "cavity", "Residual cavity", None, "walls", rect(102.5, 464, 152.5, 1200)),
             obj("ins", "insulation", "Cavity insulation", "pir_board", "walls", rect(152.5, 0, 252.5, 1200), src="profile"),
             obj("block", "masonry", "Inner leaf", "block_dense", "walls", rect(252.5, 0, 352.5, 1200)),
-            obj("plaster", "finish", "Internal finish", "plaster", "walls", rect(352.5, 0, 365, 1200), src="profile"),
+            obj("plaster", "finish", "Internal finish", "plasterboard_skim", "walls", rect(352.5, 0, 365, 1200), src="profile"),
             obj("deck", "deck", "Roof deck", "concrete_c25", "roof", rect(-1200, 0, 0, 150)),
             obj("vcl", "membrane", "Vapour control layer", "vcl_sheet", "roof", rect(-1200, 150, 0, 154), src="profile"),
             obj("roof_ins", "insulation", "Roof insulation", "pir_board", "roof", rect(-1200, 154, 0, 294)),
@@ -254,7 +255,7 @@ DETAILS: dict[str, dict[str, Any]] = {
     "ground_floor_wall_dpc": {
         "title": "Ground floor and wall junction with DPC",
         "objects": [
-            obj("ground", "external_ground", "External ground", "topsoil", "ground", rect(-600, -400, 0, 0)),
+            obj("external_ground", "external_ground", "External ground", "topsoil", "ground", rect(-600, -400, 0, 0)),
             obj("brick_lower", "masonry", "Outer leaf below DPC", "brick_facing", "walls", rect(0, -400, 102.5, 150)),
             obj("dpc_outer", "dpc", "DPC outer leaf", "dpc_polymer", "walls", rect(0, 150, 102.5, 155)),
             obj("brick_upper", "masonry", "Outer leaf", "brick_facing", "walls", rect(0, 155, 102.5, 600)),
@@ -264,15 +265,15 @@ DETAILS: dict[str, dict[str, Any]] = {
             obj("block_lower", "masonry", "Inner leaf below DPC", "block_dense", "walls", rect(252.5, -400, 352.5, 150)),
             obj("dpc_inner", "dpc", "DPC inner leaf", "dpc_polymer", "walls", rect(252.5, 150, 352.5, 155)),
             obj("block_upper", "masonry", "Inner leaf", "block_dense", "walls", rect(252.5, 155, 352.5, 600)),
-            obj("plaster", "finish", "Internal finish", "plaster", "walls", rect(352.5, 175, 365, 600), src="profile"),
+            obj("plaster", "finish", "Internal finish", "plasterboard_skim", "walls", rect(352.5, 175, 365, 600), src="profile"),
             obj("dpm", "membrane", "Damp-proof membrane", "dpm_sheet", "floor", rect(365, -154, 1400, -150)),
             obj("slab", "slab", "Floor slab", "concrete_c25", "floor", rect(365, -150, 1400, 0)),
             obj("floor_ins", "insulation", "Floor insulation", "pir_board", "floor", rect(365, 0, 1400, 100), **INFERRED),
-            obj("screed", "screed", "Screed", "screed", "floor", rect(365, 100, 1400, 175)),
+            obj("screed", "screed", "Screed", "sand_cement_screed", "floor", rect(365, 100, 1400, 175)),
         ],
         "dims": [
-            dim("dpc_height", "v", ("ground", "max"), ("dpc_outer", "min")),
-            dim("ffl", "v", ("ground", "max"), ("screed", "max")),
+            dim("dpc_height", "v", ("external_ground", "max"), ("dpc_outer", "min")),
+            dim("ffl", "v", ("external_ground", "max"), ("screed", "max")),
             dim("wall_total", "h", ("brick_lower", "min"), ("plaster", "max")),
         ],
         "anns": [
@@ -286,7 +287,7 @@ DETAILS: dict[str, dict[str, Any]] = {
         "objects": [
             *cavity_wall(300, 900, plan=True),
             obj("closer", "cavity_closer", "Insulated cavity closer", "closer_ins", "walls", rect(260, 102.5, 300, 252.5)),
-            obj("reveal", "finish", "Reveal finish", "plaster", "walls", rect(290, 252.5, 300, 365), src="profile"),
+            obj("reveal", "finish", "Reveal finish", "plasterboard_skim", "walls", rect(290, 252.5, 300, 365), src="profile"),
             obj("frame", "window_frame", "Frame", "upvc_frame", "openings", rect(160, 40, 260, 120), **INFERRED),
         ],
         "dims": [dim("closer_width", "h", ("closer", "min"), ("brick", "min")), dim("wall_total", "v", ("brick", "min"), ("plaster", "max"))],
@@ -296,7 +297,7 @@ DETAILS: dict[str, dict[str, Any]] = {
         "title": "Wall to strip foundation",
         "objects": [
             obj("footing", "foundation", "Strip foundation", "concrete_c25", "structure", rect(-150, -1000, 515, -775), note=ENGINEER),
-            obj("backfill", "backfill", "Backfill", "backfill", "ground", rect(-600, -775, 0, 0)),
+            obj("backfill", "backfill", "Backfill", "granular_backfill", "ground", rect(-600, -775, 0, 0)),
             obj("block_outer", "masonry", "Trench block, outer", "block_dense", "walls", rect(0, -775, 102.5, -150)),
             obj("cavity_fill", "cavity_fill", "Cavity fill", "lean_mix", "walls", rect(102.5, -775, 252.5, -225)),
             obj("block_inner", "masonry", "Trench block, inner", "block_dense", "walls", rect(252.5, -775, 352.5, -150)),
@@ -314,7 +315,7 @@ DETAILS: dict[str, dict[str, Any]] = {
             obj("membrane", "membrane", "Balcony membrane", "bitumen_membrane", "roof", [[-1500, -70], [-80, -40], [-80, -36], [-1500, -66]]),
             obj("threshold", "threshold", "Threshold", "alu_threshold", "openings", rect(0, 0, 150, 20)),
             obj("door_frame", "door_frame", "Door frame", "timber_sw", "openings", rect(40, 20, 150, 300), **INFERRED),
-            obj("screed", "screed", "Screed", "screed", "floor", rect(150, -75, 1200, 0)),
+            obj("screed", "screed", "Screed", "sand_cement_screed", "floor", rect(150, -75, 1200, 0)),
         ],
         "dims": [dim("break_width", "h", ("break", "min"), ("break", "max"), src="user"), dim("drop", "v", ("membrane", "max"), ("screed", "max"))],
         "anns": [ann("an_break", "break", "Thermal break unit to engineer's design"), ann("an_membrane", "membrane", "Membrane falls away from door")],
@@ -476,6 +477,16 @@ def build_ddl(name: str, spec: dict[str, Any]) -> dict[str, Any]:
     return ddl
 
 
+def hatch_of(conventions: dict[str, Any], category: str | None) -> str | None:
+    """The pattern a category is hatched with, or None. An unmapped category is a configuration error, never a guess."""
+    if category is None:
+        return None
+    if category not in conventions["hatches"]:
+        raise AssertionError(f"conventions.hatches has no entry for material category {category!r}")
+    entry = conventions["hatches"][category]
+    return None if entry is None else str(entry["pattern_id"])
+
+
 def dim_text(value: float, precision: int) -> str:
     return f"{value:.{precision}f}"
 
@@ -502,7 +513,9 @@ def goldens(name: str, ddl: dict[str, Any], conventions: dict[str, dict[str, Any
                 "source": o["source"],
                 "verify": o["verify"],
                 "material_id": o["material_id"],
-                "hatch_category": cat[o["material_id"]] if o["material_id"] and cat[o["material_id"]] in HATCHED else None,
+                "category": cat[o["material_id"]] if o["material_id"] else None,
+                # Pattern per convention set, from conventions.hatches (profile.schema 0.2.0); null = drawn unhatched.
+                "hatch": {k: hatch_of(c, cat.get(o["material_id"])) for k, c in conventions.items()},
             }
             for o in ddl["objects"]
         ],
@@ -521,7 +534,12 @@ def goldens(name: str, ddl: dict[str, Any], conventions: dict[str, dict[str, Any
         **head,
         "layers": sorted({layer["name"] for layer in ddl["layers"]}),
         "objects": [
-            {"id": o["id"], "layer": layer_name[o["layer_id"]], "hatch": bool(o["material_id"] and cat[o["material_id"]] in HATCHED)} for o in ddl["objects"]
+            {
+                "id": o["id"],
+                "layer": layer_name[o["layer_id"]],
+                "hatch": {k: hatch_of(c, cat.get(o["material_id"])) is not None for k, c in conventions.items()},
+            }
+            for o in ddl["objects"]
         ],
         "dimensions": [{"id": d["id"], "value": d["value"]} for d in ddl["dimensions"]],
         "texts": [a["text"] for a in ddl["annotations"]],
@@ -645,6 +663,7 @@ def outputs() -> dict[Path, bytes]:
     for name, spec in DETAILS.items():
         ddl = build_ddl(name, spec)
         errs = [f"{'/'.join(map(str, e.absolute_path))}: {e.message}" for e in validator.iter_errors(ddl)]
+        errs += [f"{i.path}: {i.message}" for i in core_validate(ddl)]
         assert not errs, f"{name}: DDL does not validate against contracts/ddl.schema.json: {errs[:5]}"
         layers_used = {layer["name"] for layer in ddl["layers"]}
         for cname, c in conventions.items():
@@ -662,6 +681,7 @@ def outputs() -> dict[Path, bytes]:
             idea["drawing"]["id"] = str(uuid.uuid5(uuid.NAMESPACE_URL, "https://drawlogic.invalid/fixtures/render/parapet-idea"))
             idea["drawing"]["hash"] = ddl_hash(idea)
             errs = [e.message for e in validator.iter_errors(idea)]
+            errs += [f"{i.path}: {i.message}" for i in core_validate(idea)]
             assert not errs, f"parapet idea variant: {errs[:5]}"
             files[ROOT / "idea" / "parapet.idea.ddl.json"] = dumps(idea)
     images = fidelity_images()
@@ -709,10 +729,11 @@ def main() -> int:
             return 1
         print(f"fixtures/render is up to date ({len(files)} generated files; {len(DETAILS)} detail types).")
         return 0
-    for path, data in files.items():
+    changed = [p for p, data in files.items() if not same(p, data)]
+    for path in changed:  # unchanged files are left alone (synced folders lock files that are rewritten needlessly)
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_bytes(data)
-    print(f"wrote {len(files)} files for {len(DETAILS)} detail types")
+        path.write_bytes(files[path])
+    print(f"wrote {len(changed)} of {len(files)} files for {len(DETAILS)} detail types")
     return 0
 
 
