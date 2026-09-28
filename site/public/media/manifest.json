@@ -1,0 +1,265 @@
+{
+  "version": 1,
+  "source": "design/prototype/marketing-site.html",
+  "prototype_sha256": "7786fc5f65e7784864d1433c368ff615b5f66495274635332d508a5d22a5b5d8",
+  "caption": "Illustrative — generated from a Drawlogic drawing",
+  "preview_label": "Generated preview — not a model render",
+  "assets": [
+    {
+      "path": "/media/prototype/38fb5dfe-f74d-4205-ae1b-caae63c17087.jpg",
+      "sha256": "fa7a4eb67f4bfd56aabacd4ab3c77df4f932f0979567c8d8803d7fcbe17b586b",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "38fb5dfe-f74d-4205-ae1b-caae63c17087",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/ed255f43-4c0d-4c52-84f8-fbe0d4f73c4a.jpg",
+      "sha256": "1cdc27b44f69e390bd1b496bca07e88f71226710e90dd9163f51a2805a54fda5",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "ed255f43-4c0d-4c52-84f8-fbe0d4f73c4a",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/757f1d72-e9a1-4915-8445-49dbee99c132.jpg",
+      "sha256": "8bc9664c196c5917a212c8035c8dadb99b7995f0fd4880f288f14698be4e7340",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "757f1d72-e9a1-4915-8445-49dbee99c132",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/afe6089a-ad3b-4203-a927-7c95df023a02.jpg",
+      "sha256": "4024738893735c2f5bda82862891e9e8796361a6ef3fe0fb0c37c462aef8e732",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "afe6089a-ad3b-4203-a927-7c95df023a02",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/2ac83a9d-3d91-438a-8e02-9ba14f87c35f.jpg",
+      "sha256": "144fdb20118c25ab5964cf2d926357775419f9fa8889e96ede2fd50b7a20a881",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "2ac83a9d-3d91-438a-8e02-9ba14f87c35f",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/e350595b-8b67-49c1-a03b-7687d84656d0.jpg",
+      "sha256": "016d4a7f0fdd511d4f00117e560f2c55ab425baa13e5ac7b6a42b78de0df906d",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "e350595b-8b67-49c1-a03b-7687d84656d0",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/b7325f83-b902-485a-ae29-b446b0f046cc.jpg",
+      "sha256": "cf5db827e83c0713f281eb3920c9163e61d817241d607243fabae9a8350be8b5",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "b7325f83-b902-485a-ae29-b446b0f046cc",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/aeaa752f-aaf8-486a-9caa-bd7fb0b23943.jpg",
+      "sha256": "a9bf1bb041f2e06d3d60962bec559ea2e94d70435d3c6f89e5d8461aa2404503",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "aeaa752f-aaf8-486a-9caa-bd7fb0b23943",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/0755d551-206f-43c6-b255-42a2b31f9d1d.jpg",
+      "sha256": "3e37b9252cd2e6e29bb0a83aa165759336b95b3dfc3ff2be4ede1dd249fc0e3e",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "0755d551-206f-43c6-b255-42a2b31f9d1d",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/c3f11018-6f46-44bc-8506-596330cda1b7.jpg",
+      "sha256": "bbc36c63980ffaeb40db3616aa50160719efddfa4f6995484cf802613a7bde64",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "c3f11018-6f46-44bc-8506-596330cda1b7",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/c101e7e8-9144-4924-8689-9d176d051091.jpg",
+      "sha256": "c7124ef521ff8f07ed51c769436f4e545bf30be2653dc7a743ea3afeb836a0d0",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "c101e7e8-9144-4924-8689-9d176d051091",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/15e26c78-3d05-47b9-a46a-929c512ff15d.jpg",
+      "sha256": "6ff1a1c0eb2258f9dc64d5a879a26d7e1956326a6c8f4035b0d347806c0dc061",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "15e26c78-3d05-47b9-a46a-929c512ff15d",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/dbf7426a-b18f-4ebd-9acf-fc2d50bcaecf.jpg",
+      "sha256": "123f0f8a81f835680f59aa0da74763a06183bc7f3ff07692a0033b0799e3971e",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "dbf7426a-b18f-4ebd-9acf-fc2d50bcaecf",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/22d92712-224b-4fd4-82fb-529ca510d8ed.jpg",
+      "sha256": "254d5c3eccedc11c3f273fc144aa7d2801bed522a5083e00457f3c7ae9046a18",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "22d92712-224b-4fd4-82fb-529ca510d8ed",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/d8dab7dd-2f86-4831-b2fd-b4752b50b4f1.jpg",
+      "sha256": "0b9681f5898187ef5f2cbbaf65b2a44efbc6c03fac4fd4c1da5dd50133c2cc10",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "d8dab7dd-2f86-4831-b2fd-b4752b50b4f1",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/2be9ba0b-e8ec-4e0b-b465-f3c44e437b74.jpg",
+      "sha256": "ee59265312810ed6a6bfab802bd73930cc9efe3fe8ee782320910deee37fba75",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "2be9ba0b-e8ec-4e0b-b465-f3c44e437b74",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/7470737a-0d40-4f03-9892-8ff1f9979575.jpg",
+      "sha256": "fb258bda4584c70ffc0a7d418dbf124851327ba21facf3c42f3da0203ee6a984",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "7470737a-0d40-4f03-9892-8ff1f9979575",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/2758ab33-b2d7-4e90-81cc-a7c79d2d353c.jpg",
+      "sha256": "d6808ec39c3f3598d10ecc5e7667e743a5889dcde8fb9ff35b61f54055e15d09",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "2758ab33-b2d7-4e90-81cc-a7c79d2d353c",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/c852d161-6cfa-4de9-8fa1-b9cd0c491eeb.jpg",
+      "sha256": "407c79067c4f5e1224d4e6243cd78a290d517753348f0433a28fd2acd4906787",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "c852d161-6cfa-4de9-8fa1-b9cd0c491eeb",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/4aa03b1c-29f5-4231-a075-acdd0621f8f7.jpg",
+      "sha256": "748b972ac6bb9cc33c72ccf27400c8f280506162b1c29e8f33118a0bc6b61bb0",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "4aa03b1c-29f5-4231-a075-acdd0621f8f7",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/16217a75-9eb1-45da-beb7-762e7a7b85f6.jpg",
+      "sha256": "b31a9ba53fe166bb6fdc85bb116f68201a6e3434f26937cbe742ef4712d95c77",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "16217a75-9eb1-45da-beb7-762e7a7b85f6",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/04fcc212-57cd-4c33-93f7-5ef6ec4d2f15.jpg",
+      "sha256": "2e91e2bb18b547355732443068391df2cb48e656fd496419b99e0401d6f90f66",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "04fcc212-57cd-4c33-93f7-5ef6ec4d2f15",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/e4c22ea4-239e-4849-8646-7a38a9258c27.jpg",
+      "sha256": "5c4cf7a8c7d4e2de20f190daac2acbb3c57350c28d767e3330542cfb7508298a",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "e4c22ea4-239e-4849-8646-7a38a9258c27",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/ec03ffe1-7c6c-4e3c-ac62-53111009d0b9.jpg",
+      "sha256": "47e03f56aaa748f22d008d1d3883c03a4e0c614c32d97a50114610c85c09be46",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "ec03ffe1-7c6c-4e3c-ac62-53111009d0b9",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/2f2941a9-d971-4867-8546-a8cafda109c7.jpg",
+      "sha256": "471c4cf62a64af2fe3326a21685916afe591141e346fbcfe920b4db5fcfe2424",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "2f2941a9-d971-4867-8546-a8cafda109c7",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/3d0e782d-9c22-4043-9c20-7d6e7234db16.jpg",
+      "sha256": "50c43e20ee7d2b4ae1840684c885d599b5f94527365a4c01e1e983ca8d9c52b0",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "3d0e782d-9c22-4043-9c20-7d6e7234db16",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/32b05917-6711-4fef-baaa-bab099d36bb0.jpg",
+      "sha256": "a0f0bc28a2ec60887877d43f2a8c0a8f3c1e3e04665f2551fefd6d177300fdff",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "32b05917-6711-4fef-baaa-bab099d36bb0",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/488cd67f-4dac-46b6-a372-e950780bfa19.jpg",
+      "sha256": "402397c8d44c3d2549b482f1edc10c436b973933767ea4f75300df618e1940c3",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "488cd67f-4dac-46b6-a372-e950780bfa19",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/7903c1dd-4137-4822-95ab-6be2d8d2cd7d.jpg",
+      "sha256": "c048fbf6ce2d04a920f1e633f9ffa36dbb6715a44872ecf632cba075dad0996a",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "7903c1dd-4137-4822-95ab-6be2d8d2cd7d",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/95442007-8a0f-480a-a79d-6c576bc9f9ea.jpg",
+      "sha256": "11c052777a1ee8c9a8941ac8cc206c864dc52067d8b5db376c4f2ce05dd0655c",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "95442007-8a0f-480a-a79d-6c576bc9f9ea",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/88c95438-901a-4fc5-b4a4-2281b0811207.jpg",
+      "sha256": "d015a868a93fd890696c3997178427e459fac63cb0c21a94915a6101de6d7dd1",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "88c95438-901a-4fc5-b4a4-2281b0811207",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    },
+    {
+      "path": "/media/prototype/c0fe1a3f-cf1e-4675-b2e7-dfbace826cd5.mp4",
+      "sha256": "f2fe198aa197e71ba108e9ac86c71eb6fbde3c72780181d04e1df03446d40f70",
+      "source": "design/prototype/marketing-site.html",
+      "source_resource": "c0fe1a3f-cf1e-4675-b2e7-dfbace826cd5",
+      "status": "approved_prototype",
+      "caption": "Illustrative — generated from a Drawlogic drawing"
+    }
+  ]
+}
