@@ -1,0 +1,29 @@
+{
+  "drawing_hash": "sha256:84893e473056c0863d3a557a66d42a90131b4da201e6975e2d9d0acac3c054ce",
+  "drawing_rev": "A",
+  "grid": {
+    "width_px": 1024,
+    "height_px": 903,
+    "mm_per_px": 1.4765625,
+    "origin": [
+      -76.0,
+      996.0
+    ]
+  },
+  "depth_encoding": {
+    "bits": 8,
+    "near_mm": 0,
+    "far_mm": 0
+  },
+  "legend": {
+    "alu_coping": "#336C68",
+    "bitumen_membrane": "#851CE3",
+    "block_dense": "#BEC812",
+    "brick_facing": "#ACA19B",
+    "concrete_c25": "#FBFDBB",
+    "dpc_polymer": "#AB5831",
+    "pir_board": "#D64778",
+    "vcl_sheet": "#A8A578"
+  },
+  "background": "#FFFFFF"
+}
