@@ -1,0 +1,42 @@
+{
+  "schema_version": "0.1.0",
+  "fidelity": {
+    "metric": "edge_overlay_iou",
+    "description": "Edge-overlay IoU between the render and the source line-art (FR-52). Below min → the job fails and retries; never delivered.",
+    "source": "PRD §3 success metrics: Stage 1 render geometry fidelity ≥ 0.85.",
+    "modes": {
+      "detail_to_built": {
+        "min": 0.85,
+        "description": "Mode 1: detail/section → built view (FR-51)."
+      },
+      "drawing_to_photoreal": {
+        "min": 0.85,
+        "description": "Mode 2: sketch/plan/elevation → photoreal (FR-51)."
+      },
+      "idea_concept": {
+        "min": 0.85,
+        "description": "Idea-mode concept renders (FR-93)."
+      }
+    },
+    "max_attempts": 3
+  },
+  "colour": {
+    "metric": "delta_e_2000",
+    "description": "Mean colour of the rendered region vs the material's colour value (FR-164). Above the threshold the material is labelled colour approximate — a flag, not a failure.",
+    "colour_approximate_above": null,
+    "status": "pending_eval",
+    "source": "PRD FR-164: initial threshold set from the eval harness. Null until the eval report lands; until then every colour-coded material is labelled colour approximate."
+  },
+  "generative_video": {
+    "fidelity_scored": false,
+    "max_clip_seconds": 10,
+    "source": "PRD FR-127, FR-130: preview clips carry no fidelity score and are capped at 10 seconds."
+  },
+  "metering": {
+    "charge": "once_per_delivered_render",
+    "retries_charged": false,
+    "failed_jobs_charged": false,
+    "description": "Credits are taken once, when a render is delivered. A fidelity or moderation retry never consumes credits, and a job that fails after its attempts charges nothing.",
+    "source": "Contract review, 27 Sept 2026 (Tokunbo); PRD FR-52, FR-56, FR-131."
+  }
+}

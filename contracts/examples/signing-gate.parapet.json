@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.1.0",
+  "set_id": "set-banbury-roof-b",
+  "drawing_ids": ["3f6c1e2a-7b4d-4c8e-9a51-2d0f6b7e8c11"],
+  "signer_id": "sgn-jsmith",
+  "drawings_opened": { "total": 1, "opened": 1 },
+  "verify_items": { "total": 1, "resolved": 0 },
+  "flags": {
+    "total": 3,
+    "cleared_or_accepted": 1,
+    "notes": [{ "result_id": "res-03", "state": "cleared", "note": "Closure checked on screen." }]
+  },
+  "report_reviewed": false,
+  "signer_checks": {
+    "credential_verified": true,
+    "verification_level": "verified",
+    "jurisdiction_match": true,
+    "discipline_match": true,
+    "second_factor": "not_requested"
+  },
+  "enabled": false,
+  "evidence": {
+    "items_opened": ["3f6c1e2a-7b4d-4c8e-9a51-2d0f6b7e8c11", "ins_01", "res-03"],
+    "changes": [],
+    "assumptions_resolved": 0,
+    "flags_accepted": 0,
+    "time_in_review_s": 312
+  }
+}

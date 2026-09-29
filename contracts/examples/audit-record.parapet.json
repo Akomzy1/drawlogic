@@ -1,0 +1,24 @@
+{
+  "schema_version": "0.1.0",
+  "id": "5e2b7c90-1d4f-4a36-8b2e-7f9c0a1d2e33",
+  "chain_id": "chain-3f6c1e2a",
+  "seq": 3,
+  "drawing_id": "3f6c1e2a-7b4d-4c8e-9a51-2d0f6b7e8c11",
+  "actor": {
+    "kind": "system",
+    "id": "engine.rules"
+  },
+  "action": "check.run",
+  "before_hash": "sha256:6c9dda3baaab349f23a5e252894f2c1af55ec1757d221dc49adfeec9dffbcedb",
+  "after_hash": "sha256:6c9dda3baaab349f23a5e252894f2c1af55ec1757d221dc49adfeec9dffbcedb",
+  "payload": {
+    "check_run_id": "8b1d4f60-2c3a-4e7b-9f10-5a6c7d8e9f01",
+    "profile_versions": {
+      "gb-eng-residential": "1.3.0",
+      "generic": "0.9.0"
+    }
+  },
+  "prev_hash": "sha256:9a4c2e1f0b3d5a6c7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d",
+  "hash": "sha256:a7ecd83c5326d99b366393a53b0aabfb3b7ddce003a541e92cf5d53b84ef42a2",
+  "ts": "2026-09-14T14:01:30Z"
+}

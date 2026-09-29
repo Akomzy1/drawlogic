@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://drawlogic.invalid/contracts/llm-outputs.schema.json",
+  "title": "LlmOutputs",
+  "description": "Structured outputs for LLM tasks that have no document schema of their own. Version 0.1.0. PRD §8A.1–8A.2. Tasks with their own schema: interpret/promote → interpretation, compile → ddl or ddl-diff, idea → idea-result, learn_critique → critique, narrate → narration-script, precedent_search → precedent_search_result here.",
+  "$defs": {
+    "route_result": {
+      "title": "RouteResult",
+      "description": "Haiku 4.5 routing/classification.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "intent",
+        "confidence"
+      ],
+      "properties": {
+        "intent": {
+          "type": "string",
+          "enum": [
+            "idea",
+            "draft_edit",
+            "learn",
+            "question",
+            "site_feasibility",
+            "out_of_scope"
+          ]
+        },
+        "discipline": {
+          "$ref": "common.schema.json#/$defs/discipline"
+        },
+        "drawing_type": {
+          "type": "string"
+        },
+        "confidence": {
+          "$ref": "common.schema.json#/$defs/confidence"
+        }
+      }
+    },
+    "plain_rewrite": {
+      "title": "PlainRewrite",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "text",
+        "technical_term"
+      ],
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "technical_term": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "explanation": {
+      "title": "Explanation",
+      "description": "Check explanation. Explains; never decides pass/fail (§8A.1).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "result_id",
+        "text",
+        "cites"
+      ],
+      "properties": {
+        "result_id": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cites": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/document_ref"
+          }
+        }
+      }
+    },
+    "profile_draft_result": {
+      "title": "ProfileDraftResult",
+      "description": "FR-61: rules drafted from an uploaded document. Every drafted rule is unverified with no signer.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "document",
+        "rules"
+      ],
+      "properties": {
+        "document": {
+          "$ref": "common.schema.json#/$defs/document_ref"
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "rule.schema.json"
+              },
+              {
+                "properties": {
+                  "state": {
+                    "const": "unverified"
+                  },
+                  "signer": {
+                    "type": "null"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "precedent_search_result": {
+      "title": "PrecedentSearchResult",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cards",
+        "declined"
+      ],
+      "properties": {
+        "cards": {
+          "type": "array",
+          "items": {
+            "$ref": "precedent-card.schema.json"
+          }
+        },
+        "declined": {
+          "description": "FR-175: a request to replicate a named, protected work is declined and its qualities offered instead.",
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "reason_key",
+                "offered_qualities"
+              ],
+              "properties": {
+                "reason_key": {
+                  "const": "precedent.decline_replicate"
+                },
+                "work": {
+                  "type": "string"
+                },
+                "offered_qualities": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "schema_version": "0.1.0",
+  "updated": "2026-09-26",
+  "source": "PRD v0.2.13 §8A.1 (defaults at 22 Sept 2026), Decisions 13 and 15. Changes to routing need an eval report attached (TESTING.md layer 6).",
+  "defaults": {
+    "on_refusal": {
+      "action": "surface",
+      "log": true
+    },
+    "cache_min_prefix_tokens": 512,
+    "new_thread_seed": {
+      "ddl": true,
+      "thread_state": "thread-state.schema.json",
+      "note": "A task with mid_conversation_system false takes a context change as a new thread seeded from the DDL plus the working state trust holds (assumptions, critique points, revision count, Generate anyway). The same seed starts a thread after a model change or refusal fallback."
+    }
+  },
+  "tasks": {
+    "route": {
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001",
+      "effort": null,
+      "effort_note": "Haiku 4.5 does not accept the effort parameter; PRD §8A.1 lists no effort for this task.",
+      "max_tokens": 1024,
+      "cache_prefix_key": "route.v1",
+      "batch": false,
+      "structured_output": "llm-outputs.schema.json#/$defs/route_result",
+      "mid_conversation_system": false
+    },
+    "rewrite": {
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001",
+      "effort": null,
+      "max_tokens": 1024,
+      "cache_prefix_key": "rewrite.v1",
+      "batch": false,
+      "structured_output": "llm-outputs.schema.json#/$defs/plain_rewrite",
+      "mid_conversation_system": false
+    },
+    "idea": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-5",
+      "effort": "low",
+      "effort_note": "PRD says low–medium; low chosen for the < 30 s first concept (FR-95). Raise to medium only on eval evidence.",
+      "max_tokens": 16000,
+      "cache_prefix_key": "idea.v1",
+      "batch": false,
+      "structured_output": "idea-result.schema.json",
+      "mid_conversation_system": false
+    },
+    "learn_critique": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-5",
+      "effort": "medium",
+      "max_tokens": 16000,
+      "cache_prefix_key": "learn.v1",
+      "batch": false,
+      "structured_output": "critique.schema.json",
+      "mid_conversation_system": false
+    },
+    "precedent_search": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-5",
+      "effort": "medium",
+      "max_tokens": 16000,
+      "cache_prefix_key": "precedent.v1",
+      "batch": false,
+      "tools": [
+        "web_search"
+      ],
+      "structured_output": "llm-outputs.schema.json#/$defs/precedent_search_result",
+      "mid_conversation_system": false,
+      "stage": 2
+    },
+    "promote": {
+      "provider": "anthropic",
+      "model": "claude-opus-5-5",
+      "effort": "medium",
+      "max_tokens": 32000,
+      "cache_prefix_key": "draft.v1",
+      "batch": false,
+      "structured_output": "interpretation.schema.json",
+      "mid_conversation_system": true
+    },
+    "interpret": {
+      "provider": "anthropic",
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "max_tokens": 32000,
+      "cache_prefix_key": "draft.v1",
+      "batch": false,
+      "structured_output": "interpretation.schema.json",
+      "mid_conversation_system": true,
+      "provisional": true,
+      "decision": 13,
+      "eval_candidates": [
+        {
+          "provider": "anthropic",
+          "model": "claude-opus-5-5"
+        },
+        {
+          "provider": "anthropic",
+          "model": "claude-sonnet-5"
+        },
+        {
+          "provider": "openai",
+          "model": null,
+          "name": "GPT-6 Astra",
+          "note": "API model ID to be confirmed before the Prompt 9 eval; eval candidate only (PROVIDERS.md)."
+        },
+        {
+          "provider": "anthropic",
+          "model": "claude-fable-5-1",
+          "role": "ceiling_reference"
+        }
+      ]
+    },
+    "compile": {
+      "provider": "anthropic",
+      "model": "claude-opus-5-5",
+      "effort": "medium",
+      "max_tokens": 32000,
+      "cache_prefix_key": "draft.v1",
+      "batch": false,
+      "structured_output": "ddl-diff.schema.json",
+      "mid_conversation_system": true
+    },
+    "explain": {
+      "provider": "anthropic",
+      "model": "claude-opus-5-5",
+      "effort": "medium",
+      "max_tokens": 16000,
+      "cache_prefix_key": "explain.v1",
+      "batch": false,
+      "structured_output": "llm-outputs.schema.json#/$defs/explanation",
+      "mid_conversation_system": true
+    },
+    "profile_draft": {
+      "provider": "anthropic",
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "max_tokens": 64000,
+      "cache_prefix_key": "profile_draft.v1",
+      "batch": true,
+      "structured_output": "llm-outputs.schema.json#/$defs/profile_draft_result",
+      "mid_conversation_system": true
+    },
+    "narrate": {
+      "provider": "anthropic",
+      "model": "claude-opus-5-5",
+      "effort": "medium",
+      "max_tokens": 16000,
+      "cache_prefix_key": "narrate.v1",
+      "batch": false,
+      "structured_output": "narration-script.schema.json",
+      "mid_conversation_system": true,
+      "stage": 2
+    }
+  }
+}

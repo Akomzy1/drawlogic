@@ -1,0 +1,167 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://drawlogic.invalid/contracts/render-thresholds.schema.json",
+  "title": "RenderThresholds",
+  "description": "Shape of contracts/render.thresholds.json. PRD FR-52, FR-127, FR-130, FR-164.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "fidelity",
+    "colour",
+    "generative_video",
+    "metering"
+  ],
+  "properties": {
+    "schema_version": {
+      "$ref": "common.schema.json#/$defs/semver"
+    },
+    "fidelity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "metric",
+        "modes",
+        "max_attempts"
+      ],
+      "properties": {
+        "metric": {
+          "const": "edge_overlay_iou"
+        },
+        "description": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "modes": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "min"
+            ],
+            "properties": {
+              "min": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "maximum": 1
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "max_attempts": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "colour": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "metric",
+        "colour_approximate_above",
+        "status"
+      ],
+      "properties": {
+        "metric": {
+          "const": "delta_e_2000"
+        },
+        "description": {
+          "type": "string"
+        },
+        "colour_approximate_above": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "pending_eval",
+            "set"
+          ]
+        },
+        "source": {
+          "type": "string"
+        }
+      },
+      "if": {
+        "properties": {
+          "status": {
+            "const": "set"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "colour_approximate_above": {
+            "type": "number"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "colour_approximate_above": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    "generative_video": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fidelity_scored",
+        "max_clip_seconds"
+      ],
+      "properties": {
+        "fidelity_scored": {
+          "const": false
+        },
+        "max_clip_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "source": {
+          "type": "string"
+        }
+      }
+    },
+    "metering": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "charge",
+        "retries_charged",
+        "failed_jobs_charged"
+      ],
+      "properties": {
+        "charge": {
+          "const": "once_per_delivered_render"
+        },
+        "retries_charged": {
+          "const": false
+        },
+        "failed_jobs_charged": {
+          "const": false
+        },
+        "description": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

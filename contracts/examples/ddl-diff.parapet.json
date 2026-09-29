@@ -1,0 +1,20 @@
+{
+  "schema_version": "0.1.0",
+  "id": "diff-parapet-0007",
+  "base_hash": "sha256:6c9dda3baaab349f23a5e252894f2c1af55ec1757d221dc49adfeec9dffbcedb",
+  "result_hash": null,
+  "origin": { "kind": "instruction", "instruction": "Make the parapet 750 high." },
+  "ops": [
+    {
+      "op": "set",
+      "collection": "dimensions",
+      "id": "parapet_height",
+      "field": "value",
+      "value": 750,
+      "before": 600,
+      "summary": "Parapet height 600 → 750 mm",
+      "source": "user",
+      "confidence": 1
+    }
+  ]
+}

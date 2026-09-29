@@ -1,0 +1,756 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://drawlogic.invalid/contracts/profile.schema.json",
+  "title": "Profile",
+  "description": "A versioned profile: jurisdiction, regional amendment, client, office, manufacturer or Generic. Version 0.1.0. PRD §6 principle 1, FR-03–09, FR-13, FR-24, FR-60–66, FR-152, FR-159. Config is law: everything jurisdiction- or discipline-specific lives here.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "metadata",
+    "conventions",
+    "applicable_documents",
+    "required_constraints",
+    "rules",
+    "typical_details",
+    "coverage"
+  ],
+  "properties": {
+    "schema_version": {
+      "$ref": "common.schema.json#/$defs/semver"
+    },
+    "metadata": {
+      "$ref": "#/$defs/metadata"
+    },
+    "conventions": {
+      "$ref": "#/$defs/conventions"
+    },
+    "applicable_documents": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/document_ref"
+      }
+    },
+    "provenance_settings": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "verify_threshold": {
+          "description": "ai_inferred below this confidence sets verify: true (FR-40). Default 0.8.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0.8
+        }
+      }
+    },
+    "required_constraints": {
+      "description": "Per drawing type or detail type (FR-13, FR-91), with Draft, Idea and Learn variants.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "draft",
+          "idea"
+        ],
+        "properties": {
+          "draft": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/required_constraint"
+            }
+          },
+          "idea": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/required_constraint"
+            }
+          },
+          "learn": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/required_constraint"
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "$ref": "rule.schema.json"
+      }
+    },
+    "check_categories": {
+      "description": "The categories this profile's pack recognises. Categories with no rule in the stack are listed as checks not performed (FR-32).",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "typical_details": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/typical_detail"
+      }
+    },
+    "construction_defaults": {
+      "description": "FR-06. Required on jurisdiction profiles. On client/office profiles its presence is the explicit material declaration that FR-09 requires before overriding the jurisdiction.",
+      "$ref": "#/$defs/construction_defaults"
+    },
+    "construction_defaults_by_region": {
+      "description": "Generic only (FR-08): keyed by country/climate region, e.g. \"west_africa_coastal\". Values resolve as ai_inferred with verify: true.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/construction_defaults"
+      }
+    },
+    "coverage": {
+      "$ref": "#/$defs/coverage"
+    },
+    "cost_benchmarks": {
+      "description": "Stage 2 (FR-151–152). Absent → quantities only (FR-159).",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "building_type",
+          "rate_low",
+          "rate_high",
+          "currency",
+          "unit",
+          "source",
+          "date",
+          "expiry"
+        ],
+        "properties": {
+          "building_type": {
+            "type": "string"
+          },
+          "rate_low": {
+            "type": "number",
+            "minimum": 0
+          },
+          "rate_high": {
+            "type": "number",
+            "minimum": 0
+          },
+          "currency": {
+            "type": "string",
+            "pattern": "^[A-Z]{3}$"
+          },
+          "unit": {
+            "type": "string",
+            "enum": [
+              "per_m2",
+              "per_ft2"
+            ]
+          },
+          "source": {
+            "type": "string"
+          },
+          "date": {
+            "$ref": "common.schema.json#/$defs/date"
+          },
+          "expiry": {
+            "$ref": "common.schema.json#/$defs/date"
+          }
+        }
+      }
+    },
+    "location_factors": {
+      "description": "Stage 2 (FR-159): within-jurisdiction factors keyed to the project address.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "area",
+          "factor",
+          "source"
+        ],
+        "properties": {
+          "area": {
+            "type": "string"
+          },
+          "factor": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "source": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "metadata": {
+            "properties": {
+              "type": {
+                "const": "jurisdiction"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "construction_defaults"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metadata": {
+            "properties": {
+              "type": {
+                "const": "generic"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "construction_defaults_by_region"
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "version",
+        "type",
+        "tier",
+        "disciplines",
+        "publish",
+        "changelog"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "$ref": "common.schema.json#/$defs/semver"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "generic",
+            "jurisdiction",
+            "regional",
+            "client",
+            "office",
+            "manufacturer"
+          ]
+        },
+        "jurisdiction": {
+          "description": "Jurisdiction code for jurisdiction and regional profiles, e.g. GB-ENG, NG-LA, US-IBC.",
+          "type": "string"
+        },
+        "extends": {
+          "description": "Regional amendment: the jurisdiction profile it amends.",
+          "$ref": "common.schema.json#/$defs/profile_ref"
+        },
+        "tier": {
+          "$ref": "common.schema.json#/$defs/tier"
+        },
+        "disciplines": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "common.schema.json#/$defs/discipline"
+          }
+        },
+        "building_types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scope": {
+          "description": "Plain statement of what the profile covers.",
+          "type": "string"
+        },
+        "author": {
+          "type": "string"
+        },
+        "signers": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/signer"
+          }
+        },
+        "publish": {
+          "type": "string",
+          "enum": [
+            "private",
+            "link",
+            "marketplace"
+          ]
+        },
+        "price": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "amount": {
+              "type": "number",
+              "minimum": 0
+            },
+            "currency": {
+              "type": "string"
+            },
+            "period": {
+              "type": "string",
+              "enum": [
+                "month",
+                "year",
+                "once"
+              ]
+            }
+          }
+        },
+        "changelog": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "version",
+              "date",
+              "summary"
+            ],
+            "properties": {
+              "version": {
+                "$ref": "common.schema.json#/$defs/semver"
+              },
+              "date": {
+                "$ref": "common.schema.json#/$defs/date"
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "conventions": {
+      "description": "FR-24. For Generic, conventions are keyed by region in `by_region`.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "units": {
+          "type": "string",
+          "enum": [
+            "mm",
+            "m",
+            "in",
+            "ft"
+          ]
+        },
+        "sheets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "size"
+            ],
+            "properties": {
+              "size": {
+                "type": "string"
+              },
+              "orientation": {
+                "type": "string",
+                "enum": [
+                  "landscape",
+                  "portrait"
+                ]
+              }
+            }
+          }
+        },
+        "title_block": {
+          "type": "string"
+        },
+        "layer_standard": {
+          "description": "e.g. \"BS EN ISO 13567\", \"AIA CAD Layer Guidelines\".",
+          "type": "string"
+        },
+        "symbol_set": {
+          "type": "string"
+        },
+        "dimension_style": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "terminator": {
+              "type": "string",
+              "enum": [
+                "tick",
+                "arrow",
+                "dot"
+              ]
+            },
+            "text_height_mm": {
+              "type": "number"
+            },
+            "precision": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "text_heights_mm": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "line_weights_mm": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "annotation_language": {
+          "description": "BCP 47 tag.",
+          "type": "string"
+        },
+        "by_region": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/conventions"
+          }
+        }
+      }
+    },
+    "required_constraint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "label",
+        "kind"
+      ],
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "label": {
+          "description": "Professional label on the interpretation card.",
+          "type": "string"
+        },
+        "plain_label": {
+          "description": "Plain-language label for Idea and Learn (FR-94).",
+          "type": "string"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "dimension",
+            "material",
+            "system",
+            "direction",
+            "engineering"
+          ]
+        },
+        "engineering_kind": {
+          "description": "For kind engineering: absent → blocked, never defaulted (FR-14).",
+          "type": "string",
+          "enum": [
+            "load",
+            "rating",
+            "member_size",
+            "cable_size",
+            "fire_period",
+            "u_value_target",
+            "structural_connection",
+            "other_engineering"
+          ]
+        },
+        "object_class": {
+          "type": "string"
+        },
+        "default_from": {
+          "description": "Where Idea mode fills it when missing (FR-91). Never set for kind engineering.",
+          "type": "string",
+          "enum": [
+            "construction_defaults",
+            "typical_detail",
+            "conventions"
+          ]
+        }
+      },
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "engineering"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "engineering_kind"
+        ],
+        "not": {
+          "required": [
+            "default_from"
+          ]
+        }
+      }
+    },
+    "layer_spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role",
+        "material_id"
+      ],
+      "properties": {
+        "role": {
+          "description": "e.g. outer_leaf, cavity, insulation, inner_leaf, render, block, finish.",
+          "type": "string"
+        },
+        "material_id": {
+          "description": "Null for a cavity or air gap.",
+          "oneOf": [
+            {
+              "$ref": "common.schema.json#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "thickness": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      }
+    },
+    "build_up": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "plain_description",
+        "layers"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "name": {
+          "type": "string"
+        },
+        "plain_description": {
+          "description": "Used verbatim in the assumptions panel, e.g. \"sandcrete block walls with cement render — the usual construction in Lagos\" (FR-07).",
+          "type": "string"
+        },
+        "layers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/layer_spec"
+          }
+        },
+        "applies_to": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "construction_defaults": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "materials",
+        "walls",
+        "frame",
+        "roofs",
+        "floors",
+        "windows",
+        "doors",
+        "finishes"
+      ],
+      "properties": {
+        "materials": {
+          "type": "array",
+          "items": {
+            "$ref": "object.schema.json#/$defs/material"
+          }
+        },
+        "walls": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/build_up"
+          }
+        },
+        "frame": {
+          "$ref": "#/$defs/build_up"
+        },
+        "roofs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/build_up"
+          }
+        },
+        "floors": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/build_up"
+          }
+        },
+        "windows": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/build_up"
+          }
+        },
+        "doors": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/build_up"
+          }
+        },
+        "finishes": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "external": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/build_up"
+              }
+            },
+            "internal": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/build_up"
+              }
+            },
+            "floor": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/build_up"
+              }
+            }
+          }
+        },
+        "typical_detail_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "typical_detail": {
+      "description": "Library detail keyed to a construction method (FR-06). Learn mode returns principles and a partial diagram, never the copy-ready detail (FR-141).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "detail_type",
+        "construction_method",
+        "title",
+        "principles"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "detail_type": {
+          "type": "string"
+        },
+        "construction_method": {
+          "description": "Build-up id from construction_defaults.",
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "principles": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "ddl_ref": {
+          "description": "Path to the detail's DDL within the profile package.",
+          "type": "string"
+        }
+      }
+    },
+    "coverage": {
+      "description": "FR-04. Generated from the rules; shown on every project.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement",
+        "checks_available",
+        "checks_not_available",
+        "rules_total",
+        "rules_verified"
+      ],
+      "properties": {
+        "statement": {
+          "type": "string"
+        },
+        "checks_available": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "checks_not_available": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rules_total": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rules_verified": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "generated_at": {
+          "$ref": "common.schema.json#/$defs/timestamp"
+        }
+      }
+    }
+  }
+}

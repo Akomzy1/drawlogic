@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://drawlogic.invalid/contracts/signing-gate.schema.json",
+  "title": "SigningGate",
+  "description": "Signing gate state for one drawing set. Version 0.1.0. PRD §7.11 FR-111–115, FR-43, trust rule 9. `enabled` is derived: true only when every condition holds; no role can set it. The control is disabled, never absent.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "set_id", "drawing_ids", "signer_id", "drawings_opened", "verify_items", "flags", "report_reviewed", "signer_checks", "enabled", "evidence"],
+  "properties": {
+    "schema_version": { "$ref": "common.schema.json#/$defs/semver" },
+    "set_id": { "type": "string" },
+    "drawing_ids": { "type": "array", "minItems": 1, "items": { "$ref": "common.schema.json#/$defs/uuid" } },
+    "signer_id": { "type": "string" },
+    "drawings_opened": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total", "opened"],
+      "properties": {
+        "total": { "type": "integer", "minimum": 1 },
+        "opened": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "verify_items": {
+      "description": "Every ai_inferred item with verify: true, resolved by accept, change or reject.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total", "resolved"],
+      "properties": {
+        "total": { "type": "integer", "minimum": 0 },
+        "resolved": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "flags": {
+      "description": "Every ⚠ cleared, or accepted with a note.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total", "cleared_or_accepted", "notes"],
+      "properties": {
+        "total": { "type": "integer", "minimum": 0 },
+        "cleared_or_accepted": { "type": "integer", "minimum": 0 },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["result_id", "state", "note"],
+            "properties": {
+              "result_id": { "type": "string" },
+              "state": { "type": "string", "enum": ["cleared", "accepted"] },
+              "note": { "type": "string" }
+            },
+            "if": { "properties": { "state": { "const": "accepted" } } },
+            "then": { "properties": { "note": { "minLength": 1 } } }
+          }
+        }
+      }
+    },
+    "report_reviewed": { "description": "Standards Report reviewed, including checks not performed.", "type": "boolean" },
+    "signer_checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["credential_verified", "jurisdiction_match", "discipline_match", "second_factor"],
+      "properties": {
+        "credential_verified": { "description": "Identity + registry + contact (FR-111), not suspended (FR-111b).", "type": "boolean" },
+        "verification_level": { "type": "string", "enum": ["verified", "verified_insured", "pending"] },
+        "jurisdiction_match": { "type": "boolean" },
+        "discipline_match": { "type": "boolean" },
+        "second_factor": { "description": "2FA step-up at the signing event (FR-111b). Requested only once all review conditions hold.", "type": "string", "enum": ["not_requested", "pending", "passed", "failed"] }
+      }
+    },
+    "enabled": { "type": "boolean" },
+    "evidence": {
+      "description": "Recorded into the hash-chained audit log (FR-114).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["items_opened", "changes", "assumptions_resolved", "flags_accepted", "time_in_review_s"],
+      "properties": {
+        "items_opened": { "type": "array", "items": { "type": "string" } },
+        "changes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["object_id", "before_hash", "after_hash"],
+            "properties": {
+              "object_id": { "type": "string" },
+              "field": { "type": "string" },
+              "before_hash": { "$ref": "common.schema.json#/$defs/hash" },
+              "after_hash": { "$ref": "common.schema.json#/$defs/hash" }
+            }
+          }
+        },
+        "assumptions_resolved": { "type": "integer", "minimum": 0 },
+        "flags_accepted": { "type": "integer", "minimum": 0 },
+        "time_in_review_s": { "type": "integer", "minimum": 0 }
+      }
+    }
+  },
+  "$comment": "Numeric equalities (opened == total, resolved == total, cleared_or_accepted == total) cannot be expressed in JSON Schema; contracts/scripts/validate.mjs checks that `enabled` equals the derivation, and trust/tests enforce it at runtime.",
+  "if": { "properties": { "enabled": { "const": true } } },
+  "then": {
+    "properties": {
+      "report_reviewed": { "const": true },
+      "signer_checks": {
+        "properties": {
+          "credential_verified": { "const": true },
+          "jurisdiction_match": { "const": true },
+          "discipline_match": { "const": true },
+          "verification_level": { "enum": ["verified", "verified_insured"] }
+        },
+        "required": ["verification_level"]
+      }
+    }
+  }
+}

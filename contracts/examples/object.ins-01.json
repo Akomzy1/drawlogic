@@ -1,0 +1,24 @@
+{
+  "id": "ins_01",
+  "class": "insulation",
+  "label": "Cavity insulation",
+  "material_id": "pir_board",
+  "thickness": 120,
+  "height": null,
+  "level": null,
+  "base_offset": null,
+  "geometry": null,
+  "source": "ai_inferred",
+  "confidence": 0.78,
+  "verify": true,
+  "rule_refs": ["gb-eng-L-4.2"],
+  "layer_id": "walls",
+  "field_provenance": {
+    "material_id": { "source": "ai_inferred", "confidence": 0.78, "verify": true },
+    "thickness": { "source": "ai_inferred", "confidence": 0.62, "verify": true, "source_detail": { "note": "Scaled from the reference section, not dimensioned." } }
+  },
+  "source_detail": {
+    "model": { "provider": "anthropic", "model_id": "claude-opus-5-5", "task": "interpret" },
+    "note": "Insulation type read from the reference section; thickness not dimensioned."
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": "0.1.0",
+  "id": "nar-parapet-01",
+  "drawing_id": "3f6c1e2a-7b4d-4c8e-9a51-2d0f6b7e8c11",
+  "drawing_hash": "sha256:6c9dda3baaab349f23a5e252894f2c1af55ec1757d221dc49adfeec9dffbcedb",
+  "language": "en-GB",
+  "units": "metric",
+  "illustrative": true,
+  "segments": [
+    { "id": "s1", "element_id": "wall_outer", "field": "material_id", "text": "The outer wall is red multi facing brick.", "source": "user", "verify": false, "hedge": false, "camera_cue": "cam-01" },
+    { "id": "s2", "element_id": "parapet_height", "field": "value", "text": "The parapet rises 600 millimetres above the roof membrane.", "source": "user", "verify": false, "hedge": false, "camera_cue": "cam-01" },
+    { "id": "s3", "element_id": "ins_01", "field": "thickness", "text": "The drawing shows 120 millimetres of insulation in the cavity; that thickness is assumed and still to be confirmed.", "source": "ai_inferred", "verify": true, "hedge": true, "camera_cue": "cam-02" },
+    { "id": "s4", "element_id": "coping", "field": "material_id", "text": "The parapet is capped with an aluminium coping in RAL 7016 that falls towards the roof.", "source": "user", "verify": false, "hedge": false, "camera_cue": "cam-02" }
+  ],
+  "omitted": [],
+  "generated_at": "2026-09-14T14:10:00Z"
+}

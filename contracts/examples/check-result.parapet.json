@@ -1,0 +1,92 @@
+{
+  "schema_version": "0.1.0",
+  "run_id": "8b1d4f60-2c3a-4e7b-9f10-5a6c7d8e9f01",
+  "drawing_id": "3f6c1e2a-7b4d-4c8e-9a51-2d0f6b7e8c11",
+  "drawing_hash": "sha256:6c9dda3baaab349f23a5e252894f2c1af55ec1757d221dc49adfeec9dffbcedb",
+  "mode": "draft",
+  "profile_versions": { "gb-eng-residential": "1.3.0", "generic": "0.9.0" },
+  "results": [
+    {
+      "id": "res-01",
+      "rule_id": "gb-eng-roof-upstand-150",
+      "profile": { "id": "gb-eng-residential", "version": "1.3.0" },
+      "category": "moisture",
+      "status": "pass",
+      "reason": null,
+      "object_ids": ["upstand"],
+      "message": "Membrane upstand should be at least 150 mm above the finished roof surface.",
+      "document": { "ref": "BS 6229", "edition": "2018" },
+      "rule_state": "verified",
+      "signer": { "name": "J. Smith", "credential": "CIAT 12345", "jurisdiction": "England", "verification_level": "verified", "signed_at": "2026-09-02T10:00:00Z" },
+      "auto_fix": { "available": false },
+      "resolution": null
+    },
+    {
+      "id": "res-02",
+      "rule_id": "gb-eng-L-4.2",
+      "profile": { "id": "gb-eng-residential", "version": "1.3.0" },
+      "category": "thermal",
+      "status": "flag",
+      "reason": "unverified",
+      "object_ids": ["ins_01"],
+      "message": "Insulation continuity between wall and roof: rule not yet verified by a signer.",
+      "document": { "ref": "Approved Document L" },
+      "rule_state": "unverified",
+      "signer": null,
+      "auto_fix": { "available": false },
+      "resolution": null
+    },
+    {
+      "id": "res-03",
+      "rule_id": "generic-geometry-closure",
+      "profile": { "id": "generic", "version": "0.9.0" },
+      "category": "geometry",
+      "status": "flag",
+      "reason": "unverified",
+      "object_ids": ["wall_outer", "wall_inner", "coping"],
+      "message": "Geometry closure: good-practice check, not verified by a signer.",
+      "document": null,
+      "rule_state": "unverified",
+      "signer": null,
+      "auto_fix": { "available": false },
+      "resolution": { "state": "cleared", "by": "usr-technologist-01", "at": "2026-09-14T14:05:00Z" }
+    },
+    {
+      "id": "res-04",
+      "rule_id": null,
+      "category": "moisture",
+      "status": "flag",
+      "reason": "no_rule",
+      "object_ids": ["coping", "wall_outer"],
+      "message": "No rule covers the damp-proof course under the coping.",
+      "document": null,
+      "rule_state": null,
+      "signer": null,
+      "auto_fix": { "available": false },
+      "resolution": null
+    },
+    {
+      "id": "res-05",
+      "rule_id": "gb-eng-roof-outlet-spacing",
+      "profile": { "id": "gb-eng-residential", "version": "1.3.0" },
+      "category": "drainage",
+      "status": "out_of_scope",
+      "reason": null,
+      "object_ids": [],
+      "message": "Roof outlets are not part of a parapet detail.",
+      "document": null,
+      "rule_state": "verified",
+      "signer": { "name": "J. Smith", "credential": "CIAT 12345" },
+      "auto_fix": { "available": false },
+      "resolution": null
+    }
+  ],
+  "checks_not_performed": [
+    { "category": "fire_stopping", "label": "fire stopping" },
+    { "category": "structural", "label": "structural" },
+    { "category": "acoustic", "label": "acoustic" }
+  ],
+  "blocked": [],
+  "summary": { "performed": 4, "passed": 1, "flagged": 3, "out_of_scope": 1 },
+  "generated_at": "2026-09-14T14:01:30Z"
+}

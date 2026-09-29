@@ -28,10 +28,16 @@ export const GOVERNED_LINE = /[£$₦€]\s?\d|\bcredits?\b|\bseats?\b|\/mo\b|\/
 export function loadBanned() {
   const copy = path.join(REPO_ROOT, "contracts/copy.json");
   if (fs.existsSync(copy)) {
-    const words = JSON.parse(fs.readFileSync(copy, "utf8")).banned ?? [];
+    // The site shows no Studio output and no estimate output, so it takes the everywhere list, the compliance-claim
+    // patterns, the outside-Studio words and the render/preview words; the estimate scope does not apply.
+    const c = JSON.parse(fs.readFileSync(copy, "utf8"));
+    const words = [...(c.banned ?? []), ...(c.banned_scoped?.outside_studio_output?.words ?? []), ...(c.banned_scoped?.render_and_preview_output?.words ?? [])];
     return {
       source: "contracts/copy.json",
-      patterns: words.map((w) => ({ word: w, re: new RegExp(`\\b${w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/\s+/g, "[\\s-]+")}\\b`, "i") })),
+      patterns: [
+        ...words.map((w) => ({ word: w, re: new RegExp(`\\b${w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/\s+/g, "[\\s-]+")}\\b`, "i") })),
+        ...(c.banned_patterns ?? []).map((p) => ({ word: p.id, re: new RegExp(p.pattern, p.flags) })),
+      ],
     };
   }
   const words = ["compliant", "code-compliant", "meets code", "guaranteed", "stamp marketplace", "get your plans stamped", "stamping service", "flythrough", "walkthrough", "cinematic"];

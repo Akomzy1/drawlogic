@@ -1,0 +1,5 @@
+{
+  "result_id": "res-02",
+  "text": "This line is flagged because the rule that checks insulation continuity between the wall and the roof has not been verified by a signer yet. The drawing may be fine; nobody has signed the rule that would say so. A professional needs to confirm the insulation type and thickness, which were read from your reference section rather than stated.",
+  "cites": [{ "ref": "Approved Document L" }]
+}

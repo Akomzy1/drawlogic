@@ -1,0 +1,505 @@
+{
+  "ddl_version": "0.1.0",
+  "drawing": {
+    "id": "c7d8e9f0-1a2b-4c3d-9e4f-5a6b7c8d9e02",
+    "title": "Lekki plot — option A, 4-bed duplex with BQ and gate house",
+    "discipline": "architecture",
+    "type": "site_plan",
+    "mode": "idea",
+    "scale": 200,
+    "units": "m",
+    "jurisdiction": "NG-LA",
+    "rev": "C1",
+    "hash": "sha256:e0505d945004638e8d73a785898cf371c84a5795181e3f0ff124063f67e80839",
+    "parent_hash": null,
+    "profile_stack": [
+      {
+        "id": "ng-la-residential",
+        "name": "NG-LA Residential",
+        "version": "0.8.0",
+        "layer": "jurisdiction",
+        "tier": 2,
+        "signer": null
+      },
+      {
+        "id": "generic",
+        "name": "Generic",
+        "version": "0.9.0",
+        "layer": "generic",
+        "tier": null,
+        "signer": null
+      }
+    ],
+    "created_at": "2026-09-16T11:04:00Z"
+  },
+  "project": {
+    "id": "idea-lekki-0001",
+    "location": {
+      "address": "Lekki, Lagos",
+      "country": "NG",
+      "jurisdiction": "NG-LA",
+      "climate_region": "west_africa_coastal"
+    },
+    "building_type": "residential",
+    "storeys": [
+      {
+        "id": "ground",
+        "name": "Ground floor",
+        "ffl": 0,
+        "height": null,
+        "source": "ai_inferred",
+        "confidence": 0.85,
+        "verify": true,
+        "source_detail": {
+          "model": {
+            "provider": "anthropic",
+            "model_id": "claude-sonnet-5",
+            "task": "idea"
+          }
+        }
+      },
+      {
+        "id": "first",
+        "name": "First floor",
+        "ffl": null,
+        "height": null,
+        "source": "ai_inferred",
+        "confidence": 0.85,
+        "verify": true,
+        "source_detail": {
+          "model": {
+            "provider": "anthropic",
+            "model_id": "claude-sonnet-5",
+            "task": "idea"
+          },
+          "note": "Duplex read as two floors."
+        }
+      }
+    ]
+  },
+  "site": {
+    "crs": "LOCAL",
+    "boundary": {
+      "method": "dimensions",
+      "polygon": [
+        [
+          0,
+          0
+        ],
+        [
+          18.288,
+          0
+        ],
+        [
+          18.288,
+          36.576
+        ],
+        [
+          0,
+          36.576
+        ]
+      ],
+      "area_m2": 668.9,
+      "source": "user",
+      "confidence": 1,
+      "verify": false,
+      "source_detail": {
+        "note": "60 × 120 ft as typed. No survey uploaded; a survey plan would govern."
+      }
+    },
+    "basemap": null,
+    "terrain": {
+      "provenance": {
+        "kind": "terrain",
+        "provider": "Copernicus",
+        "dataset": "Copernicus DEM GLO-30",
+        "resolution_m": 30,
+        "attribution": "Copernicus DEM",
+        "retrieved_at": "2026-09-16T11:03:40Z"
+      },
+      "fall_direction_deg": null,
+      "slope_pct": null,
+      "suitable_for_drainage_design": false
+    },
+    "context_layers": [
+      {
+        "kind": "road",
+        "provenance": {
+          "kind": "context_layer",
+          "provider": "OpenStreetMap",
+          "licence": "ODbL",
+          "attribution": "© OpenStreetMap contributors",
+          "retrieved_at": "2026-09-16T11:03:41Z"
+        },
+        "feature_ids": [
+          "osm-way-front-road"
+        ],
+        "use": "context"
+      }
+    ],
+    "orientation_deg": null
+  },
+  "materials": [
+    {
+      "id": "sandcrete_block",
+      "name": "Sandcrete block",
+      "category": "masonry",
+      "basis": "description_only",
+      "source": "profile",
+      "confidence": 1,
+      "verify": false,
+      "source_detail": {
+        "profile": {
+          "id": "ng-la-residential",
+          "version": "0.8.0"
+        }
+      }
+    },
+    {
+      "id": "cement_render",
+      "name": "Cement render and paint",
+      "category": "render",
+      "basis": "description_only",
+      "source": "profile",
+      "confidence": 1,
+      "verify": false,
+      "source_detail": {
+        "profile": {
+          "id": "ng-la-residential",
+          "version": "0.8.0"
+        }
+      }
+    },
+    {
+      "id": "rc_frame",
+      "name": "Reinforced concrete frame and slabs",
+      "category": "concrete",
+      "basis": "description_only",
+      "source": "profile",
+      "confidence": 1,
+      "verify": false,
+      "source_detail": {
+        "profile": {
+          "id": "ng-la-residential",
+          "version": "0.8.0"
+        }
+      }
+    },
+    {
+      "id": "longspan_alu",
+      "name": "Long-span aluminium roofing sheet",
+      "category": "roofing_sheet",
+      "basis": "description_only",
+      "source": "profile",
+      "confidence": 1,
+      "verify": false,
+      "source_detail": {
+        "profile": {
+          "id": "ng-la-residential",
+          "version": "0.8.0"
+        }
+      }
+    }
+  ],
+  "objects": [
+    {
+      "id": "duplex",
+      "class": "building",
+      "label": "4-bed duplex",
+      "material_id": "sandcrete_block",
+      "thickness": null,
+      "height": null,
+      "level": "ground",
+      "base_offset": null,
+      "geometry": {
+        "kind": "rect",
+        "origin": [
+          3,
+          6
+        ],
+        "width": 12.288,
+        "height": 14
+      },
+      "properties": {
+        "floors": 2,
+        "footprint_m2": 172
+      },
+      "status": "proposed",
+      "source": "user",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": [],
+      "field_provenance": {
+        "geometry": {
+          "source": "ai_inferred",
+          "confidence": 0.7,
+          "verify": true,
+          "source_detail": {
+            "model": {
+              "provider": "anthropic",
+              "model_id": "claude-sonnet-5",
+              "task": "idea"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "bq",
+      "class": "building",
+      "label": "Boys' quarters",
+      "material_id": "sandcrete_block",
+      "thickness": null,
+      "height": null,
+      "level": "ground",
+      "base_offset": null,
+      "geometry": {
+        "kind": "rect",
+        "origin": [
+          3,
+          29.576
+        ],
+        "width": 6,
+        "height": 4
+      },
+      "properties": {
+        "floors": 1,
+        "footprint_m2": 24
+      },
+      "status": "proposed",
+      "source": "user",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": [],
+      "field_provenance": {
+        "geometry": {
+          "source": "ai_inferred",
+          "confidence": 0.7,
+          "verify": true,
+          "source_detail": {
+            "model": {
+              "provider": "anthropic",
+              "model_id": "claude-sonnet-5",
+              "task": "idea"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "gate_house",
+      "class": "building",
+      "label": "Gate house",
+      "material_id": "sandcrete_block",
+      "thickness": null,
+      "height": null,
+      "level": "ground",
+      "base_offset": null,
+      "geometry": {
+        "kind": "rect",
+        "origin": [
+          14.288,
+          0.5
+        ],
+        "width": 3,
+        "height": 3
+      },
+      "properties": {
+        "floors": 1,
+        "footprint_m2": 9
+      },
+      "status": "proposed",
+      "source": "user",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": [],
+      "field_provenance": {
+        "geometry": {
+          "source": "ai_inferred",
+          "confidence": 0.7,
+          "verify": true,
+          "source_detail": {
+            "model": {
+              "provider": "anthropic",
+              "model_id": "claude-sonnet-5",
+              "task": "idea"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "setback_front",
+      "class": "setback",
+      "label": "Front setback",
+      "material_id": null,
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polyline",
+        "points": [
+          [
+            0,
+            6
+          ],
+          [
+            18.288,
+            6
+          ]
+        ]
+      },
+      "properties": {
+        "distance_m": 6
+      },
+      "source": "ai_inferred",
+      "confidence": 0.7,
+      "verify": true,
+      "rule_refs": [],
+      "source_detail": {
+        "profile": {
+          "id": "ng-la-residential",
+          "version": "0.8.0"
+        },
+        "note": "Default from the NG-LA Tier 2 profile; not a signed rule."
+      }
+    },
+    {
+      "id": "setback_sides",
+      "class": "setback",
+      "label": "Side setbacks",
+      "material_id": null,
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polyline",
+        "points": [
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            36.576
+          ]
+        ]
+      },
+      "properties": {
+        "distance_m": 3
+      },
+      "source": "ai_inferred",
+      "confidence": 0.7,
+      "verify": true,
+      "rule_refs": [],
+      "source_detail": {
+        "profile": {
+          "id": "ng-la-residential",
+          "version": "0.8.0"
+        }
+      }
+    },
+    {
+      "id": "setback_rear",
+      "class": "setback",
+      "label": "Rear setback",
+      "material_id": null,
+      "thickness": null,
+      "height": null,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "polyline",
+        "points": [
+          [
+            0,
+            33.576
+          ],
+          [
+            18.288,
+            33.576
+          ]
+        ]
+      },
+      "properties": {
+        "distance_m": 3
+      },
+      "source": "ai_inferred",
+      "confidence": 0.7,
+      "verify": true,
+      "rule_refs": [],
+      "source_detail": {
+        "profile": {
+          "id": "ng-la-residential",
+          "version": "0.8.0"
+        }
+      }
+    }
+  ],
+  "connections": [],
+  "constraints": [
+    {
+      "id": "c_duplex_front",
+      "type": "min",
+      "target": "duplex.geometry.origin.1",
+      "value": "setback_front.properties.distance_m",
+      "source": "ai_inferred",
+      "confidence": 0.7,
+      "verify": true,
+      "source_detail": {
+        "profile": {
+          "id": "ng-la-residential",
+          "version": "0.8.0"
+        }
+      }
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "coverage",
+      "kind": "area",
+      "refs": [
+        "duplex",
+        "bq",
+        "gate_house"
+      ],
+      "value": null,
+      "driving": false,
+      "source": "profile",
+      "confidence": 1,
+      "source_detail": {
+        "profile": {
+          "id": "ng-la-residential",
+          "version": "0.8.0"
+        },
+        "note": "Coverage measured by the solver."
+      }
+    }
+  ],
+  "annotations": [],
+  "layers": [],
+  "schedules": [
+    {
+      "id": "sch_areas",
+      "kind": "areas",
+      "object_ids": [
+        "duplex",
+        "bq",
+        "gate_house"
+      ],
+      "columns": [
+        "label",
+        "properties.floors",
+        "properties.footprint_m2"
+      ]
+    }
+  ],
+  "solver": {
+    "status": "unresolved",
+    "conflicts": []
+  },
+  "checks": null,
+  "stamp": null
+}

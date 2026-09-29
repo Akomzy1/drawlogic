@@ -1,0 +1,35 @@
+{
+  "schema_version": "0.1.0",
+  "card_id": "card-lekki-0001",
+  "mode": "idea",
+  "status": "draft",
+  "discipline": "architecture",
+  "drawing_type": "site_plan",
+  "scale": 200,
+  "units": "m",
+  "jurisdiction": "NG-LA",
+  "jurisdiction_inferred": true,
+  "profile_stack": [
+    { "id": "ng-la-residential", "name": "NG-LA Residential", "version": "0.8.0", "layer": "jurisdiction", "tier": 2, "signer": null },
+    { "id": "generic", "name": "Generic", "version": "0.9.0", "layer": "generic", "tier": null, "signer": null }
+  ],
+  "inputs": [
+    { "kind": "text", "text": "60 × 120 ft plot in Lekki, 4-bed duplex with BQ and gate house" },
+    { "kind": "location", "text": "Lekki, Lagos" }
+  ],
+  "recognised": [
+    { "key": "plot_dimensions", "label": "Plot", "plain_label": "Plot size", "value": "60 × 120 ft (18.3 × 36.6 m)", "source": "user", "confidence": 1, "verify": false },
+    { "key": "programme", "label": "Programme", "plain_label": "What you want on the plot", "value": "4-bed duplex, boys' quarters, gate house", "source": "user", "confidence": 1, "verify": false }
+  ],
+  "missing": [],
+  "blocked": [],
+  "assumptions": [
+    { "id": "as-setbacks", "key": "setbacks", "text": "I assumed setbacks of 6 m at the front and 3 m at the sides and rear", "technical_term": "Building setbacks", "value": "6.0 / 3.0 / 3.0", "unit": "m", "source": "ai_inferred", "confidence": 0.7, "verify": true, "editable": true, "source_detail": { "profile": { "id": "ng-la-residential", "version": "0.8.0" }, "note": "NG-LA Tier 2 profile default, not a signed rule." } },
+    { "id": "as-floors", "key": "floors", "text": "I assumed the duplex has two floors", "value": 2, "source": "ai_inferred", "confidence": 0.85, "verify": true, "editable": true, "source_detail": { "model": { "provider": "anthropic", "model_id": "claude-sonnet-5", "task": "idea" } } },
+    { "id": "as-walls", "key": "wall_build_up", "text": "I assumed sandcrete block walls with cement render — the usual construction in Lagos", "technical_term": "Sandcrete block, rendered", "value": "ng_sandcrete_render", "source": "profile", "confidence": 1, "verify": false, "editable": true, "source_detail": { "profile": { "id": "ng-la-residential", "version": "0.8.0" } } },
+    { "id": "as-frame", "key": "frame", "text": "I assumed a reinforced concrete frame", "technical_term": "RC frame and slabs", "value": "ng_rc_frame", "source": "profile", "confidence": 1, "verify": false, "editable": true, "source_detail": { "profile": { "id": "ng-la-residential", "version": "0.8.0" } } },
+    { "id": "as-roof", "key": "roof_type", "text": "I assumed a long-span aluminium sheet roof", "technical_term": "Long-span aluminium roofing sheet", "value": "ng_longspan_alu", "source": "profile", "confidence": 1, "verify": false, "editable": true, "source_detail": { "profile": { "id": "ng-la-residential", "version": "0.8.0" } } },
+    { "id": "as-boundary", "key": "boundary", "text": "I drew the plot from the size you typed; a survey plan would replace it", "value": "dimensions", "source": "ai_inferred", "confidence": 0.9, "verify": false, "editable": true, "source_detail": { "model": { "provider": "anthropic", "model_id": "claude-sonnet-5", "task": "idea" } } }
+  ],
+  "created_at": "2026-09-16T11:03:30Z"
+}

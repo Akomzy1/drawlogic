@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://drawlogic.invalid/contracts/ddl-diff.schema.json",
+  "title": "DdlDiff",
+  "description": "A change to a DDL: a natural-language edit (FR-21) or an auto-fix (FR-33). Version 0.1.0. Shown as a change list and undoable. Addition to the CONTRACTS.md table (structured output for the `compile` task's edits; output of /check/autofix).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "base_hash", "origin", "ops"],
+  "properties": {
+    "schema_version": { "$ref": "common.schema.json#/$defs/semver" },
+    "id": { "type": "string" },
+    "base_hash": { "$ref": "common.schema.json#/$defs/hash" },
+    "result_hash": { "description": "Filled by the engine after applying and resolving, never by a model.", "oneOf": [{ "$ref": "common.schema.json#/$defs/hash" }, { "type": "null" }] },
+    "origin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind"],
+      "properties": {
+        "kind": { "type": "string", "enum": ["instruction", "auto_fix", "card_edit", "promote"] },
+        "instruction": { "description": "The user's words for kind instruction.", "type": "string" },
+        "rule_id": { "type": "string" },
+        "check_run_id": { "type": "string" }
+      },
+      "allOf": [
+        { "if": { "properties": { "kind": { "const": "instruction" } } }, "then": { "required": ["instruction"] } },
+        { "if": { "properties": { "kind": { "const": "auto_fix" } } }, "then": { "required": ["rule_id", "check_run_id"] } }
+      ]
+    },
+    "ops": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["op", "collection", "id", "source", "confidence"],
+        "allOf": [
+          { "$ref": "common.schema.json#/$defs/provenance" },
+          { "description": "set carries what to change and what it was, so it can be applied and undone (FR-21).", "if": { "properties": { "op": { "const": "set" } } }, "then": { "required": ["field", "value", "before"] } },
+          { "description": "add carries the whole element.", "if": { "properties": { "op": { "const": "add" } } }, "then": { "required": ["value"] } },
+          { "description": "remove carries the removed element, so it can be undone (FR-21).", "if": { "properties": { "op": { "const": "remove" } } }, "then": { "required": ["before"] } }
+        ],
+        "properties": {
+          "op": { "type": "string", "enum": ["add", "remove", "set"] },
+          "collection": { "type": "string", "enum": ["materials", "objects", "connections", "constraints", "dimensions", "annotations", "layers", "schedules"] },
+          "id": { "description": "Element id the op targets.", "type": "string" },
+          "field": { "description": "For set: dotted field path within the element.", "type": "string" },
+          "value": { "description": "For add: the whole element; for set: the new value." },
+          "before": { "description": "For set and remove: the previous value, so the change is undoable." },
+          "summary": { "description": "Change-list line, plain language.", "type": "string" },
+          "source": true, "confidence": true, "verify": true, "source_detail": true
+        }
+      }
+    }
+  },
+  "if": { "properties": { "origin": { "properties": { "kind": { "const": "auto_fix" } } } } },
+  "then": { "properties": { "ops": { "items": { "properties": { "source": { "const": "auto_fix" } } } } } }
+}

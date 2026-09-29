@@ -1,0 +1,43 @@
+{
+  "schema_version": "0.1.0",
+  "id": "ts-ex03-parapet",
+  "task": "learn_critique",
+  "mode": "learn",
+  "workspace_id": "ws-student-ab",
+  "drawing_id": null,
+  "ddl_hash": null,
+  "card_id": null,
+  "assumptions": [],
+  "critique_points": [
+    {
+      "id": "pt-01",
+      "grade": "red",
+      "title": "Upstand height",
+      "reason": "The felt only turns up the wall a little. Water blown against the parapet can get over it.",
+      "why": "The membrane has to turn up high enough that standing or wind-driven water cannot get over the top of it and into the wall.",
+      "question": "How far above the finished roof should the membrane turn up, and where would you finish its top edge?",
+      "source": { "kind": "rule", "rule_id": "gb-eng-roof-upstand-150", "rule_state": "verified", "document": { "ref": "BS 6229", "edition": "2018" } },
+      "asks_for": [],
+      "state": "attempted",
+      "worked_answer_available": true
+    },
+    {
+      "id": "pt-02",
+      "grade": "amber",
+      "title": "Nothing under the coping",
+      "reason": "There is no damp-proof layer shown under the coping, so water that gets past the coping joints can run down inside the wall.",
+      "why": "Coping joints are not watertight forever. A layer under the coping catches what gets through.",
+      "source": { "kind": "general_good_practice", "label_key": "learn.general_good_practice" },
+      "asks_for": [],
+      "state": "raised",
+      "worked_answer_available": false
+    }
+  ],
+  "revision_cycles": 1,
+  "generate_anyway": { "used": false, "audit_record_id": null },
+  "thread_ids": [
+    { "thread_id": "thr-ex03-a", "model": "claude-sonnet-5", "started_at": "2026-09-19T10:11:30Z", "reason": "start" },
+    { "thread_id": "thr-ex03-b", "model": "claude-sonnet-5", "started_at": "2026-09-19T10:40:02Z", "reason": "context_change" }
+  ],
+  "updated_at": "2026-09-19T10:41:15Z"
+}

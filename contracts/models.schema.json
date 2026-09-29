@@ -1,0 +1,281 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://drawlogic.invalid/contracts/models.schema.json",
+  "title": "Models",
+  "description": "Shape of contracts/models.json — task → provider, model, effort, cache prefix key, batch flag. The only place model IDs live (§8A). Every task named in contracts/providers/llm.ts must appear.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "updated",
+    "source",
+    "defaults",
+    "tasks"
+  ],
+  "properties": {
+    "schema_version": {
+      "$ref": "common.schema.json#/$defs/semver"
+    },
+    "updated": {
+      "$ref": "common.schema.json#/$defs/date"
+    },
+    "source": {
+      "type": "string"
+    },
+    "defaults": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "on_refusal",
+        "cache_min_prefix_tokens",
+        "new_thread_seed"
+      ],
+      "properties": {
+        "on_refusal": {
+          "$ref": "#/$defs/on_refusal"
+        },
+        "cache_min_prefix_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "new_thread_seed": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ddl",
+            "thread_state"
+          ],
+          "properties": {
+            "ddl": {
+              "const": true
+            },
+            "thread_state": {
+              "const": "thread-state.schema.json"
+            },
+            "note": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "tasks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "route",
+        "rewrite",
+        "idea",
+        "learn_critique",
+        "precedent_search",
+        "promote",
+        "interpret",
+        "compile",
+        "explain",
+        "profile_draft",
+        "narrate"
+      ],
+      "properties": {
+        "route": {
+          "$ref": "#/$defs/task"
+        },
+        "rewrite": {
+          "$ref": "#/$defs/task"
+        },
+        "idea": {
+          "$ref": "#/$defs/task"
+        },
+        "learn_critique": {
+          "$ref": "#/$defs/task"
+        },
+        "precedent_search": {
+          "$ref": "#/$defs/task"
+        },
+        "promote": {
+          "$ref": "#/$defs/task"
+        },
+        "interpret": {
+          "$ref": "#/$defs/task"
+        },
+        "compile": {
+          "$ref": "#/$defs/task"
+        },
+        "explain": {
+          "$ref": "#/$defs/task"
+        },
+        "profile_draft": {
+          "$ref": "#/$defs/task"
+        },
+        "narrate": {
+          "$ref": "#/$defs/task"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "on_refusal": {
+      "description": "stop_reason refusal: surface to the user and log (never silently alter), or start a new thread on another model seeded from the DDL (a thread never switches model, §8A.2).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "action",
+        "log"
+      ],
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "surface",
+            "new_thread_with"
+          ]
+        },
+        "model": {
+          "type": "string"
+        },
+        "log": {
+          "const": true
+        }
+      },
+      "if": {
+        "properties": {
+          "action": {
+            "const": "new_thread_with"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "model"
+        ]
+      }
+    },
+    "task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "model",
+        "effort",
+        "max_tokens",
+        "cache_prefix_key",
+        "batch",
+        "structured_output",
+        "mid_conversation_system"
+      ],
+      "properties": {
+        "provider": {
+          "type": "string",
+          "enum": [
+            "anthropic",
+            "openai"
+          ]
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "effort": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max",
+            null
+          ]
+        },
+        "effort_note": {
+          "type": "string"
+        },
+        "max_tokens": {
+          "type": "integer",
+          "minimum": 256
+        },
+        "cache_prefix_key": {
+          "type": "string"
+        },
+        "batch": {
+          "type": "boolean"
+        },
+        "tools": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "web_search"
+            ]
+          }
+        },
+        "structured_output": {
+          "description": "Contract schema (file, optionally #/$defs/name) the output must validate against.",
+          "type": "string",
+          "pattern": "^[a-z-]+\\.schema\\.json(#/\\$defs/[a-z_]+)?$"
+        },
+        "mid_conversation_system": {
+          "description": "Whether the model accepts mid-conversation system messages. false → context changes start a new thread seeded from the DDL (Sonnet 5 and Haiku 4.5 do not support them).",
+          "type": "boolean"
+        },
+        "on_refusal": {
+          "$ref": "#/$defs/on_refusal"
+        },
+        "provisional": {
+          "type": "boolean"
+        },
+        "decision": {
+          "type": "integer"
+        },
+        "stage": {
+          "type": "integer",
+          "enum": [
+            1,
+            2,
+            3
+          ]
+        },
+        "eval_candidates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "provider",
+              "model"
+            ],
+            "properties": {
+              "provider": {
+                "type": "string",
+                "enum": [
+                  "anthropic",
+                  "openai"
+                ]
+              },
+              "model": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "name": {
+                "type": "string"
+              },
+              "role": {
+                "type": "string",
+                "enum": [
+                  "candidate",
+                  "ceiling_reference"
+                ]
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

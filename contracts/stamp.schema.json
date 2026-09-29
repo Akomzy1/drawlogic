@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://drawlogic.invalid/contracts/stamp.schema.json",
+  "title": "Stamp",
+  "description": "Verification stamp on every export. Version 0.1.0. PRD App. C, FR-42, FR-59, FR-96, FR-115, FR-146, FR-165, trust rule 7. All text comes from copy.json by key; this document carries data only.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "drawing_id", "drawing_hash", "rev", "mode", "profiles", "checks", "checks_not_performed", "unverified_objects", "signed", "marks", "closing_sentence_key", "generated_at"],
+  "properties": {
+    "schema_version": { "$ref": "common.schema.json#/$defs/semver" },
+    "drawing_id": { "$ref": "common.schema.json#/$defs/uuid" },
+    "drawing_hash": { "$ref": "common.schema.json#/$defs/hash" },
+    "rev": { "type": "string" },
+    "mode": { "$ref": "common.schema.json#/$defs/mode" },
+    "check_run_id": { "oneOf": [{ "$ref": "common.schema.json#/$defs/uuid" }, { "type": "null" }] },
+    "profiles": { "type": "array", "minItems": 1, "items": { "$ref": "common.schema.json#/$defs/stack_entry" } },
+    "checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["performed", "passed", "flagged"],
+      "properties": {
+        "performed": { "type": "integer", "minimum": 0 },
+        "passed": { "type": "integer", "minimum": 0 },
+        "flagged": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "checks_not_performed": {
+      "description": "Always present. Empty renders copy.json → check.not_performed_none.",
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "unverified_objects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["count", "items"],
+      "properties": {
+        "count": { "type": "integer", "minimum": 0 },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["object_id", "note"],
+            "properties": { "object_id": { "type": "string" }, "note": { "type": "string" } }
+          }
+        }
+      }
+    },
+    "signed": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["signed", "signer", "basis_key", "audit_record_hash", "signed_at"],
+      "properties": {
+        "signed": { "type": "boolean" },
+        "signer": { "oneOf": [{ "$ref": "common.schema.json#/$defs/signer" }, { "type": "null" }] },
+        "basis_key": { "description": "copy.json key for the signature line: stamp.signed_basis when signed, stamp.unsigned when not (FR-115).", "$ref": "common.schema.json#/$defs/copy_key" },
+        "audit_record_hash": { "oneOf": [{ "$ref": "common.schema.json#/$defs/hash" }, { "type": "null" }] },
+        "signed_at": { "oneOf": [{ "$ref": "common.schema.json#/$defs/timestamp" }, { "type": "null" }] }
+      },
+      "if": { "properties": { "signed": { "const": true } } },
+      "then": {
+        "properties": {
+          "signer": {
+            "description": "Only a verified credential signs (FR-111, FR-111b, FR-115); pending never reaches a signed export.",
+            "$ref": "common.schema.json#/$defs/signer",
+            "required": ["name", "credential", "jurisdiction", "verification_level"],
+            "properties": { "verification_level": { "enum": ["verified", "verified_insured"] } }
+          },
+          "basis_key": { "const": "stamp.signed_basis" },
+          "audit_record_hash": { "$ref": "common.schema.json#/$defs/hash" },
+          "signed_at": { "$ref": "common.schema.json#/$defs/timestamp" }
+        }
+      },
+      "else": {
+        "properties": {
+          "signer": { "type": "null" },
+          "basis_key": { "const": "stamp.unsigned" },
+          "audit_record_hash": { "type": "null" },
+          "signed_at": { "type": "null" }
+        }
+      }
+    },
+    "marks": {
+      "description": "Watermarks and marks the export assembler must render, as copy.json keys (trust rules 7, 13b).",
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "enum": ["watermark.concept", "watermark.student", "watermark.free_tier", "mark.made_with"] }
+    },
+    "integrity_summary": {
+      "description": "Student exports (FR-146).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["student_supplied_share", "ai_inferred_share", "critique_points_raised", "critique_points_addressed", "revision_cycles", "generate_anyway_used"],
+      "properties": {
+        "student_supplied_share": { "type": "number", "minimum": 0, "maximum": 1 },
+        "ai_inferred_share": { "type": "number", "minimum": 0, "maximum": 1 },
+        "critique_points_raised": { "type": "integer", "minimum": 0 },
+        "critique_points_addressed": { "type": "integer", "minimum": 0 },
+        "revision_cycles": { "type": "integer", "minimum": 0 },
+        "generate_anyway_used": { "type": "boolean" }
+      }
+    },
+    "closing_sentence_key": { "const": "stamp.closing_sentence" },
+    "generated_at": { "$ref": "common.schema.json#/$defs/timestamp" }
+  },
+  "allOf": [
+    {
+      "description": "Idea: Concept watermark, never a pass (principle 7, FR-96).",
+      "if": { "properties": { "mode": { "const": "idea" } } },
+      "then": {
+        "properties": {
+          "marks": { "contains": { "const": "watermark.concept" } },
+          "checks": { "properties": { "passed": { "const": 0 } } },
+          "signed": { "properties": { "signed": { "const": false } } }
+        }
+      }
+    },
+    {
+      "description": "Learn: student watermark, Made with Drawlogic, integrity summary (FR-146, FR-165).",
+      "if": { "properties": { "mode": { "const": "learn" } } },
+      "then": {
+        "required": ["integrity_summary"],
+        "properties": {
+          "marks": { "allOf": [{ "contains": { "const": "watermark.student" } }, { "contains": { "const": "mark.made_with" } }] }
+        }
+      }
+    }
+  ]
+}

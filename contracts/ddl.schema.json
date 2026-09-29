@@ -1,0 +1,289 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://drawlogic.invalid/contracts/ddl.schema.json",
+  "title": "DDL",
+  "description": "Drawing Description Language v0.1 — the source of truth for a drawing. Version 0.1.0. PRD App. A, §5A.3, FR-20–26, FR-102–105. drawing.hash covers the document with drawing.hash, checks and stamp removed (contracts/README.md).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["ddl_version", "drawing", "materials", "objects", "connections", "constraints", "dimensions", "annotations", "layers", "schedules"],
+  "properties": {
+    "ddl_version": { "description": "Mandatory in every DDL document (CONTRACTS.md).", "$ref": "common.schema.json#/$defs/semver" },
+    "drawing": { "$ref": "#/$defs/header" },
+    "project": { "$ref": "#/$defs/project" },
+    "site": { "$ref": "#/$defs/site" },
+    "materials": { "type": "array", "items": { "$ref": "object.schema.json#/$defs/material" } },
+    "objects": { "type": "array", "items": { "$ref": "object.schema.json" } },
+    "connections": { "type": "array", "items": { "$ref": "#/$defs/connection" } },
+    "constraints": { "type": "array", "items": { "$ref": "#/$defs/constraint" } },
+    "dimensions": { "type": "array", "items": { "$ref": "#/$defs/dimension" } },
+    "annotations": { "type": "array", "items": { "$ref": "#/$defs/annotation" } },
+    "layers": { "type": "array", "items": { "$ref": "#/$defs/layer" } },
+    "schedules": { "type": "array", "items": { "$ref": "#/$defs/schedule" } },
+    "solver": { "$ref": "#/$defs/solver_state" },
+    "checks": { "description": "Latest check run, or null before the first run.", "oneOf": [{ "$ref": "check-result.schema.json" }, { "type": "null" }] },
+    "stamp": { "description": "Stamp for the current revision, or null before export.", "oneOf": [{ "$ref": "stamp.schema.json" }, { "type": "null" }] }
+  },
+  "$defs": {
+    "header": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "discipline", "type", "mode", "scale", "units", "jurisdiction", "rev", "hash", "profile_stack", "created_at"],
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/uuid" },
+        "title": { "type": "string", "minLength": 1 },
+        "discipline": { "$ref": "common.schema.json#/$defs/discipline" },
+        "type": { "type": "string", "enum": ["detail", "plan", "section", "elevation", "site_plan", "massing", "schedule"] },
+        "detail_type": { "description": "Pack data. Architecture pack at launch (FR-23): window_head, window_jamb, window_sill, door_threshold, eaves, verge, parapet, warm_flat_roof_abutment, ground_floor_wall_dpc, cavity_closer, wall_to_foundation, balcony_threshold, steel_beam_bearing.", "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+        "mode": { "$ref": "common.schema.json#/$defs/mode" },
+        "scale": { "description": "Scale denominator: 10 means 1:10.", "type": "integer", "minimum": 1 },
+        "units": { "type": "string", "enum": ["mm", "m", "in", "ft"] },
+        "jurisdiction": { "description": "Jurisdiction code of the project location, e.g. GB-ENG, NG-LA, US-TX, or GENERIC:<region> where no jurisdiction profile exists.", "type": "string", "minLength": 2 },
+        "rev": { "type": "string", "minLength": 1 },
+        "hash": { "$ref": "common.schema.json#/$defs/hash" },
+        "parent_hash": { "description": "Hash of the previous revision, null for the first.", "oneOf": [{ "$ref": "common.schema.json#/$defs/hash" }, { "type": "null" }] },
+        "profile_stack": { "type": "array", "minItems": 1, "items": { "$ref": "common.schema.json#/$defs/stack_entry" } },
+        "card_id": { "description": "The confirmed interpretation card this drawing was compiled from. Required in Draft mode (FR-12, trust rule 6).", "type": "string" },
+        "promoted_from": {
+          "description": "FR-98: the Idea concept this Draft drawing was promoted from.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["idea_result_id", "option_id"],
+          "properties": {
+            "idea_result_id": { "type": "string" },
+            "option_id": { "type": "string" },
+            "ddl_hash": { "$ref": "common.schema.json#/$defs/hash" }
+          }
+        },
+        "created_at": { "$ref": "common.schema.json#/$defs/timestamp" }
+      },
+      "allOf": [
+        { "if": { "properties": { "mode": { "const": "draft" } } }, "then": { "required": ["card_id"] } },
+        { "if": { "properties": { "type": { "const": "detail" } } }, "then": { "required": ["detail_type"] } }
+      ]
+    },
+    "project": {
+      "description": "Snapshot of project data this drawing uses. Storeys and datum are project data (5A.3 hook 2).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "location": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "address": { "type": "string" },
+            "country": { "type": "string", "pattern": "^[A-Z]{2}$" },
+            "jurisdiction": { "type": "string" },
+            "climate_region": { "type": "string" },
+            "lat": { "type": "number", "minimum": -90, "maximum": 90 },
+            "lon": { "type": "number", "minimum": -180, "maximum": 180 }
+          }
+        },
+        "building_type": { "type": "string" },
+        "datum": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "value"],
+          "allOf": [{ "$ref": "common.schema.json#/$defs/provenance" }],
+          "properties": {
+            "name": { "type": "string" },
+            "value": { "type": "number" },
+            "units": { "type": "string", "enum": ["mm", "m", "in", "ft"] },
+            "source": true, "confidence": true, "verify": true, "source_detail": true
+          }
+        },
+        "storeys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "name", "ffl", "height", "source", "confidence"],
+            "allOf": [{ "$ref": "common.schema.json#/$defs/provenance" }],
+            "properties": {
+              "id": { "type": "string" },
+              "name": { "type": "string" },
+              "ffl": { "description": "Finished floor level above datum, drawing units. Null until known (Idea mode).", "type": ["number", "null"] },
+              "height": { "description": "Floor-to-floor height, drawing units.", "type": ["number", "null"] },
+              "source": true, "confidence": true, "verify": true, "source_detail": true
+            }
+          }
+        }
+      }
+    },
+    "site": {
+      "description": "Site-plan data (FR-100–105). The boundary's source governs: an uploaded survey always governs over a traced boundary (FR-102).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["crs", "boundary"],
+      "properties": {
+        "crs": { "description": "EPSG code of the site frame, e.g. EPSG:32631 (UTM zone 31N, Lagos), or LOCAL for plot-local metres when the boundary came from dimensions and nothing is georeferenced.", "type": "string", "pattern": "^(EPSG:\\d+|LOCAL)$" },
+        "boundary": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["method", "polygon", "source", "confidence"],
+          "allOf": [{ "$ref": "common.schema.json#/$defs/provenance" }],
+          "properties": {
+            "method": { "type": "string", "enum": ["survey", "traced", "dimensions"] },
+            "polygon": { "type": "array", "minItems": 3, "items": { "$ref": "common.schema.json#/$defs/point" } },
+            "area_m2": { "type": "number", "exclusiveMinimum": 0 },
+            "source": true, "confidence": true, "verify": true, "source_detail": true
+          }
+        },
+        "basemap": { "oneOf": [{ "$ref": "common.schema.json#/$defs/geodata_provenance" }, { "type": "null" }] },
+        "terrain": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["provenance"],
+              "properties": {
+                "provenance": { "$ref": "common.schema.json#/$defs/geodata_provenance" },
+                "fall_direction_deg": { "type": ["number", "null"] },
+                "slope_pct": { "type": ["number", "null"] },
+                "suitable_for_drainage_design": { "description": "False for any public DEM coarser than a survey (FR-105).", "type": "boolean" }
+              }
+            },
+            { "type": "null" }
+          ]
+        },
+        "context_layers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["kind", "provenance"],
+            "properties": {
+              "kind": { "type": "string", "enum": ["road", "water", "power_line", "railway", "land_use", "flood_zone", "conservation_area", "protected_tree", "easement"] },
+              "provenance": { "$ref": "common.schema.json#/$defs/geodata_provenance" },
+              "feature_ids": { "type": "array", "items": { "type": "string" } },
+              "use": { "description": "Constraint layers are things to check, never pass/fail (FR-104).", "type": "string", "enum": ["context", "thing_to_check"] }
+            }
+          }
+        },
+        "orientation_deg": { "description": "Bearing of the drawing's +y axis from true north.", "type": ["number", "null"] }
+      }
+    },
+    "connection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "from", "to", "source", "confidence"],
+      "allOf": [{ "$ref": "common.schema.json#/$defs/provenance" }],
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/id" },
+        "kind": { "type": "string", "enum": ["bears_on", "abuts", "laps", "fixed_to", "continuous_with", "sealed_to", "turns_up"] },
+        "from": { "type": "string" },
+        "to": { "type": "string" },
+        "properties": { "type": "object", "additionalProperties": { "type": ["number", "string", "boolean", "null"] } },
+        "source": true, "confidence": true, "verify": true, "source_detail": true
+      }
+    },
+    "operand": {
+      "description": "A dimension id, an object field as \"object_id.field\", or a literal number in drawing units.",
+      "oneOf": [{ "type": "string" }, { "type": "number" }]
+    },
+    "constraint": {
+      "description": "Constraints are first-class (FR-22). The solver resolves them or surfaces a conflict; it never resolves silently.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "source", "confidence"],
+      "allOf": [
+        { "$ref": "common.schema.json#/$defs/provenance" },
+        { "if": { "properties": { "type": { "const": "sum" } } }, "then": { "required": ["of", "equals"] } },
+        { "if": { "properties": { "type": { "const": "equality" } } }, "then": { "required": ["of"], "properties": { "of": { "minItems": 2 } } } },
+        { "if": { "properties": { "type": { "const": "offset" } } }, "then": { "required": ["target", "from", "value"] } },
+        { "if": { "properties": { "type": { "enum": ["min", "max"] } } }, "then": { "required": ["target", "value"] } }
+      ],
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/id" },
+        "type": { "type": "string", "enum": ["sum", "equality", "offset", "min", "max"] },
+        "of": { "type": "array", "items": { "$ref": "#/$defs/operand" }, "minItems": 1 },
+        "equals": { "$ref": "#/$defs/operand" },
+        "target": { "$ref": "#/$defs/operand" },
+        "from": { "$ref": "#/$defs/operand" },
+        "value": { "$ref": "#/$defs/operand" },
+        "rule_ref": { "description": "Rule that asked for this constraint, if any.", "type": "string" },
+        "source": true, "confidence": true, "verify": true, "source_detail": true
+      }
+    },
+    "dimension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "refs", "value", "driving", "source", "confidence"],
+      "allOf": [{ "$ref": "common.schema.json#/$defs/provenance" }],
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/id" },
+        "kind": { "type": "string", "enum": ["linear", "level", "angle", "radius", "fall", "area"] },
+        "refs": { "description": "Object ids or \"object_id.field\" the dimension measures.", "type": "array", "items": { "type": "string" } },
+        "value": { "description": "Null until resolved when not driving.", "type": ["number", "null"] },
+        "driving": { "description": "true: the value drives geometry; false: measured from it.", "type": "boolean" },
+        "display": { "type": "boolean", "default": true },
+        "source": true, "confidence": true, "verify": true, "source_detail": true
+      }
+    },
+    "annotation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "text", "source", "confidence"],
+      "allOf": [{ "$ref": "common.schema.json#/$defs/provenance" }],
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/id" },
+        "kind": { "type": "string", "enum": ["label", "leader", "note", "tag", "title"] },
+        "text": { "type": "string" },
+        "targets": { "type": "array", "items": { "type": "string" } },
+        "position": { "$ref": "common.schema.json#/$defs/point" },
+        "layer_id": { "type": "string" },
+        "source": true, "confidence": true, "verify": true, "source_detail": true
+      }
+    },
+    "layer": {
+      "description": "Layer names follow the profile's layer standard (FR-24).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name"],
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/id" },
+        "name": { "type": "string" },
+        "standard": { "type": "string" },
+        "line_weight_mm": { "type": "number", "exclusiveMinimum": 0 },
+        "colour": { "type": "string" }
+      }
+    },
+    "schedule": {
+      "description": "Schedules are views over objects, so schedule and drawing cannot disagree (FR-26).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "object_ids", "columns"],
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/id" },
+        "kind": { "type": "string", "enum": ["materials", "finishes", "doors", "windows", "rooms", "areas"] },
+        "object_ids": { "type": "array", "items": { "type": "string" } },
+        "columns": { "description": "Object fields shown, e.g. [\"label\", \"material_id\", \"thickness\"].", "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "solver_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "conflicts"],
+      "properties": {
+        "status": { "type": "string", "enum": ["unresolved", "resolved", "conflict"] },
+        "conflicts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["constraint_ids", "message"],
+            "properties": {
+              "constraint_ids": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+              "message": { "type": "string" }
+            }
+          }
+        },
+        "resolved_at": { "$ref": "common.schema.json#/$defs/timestamp" }
+      },
+      "if": { "properties": { "status": { "const": "conflict" } } },
+      "then": { "properties": { "conflicts": { "minItems": 1 } } }
+    }
+  }
+}
