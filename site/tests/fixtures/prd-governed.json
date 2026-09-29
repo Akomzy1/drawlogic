@@ -84,6 +84,13 @@
         ],
         "what": "500 and 2 000 credit packs",
         "status": "not in PRD; prototype value stands until decided"
+      },
+      {
+        "values": [
+          "$180"
+        ],
+        "what": "Sample marketplace listing price (California · CBC Title 24 profile)",
+        "status": "author-set listing price (FR-64/65), not a Drawlogic plan price; prototype sample"
       }
     ]
   },

@@ -23,19 +23,26 @@ function loadCopy() {
   const all = files.flatMap((f) => strings(JSON.parse(fs.readFileSync(path.join(CONTENT_DIR, f), "utf8"))));
   const m = loadManifest();
   if (m) all.push(...[m.caption, m.preview_label].filter(Boolean));
-  // Longest first, so a line is explained by the fewest, largest strings.
-  return { files, pieces: [...new Set(all.map(norm).filter((s) => s.length >= 2))].sort((a, b) => b.length - a.length) };
+  // Longest first, so a line is explained by the fewest, largest strings. One-letter strings ("A", "B", "C" in
+  // "Concept A") are kept apart and only explain a whole word, so they cannot erase letters inside other words.
+  const normed = [...new Set(all.map(norm).filter(Boolean))];
+  return {
+    files,
+    pieces: normed.filter((s) => s.length >= 2).sort((a, b) => b.length - a.length),
+    letters: new Set(normed.filter((s) => /^\p{L}$/u.test(s))),
+  };
 }
 
 /**
  * True when the line is entirely made of content strings plus punctuation, numbers and symbols, or is part of one
  * content string (a string broken across lines by <br> renders as several lines).
  */
-function explained(line: string, pieces: string[]) {
+function explained(line: string, pieces: string[], letters: Set<string>) {
   const whole = norm(line);
   if (pieces.some((p) => p.includes(whole))) return true;
   let rest = whole;
   for (const p of pieces) if (rest.includes(p)) rest = rest.split(p).join(" ");
+  rest = rest.replace(/(?<!\p{L})\p{L}(?!\p{L})/gu, (c) => (letters.has(c) ? " " : c));
   return /^[\s\p{P}\p{S}\d]*$/u.test(rest);
 }
 
@@ -47,7 +54,7 @@ for (const p of PAGES) {
     expect(copy.files.length, `No content files in ${CONTENT_DIR}`).toBeGreaterThan(0);
     await openSite(page, p);
     for (const s of await readSections(page)) {
-      const inline = s.lines.filter((l: string) => /\p{L}{2}/u.test(l) && !explained(l, copy.pieces));
+      const inline = s.lines.filter((l: string) => /\p{L}{2}/u.test(l) && !explained(l, copy.pieces, copy.letters));
       expect.soft(inline.slice(0, 15), `${p.name} — "${s.key}": lines not found in site/content/*.json (written inline?)${inline.length > 15 ? ` — ${inline.length} in all` : ""}`).toEqual([]);
     }
   });

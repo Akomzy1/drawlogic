@@ -50,7 +50,9 @@ for (const p of PAGES) {
             if (!(el as HTMLElement).innerText?.trim() || el.children.length) return false;
             let o = 1;
             for (let n: Element | null = el; n; n = n.parentElement) o *= Number(getComputedStyle(n).opacity);
-            return o < 0.99 || getComputedStyle(el).visibility === "hidden";
+            // Hidden means effectively invisible (a reveal left at its start state). Deliberate dimming — watermarks,
+            // image overlays, a dimmed preview — is design, compared by visual.spec and legibility-gated by axe contrast.
+            return o < 0.1 || getComputedStyle(el).visibility === "hidden";
           }).map((el) => (el as HTMLElement).innerText.trim().slice(0, 60)),
         }));
         expect.soft(state.playing, `${where} @${y}px: video autoplays or plays under reduced motion`).toEqual([]);
