@@ -1,7 +1,7 @@
 {
   "note": "Generated from the prototype by scripts/extract-prototype.mjs. Do not edit by hand; re-run the script when the prototype changes and review the diff.",
   "prototype_file": "design/prototype/marketing-site.html",
-  "prototype_sha256": "7786fc5f65e7784864d1433c368ff615b5f66495274635332d508a5d22a5b5d8",
+  "prototype_sha256": "dd4d6cba6ae90d917155e15b8f24180d4bbfa6d59c8896fc84b5d807a570408d",
   "pages": {
     "Home": {
       "route": "/",
@@ -72,7 +72,8 @@
             "For professionals",
             "Question-first interpretation, checks against jurisdiction profiles, a provenance layer and a verification stamp.",
             "DXF and PDF · signed",
-            "Start drafting"
+            "Start drafting",
+            "Illustrative — generated from a Drawlogic drawing"
           ]
         },
         {
@@ -86,6 +87,7 @@
             "A-101",
             "1:50",
             "sha256:9f2c…41ab",
+            "Illustrative — generated from a Drawlogic drawing",
             "“extend my kitchen 3m into the garden, keep the existing rear wall opening”",
             "person",
             "EXISTING OPENING",
@@ -321,10 +323,11 @@
       "honesty": [
         "liability",
         "training",
+        "illustrative",
         "unsigned"
       ],
       "captions": {
-        "illustrative": 0,
+        "illustrative": 2,
         "preview_label": 0
       },
       "roadmap": [
@@ -637,7 +640,8 @@
             "NEW AREA",
             "16.0 m²",
             "PLOT USED",
-            "39%"
+            "39%",
+            "Illustrative — generated from a Drawlogic drawing"
           ]
         },
         {
@@ -657,6 +661,7 @@
             "OPTION A",
             "SATELLITE BASEMAP · 2024-03 · 0.5 m/px",
             "DRAG A CORNER TO RETRACE",
+            "Illustrative — generated from a Drawlogic drawing",
             "Imagery",
             "2024-03 · 0.5 m/px",
             "⚠",
@@ -665,7 +670,6 @@
             "⚠",
             "Terrain",
             "30 m elevation model",
-            "Illustrative — generated from Drawlogic drawings",
             "Flood zones and constraints appear as things to check, never as a decision."
           ]
         },
@@ -722,6 +726,7 @@
             "CONCEPT C",
             "C-003",
             "Drawn after revision",
+            "Illustrative — generated from a Drawlogic drawing",
             "Critique",
             "3 points · before drawing",
             "✓",
@@ -870,7 +875,7 @@
         "illustrative"
       ],
       "captions": {
-        "illustrative": 1,
+        "illustrative": 3,
         "preview_label": 0
       },
       "roadmap": [],
@@ -1251,6 +1256,7 @@
             "A-512",
             "1:5",
             "sha256:9f2c…41ab",
+            "Illustrative — generated from a Drawlogic drawing",
             "layers",
             "COPING PROFILE",
             "From the office standard detail 04",
@@ -1467,10 +1473,11 @@
       ],
       "honesty": [
         "liability",
-        "training"
+        "training",
+        "illustrative"
       ],
       "captions": {
-        "illustrative": 0,
+        "illustrative": 1,
         "preview_label": 0
       },
       "roadmap": [
@@ -1704,10 +1711,12 @@
             "A-101",
             "1:50",
             "sha256:9f2c…41ab",
+            "Illustrative — generated from a Drawlogic drawing",
             "C",
             "RENDER",
             "R-101",
             "sha256:9f2c…41ab",
+            "Illustrative — generated from a Drawlogic drawing",
             "drift check: passed · geometry delta 0.4% · failed renders are never delivered"
           ]
         },
@@ -1724,6 +1733,7 @@
             "CONCEPT — NOT FOR CONSTRUCTION",
             "CONCEPT — NOT FOR CONSTRUCTION",
             "CONCEPT · PDF/PNG ONLY",
+            "Illustrative — generated from a Drawlogic drawing",
             "⚠",
             "Generated preview — not a model render. First frame is faithful; later frames may drift.",
             "Source drawing",
@@ -1767,6 +1777,7 @@
             "BRICK — RED MULTI",
             "RENDER — OFF-WHITE",
             "TIMBER — LARCH",
+            "Illustrative — generated from a Drawlogic drawing",
             "all four: R-101–104 · sha256:9f2c…41ab · rev C · camera 01 fixed"
           ]
         },
@@ -1850,10 +1861,11 @@
         "liability",
         "training",
         "preview-label",
-        "concept-watermark"
+        "concept-watermark",
+        "illustrative"
       ],
       "captions": {
-        "illustrative": 0,
+        "illustrative": 4,
         "preview_label": 1
       },
       "roadmap": [],
@@ -3021,6 +3033,7 @@
             "1 · STUDENT'S SKETCH",
             "STUDIO SKETCH",
             "EX-03",
+            "Illustrative — generated from a Drawlogic drawing",
             "2 · PRINCIPLES THAT APPLY",
             "Principle 1",
             "Circulation before rooms",
@@ -3186,10 +3199,11 @@
       ],
       "honesty": [
         "liability",
-        "training"
+        "training",
+        "illustrative"
       ],
       "captions": {
-        "illustrative": 0,
+        "illustrative": 1,
         "preview_label": 0
       },
       "roadmap": [],
@@ -4528,34 +4542,34 @@
   "style": {
     "note": "Allowed colours (normalised) and font families: tokens.css custom properties plus what the prototype renders. Value = where first seen.",
     "colors": {
-      "#000000": "For professionals w375 line",
+      "#000000": "Home w375 line",
       "#092b4c": "tokens.css",
       "#093533": "tokens.css",
-      "#0c3966": "For professionals w375 span",
+      "#0c3966": "Home w375 span",
       "#0c4744": "For professionals w375 span",
-      "#0d0505": "For professionals w375 line",
+      "#0d0505": "Home w375 line",
       "#0d3721": "tokens.css",
-      "#134d2d": "For professionals w375 span",
-      "#1873cc": "tokens.css",
-      "#197c45": "tokens.css",
+      "#134d2d": "Home w375 span",
+      "#1873cc": "Home w375 a",
+      "#197c45": "For professionals w375 span",
       "#198e88": "tokens.css",
-      "#1e90ff": "For professionals w375 circle",
-      "#1f9d57": "For professionals w375 span",
+      "#1e90ff": "Home w375 circle",
+      "#1f9d57": "Home w375 span",
       "#20b2aa": "For professionals w375 span",
-      "#251e1e": "For professionals w375 span",
+      "#251e1e": "Home w375 span",
       "#261a4d": "tokens.css",
       "#342369": "For professionals w375 span",
       "#4c2020": "tokens.css",
       "#4c4000": "tokens.css",
       "#553cb0": "tokens.css",
-      "#555050": "For professionals w375 p",
+      "#555050": "Home w375 span",
       "#5cba83": "Developers w375 div",
       "#61b1ff": "Developers w375 div",
       "#62c9c3": "Developers w375 div",
-      "#662a2a": "For professionals w375 span",
-      "#665600": "For professionals w375 span",
+      "#662a2a": "Home w375 span",
+      "#665600": "Home w375 span",
       "#6c4fd8": "For professionals w375 span",
-      "#868282": "For professionals w375 th",
+      "#868282": "tokens.css",
       "#8a8a7c": "Idea mode w375 rect",
       "#8f8d82": "Idea mode w375 div",
       "#9b86e8": "Developers w375 div",
@@ -4563,50 +4577,52 @@
       "#cc5555": "tokens.css",
       "#ccac00": "tokens.css",
       "#cfe9da": "tokens.css",
-      "#d2e8ff": "For professionals w375 section.dl-section",
+      "#d2e8ff": "Home w375 section.dl-section",
       "#d2efee": "tokens.css",
       "#dad9d9": "Idea mode w375 span",
       "#e0d8fa": "tokens.css",
-      "#e8f3ff": "For professionals w375 header",
+      "#e8f3ff": "Home w375 header",
       "#e8f7f6": "For professionals w375 span",
-      "#e9f6ee": "For professionals w375 span",
+      "#e9f6ee": "Home w375 span",
       "#f1edfd": "For professionals w375 span",
       "#f1efe8": "Idea mode w375 polygon",
-      "#f2f2f2": "For professionals w375 div",
-      "#faf9f9": "For professionals w375 section.dl-section",
-      "#ff6b6b": "For professionals w375 span",
+      "#f2f2f2": "Home w375 figcaption",
+      "#faf9f9": "Home w375 section.dl-section",
+      "#ff6b6b": "Home w375 span",
       "#ff9797": "Home w375 span",
-      "#ffd700": "For professionals w375 span",
+      "#ffd700": "Home w375 span",
       "#ffe1e1": "tokens.css",
-      "#ffe34c": "For professionals w375 span",
-      "#fff0f0": "For professionals w375 span",
-      "#fff7cc": "For professionals w375 div",
-      "#fffbe5": "For professionals w375 span",
-      "#ffffff": "For professionals w375 a",
+      "#ffe34c": "Home w375 span",
+      "#fff0f0": "Home w375 span",
+      "#fff7cc": "Idea mode w375 div",
+      "#fffbe5": "Home w375 span",
+      "#ffffff": "Home w375 a",
       "color(srgb 0.0509804 0.0196078 0.0196078 / 0.05)": "tokens.css",
-      "color(srgb 0.0509804 0.0196078 0.0196078 / 0.1)": "For professionals w375 tr",
-      "color(srgb 0.0509804 0.0196078 0.0196078 / 0.15)": "For professionals w375 header",
+      "color(srgb 0.0509804 0.0196078 0.0196078 / 0.1)": "Idea mode w375 div",
+      "color(srgb 0.0509804 0.0196078 0.0196078 / 0.15)": "Home w375 header",
       "color(srgb 0.0509804 0.0196078 0.0196078 / 0.2)": "Render studio w375 div",
-      "color(srgb 0.0509804 0.0196078 0.0196078 / 0.3)": "For professionals w375 figure",
+      "color(srgb 0.0509804 0.0196078 0.0196078 / 0.3)": "Home w375 figure",
       "color(srgb 0.0509804 0.0196078 0.0196078 / 0.5)": "tokens.css",
+      "color(srgb 0.980392 0.976471 0.976471 / 0.9)": "Home w375 span",
       "color(srgb 1 1 1 / 0.1)": "tokens.css",
-      "color(srgb 1 1 1 / 0.2)": "For professionals w375 div",
+      "color(srgb 1 1 1 / 0.2)": "Home w375 div",
       "color(srgb 1 1 1 / 0.3)": "tokens.css",
-      "color(srgb 1 1 1 / 0.6)": "For professionals w375 span",
+      "color(srgb 1 1 1 / 0.6)": "Home w375 span",
+      "rgba(13,5,5,0.85)": "Idea mode w375 rect",
       "rgba(255,255,255,0.90)": "Idea mode w375 span",
       "rgba(30,144,255,0.12)": "Idea mode w375 polygon"
     },
     "fonts": {
-      "-apple-system": "For professionals w375 span",
-      "ibm plex mono": "For professionals w375 span",
-      "material symbols outlined": "For professionals w375 span.dl-icon",
-      "menlo": "For professionals w375 span",
-      "monospace": "For professionals w375 span",
-      "sans-serif": "For professionals w375 span",
-      "segoe ui": "For professionals w375 span",
-      "sfmono-regular": "For professionals w375 span",
-      "source sans 3": "For professionals w375 span",
-      "ui-monospace": "For professionals w375 span"
+      "-apple-system": "Home w375 span",
+      "ibm plex mono": "Home w375 p",
+      "material symbols outlined": "Home w375 span.dl-icon",
+      "menlo": "Home w375 p",
+      "monospace": "Home w375 p",
+      "sans-serif": "Home w375 span",
+      "segoe ui": "Home w375 span",
+      "sfmono-regular": "Home w375 p",
+      "source sans 3": "Home w375 span",
+      "ui-monospace": "Home w375 p"
     }
   }
 }
