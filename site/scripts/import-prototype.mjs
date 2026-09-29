@@ -13,7 +13,13 @@ const manifest = embedded('manifest');
 const template = embedded('template');
 const decode = resource => resource.compressed ? gunzipSync(Buffer.from(resource.data, 'base64')) : Buffer.from(resource.data, 'base64');
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
-const write = (file, data) => { const target = path.join(root, file); fs.mkdirSync(path.dirname(target), { recursive: true }); fs.writeFileSync(target, data); };
+const write = (file, data) => {
+  const target = path.join(root, file);
+  const bytes = Buffer.isBuffer(data) ? data : Buffer.from(data);
+  if (fs.existsSync(target) && fs.readFileSync(target).equals(bytes)) return;
+  fs.mkdirSync(path.dirname(target), { recursive: true });
+  fs.writeFileSync(target, bytes);
+};
 const json = (file, data) => write(file, JSON.stringify(data, null, 2) + '\n');
 const resourcePaths = {};
 const assets = [];
@@ -35,7 +41,7 @@ let styles = [...template.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)].map(m =>
 for (const [id, file] of Object.entries(resourcePaths)) styles = styles.replaceAll(id, file);
 write('src/app/globals.css', styles);
 
-const overrides = value => value.replaceAll('₦9,500', '₦6,000').replaceAll('₦32,000', '₦20,000').replaceAll('₦119,000', '₦75,000').replaceAll('₦729,000', '₦450,000').replaceAll('Up to 25 seats', '5 seats + $149/seat');
+const overrides = value => value.replaceAll('₦9,500', '₦6,000').replaceAll('₦32,000', '₦20,000').replaceAll('₦119,000', '₦75,000').replaceAll('₦729,000', '₦450,000').replaceAll('₦12,500', '₦8,000');
 const strings = {};
 const ref = value => {
   value = overrides(value);
@@ -62,7 +68,16 @@ function externalize(code, file) {
         const text = cleanJSX(node.text);
         return text.trim() ? ts.factory.createJsxExpression(undefined, ref(text)) : node;
       }
-      if ((ts.isStringLiteral(node) || ts.isNoSubstitutionTemplateLiteral(node)) && /[A-Z]|[a-z] [a-z]/.test(node.text) && !/^(var\(|https?:|\/|#|[.]{1,2}\/)/.test(node.text)) {
+      if (ts.isTemplateExpression(node)) {
+        const pieces = [ref(node.head.text)];
+        for (const span of node.templateSpans) {
+          pieces.push(ts.visitNode(span.expression, visit), ref(span.literal.text));
+        }
+        return pieces.reduce((a, b) => ts.factory.createBinaryExpression(a, ts.SyntaxKind.PlusToken, b));
+      }
+      const isRenderedChild = node.parent && ts.isCallExpression(node.parent) && node.parent.expression.getText(tree) === 'React.createElement' && node.parent.arguments.indexOf(node) >= 2;
+      const displayValue = /^(sha256:|# |\/(mo|user\/mo|month|project)$)/.test(node.text ?? '');
+      if ((ts.isStringLiteral(node) || ts.isNoSubstitutionTemplateLiteral(node)) && (/[a-zA-Z£$₦]/.test(node.text) || isRenderedChild || displayValue) && (!/^(var\(|https?:|\/|#|[.]{1,2}\/)/.test(node.text) || displayValue)) {
         const parent = node.parent;
         if (ts.isPropertyAssignment(parent) && parent.name === node || ts.isImportDeclaration(parent) || ts.isExportDeclaration(parent)) return node;
         if (ts.isJsxAttribute(parent)) return ts.factory.createJsxExpression(undefined, ref(node.text));
@@ -81,6 +96,7 @@ let system = decode(systemResource).toString();
 system = system.slice(system.indexOf('(() => {'));
 system = system.slice(0, system.indexOf('// ui_kits/app/shell.js')) + system.slice(system.indexOf('__ds_ns.Mark ='));
 system = system.replace('const __ds_ns = (window.DrawlogicDesignSystem_60c2c5 = window.DrawlogicDesignSystem_60c2c5 || {});', 'const __ds_ns = DL;');
+system = system.replace('}, t.audience)', '}, typeof t.audience === "object" ? t.audience[cur] : t.audience)');
 let code = 'const DL = {};\n' + system;
 for (const m of template.matchAll(/<script type="text\/babel" src="([^"]+)"/g)) {
   let part = decode(manifest[m[1]]).toString();
@@ -90,8 +106,32 @@ for (const m of template.matchAll(/<script type="text\/babel" src="([^"]+)"/g)) 
   part = part.replace('["Drafts per month", ["1",', '["Drafts per month", ["3",').replace('["0", "20", "60", "200", "1 000", "Negotiated"]', '["0", "40", "60", "250", "1 000", "Negotiated"]');
   // Decision 12: let PricingTable manage the selected currency on the Lagos page.
   part = part.replace('currency="NGN" currencies={["NGN", "USD"]}', 'currencies={["NGN", "USD"]}');
+  part = part.replace('audience: "Up to 25 seats"', 'audience: { GBP: "5 seats; additional seats billed separately", USD: "5 seats + $149/seat", NGN: "5 seats + ₦60,000/seat" }');
+  part = part.replace('opacity: teach ? 0.5 : 1', 'opacity: teach ? 0.9 : 1');
+  if (part.includes('function RenderStudio')) {
+    // PRD: Concept watermarks belong to Idea outputs only.
+    part = part.replace('<ConceptWatermark repeat={3}', '<div').replace('</ConceptWatermark>', '</div>');
+    part = part.replace('Generated preview — not a model render.</b>', 'Generated preview — not a model render.</b> <span>Illustrative — generated from a Drawlogic drawing.</span>');
+  }
   code += '\n' + part;
 }
+// Required generated-media captions missing from the export's hero and drawing frames.
+code += `
+const OriginalDrawingFrame = DL.DrawingFrame;
+const OriginalHeroSlideshow = DL.HeroSlideshow;
+function includesIllustration(children) {
+  return React.Children.toArray(children).some(child => React.isValidElement(child) &&
+    (child.type === 'img' || child.type === 'video' || includesIllustration(child.props.children)));
+}
+DL.DrawingFrame = function IllustratedDrawingFrame(props) {
+  return <OriginalDrawingFrame {...props}>{props.children}{includesIllustration(props.children) &&
+    <span className="dl-illustration-caption">Illustrative — generated from a Drawlogic drawing</span>
+  }</OriginalDrawingFrame>;
+};
+DL.HeroSlideshow = function IllustratedHeroSlideshow(props) {
+  return <><OriginalHeroSlideshow {...props}/><span className="dl-illustration-caption dl-hero-caption">Illustrative — generated from a Drawlogic drawing</span></>;
+};
+`;
 write('src/components/prototype.jsx', '"use client";\nimport * as React from "react";\nimport copy from "../../content/prototype.json";\nimport resources from "../../content/resources.json";\n\n' + externalize(code, 'prototype.jsx') + '\nexport { DL, Home, IdeaMode, ForProfessionals, RenderStudio, Marketplace, FindASigner, Developers, Students, Regulators, Lagos, Pricing, About };\n');
 json('content/prototype.json', strings);
 console.log(`Imported ${assets.length} approved prototype media assets and ${Object.keys(strings).length} content strings.`);

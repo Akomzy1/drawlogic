@@ -16,9 +16,10 @@ export default function Marketing({ name }) {
   };
 
   useEffect(() => {
-    for (const anchor of frame.current.querySelectorAll('a[href="#"]')) {
+    for (const anchor of frame.current.querySelectorAll('a[href^="#"]')) {
       const label = anchor.textContent.trim();
-      const target = routes.find(route => label === route.name || label.startsWith(route.name + "\n"));
+      const fragment = decodeURIComponent(anchor.getAttribute("href").slice(1));
+      const target = routes.find(route => fragment === route.name || label === route.name || label.startsWith(route.name + "\n"));
       if (target) anchor.setAttribute("href", target.path);
     }
   }, [name]);
