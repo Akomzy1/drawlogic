@@ -1,12 +1,14 @@
 import { expect, test } from "@playwright/test";
 import { PAGES } from "../lib/common.mjs";
 import { readSections } from "../lib/dom.mjs";
-import { GOVERNED_LINE } from "../lib/rules.mjs";
+import { GOVERNED_LINE, ILLUSTRATIVE, PREVIEW_LABEL } from "../lib/rules.mjs";
 import { openSite, prototype } from "../lib/site.mjs";
 
 // Copy is part of the design: each section's text matches the prototype, line by line.
 // Lines carrying PRD-governed values (prices, credits, seats) are left to prd.spec.ts.
+// The required media labels may be added where the prototype omits them (#15); labels.spec.ts asserts they are present.
 const proto = prototype();
+const REQUIRED_LABEL = (l: string) => [ILLUSTRATIVE, PREVIEW_LABEL].some((re) => new RegExp(`^${re.source}$`, "i").test(l));
 
 function difference(a: string[], b: string[]) {
   const counts = new Map<string, number>();
@@ -34,7 +36,7 @@ for (const p of PAGES) {
       const want = s.lines.filter((l: string) => !GOVERNED_LINE.test(l));
       const have = site.lines.filter((l: string) => !GOVERNED_LINE.test(l));
       expect.soft(difference(want, have), `${p.name} — "${s.key}": prototype lines missing on the site`).toEqual([]);
-      expect.soft(difference(have, want), `${p.name} — "${s.key}": site lines not in the prototype`).toEqual([]);
+      expect.soft(difference(have, want).filter((l) => !REQUIRED_LABEL(l)), `${p.name} — "${s.key}": site lines not in the prototype`).toEqual([]);
     }
   });
 }

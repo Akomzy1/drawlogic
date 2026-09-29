@@ -52,6 +52,17 @@ export function checkCurrencies(readings, gov, prices = prdPricing()) {
       if (silent.length) notes.push(`USD ${silent.join(", ")}: ${gov.usd_allowed.prd_silent[0].status}`);
     }
   }
-  if (counts.size > 1) problems.push(`a different number of prices shows in each currency (${Object.entries(readings).map(([c, a]) => `${c}: ${a?.length ?? 0}`).join(", ")}); every price must switch`);
+  // Every price switches: the PRD-priced currencies (USD, NGN) show the same number of prices. Another currency may
+  // show fewer where the PRD states no price for it (never invent one; e.g. no GBP additional-seat price) — noted, not failed.
+  const count = (c) => readings[c]?.length ?? 0;
+  const priced = Object.keys(readings).filter((c) => c === "USD" || c === "NGN");
+  const most = Math.max(0, ...priced.map(count));
+  const summary = Object.keys(readings).map((c) => `${c}: ${count(c)}`).join(", ");
+  if (new Set(priced.map(count)).size > 1) problems.push(`a different number of prices shows in each PRD-priced currency (${summary}); every price must switch`);
+  for (const c of Object.keys(readings).filter((c) => !priced.includes(c) && readings[c])) {
+    if (priced.length && count(c) > most) problems.push(`${c} shows more prices than the PRD-priced currencies (${summary})`);
+    else if (priced.length && count(c) < most) notes.push(`${c} shows ${most - count(c)} fewer price(s) than USD/NGN (${summary}); allowed only where the PRD states no ${c} price`);
+  }
+  if (!priced.length && counts.size > 1) problems.push(`a different number of prices shows in each currency (${summary}); every price must switch`);
   return { problems, notes };
 }
