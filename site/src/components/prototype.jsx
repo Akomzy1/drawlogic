@@ -1393,7 +1393,7 @@ const DL = {};
                         fontWeight: "var(--font-weight-semibold)"
                     }
                 }, g), React.createElement(copy["scd35a2426062"], {
-                    style: {
+                    tabIndex: 0, role: copy["sc697d2981bf4"], "aria-label": copy["secc97d1b4afb"], style: {
                         display: copy["s222f930b8752"],
                         gap: "var(--space-4)",
                         overflowX: copy["s929260ad9b9e"],
@@ -2306,7 +2306,6 @@ const DL = {};
                         ...style
                     }
                 }, props), children, React.createElement(copy["scd35a2426062"], {
-                    "aria-hidden": copy["sb5bea41b6c62"],
                     style: {
                         position: copy["s747355bdc2a2"],
                         inset: 0,
@@ -2325,7 +2324,7 @@ const DL = {};
                 }, Array.from({
                     length: repeat
                 }).map((_, i) => React.createElement(copy["scd35a2426062"], {
-                    key: i,
+                    key: i, "aria-hidden": i > 0 ? copy["sb5bea41b6c62"] : undefined,
                     style: {
                         fontFamily: "var(--font-mono)",
                         fontWeight: "var(--font-weight-bold)",
@@ -2513,7 +2512,7 @@ const DL = {};
                         color: "var(--text-secondary)"
                     }
                 }, rows.length, copy["s2b77fe3289d4"])), React.createElement(copy["scd35a2426062"], {
-                    style: {
+                    tabIndex: 0, role: copy["sc697d2981bf4"], "aria-label": copy["s5f4482832295"], style: {
                         overflowX: copy["s929260ad9b9e"]
                     }
                 }, React.createElement(copy["s0d4fc4a78d37"], {
@@ -2860,7 +2859,7 @@ const DL = {};
                         color: "var(--text-secondary)"
                     }
                 }, profile, version ? " · " + version : "")), React.createElement(copy["scd35a2426062"], {
-                    style: {
+                    tabIndex: 0, role: copy["sc697d2981bf4"], "aria-label": copy["s9162da21039f"], style: {
                         overflowX: copy["s929260ad9b9e"]
                     }
                 }, React.createElement(copy["s0d4fc4a78d37"], {
@@ -3235,7 +3234,7 @@ function Dimension({ label, style }) {
     </div>);
 }
 function CodeBlock({ lines = [], style }) {
-    return (<pre style={{
+    return (<pre tabIndex={0} role={copy["sc697d2981bf4"]} aria-label={copy["s3c22db9689dc"]} style={{
             margin: 0, padding: "var(--space-5)", background: "var(--surface-ink)",
             color: "var(--color-white)", borderRadius: "var(--radius-drawing)",
             fontFamily: "var(--font-mono)", fontSize: "var(--text-small)",
@@ -3776,7 +3775,7 @@ function RenderStudio() {
         <SectionHead eyebrow={copy["sbc52af22d164"]} title={copy["s0fdfade9dc09"]} lead={copy["sbd65b2f81fb1"]}/>
         <Split ratio={copy["s68cb5ce1f75c"]} style={{ alignItems: copy["scced28c6dc3f"] }}>
           <div style={{ display: copy["s0f2a693e93e2"], gap: "var(--space-3)" }}>
-            <div style={{ border: "var(--border-width) solid var(--border-strong)", borderRadius: "var(--radius-drawing)", background: "var(--surface-sunken)" }}>
+            <ConceptWatermark repeat={3} style={{ border: "var(--border-width) solid var(--border-strong)", borderRadius: "var(--radius-drawing)", background: "var(--surface-sunken)" }}>
               <div style={{ position: copy["sd2d9e1f13413"], aspectRatio: "16 / 9", display: copy["s0f2a693e93e2"], placeItems: copy["sf179a509d32b"], background: "var(--surface-sunken)", overflow: copy["se564b4081d7a"] }}>
                 <video ref={clipRef} src={(resources && resources.cameraMove) || "../../assets/hero/sm/camera-move.mp4"} playsInline loop muted onTimeUpdate={(e) => setClip((c) => ({ ...c, t: e.target.currentTime, d: e.target.duration || c.d }))} onPlay={() => setClip((c) => ({ ...c, playing: true }))} onPause={() => setClip((c) => ({ ...c, playing: false }))} style={{ position: copy["s747355bdc2a2"], inset: 0, width: "100%", height: "100%", objectFit: copy["s3fa405a8301a"], display: copy["s496aca80e4d8"] }}/>
                 <button type={copy["sc3e2d78f3ff3"]} aria-label={clip.playing ? copy["s24244a98c715"] : copy["scd79b232b408"]} onClick={() => { const v = clipRef.current; if (!v)
@@ -3786,10 +3785,11 @@ function RenderStudio() {
                 <span style={{ position: copy["s747355bdc2a2"], top: "var(--space-3)", left: "var(--space-3)", ...mono, color: "var(--text-primary)", background: copy["sea1e459fee10"], borderRadius: copy["s356601538da0"], padding: copy["s8bc217908cbb"] }}>{fmt(clip.t)}{copy["s005e1574a2b5"]}{fmt(clip.d)}</span>
                 <span style={{ position: copy["s747355bdc2a2"], right: "var(--space-3)", bottom: "var(--space-3)", ...mono, color: "var(--text-primary)", background: copy["sea1e459fee10"], borderRadius: copy["s356601538da0"], padding: copy["s8bc217908cbb"] }}>{copy["s09f8a335f50e"]}</span>
               </div>
-            </div>
+            </ConceptWatermark>
+    <p style={mono}>{copy["s290a7f7af557"]}</p>
             <div style={{ display: copy["s0f2a693e93e2"], gridTemplateColumns: copy["s937ff37cb38c"], gap: "var(--space-3)", alignItems: copy["s8ba8496a2525"], padding: "var(--space-3) var(--space-4)", border: "var(--border-width) solid var(--border)", borderRadius: "var(--radius-drawing)", background: "var(--surface)", fontSize: "var(--text-small)" }}>
               <span aria-hidden={copy["sb5bea41b6c62"]} style={{ color: "var(--flag-ink)" }}>{copy["s0bae1fe0557d"]}</span>
-              <span><b style={{ fontWeight: "var(--font-weight-semibold)" }}>{copy["s2bbd445e420d"]}</b> <span>{copy["s2d7edd9a4423"]}</span> <span style={{ color: "var(--text-secondary)" }}>{copy["s24f857bed8d8"]}</span></span>
+              <span><b style={{ fontWeight: "var(--font-weight-semibold)" }}>{copy["s2bbd445e420d"]}</b> <span style={{ color: "var(--text-secondary)" }}>{copy["s24f857bed8d8"]}</span></span>
             </div>
           </div>
           <div style={{ display: copy["s0f2a693e93e2"], gap: "var(--space-5)", alignContent: copy["scced28c6dc3f"] }}>
@@ -4459,7 +4459,7 @@ function Pricing() {
 
       <Section>
         <SectionHead eyebrow={copy["se2dc37c225ef"]} title={copy["sd69a37385809"]}/>
-        <div style={{ overflowX: copy["s929260ad9b9e"], border: "var(--border-width) solid var(--border)", borderRadius: "var(--radius-drawing)", background: "var(--surface)" }}>
+        <div tabIndex={0} role={copy["sc697d2981bf4"]} aria-label={copy["sfef2ef432688"]} style={{ overflowX: copy["s929260ad9b9e"], border: "var(--border-width) solid var(--border)", borderRadius: "var(--radius-drawing)", background: "var(--surface)" }}>
           <table style={{ width: "100%", borderCollapse: copy["s93bc5d02dc2a"], minWidth: copy["s6ddb6ba5b9ff"], fontVariantNumeric: copy["sba2d0eea2e16"] }}>
             <thead>
               <tr>

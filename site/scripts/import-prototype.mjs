@@ -97,6 +97,22 @@ system = system.slice(system.indexOf('(() => {'));
 system = system.slice(0, system.indexOf('// ui_kits/app/shell.js')) + system.slice(system.indexOf('__ds_ns.Mark ='));
 system = system.replace('const __ds_ns = (window.DrawlogicDesignSystem_60c2c5 = window.DrawlogicDesignSystem_60c2c5 || {});', 'const __ds_ns = DL;');
 system = system.replace('}, t.audience)', '}, typeof t.audience === "object" ? t.audience[cur] : t.audience)');
+// Name the shared horizontal scroll regions and expose them to keyboard users.
+// The existing :focus-visible rule uses the prototype's focus-ring token.
+const scrollLabels = {
+  PricingTable: 'Plan prices',
+  InterpretationCard: 'Recognised drawing objects',
+  StandardsReport: 'Standards report checks',
+};
+system = system.replace(/style: (\{[^{}]*overflowX: "auto"[^{}]*\})/g, (match, style, offset) => {
+  const component = [...system.slice(0, offset).matchAll(/function (\w+)\(/g)].at(-1)?.[1];
+  if (!scrollLabels[component]) throw new Error('Unnamed scroll region in ' + component);
+  return `tabIndex: 0, role: "region", "aria-label": "${scrollLabels[component]}", style: ${style}`;
+});
+// Keep one watermark announcement accessible; only its duplicate repeats are decorative.
+system = system.replace(/function ConceptWatermark\([\s\S]*?Object.assign\(__ds_scope, \{ ConceptWatermark \}\);/, component =>
+  component.replace('"aria-hidden": "true",', '').replace('key: i,', 'key: i, "aria-hidden": i > 0 ? "true" : undefined,')
+);
 let code = 'const DL = {};\n' + system;
 for (const m of template.matchAll(/<script type="text\/babel" src="([^"]+)"/g)) {
   let part = decode(manifest[m[1]]).toString();
@@ -108,10 +124,12 @@ for (const m of template.matchAll(/<script type="text\/babel" src="([^"]+)"/g)) 
   part = part.replace('currency="NGN" currencies={["NGN", "USD"]}', 'currencies={["NGN", "USD"]}');
   part = part.replace('audience: "Up to 25 seats"', 'audience: { GBP: "5 seats; additional seats billed separately", USD: "5 seats + $149/seat", NGN: "5 seats + ₦60,000/seat" }');
   part = part.replace('opacity: teach ? 0.5 : 1', 'opacity: teach ? 0.9 : 1');
+  part = part.replace('<pre style={{', '<pre tabIndex={0} role="region" aria-label="Code example" style={{');
+  part = part.replace('<div style={{ overflowX: "auto",', '<div tabIndex={0} role="region" aria-label="Plan feature comparison" style={{ overflowX: "auto",');
   if (part.includes('function RenderStudio')) {
-    // PRD: Concept watermarks belong to Idea outputs only.
-    part = part.replace('<ConceptWatermark repeat={3}', '<div').replace('</ConceptWatermark>', '</div>');
-    part = part.replace('Generated preview — not a model render.</b>', 'Generated preview — not a model render.</b> <span>Illustrative — generated from a Drawlogic drawing.</span>');
+    // FR-130: this is the prototype's Idea clip; keep its Concept watermark.
+    // The required media caption is a separate line after the intact preview label.
+    part = part.replace('</ConceptWatermark>', '</ConceptWatermark>\n<p style={mono}>Illustrative — generated from a Drawlogic drawing</p>');
   }
   code += '\n' + part;
 }

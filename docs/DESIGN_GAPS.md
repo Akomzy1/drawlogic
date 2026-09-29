@@ -50,8 +50,9 @@ The approved export has gaps exposed by the independent site suite:
 - The hero's generated images and the image in the drawing frame have no nearby
   Illustrative caption. The prototype's copy baseline therefore omits the label,
   while the caption gate requires it. The site adds the required caption using
-  the existing monospace caption tokens. The examiner needs to allow these
-  required additions in the copy baseline; no test was changed by the builder.
+  the existing monospace caption tokens. Examiner PR #20 now accepts those
+  additions; no test was changed by the builder. Caption placement still awaits
+  a design re-export and regenerated visual baselines.
 - Muted text (`#868282`) on white/tinted surfaces and white text on accent blue
   fail WCAG AA contrast (28 Home nodes at 1280 px). The site uses the existing
   neutral-dark text token for muted copy and neutral-darkest on accent buttons.
@@ -61,14 +62,22 @@ The approved export has gaps exposed by the independent site suite:
 
 - The same caption omission affects image frames on Idea mode, For professionals,
   Render studio and Students, plus the preview clip. Required captions remain
-  visible DOM text; issue #15 tracks the copy-baseline conflict.
+  visible DOM text; examiner PR #20 resolves the copy-baseline conflict (#15).
+  The caption bands and contrast corrections still await design incorporation;
+  the visual budget remains 2%.
 - Small white text on the green Signed badge, the blue Students link and the
   Student watermark need stronger contrast. They use existing dark text tokens.
   The Teach me first preview remains dimmed, with opacity increased from 0.5 to
   0.9 so its labels stay legible. These adjustments await design incorporation.
-- The Draft preview clip loses the Concept watermark under FR-130; Idea outputs
-  retain theirs. The examiner's prototype-derived honesty check needs that
-  exception. This changes only the marketing demonstration, not the renderer.
+- The Render studio demonstration is an Idea-mode preview clip. FR-130 requires
+  its Concept watermark: three “CONCEPT — NOT FOR CONSTRUCTION” repeats and the
+  “CONCEPT · PDF/PNG ONLY” strip, as exported. The watermark is restored; the
+  earlier note describing this as a Draft clip was incorrect. The prototype's
+  preview-and-drift sentence stays intact, with the Illustrative caption on its
+  own line.
+- Horizontal plan prices, interpretation and standards tables, code examples,
+  and the pricing comparison retain their prototype layout and gain keyboard
+  focus and accessible names. Focus uses the existing `--focus-ring` style.
 - Practice cards show five seats, with $149 additional seats in USD and ₦60,000
   in NGN. The PRD has no GBP additional-seat price, so GBP says additional seats
   are billed separately. The 100-credit NGN pack is ₦8,000, per PRD §10.
