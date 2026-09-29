@@ -87,6 +87,37 @@ embedded images and video, with resource IDs and SHA256 hashes. Superseded Home
 assets are excluded under Decision 16. Open pricing decisions remain open; the
 draft site follows the examiner's prototype-value policy for those entries.
 
+### Re-export — 29 September 2026 (`marketing-site.html` sha256 `dd4d6cba…408d`)
+
+**Captions and contrast: Approved — in the export.** Every generated image, frame
+and the preview clip now carries "Illustrative — generated from a Drawlogic
+drawing" in a `Caption` below it (the hero: a canvas chip bottom-left). Small
+muted text uses `--color-neutral-dark`; primary buttons and the prompt submit use
+`--color-blue-dark` (hover `--color-blue-darker`); the Signed stamp uses
+`--color-green-dark`; the Students link uses `--color-blue-dark`; the Student
+watermark uses `--color-neutral-dark`; Teach me first dims only the concept
+images (0.5), not their labels; the hero scrim is 0.65; the Idea site plan's scale
+bar and north arrow sit on a dark backing. axe colour-contrast on the export:
+0 failures on all 12 pages at 375, 768 and 1280 px (was 116 elements). The
+site's own caption bands and contrast overrides above are superseded by the export.
+
+Unchanged by the re-export: copy (apart from the captions), layout, images, video,
+fonts and behaviour. The keyboard-focus additions for scroll regions (above) and the
+PRD price corrections are not in the export and remain site-side.
+
+New, found reviewing the elements axe could not decide:
+
+- **Render studio, 375 px:** the "CONCEPT · PDF/PNG ONLY" strip wraps to three
+  lines and the play button sits over it, so the honesty mark is partly hidden.
+  Awaiting design.
+- **Idea mode site plan, 375 px:** the "OPTION A" label overlaps "YOUR PLOT ·
+  TRACED"; at 768 px "YOUR PLOT" is clipped at the frame edge. Awaiting design.
+- **Render studio clip:** the diagonal "CONCEPT — NOT FOR CONSTRUCTION" repeats are
+  faint where they cross the white façade. Legible; a heavier weight or tone would
+  make the mark unmistakable. Awaiting design decision.
+- **Pricing, Lagos:** the ✓ ticks beside plan features are a light green. They sit
+  beside text (not the only cue), so they are not a WCAG failure. No action needed.
+
 ## How to add an entry
 Date · screen/component · what the prototype lacks or contradicts · an approach consistent with `tokens.css` and the 17 system components · status (Awaiting design / Awaiting redesign / Not yet exported / Deferred / Approved).
 
