@@ -119,13 +119,15 @@ jobs:
             # The profile runtime tests (-m profiles) need core interpretation; they join CI with Prompt 9.
           fi
 
-      - name: examiner runtime — engine/core (gated per prompt; Prompt 4 now)
+      - name: examiner runtime — engine/core (gated per prompt; Prompt 6 now)
         run: |
           if [ -f trust/tests/pytest.ini ] && [ -f engine/core/main.py ]; then
             pip install $(python .github/scripts/engine-deps.py)
             # Codex's runtime tests gate each prompt as it lands; widen this selection with each prompt, never narrow it.
             #   Prompt 4 (DDL + solver): solver goldens and solver properties.
+            #   Prompt 6 (rule engine): check goldens, fail-closed property, no-rule coverage, byte-identical runs.
             GATED="solver_golden or solver_conserves or constraint_types_preserve or conflicting_driving or preserves_every_provenance"
+            GATED="$GATED or check_golden or no_pass_without_verified_signed_rule or absent_coverage or byte_identical"
             DRAWLOGIC_CORE_APP=engine.core.main:app python -m pytest -c trust/tests/pytest.ini -m runtime               trust/tests/test_core_goldens.py trust/tests/test_core_properties.py -k "$GATED"
           else
             echo "::notice::engine/core/main.py not present yet; core runtime tests fail with CORE_UNAVAILABLE until Prompt 4."

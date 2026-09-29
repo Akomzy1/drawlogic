@@ -53,9 +53,11 @@ for(let n=0;n<names.length;n++){
  layers:[{id:"detail",name:"Detail",line_weight_mm:.35}],schedules:[],solver:{status:"unresolved",conflicts:[]},checks:null,stamp:null};
  ddl.drawing.hash=ddlHash(ddl);
  const resolved=clone(ddl);resolved.dimensions[0].value=objects.reduce((a,o)=>a+o.thickness,0);resolved.solver={status:"resolved",conflicts:[]};resolved.drawing.hash=ddlHash(resolved);
+ // rule.schema.json: object_class is evaluated once per matching object, regardless of rule_refs.
+ const results=rules.flatMap(r=>objects.filter(o=>o.class===r.applies_to.object_class).map(o=>({rule_id:r.id,profile:r.profile,category:r.category,status:"flag",reason:"unverified",object_ids:[o.id],message:r.message,document:null,rule_state:"unverified",signer:null,auto_fix:{available:false},resolution:null}))).map((result,i)=>({id:"result-"+(i+1),...result}));
  const check={schema_version:V,run_id:"20000000-0000-4000-8000-"+String(n+1).padStart(12,"0"),drawing_id:id,drawing_hash:resolved.drawing.hash,mode:"draft",profile_versions:{"generic":V,"gb-eng-residential":V},
- results:rules.map((r,i)=>({id:"result-"+(i+1),rule_id:r.id,profile:r.profile,category:r.category,status:"flag",reason:"unverified",object_ids:[objects[0].id],message:r.message,document:null,rule_state:"unverified",signer:null,auto_fix:{available:false},resolution:null})),
- checks_not_performed:["structural","fire_stopping","acoustic"].map(category=>({category,label:category.replaceAll("_"," ")})),blocked:[],summary:{performed:2,passed:0,flagged:2,out_of_scope:0},generated_at:T};
+ results,
+ checks_not_performed:["structural","fire_stopping","acoustic"].map(category=>({category,label:category.replaceAll("_"," ")})),blocked:[],summary:{performed:results.length,passed:0,flagged:results.length,out_of_scope:0},generated_at:T};
  const card={schema_version:V,card_id:ddl.drawing.card_id,mode:"draft",status:"confirmed",confirmed_by:"fixture-user",confirmed_at:T,discipline:"architecture",drawing_type:"detail",detail_type:type,scale:10,units:"mm",jurisdiction:"GB-ENG",profile_stack:clone(stack),inputs:[{kind:"text",text:"Draw the supplied schematic "+type+" using only the supplied component dimensions."}],recognised:objects.map(o=>({key:o.id+".thickness",object_id:o.id,label:o.label,value:o.thickness,unit:"mm",...provenance})),missing:[],blocked:[],assumptions:[],created_at:T};
  const base=out+"/details/"+type;
  await save(base+"/input.ddl.json",ddl,"ddl");await save(base+"/resolved.ddl.json",resolved,"ddl");await save(base+"/expected.check.json",check,"check-result");await save(base+"/card.json",card,"interpretation");
