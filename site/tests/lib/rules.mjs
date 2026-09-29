@@ -23,26 +23,33 @@ export const GOVERNED_LINE = /[£$₦€]\s?\d|\bcredits?\b|\bseats?\b|\/mo\b|\/
  * Banned words. contracts/copy.json → banned is the source of truth. Until Prompt 0 drafts it, the list in
  * skills/drawlogic-trust-rules/SKILL.md §8 is used; the result says which source applied.
  * "approved" is banned only as a compliance claim, so only claim-shaped phrases are matched.
- * flythrough/walkthrough/cinematic are reserved for Studio (ray-traced) output, which the site does not show.
+ *
+ * Scopes (examiner's reading of trust-rules §8, 29 Sept 2026). The site applies every banned_scoped list:
+ * - outside_studio_output: the site is never Studio (ray-traced) output, so flythrough/walkthrough/cinematic are banned.
+ * - render_and_preview_output: the site shows render stills and preview clips and describes them; a colour-accuracy
+ *   claim in marketing is the same claim.
+ * - estimate_output: the site advertises quantities and cost ranges; "quote" there promises what the estimate
+ *   labels deny. The scope's permitted_phrases are removed from the text before the scan, as they are in the product.
  */
 export function loadBanned() {
   const copy = path.join(REPO_ROOT, "contracts/copy.json");
   if (fs.existsSync(copy)) {
-    // The site shows no Studio output and no estimate output, so it takes the everywhere list, the compliance-claim
-    // patterns, the outside-Studio words and the render/preview words; the estimate scope does not apply.
     const c = JSON.parse(fs.readFileSync(copy, "utf8"));
-    const words = [...(c.banned ?? []), ...(c.banned_scoped?.outside_studio_output?.words ?? []), ...(c.banned_scoped?.render_and_preview_output?.words ?? [])];
+    const scopes = Object.values(c.banned_scoped ?? {});
+    const words = [...(c.banned ?? []), ...scopes.flatMap((s) => s.words ?? [])];
     return {
       source: "contracts/copy.json",
+      permitted: scopes.flatMap((s) => s.permitted_phrases ?? []),
       patterns: [
         ...words.map((w) => ({ word: w, re: new RegExp(`\\b${w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/\s+/g, "[\\s-]+")}\\b`, "i") })),
         ...(c.banned_patterns ?? []).map((p) => ({ word: p.id, re: new RegExp(p.pattern, p.flags) })),
       ],
     };
   }
-  const words = ["compliant", "code-compliant", "meets code", "guaranteed", "stamp marketplace", "get your plans stamped", "stamping service", "flythrough", "walkthrough", "cinematic"];
+  const words = ["compliant", "code-compliant", "meets code", "guaranteed", "stamp marketplace", "get your plans stamped", "stamping service", "flythrough", "walkthrough", "cinematic", "quote", "quotation", "guaranteed price", "fixed price", "exact match", "exact colour", "true colour"];
   return {
     source: "skills/drawlogic-trust-rules/SKILL.md §8 (contracts/copy.json not drafted yet)",
+    permitted: ["Indicative — not a quote", "This is an estimate, not a quotation."],
     patterns: [
       ...words.map((w) => ({ word: w, re: new RegExp(`\\b${w.replace(/\s+/g, "[\\s-]+")}\\b`, "i") })),
       { word: "approved (compliance claim)", re: /\b(code|building[\s-]control|council|regulator|regulation|planning)[\s-]approved\b|\bapproved (by|for) (building control|the council|planning|code|regulators?)\b/i },
@@ -51,6 +58,7 @@ export function loadBanned() {
 }
 
 export function findBanned(text, banned) {
+  for (const p of banned.permitted ?? []) text = text.split(p).join(" ");
   const hits = [];
   for (const { word, re } of banned.patterns) {
     const m = text.match(re);
