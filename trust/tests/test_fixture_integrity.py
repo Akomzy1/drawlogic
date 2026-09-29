@@ -68,10 +68,30 @@ def test_detail_hash_references_solver_oracle_and_unsigned_checks(row):
         o["thickness"] for o in original["objects"]
     )
     assert expected["drawing_hash"] == resolved["drawing"]["hash"]
+    # These two details have two masonry leaves. Both must be checked even
+    # though only outer carries rule_refs (rule.schema.json applies_to).
+    object_ids = (
+        {"outer", "inner"}
+        if row["id"] in {"window_jamb", "cavity_closer"}
+        else {original["objects"][0]["id"]}
+    )
+    rule_ids = {
+        rule["id"]
+        for profile in profiles()
+        for rule in profile["rules"]
+        if rule["applies_to"]["detail_type"] == row["id"]
+    }
+    assert len(rule_ids) == 2
+    assert {
+        (result["rule_id"], tuple(result["object_ids"]))
+        for result in expected["results"]
+    } == {(rule_id, (object_id,)) for rule_id in rule_ids for object_id in object_ids}
+    result_count = 2 * len(object_ids)
+    assert len(expected["results"]) == result_count
     assert expected["summary"] == {
-        "performed": 2,
+        "performed": result_count,
         "passed": 0,
-        "flagged": 2,
+        "flagged": result_count,
         "out_of_scope": 0,
     }
     assert all(
