@@ -1,0 +1,29 @@
+{
+  "exercise_id": "exercise-parapet",
+  "detail_type": "parapet",
+  "submission": {
+    "description": "Brick and block cavity wall carried up as a parapet round a flat roof. Felt turned up the wall a little, stone coping on top.",
+    "sketch_asset_ids": [
+      "ast-student-sketch-01"
+    ]
+  },
+  "cycle": 0,
+  "profile_stack": [
+    {
+      "id": "gb-eng-residential",
+      "name": "GB-ENG Residential",
+      "version": "0.1.0",
+      "layer": "jurisdiction",
+      "tier": 1,
+      "signer": null
+    },
+    {
+      "id": "generic",
+      "name": "Generic",
+      "version": "0.1.0",
+      "layer": "generic",
+      "tier": null,
+      "signer": null
+    }
+  ]
+}

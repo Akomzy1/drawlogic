@@ -1,0 +1,37 @@
+{
+  "schema_version": "0.1.0",
+  "set_id": "fixture-review-set",
+  "drawing_ids": [
+    "3f6c1e2a-7b4d-4c8e-9a51-2d0f6b7e8c11"
+  ],
+  "signer_id": "sgn-jsmith",
+  "drawings_opened": {
+    "total": 1,
+    "opened": 0
+  },
+  "verify_items": {
+    "total": 1,
+    "resolved": 0
+  },
+  "flags": {
+    "total": 1,
+    "cleared_or_accepted": 0,
+    "notes": []
+  },
+  "report_reviewed": false,
+  "signer_checks": {
+    "credential_verified": true,
+    "verification_level": "verified",
+    "jurisdiction_match": true,
+    "discipline_match": true,
+    "second_factor": "not_requested"
+  },
+  "enabled": false,
+  "evidence": {
+    "items_opened": [],
+    "changes": [],
+    "assumptions_resolved": 0,
+    "flags_accepted": 0,
+    "time_in_review_s": 0
+  }
+}

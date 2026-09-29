@@ -1,0 +1,123 @@
+{
+  "schema_version": "0.1.0",
+  "run_id": "20000000-0000-4000-8000-000000000010",
+  "drawing_id": "10000000-0000-4000-8000-000000000010",
+  "drawing_hash": "sha256:893a4c7ccea8f03c569571eb5f1fcea5bdc2b0a8f9a067fb5dee7f5848dd4ac3",
+  "mode": "draft",
+  "profile_versions": {
+    "generic": "0.1.0",
+    "gb-eng-residential": "0.1.0"
+  },
+  "results": [
+    {
+      "id": "result-1",
+      "rule_id": "generic-cavity_closer-geometry",
+      "profile": {
+        "id": "generic",
+        "version": "0.1.0"
+      },
+      "category": "geometry",
+      "status": "flag",
+      "reason": "unverified",
+      "object_ids": [
+        "outer"
+      ],
+      "message": "Examiner geometry rule requires professional verification.",
+      "document": null,
+      "rule_state": "unverified",
+      "signer": null,
+      "auto_fix": {
+        "available": false
+      },
+      "resolution": null
+    },
+    {
+      "id": "result-2",
+      "rule_id": "generic-cavity_closer-geometry",
+      "profile": {
+        "id": "generic",
+        "version": "0.1.0"
+      },
+      "category": "geometry",
+      "status": "flag",
+      "reason": "unverified",
+      "object_ids": [
+        "inner"
+      ],
+      "message": "Examiner geometry rule requires professional verification.",
+      "document": null,
+      "rule_state": "unverified",
+      "signer": null,
+      "auto_fix": {
+        "available": false
+      },
+      "resolution": null
+    },
+    {
+      "id": "result-3",
+      "rule_id": "gb-eng-residential-cavity_closer-continuity",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "category": "thermal",
+      "status": "flag",
+      "reason": "unverified",
+      "object_ids": [
+        "outer"
+      ],
+      "message": "Examiner detail continuity rule requires professional verification.",
+      "document": null,
+      "rule_state": "unverified",
+      "signer": null,
+      "auto_fix": {
+        "available": false
+      },
+      "resolution": null
+    },
+    {
+      "id": "result-4",
+      "rule_id": "gb-eng-residential-cavity_closer-continuity",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "category": "thermal",
+      "status": "flag",
+      "reason": "unverified",
+      "object_ids": [
+        "inner"
+      ],
+      "message": "Examiner detail continuity rule requires professional verification.",
+      "document": null,
+      "rule_state": "unverified",
+      "signer": null,
+      "auto_fix": {
+        "available": false
+      },
+      "resolution": null
+    }
+  ],
+  "checks_not_performed": [
+    {
+      "category": "structural",
+      "label": "structural"
+    },
+    {
+      "category": "fire_stopping",
+      "label": "fire stopping"
+    },
+    {
+      "category": "acoustic",
+      "label": "acoustic"
+    }
+  ],
+  "blocked": [],
+  "summary": {
+    "performed": 4,
+    "passed": 0,
+    "flagged": 4,
+    "out_of_scope": 0
+  },
+  "generated_at": "2026-09-27T00:00:00Z"
+}

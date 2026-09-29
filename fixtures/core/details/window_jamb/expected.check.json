@@ -1,0 +1,123 @@
+{
+  "schema_version": "0.1.0",
+  "run_id": "20000000-0000-4000-8000-000000000002",
+  "drawing_id": "10000000-0000-4000-8000-000000000002",
+  "drawing_hash": "sha256:e0bf12469b4d15261699413488ec3b5fd8e5321ce792b5cfbc67d2cc0a59d752",
+  "mode": "draft",
+  "profile_versions": {
+    "generic": "0.1.0",
+    "gb-eng-residential": "0.1.0"
+  },
+  "results": [
+    {
+      "id": "result-1",
+      "rule_id": "generic-window_jamb-geometry",
+      "profile": {
+        "id": "generic",
+        "version": "0.1.0"
+      },
+      "category": "geometry",
+      "status": "flag",
+      "reason": "unverified",
+      "object_ids": [
+        "outer"
+      ],
+      "message": "Examiner geometry rule requires professional verification.",
+      "document": null,
+      "rule_state": "unverified",
+      "signer": null,
+      "auto_fix": {
+        "available": false
+      },
+      "resolution": null
+    },
+    {
+      "id": "result-2",
+      "rule_id": "generic-window_jamb-geometry",
+      "profile": {
+        "id": "generic",
+        "version": "0.1.0"
+      },
+      "category": "geometry",
+      "status": "flag",
+      "reason": "unverified",
+      "object_ids": [
+        "inner"
+      ],
+      "message": "Examiner geometry rule requires professional verification.",
+      "document": null,
+      "rule_state": "unverified",
+      "signer": null,
+      "auto_fix": {
+        "available": false
+      },
+      "resolution": null
+    },
+    {
+      "id": "result-3",
+      "rule_id": "gb-eng-residential-window_jamb-continuity",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "category": "thermal",
+      "status": "flag",
+      "reason": "unverified",
+      "object_ids": [
+        "outer"
+      ],
+      "message": "Examiner detail continuity rule requires professional verification.",
+      "document": null,
+      "rule_state": "unverified",
+      "signer": null,
+      "auto_fix": {
+        "available": false
+      },
+      "resolution": null
+    },
+    {
+      "id": "result-4",
+      "rule_id": "gb-eng-residential-window_jamb-continuity",
+      "profile": {
+        "id": "gb-eng-residential",
+        "version": "0.1.0"
+      },
+      "category": "thermal",
+      "status": "flag",
+      "reason": "unverified",
+      "object_ids": [
+        "inner"
+      ],
+      "message": "Examiner detail continuity rule requires professional verification.",
+      "document": null,
+      "rule_state": "unverified",
+      "signer": null,
+      "auto_fix": {
+        "available": false
+      },
+      "resolution": null
+    }
+  ],
+  "checks_not_performed": [
+    {
+      "category": "structural",
+      "label": "structural"
+    },
+    {
+      "category": "fire_stopping",
+      "label": "fire stopping"
+    },
+    {
+      "category": "acoustic",
+      "label": "acoustic"
+    }
+  ],
+  "blocked": [],
+  "summary": {
+    "performed": 4,
+    "passed": 0,
+    "flagged": 4,
+    "out_of_scope": 0
+  },
+  "generated_at": "2026-09-27T00:00:00Z"
+}

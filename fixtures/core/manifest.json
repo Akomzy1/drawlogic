@@ -1,0 +1,482 @@
+{
+  "version": "0.1.0",
+  "source_prd": "v0.2.14",
+  "contract_commit": "29d8c9a",
+  "details": [
+    {
+      "id": "window_head",
+      "input": "fixtures/core/details/window_head/input.ddl.json",
+      "resolved": "fixtures/core/details/window_head/resolved.ddl.json",
+      "check": "fixtures/core/details/window_head/expected.check.json",
+      "card": "fixtures/core/details/window_head/card.json",
+      "clauses": [
+        "FR-22",
+        "FR-23",
+        "FR-30",
+        "FR-31",
+        "FR-40"
+      ]
+    },
+    {
+      "id": "window_jamb",
+      "input": "fixtures/core/details/window_jamb/input.ddl.json",
+      "resolved": "fixtures/core/details/window_jamb/resolved.ddl.json",
+      "check": "fixtures/core/details/window_jamb/expected.check.json",
+      "card": "fixtures/core/details/window_jamb/card.json",
+      "clauses": [
+        "FR-22",
+        "FR-23",
+        "FR-30",
+        "FR-31",
+        "FR-40"
+      ]
+    },
+    {
+      "id": "window_sill",
+      "input": "fixtures/core/details/window_sill/input.ddl.json",
+      "resolved": "fixtures/core/details/window_sill/resolved.ddl.json",
+      "check": "fixtures/core/details/window_sill/expected.check.json",
+      "card": "fixtures/core/details/window_sill/card.json",
+      "clauses": [
+        "FR-22",
+        "FR-23",
+        "FR-30",
+        "FR-31",
+        "FR-40"
+      ]
+    },
+    {
+      "id": "door_threshold",
+      "input": "fixtures/core/details/door_threshold/input.ddl.json",
+      "resolved": "fixtures/core/details/door_threshold/resolved.ddl.json",
+      "check": "fixtures/core/details/door_threshold/expected.check.json",
+      "card": "fixtures/core/details/door_threshold/card.json",
+      "clauses": [
+        "FR-22",
+        "FR-23",
+        "FR-30",
+        "FR-31",
+        "FR-40"
+      ]
+    },
+    {
+      "id": "eaves",
+      "input": "fixtures/core/details/eaves/input.ddl.json",
+      "resolved": "fixtures/core/details/eaves/resolved.ddl.json",
+      "check": "fixtures/core/details/eaves/expected.check.json",
+      "card": "fixtures/core/details/eaves/card.json",
+      "clauses": [
+        "FR-22",
+        "FR-23",
+        "FR-30",
+        "FR-31",
+        "FR-40"
+      ]
+    },
+    {
+      "id": "verge",
+      "input": "fixtures/core/details/verge/input.ddl.json",
+      "resolved": "fixtures/core/details/verge/resolved.ddl.json",
+      "check": "fixtures/core/details/verge/expected.check.json",
+      "card": "fixtures/core/details/verge/card.json",
+      "clauses": [
+        "FR-22",
+        "FR-23",
+        "FR-30",
+        "FR-31",
+        "FR-40"
+      ]
+    },
+    {
+      "id": "parapet",
+      "input": "fixtures/core/details/parapet/input.ddl.json",
+      "resolved": "fixtures/core/details/parapet/resolved.ddl.json",
+      "check": "fixtures/core/details/parapet/expected.check.json",
+      "card": "fixtures/core/details/parapet/card.json",
+      "clauses": [
+        "FR-22",
+        "FR-23",
+        "FR-30",
+        "FR-31",
+        "FR-40"
+      ]
+    },
+    {
+      "id": "warm_flat_roof_abutment",
+      "input": "fixtures/core/details/warm_flat_roof_abutment/input.ddl.json",
+      "resolved": "fixtures/core/details/warm_flat_roof_abutment/resolved.ddl.json",
+      "check": "fixtures/core/details/warm_flat_roof_abutment/expected.check.json",
+      "card": "fixtures/core/details/warm_flat_roof_abutment/card.json",
+      "clauses": [
+        "FR-22",
+        "FR-23",
+        "FR-30",
+        "FR-31",
+        "FR-40"
+      ]
+    },
+    {
+      "id": "ground_floor_wall_dpc",
+      "input": "fixtures/core/details/ground_floor_wall_dpc/input.ddl.json",
+      "resolved": "fixtures/core/details/ground_floor_wall_dpc/resolved.ddl.json",
+      "check": "fixtures/core/details/ground_floor_wall_dpc/expected.check.json",
+      "card": "fixtures/core/details/ground_floor_wall_dpc/card.json",
+      "clauses": [
+        "FR-22",
+        "FR-23",
+        "FR-30",
+        "FR-31",
+        "FR-40"
+      ]
+    },
+    {
+      "id": "cavity_closer",
+      "input": "fixtures/core/details/cavity_closer/input.ddl.json",
+      "resolved": "fixtures/core/details/cavity_closer/resolved.ddl.json",
+      "check": "fixtures/core/details/cavity_closer/expected.check.json",
+      "card": "fixtures/core/details/cavity_closer/card.json",
+      "clauses": [
+        "FR-22",
+        "FR-23",
+        "FR-30",
+        "FR-31",
+        "FR-40"
+      ]
+    },
+    {
+      "id": "wall_to_foundation",
+      "input": "fixtures/core/details/wall_to_foundation/input.ddl.json",
+      "resolved": "fixtures/core/details/wall_to_foundation/resolved.ddl.json",
+      "check": "fixtures/core/details/wall_to_foundation/expected.check.json",
+      "card": "fixtures/core/details/wall_to_foundation/card.json",
+      "clauses": [
+        "FR-22",
+        "FR-23",
+        "FR-30",
+        "FR-31",
+        "FR-40"
+      ]
+    },
+    {
+      "id": "balcony_threshold",
+      "input": "fixtures/core/details/balcony_threshold/input.ddl.json",
+      "resolved": "fixtures/core/details/balcony_threshold/resolved.ddl.json",
+      "check": "fixtures/core/details/balcony_threshold/expected.check.json",
+      "card": "fixtures/core/details/balcony_threshold/card.json",
+      "clauses": [
+        "FR-22",
+        "FR-23",
+        "FR-30",
+        "FR-31",
+        "FR-40"
+      ]
+    },
+    {
+      "id": "steel_beam_bearing",
+      "input": "fixtures/core/details/steel_beam_bearing/input.ddl.json",
+      "resolved": "fixtures/core/details/steel_beam_bearing/resolved.ddl.json",
+      "check": "fixtures/core/details/steel_beam_bearing/expected.check.json",
+      "card": "fixtures/core/details/steel_beam_bearing/card.json",
+      "clauses": [
+        "FR-22",
+        "FR-23",
+        "FR-30",
+        "FR-31",
+        "FR-40"
+      ]
+    }
+  ],
+  "ideas": [
+    {
+      "id": "kitchen-extension",
+      "request": "fixtures/core/idea/kitchen-extension/request.json",
+      "card": "fixtures/core/idea/kitchen-extension/expected.card.json"
+    },
+    {
+      "id": "restaurant",
+      "request": "fixtures/core/idea/restaurant/request.json",
+      "card": "fixtures/core/idea/restaurant/expected.card.json"
+    },
+    {
+      "id": "lekki-site",
+      "request": "fixtures/core/idea/lekki-site/request.json",
+      "card": "fixtures/core/idea/lekki-site/expected.card.json"
+    }
+  ],
+  "learn": [
+    {
+      "id": "parapet",
+      "request": "fixtures/core/learn/parapet/request.json",
+      "expected": "fixtures/core/learn/parapet/expected.critique.json"
+    },
+    {
+      "id": "steel-beam-bearing",
+      "request": "fixtures/core/learn/steel-beam-bearing/request.json",
+      "expected": "fixtures/core/learn/steel-beam-bearing/expected.critique.json"
+    }
+  ],
+  "documents": [
+    {
+      "path": "fixtures/core/details/window_head/input.ddl.json",
+      "schema": "ddl"
+    },
+    {
+      "path": "fixtures/core/details/window_head/resolved.ddl.json",
+      "schema": "ddl"
+    },
+    {
+      "path": "fixtures/core/details/window_head/expected.check.json",
+      "schema": "check-result"
+    },
+    {
+      "path": "fixtures/core/details/window_head/card.json",
+      "schema": "interpretation"
+    },
+    {
+      "path": "fixtures/core/details/window_jamb/input.ddl.json",
+      "schema": "ddl"
+    },
+    {
+      "path": "fixtures/core/details/window_jamb/resolved.ddl.json",
+      "schema": "ddl"
+    },
+    {
+      "path": "fixtures/core/details/window_jamb/expected.check.json",
+      "schema": "check-result"
+    },
+    {
+      "path": "fixtures/core/details/window_jamb/card.json",
+      "schema": "interpretation"
+    },
+    {
+      "path": "fixtures/core/details/window_sill/input.ddl.json",
+      "schema": "ddl"
+    },
+    {
+      "path": "fixtures/core/details/window_sill/resolved.ddl.json",
+      "schema": "ddl"
+    },
+    {
+      "path": "fixtures/core/details/window_sill/expected.check.json",
+      "schema": "check-result"
+    },
+    {
+      "path": "fixtures/core/details/window_sill/card.json",
+      "schema": "interpretation"
+    },
+    {
+      "path": "fixtures/core/details/door_threshold/input.ddl.json",
+      "schema": "ddl"
+    },
+    {
+      "path": "fixtures/core/details/door_threshold/resolved.ddl.json",
+      "schema": "ddl"
+    },
+    {
+      "path": "fixtures/core/details/door_threshold/expected.check.json",
+      "schema": "check-result"
+    },
+    {
+      "path": "fixtures/core/details/door_threshold/card.json",
+      "schema": "interpretation"
+    },
+    {
+      "path": "fixtures/core/details/eaves/input.ddl.json",
+      "schema": "ddl"
+    },
+    {
+      "path": "fixtures/core/details/eaves/resolved.ddl.json",
+      "schema": "ddl"
+    },
+    {
+      "path": "fixtures/core/details/eaves/expected.check.json",
+      "schema": "check-result"
+    },
+    {
+      "path": "fixtures/core/details/eaves/card.json",
+      "schema": "interpretation"
+    },
+    {
+      "path": "fixtures/core/details/verge/input.ddl.json",
+      "schema": "ddl"
+    },
+    {
+      "path": "fixtures/core/details/verge/resolved.ddl.json",
+      "schema": "ddl"
+    },
+    {
+      "path": "fixtures/core/details/verge/expected.check.json",
+      "schema": "check-result"
+    },
+    {
+      "path": "fixtures/core/details/verge/card.json",
+      "schema": "interpretation"
+    },
+    {
+      "path": "fixtures/core/details/parapet/input.ddl.json",
+      "schema": "ddl"
+    },
+    {
+      "path": "fixtures/core/details/parapet/resolved.ddl.json",
+      "schema": "ddl"
+    },
+    {
+      "path": "fixtures/core/details/parapet/expected.check.json",
+      "schema": "check-result"
+    },
+    {
+      "path": "fixtures/core/details/parapet/card.json",
+      "schema": "interpretation"
+    },
+    {
+      "path": "fixtures/core/details/warm_flat_roof_abutment/input.ddl.json",
+      "schema": "ddl"
+    },
+    {
+      "path": "fixtures/core/details/warm_flat_roof_abutment/resolved.ddl.json",
+      "schema": "ddl"
+    },
+    {
+      "path": "fixtures/core/details/warm_flat_roof_abutment/expected.check.json",
+      "schema": "check-result"
+    },
+    {
+      "path": "fixtures/core/details/warm_flat_roof_abutment/card.json",
+      "schema": "interpretation"
+    },
+    {
+      "path": "fixtures/core/details/ground_floor_wall_dpc/input.ddl.json",
+      "schema": "ddl"
+    },
+    {
+      "path": "fixtures/core/details/ground_floor_wall_dpc/resolved.ddl.json",
+      "schema": "ddl"
+    },
+    {
+      "path": "fixtures/core/details/ground_floor_wall_dpc/expected.check.json",
+      "schema": "check-result"
+    },
+    {
+      "path": "fixtures/core/details/ground_floor_wall_dpc/card.json",
+      "schema": "interpretation"
+    },
+    {
+      "path": "fixtures/core/details/cavity_closer/input.ddl.json",
+      "schema": "ddl"
+    },
+    {
+      "path": "fixtures/core/details/cavity_closer/resolved.ddl.json",
+      "schema": "ddl"
+    },
+    {
+      "path": "fixtures/core/details/cavity_closer/expected.check.json",
+      "schema": "check-result"
+    },
+    {
+      "path": "fixtures/core/details/cavity_closer/card.json",
+      "schema": "interpretation"
+    },
+    {
+      "path": "fixtures/core/details/wall_to_foundation/input.ddl.json",
+      "schema": "ddl"
+    },
+    {
+      "path": "fixtures/core/details/wall_to_foundation/resolved.ddl.json",
+      "schema": "ddl"
+    },
+    {
+      "path": "fixtures/core/details/wall_to_foundation/expected.check.json",
+      "schema": "check-result"
+    },
+    {
+      "path": "fixtures/core/details/wall_to_foundation/card.json",
+      "schema": "interpretation"
+    },
+    {
+      "path": "fixtures/core/details/balcony_threshold/input.ddl.json",
+      "schema": "ddl"
+    },
+    {
+      "path": "fixtures/core/details/balcony_threshold/resolved.ddl.json",
+      "schema": "ddl"
+    },
+    {
+      "path": "fixtures/core/details/balcony_threshold/expected.check.json",
+      "schema": "check-result"
+    },
+    {
+      "path": "fixtures/core/details/balcony_threshold/card.json",
+      "schema": "interpretation"
+    },
+    {
+      "path": "fixtures/core/details/steel_beam_bearing/input.ddl.json",
+      "schema": "ddl"
+    },
+    {
+      "path": "fixtures/core/details/steel_beam_bearing/resolved.ddl.json",
+      "schema": "ddl"
+    },
+    {
+      "path": "fixtures/core/details/steel_beam_bearing/expected.check.json",
+      "schema": "check-result"
+    },
+    {
+      "path": "fixtures/core/details/steel_beam_bearing/card.json",
+      "schema": "interpretation"
+    },
+    {
+      "path": "fixtures/core/profiles/generic.json",
+      "schema": "profile"
+    },
+    {
+      "path": "fixtures/core/profiles/gb-eng-residential.json",
+      "schema": "profile"
+    },
+    {
+      "path": "fixtures/core/profiles/ng-la.json",
+      "schema": "profile"
+    },
+    {
+      "path": "fixtures/core/idea/kitchen-extension/expected.card.json",
+      "schema": "interpretation"
+    },
+    {
+      "path": "fixtures/core/idea/restaurant/expected.card.json",
+      "schema": "interpretation"
+    },
+    {
+      "path": "fixtures/core/idea/lekki-site/expected.card.json",
+      "schema": "interpretation"
+    },
+    {
+      "path": "fixtures/core/learn/parapet/expected.critique.json",
+      "schema": "critique"
+    },
+    {
+      "path": "fixtures/core/learn/steel-beam-bearing/expected.critique.json",
+      "schema": "critique"
+    },
+    {
+      "path": "trust/tests/fixtures/gate.initial.json",
+      "schema": "signing-gate"
+    },
+    {
+      "path": "trust/tests/fixtures/audit.0.json",
+      "schema": "audit-record"
+    },
+    {
+      "path": "trust/tests/fixtures/audit.1.json",
+      "schema": "audit-record"
+    },
+    {
+      "path": "trust/tests/fixtures/audit.2.json",
+      "schema": "audit-record"
+    }
+  ],
+  "notes": [
+    "FR-23 lists thirteen named details, despite the twelve label.",
+    "Profile fixtures are unsigned examiner inputs, not production profile authoring.",
+    "All dimensional inputs are explicitly synthetic and user supplied.",
+    "No provider calls or API keys are used."
+  ]
+}

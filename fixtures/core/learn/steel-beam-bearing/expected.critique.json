@@ -1,0 +1,148 @@
+{
+  "schema_version": "0.1.0",
+  "id": "critique-steel-beam-bearing",
+  "exercise_id": "exercise-steel-beam-bearing",
+  "detail_type": "steel_beam_bearing",
+  "profile_stack": [
+    {
+      "id": "gb-eng-residential",
+      "name": "GB-ENG Residential",
+      "version": "0.1.0",
+      "layer": "jurisdiction",
+      "tier": 1,
+      "signer": null
+    },
+    {
+      "id": "generic",
+      "name": "Generic",
+      "version": "0.1.0",
+      "layer": "generic",
+      "tier": null,
+      "signer": null
+    }
+  ],
+  "submission": {
+    "description": "A steel beam rests on masonry. I have not provided a load, member size or connection design."
+  },
+  "cycle": 0,
+  "inspiration": [
+    {
+      "id": "load-path",
+      "title": "Trace the load path",
+      "typical_detail_id": null,
+      "principles": [
+        "Show where the beam bears and how its support is identified; obtain engineering values separately."
+      ],
+      "partial_diagram_asset_id": null
+    },
+    {
+      "id": "bearing-support",
+      "title": "Separate drawing from design",
+      "typical_detail_id": null,
+      "principles": [
+        "Label the support and leave missing engineering values as questions."
+      ],
+      "partial_diagram_asset_id": null
+    }
+  ],
+  "points": [
+    {
+      "id": "beam-0",
+      "grade": "red",
+      "title": "load",
+      "reason": "Supply the engineer's load.",
+      "why": "Drawing-level geometry cannot establish this engineering value.",
+      "question": "Supply the engineer's load.",
+      "source": {
+        "kind": "general_good_practice",
+        "label_key": "learn.general_good_practice"
+      },
+      "asks_for": [
+        {
+          "key": "beam.load",
+          "object_id": "beam",
+          "kind": "load",
+          "request": "Supply the engineer's load.",
+          "why": "Drawing-level geometry cannot establish this engineering value."
+        }
+      ],
+      "state": "raised",
+      "worked_answer_available": false
+    },
+    {
+      "id": "beam-1",
+      "grade": "red",
+      "title": "member size",
+      "reason": "Supply the engineer's member size.",
+      "why": "Drawing-level geometry cannot establish this engineering value.",
+      "question": "Supply the engineer's member size.",
+      "source": {
+        "kind": "general_good_practice",
+        "label_key": "learn.general_good_practice"
+      },
+      "asks_for": [
+        {
+          "key": "beam.member_size",
+          "object_id": "beam",
+          "kind": "member_size",
+          "request": "Supply the engineer's member size.",
+          "why": "Drawing-level geometry cannot establish this engineering value."
+        }
+      ],
+      "state": "raised",
+      "worked_answer_available": false
+    },
+    {
+      "id": "beam-2",
+      "grade": "red",
+      "title": "structural connection",
+      "reason": "Supply the engineer's structural connection.",
+      "why": "Drawing-level geometry cannot establish this engineering value.",
+      "question": "Supply the engineer's structural connection.",
+      "source": {
+        "kind": "general_good_practice",
+        "label_key": "learn.general_good_practice"
+      },
+      "asks_for": [
+        {
+          "key": "beam.structural_connection",
+          "object_id": "beam",
+          "kind": "structural_connection",
+          "request": "Supply the engineer's structural connection.",
+          "why": "Drawing-level geometry cannot establish this engineering value."
+        }
+      ],
+      "state": "raised",
+      "worked_answer_available": false
+    }
+  ],
+  "blocked": [
+    {
+      "key": "beam.load",
+      "object_id": "beam",
+      "kind": "load",
+      "request": "Supply the engineer's load.",
+      "why": "Drawing-level geometry cannot establish this engineering value."
+    },
+    {
+      "key": "beam.member_size",
+      "object_id": "beam",
+      "kind": "member_size",
+      "request": "Supply the engineer's member size.",
+      "why": "Drawing-level geometry cannot establish this engineering value."
+    },
+    {
+      "key": "beam.structural_connection",
+      "object_id": "beam",
+      "kind": "structural_connection",
+      "request": "Supply the engineer's structural connection.",
+      "why": "Drawing-level geometry cannot establish this engineering value."
+    }
+  ],
+  "generation_unlocked": {
+    "unlocked": false,
+    "by": null
+  },
+  "compare": null,
+  "created_at": "2026-09-27T00:00:00Z"
+}

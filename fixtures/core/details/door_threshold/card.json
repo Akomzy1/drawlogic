@@ -1,0 +1,84 @@
+{
+  "schema_version": "0.1.0",
+  "card_id": "card-door_threshold",
+  "mode": "draft",
+  "status": "confirmed",
+  "confirmed_by": "fixture-user",
+  "confirmed_at": "2026-09-27T00:00:00Z",
+  "discipline": "architecture",
+  "drawing_type": "detail",
+  "detail_type": "door_threshold",
+  "scale": 10,
+  "units": "mm",
+  "jurisdiction": "GB-ENG",
+  "profile_stack": [
+    {
+      "id": "gb-eng-residential",
+      "name": "GB-ENG Residential",
+      "version": "0.1.0",
+      "layer": "jurisdiction",
+      "tier": 1,
+      "signer": null
+    },
+    {
+      "id": "generic",
+      "name": "Generic",
+      "version": "0.1.0",
+      "layer": "generic",
+      "tier": null,
+      "signer": null
+    }
+  ],
+  "inputs": [
+    {
+      "kind": "text",
+      "text": "Draw the supplied schematic door_threshold using only the supplied component dimensions."
+    }
+  ],
+  "recognised": [
+    {
+      "key": "slab.thickness",
+      "object_id": "slab",
+      "label": "slab",
+      "value": 150,
+      "unit": "mm",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "key": "insulation.thickness",
+      "object_id": "insulation",
+      "label": "insulation",
+      "value": 100,
+      "unit": "mm",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "key": "threshold.thickness",
+      "object_id": "threshold",
+      "label": "threshold",
+      "value": 25,
+      "unit": "mm",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "key": "seal.thickness",
+      "object_id": "seal",
+      "label": "seal",
+      "value": 2,
+      "unit": "mm",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "missing": [],
+  "blocked": [],
+  "assumptions": [],
+  "created_at": "2026-09-27T00:00:00Z"
+}

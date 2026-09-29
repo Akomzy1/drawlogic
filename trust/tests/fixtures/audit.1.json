@@ -1,0 +1,21 @@
+{
+  "schema_version": "0.1.0",
+  "id": "30000000-0000-4000-8000-000000000002",
+  "chain_id": "fixture-chain",
+  "seq": 1,
+  "drawing_id": "3f6c1e2a-7b4d-4c8e-9a51-2d0f6b7e8c11",
+  "actor": {
+    "kind": "user",
+    "id": "fixture-user"
+  },
+  "action": "drawing.open",
+  "before_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "after_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "prev_hash": "sha256:029da6dd3eef25b36f3cc6aac89be196e597f6103f7117f2d5b17f6d120831f4",
+  "ts": "2026-09-27T00:00:00Z",
+  "payload": {
+    "review_note": "Fixture review evidence",
+    "numeric": 1
+  },
+  "hash": "sha256:25f774f0748ad5608a38263def9ef9492e4a8e7aee2b1e37fb3b7e7094e01b16"
+}

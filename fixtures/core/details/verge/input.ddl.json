@@ -1,0 +1,244 @@
+{
+  "ddl_version": "0.1.0",
+  "drawing": {
+    "id": "10000000-0000-4000-8000-000000000006",
+    "title": "verge",
+    "discipline": "architecture",
+    "type": "detail",
+    "detail_type": "verge",
+    "mode": "draft",
+    "scale": 10,
+    "units": "mm",
+    "jurisdiction": "GB-ENG",
+    "rev": "A",
+    "hash": "sha256:5d71575f7783a54a1dd8215c508ac07f6cc3166b0e0a32e0b1e82b3a2aecafb4",
+    "parent_hash": null,
+    "profile_stack": [
+      {
+        "id": "gb-eng-residential",
+        "name": "GB-ENG Residential",
+        "version": "0.1.0",
+        "layer": "jurisdiction",
+        "tier": 1,
+        "signer": null
+      },
+      {
+        "id": "generic",
+        "name": "Generic",
+        "version": "0.1.0",
+        "layer": "generic",
+        "tier": null,
+        "signer": null
+      }
+    ],
+    "card_id": "card-verge",
+    "created_at": "2026-09-27T00:00:00Z"
+  },
+  "materials": [
+    {
+      "id": "mat_masonry",
+      "name": "masonry",
+      "category": "test_material",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "mat_roof_covering",
+      "name": "roof covering",
+      "category": "test_material",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "mat_membrane",
+      "name": "membrane",
+      "category": "test_material",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "mat_verge_trim",
+      "name": "verge trim",
+      "category": "test_material",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "objects": [
+    {
+      "id": "wall",
+      "class": "masonry",
+      "label": "wall",
+      "material_id": "mat_masonry",
+      "thickness": 102.5,
+      "height": 500,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "rect",
+        "origin": [
+          0,
+          0
+        ],
+        "width": 300,
+        "height": 500
+      },
+      "source": "user",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": [
+        "generic-verge-geometry",
+        "gb-eng-residential-verge-continuity"
+      ],
+      "layer_id": "detail"
+    },
+    {
+      "id": "roof",
+      "class": "roof_covering",
+      "label": "roof",
+      "material_id": "mat_roof_covering",
+      "thickness": 25,
+      "height": 25,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "rect",
+        "origin": [
+          -50,
+          525
+        ],
+        "width": 500,
+        "height": 25
+      },
+      "source": "user",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "detail"
+    },
+    {
+      "id": "underlay",
+      "class": "membrane",
+      "label": "underlay",
+      "material_id": "mat_membrane",
+      "thickness": 2,
+      "height": 2,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "rect",
+        "origin": [
+          -50,
+          520
+        ],
+        "width": 500,
+        "height": 2
+      },
+      "source": "user",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "detail"
+    },
+    {
+      "id": "edge",
+      "class": "verge_trim",
+      "label": "edge",
+      "material_id": "mat_verge_trim",
+      "thickness": 20,
+      "height": 60,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "rect",
+        "origin": [
+          -70,
+          500
+        ],
+        "width": 20,
+        "height": 60
+      },
+      "source": "user",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "detail"
+    }
+  ],
+  "connections": [
+    {
+      "id": "connection-1",
+      "kind": "abuts",
+      "from": "roof",
+      "to": "wall",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "constraints": [
+    {
+      "id": "sum-thickness",
+      "type": "sum",
+      "of": [
+        "wall.thickness",
+        "roof.thickness",
+        "underlay.thickness",
+        "edge.thickness"
+      ],
+      "equals": "assembly_total",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "assembly_total",
+      "kind": "linear",
+      "refs": [
+        "wall",
+        "roof",
+        "underlay",
+        "edge"
+      ],
+      "value": null,
+      "driving": false,
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "annotations": [
+    {
+      "id": "note-supplied",
+      "kind": "note",
+      "text": "All dimensions are synthetic user-supplied test inputs, not design recommendations.",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "layers": [
+    {
+      "id": "detail",
+      "name": "Detail",
+      "line_weight_mm": 0.35
+    }
+  ],
+  "schedules": [],
+  "solver": {
+    "status": "unresolved",
+    "conflicts": []
+  },
+  "checks": null,
+  "stamp": null
+}

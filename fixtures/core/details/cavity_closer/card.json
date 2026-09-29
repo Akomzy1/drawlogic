@@ -1,0 +1,84 @@
+{
+  "schema_version": "0.1.0",
+  "card_id": "card-cavity_closer",
+  "mode": "draft",
+  "status": "confirmed",
+  "confirmed_by": "fixture-user",
+  "confirmed_at": "2026-09-27T00:00:00Z",
+  "discipline": "architecture",
+  "drawing_type": "detail",
+  "detail_type": "cavity_closer",
+  "scale": 10,
+  "units": "mm",
+  "jurisdiction": "GB-ENG",
+  "profile_stack": [
+    {
+      "id": "gb-eng-residential",
+      "name": "GB-ENG Residential",
+      "version": "0.1.0",
+      "layer": "jurisdiction",
+      "tier": 1,
+      "signer": null
+    },
+    {
+      "id": "generic",
+      "name": "Generic",
+      "version": "0.1.0",
+      "layer": "generic",
+      "tier": null,
+      "signer": null
+    }
+  ],
+  "inputs": [
+    {
+      "kind": "text",
+      "text": "Draw the supplied schematic cavity_closer using only the supplied component dimensions."
+    }
+  ],
+  "recognised": [
+    {
+      "key": "outer.thickness",
+      "object_id": "outer",
+      "label": "outer",
+      "value": 102.5,
+      "unit": "mm",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "key": "cavity.thickness",
+      "object_id": "cavity",
+      "label": "cavity",
+      "value": 50,
+      "unit": "mm",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "key": "closer.thickness",
+      "object_id": "closer",
+      "label": "closer",
+      "value": 50,
+      "unit": "mm",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "key": "inner.thickness",
+      "object_id": "inner",
+      "label": "inner",
+      "value": 100,
+      "unit": "mm",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "missing": [],
+  "blocked": [],
+  "assumptions": [],
+  "created_at": "2026-09-27T00:00:00Z"
+}

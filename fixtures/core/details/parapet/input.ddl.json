@@ -1,0 +1,244 @@
+{
+  "ddl_version": "0.1.0",
+  "drawing": {
+    "id": "10000000-0000-4000-8000-000000000007",
+    "title": "parapet",
+    "discipline": "architecture",
+    "type": "detail",
+    "detail_type": "parapet",
+    "mode": "draft",
+    "scale": 10,
+    "units": "mm",
+    "jurisdiction": "GB-ENG",
+    "rev": "A",
+    "hash": "sha256:19dcf3661106db4f185cd1166e89634945cdb7dd9870faea145e5f88c7ed58e0",
+    "parent_hash": null,
+    "profile_stack": [
+      {
+        "id": "gb-eng-residential",
+        "name": "GB-ENG Residential",
+        "version": "0.1.0",
+        "layer": "jurisdiction",
+        "tier": 1,
+        "signer": null
+      },
+      {
+        "id": "generic",
+        "name": "Generic",
+        "version": "0.1.0",
+        "layer": "generic",
+        "tier": null,
+        "signer": null
+      }
+    ],
+    "card_id": "card-parapet",
+    "created_at": "2026-09-27T00:00:00Z"
+  },
+  "materials": [
+    {
+      "id": "mat_masonry",
+      "name": "masonry",
+      "category": "test_material",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "mat_insulation",
+      "name": "insulation",
+      "category": "test_material",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "mat_upstand",
+      "name": "upstand",
+      "category": "test_material",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "id": "mat_coping",
+      "name": "coping",
+      "category": "test_material",
+      "basis": "description_only",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "objects": [
+    {
+      "id": "wall",
+      "class": "masonry",
+      "label": "wall",
+      "material_id": "mat_masonry",
+      "thickness": 102.5,
+      "height": 600,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "rect",
+        "origin": [
+          0,
+          0
+        ],
+        "width": 300,
+        "height": 600
+      },
+      "source": "user",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": [
+        "generic-parapet-geometry",
+        "gb-eng-residential-parapet-continuity"
+      ],
+      "layer_id": "detail"
+    },
+    {
+      "id": "insulation",
+      "class": "insulation",
+      "label": "insulation",
+      "material_id": "mat_insulation",
+      "thickness": 120,
+      "height": 450,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "rect",
+        "origin": [
+          300,
+          0
+        ],
+        "width": 120,
+        "height": 450
+      },
+      "source": "user",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "detail"
+    },
+    {
+      "id": "upstand",
+      "class": "upstand",
+      "label": "upstand",
+      "material_id": "mat_upstand",
+      "thickness": 2,
+      "height": 150,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "rect",
+        "origin": [
+          420,
+          300
+        ],
+        "width": 2,
+        "height": 150
+      },
+      "source": "user",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "detail"
+    },
+    {
+      "id": "coping",
+      "class": "coping",
+      "label": "coping",
+      "material_id": "mat_coping",
+      "thickness": 25,
+      "height": 25,
+      "level": null,
+      "base_offset": null,
+      "geometry": {
+        "kind": "rect",
+        "origin": [
+          -25,
+          600
+        ],
+        "width": 475,
+        "height": 25
+      },
+      "source": "user",
+      "confidence": 1,
+      "verify": false,
+      "rule_refs": [],
+      "layer_id": "detail"
+    }
+  ],
+  "connections": [
+    {
+      "id": "connection-1",
+      "kind": "abuts",
+      "from": "insulation",
+      "to": "wall",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "constraints": [
+    {
+      "id": "sum-thickness",
+      "type": "sum",
+      "of": [
+        "wall.thickness",
+        "insulation.thickness",
+        "upstand.thickness",
+        "coping.thickness"
+      ],
+      "equals": "assembly_total",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "assembly_total",
+      "kind": "linear",
+      "refs": [
+        "wall",
+        "insulation",
+        "upstand",
+        "coping"
+      ],
+      "value": null,
+      "driving": false,
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "annotations": [
+    {
+      "id": "note-supplied",
+      "kind": "note",
+      "text": "All dimensions are synthetic user-supplied test inputs, not design recommendations.",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "layers": [
+    {
+      "id": "detail",
+      "name": "Detail",
+      "line_weight_mm": 0.35
+    }
+  ],
+  "schedules": [],
+  "solver": {
+    "status": "unresolved",
+    "conflicts": []
+  },
+  "checks": null,
+  "stamp": null
+}

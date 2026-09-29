@@ -1,0 +1,49 @@
+{
+  "version": "0.1.0",
+  "source": "PRD v0.2.14 FR-03–09, FR-13, FR-23–24, FR-30–34; BUILD_PROMPTS Prompt 3",
+  "profiles": [
+    {
+      "id": "generic",
+      "type": "generic",
+      "stub": false
+    },
+    {
+      "id": "gb-eng-residential",
+      "type": "jurisdiction",
+      "jurisdiction": "GB-ENG",
+      "stub": false
+    },
+    {
+      "id": "us-ibc-base",
+      "type": "jurisdiction",
+      "jurisdiction": "US-IBC",
+      "stub": true
+    },
+    {
+      "id": "ng-la",
+      "type": "jurisdiction",
+      "jurisdiction": "NG-LA",
+      "stub": true
+    }
+  ],
+  "regions": [
+    "west_africa_coastal",
+    "gulf",
+    "northern_europe"
+  ],
+  "required_gb_documents": [
+    "Approved Document L",
+    "Approved Document F",
+    "Approved Document C",
+    "Approved Document B",
+    "Approved Document M"
+  ],
+  "generic_check_categories": [
+    "geometry",
+    "dimensions",
+    "symbols",
+    "annotation",
+    "thermal",
+    "drainage"
+  ]
+}

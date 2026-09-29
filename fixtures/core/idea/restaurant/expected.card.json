@@ -1,0 +1,95 @@
+{
+  "schema_version": "0.1.0",
+  "card_id": "card-restaurant",
+  "mode": "idea",
+  "status": "draft",
+  "discipline": "architecture",
+  "drawing_type": "plan",
+  "scale": 50,
+  "units": "mm",
+  "jurisdiction": "GB-ENG",
+  "jurisdiction_inferred": false,
+  "profile_stack": [
+    {
+      "id": "gb-eng-residential",
+      "name": "GB-ENG Residential",
+      "version": "0.1.0",
+      "layer": "jurisdiction",
+      "tier": 1,
+      "signer": null
+    },
+    {
+      "id": "generic",
+      "name": "Generic",
+      "version": "0.1.0",
+      "layer": "generic",
+      "tier": null,
+      "signer": null
+    }
+  ],
+  "inputs": [
+    {
+      "kind": "text",
+      "text": "Plan an 80-cover restaurant with an open kitchen in Banbury."
+    }
+  ],
+  "recognised": [
+    {
+      "key": "covers",
+      "label": "Seats",
+      "value": 80,
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    },
+    {
+      "key": "kitchen",
+      "label": "Kitchen",
+      "value": "open",
+      "source": "user",
+      "confidence": 1,
+      "verify": false
+    }
+  ],
+  "missing": [],
+  "blocked": [],
+  "assumptions": [
+    {
+      "id": "as-ceiling",
+      "key": "ceiling_height",
+      "text": "I assumed a 2.4 m ceiling",
+      "technical_term": "Floor-to-ceiling height",
+      "value": 2.4,
+      "unit": "m",
+      "source": "ai_inferred",
+      "confidence": 0.6,
+      "verify": true,
+      "editable": true,
+      "source_detail": {
+        "model": {
+          "provider": "anthropic",
+          "model_id": "claude-sonnet-5",
+          "task": "idea"
+        }
+      }
+    },
+    {
+      "id": "as-walls",
+      "key": "wall_build_up",
+      "text": "I assumed brick walls with a cavity and a block inner wall — the usual construction in England",
+      "technical_term": "Brick / cavity / block",
+      "value": "gb_cavity_brick_block",
+      "source": "profile",
+      "confidence": 1,
+      "verify": false,
+      "editable": true,
+      "source_detail": {
+        "profile": {
+          "id": "gb-eng-residential",
+          "version": "0.1.0"
+        }
+      }
+    }
+  ],
+  "created_at": "2026-09-27T00:00:00Z"
+}
