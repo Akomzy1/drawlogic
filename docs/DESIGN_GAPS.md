@@ -43,6 +43,50 @@ Precedence: one repo-wide rule, defined in `skills/drawlogic-prototype-fidelity/
 | 33 | App prototype — decline-and-offer-qualities message | FR-175: "I can't recreate a specific protected design, but here are the qualities that make it work", followed by the precedent's pinnable qualities (Idea state "Asks to copy a named building") | — | Approved — exported 25 Sept |
 | 34 | App prototype — reference upload rights step (`idea-home.standalone.html`, `promote.standalone.html`) | FR-177 (P0, Stage 1): "Where is this from?" (my own work / supplied by my client / published elsewhere, with optional link / other) and "I have the right to use this as a reference for this project" before Add/Upload is enabled; the reference chip shows its stated origin | — | Approved — re-exported 25 Sept |
 
+## Marketing site alignment — 28 September 2026
+
+The approved export has gaps exposed by the independent site suite:
+
+- The hero's generated images and the image in the drawing frame have no nearby
+  Illustrative caption. The prototype's copy baseline therefore omits the label,
+  while the caption gate requires it. The site adds the required caption using
+  the existing monospace caption tokens. Examiner PR #20 now accepts those
+  additions; no test was changed by the builder. Caption placement still awaits
+  a design re-export and regenerated visual baselines.
+- Muted text (`#868282`) on white/tinted surfaces and white text on accent blue
+  fail WCAG AA contrast (28 Home nodes at 1280 px). The site uses the existing
+  neutral-dark text token for muted copy and neutral-darkest on accent buttons.
+  Layout and palette values remain from the prototype. These accessibility
+  corrections need to be reflected in the approved design; section comparisons
+    remain subject to the examiner's existing 2% budget.
+
+- The same caption omission affects image frames on Idea mode, For professionals,
+  Render studio and Students, plus the preview clip. Required captions remain
+  visible DOM text; examiner PR #20 resolves the copy-baseline conflict (#15).
+  The caption bands and contrast corrections still await design incorporation;
+  the visual budget remains 2%.
+- Small white text on the green Signed badge, the blue Students link and the
+  Student watermark need stronger contrast. They use existing dark text tokens.
+  The Teach me first preview remains dimmed, with opacity increased from 0.5 to
+  0.9 so its labels stay legible. These adjustments await design incorporation.
+- The Render studio demonstration is an Idea-mode preview clip. FR-130 requires
+  its Concept watermark: three “CONCEPT — NOT FOR CONSTRUCTION” repeats and the
+  “CONCEPT · PDF/PNG ONLY” strip, as exported. The watermark is restored; the
+  earlier note describing this as a Draft clip was incorrect. The prototype's
+  preview-and-drift sentence stays intact, with the Illustrative caption on its
+  own line.
+- Horizontal plan prices, interpretation and standards tables, code examples,
+  and the pricing comparison retain their prototype layout and gain keyboard
+  focus and accessible names. Focus uses the existing `--focus-ring` style.
+- Practice cards show five seats, with $149 additional seats in USD and ₦60,000
+  in NGN. The PRD has no GBP additional-seat price, so GBP says additional seats
+  are billed separately. The 100-credit NGN pack is ₦8,000, per PRD §10.
+
+The asset manifest records byte-for-byte imports of the approved export's
+embedded images and video, with resource IDs and SHA256 hashes. Superseded Home
+assets are excluded under Decision 16. Open pricing decisions remain open; the
+draft site follows the examiner's prototype-value policy for those entries.
+
 ## How to add an entry
 Date · screen/component · what the prototype lacks or contradicts · an approach consistent with `tokens.css` and the 17 system components · status (Awaiting design / Awaiting redesign / Not yet exported / Deferred / Approved).
 

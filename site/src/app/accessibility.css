@@ -1,0 +1,30 @@
+/* Accessibility and caption corrections, recorded in DESIGN_GAPS.md. */
+:root { --text-muted: var(--color-neutral-dark); }
+[style*="background:var(--accent)"],
+[style*="background: var(--accent)"],
+[style*="background:var(--prov-user-fill)"],
+[style*="background: var(--prov-user-fill)"] {
+  color: var(--color-neutral-darkest) !important;
+}
+a[style*="color:var(--accent)"], a[style*="color: var(--accent)"] {
+  color: var(--color-neutral-dark) !important;
+  text-decoration: underline;
+}
+[style*="color:var(--concept-watermark-color)"],
+[style*="color: var(--concept-watermark-color)"] {
+  color: var(--color-neutral-dark) !important;
+}
+.dl-illustration-caption {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: var(--space-1) var(--space-2);
+  font: var(--text-tiny)/var(--leading-body) var(--font-mono);
+  color: var(--color-neutral-dark);
+  background: var(--color-white);
+}
+.dl-hero-caption {
+  inset-inline: auto var(--space-4);
+  bottom: var(--space-2);
+}

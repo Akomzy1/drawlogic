@@ -1,0 +1,14 @@
+[
+  { "name": "Home", "path": "/", "component": "Home" },
+  { "name": "Idea mode", "path": "/idea-mode", "component": "IdeaMode" },
+  { "name": "For professionals", "path": "/for-professionals", "component": "ForProfessionals" },
+  { "name": "Render studio", "path": "/render-studio", "component": "RenderStudio" },
+  { "name": "Profile marketplace", "path": "/profile-marketplace", "component": "Marketplace" },
+  { "name": "Find a signer", "path": "/find-a-signer", "component": "FindASigner" },
+  { "name": "Developers", "path": "/developers", "component": "Developers" },
+  { "name": "Students & educators", "path": "/students-and-educators", "component": "Students" },
+  { "name": "Regulators & manufacturers", "path": "/regulators-and-manufacturers", "component": "Regulators" },
+  { "name": "Lagos", "path": "/lagos", "component": "Lagos" },
+  { "name": "Pricing", "path": "/pricing", "component": "Pricing" },
+  { "name": "About", "path": "/about", "component": "About" }
+]

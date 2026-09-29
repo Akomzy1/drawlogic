@@ -38,6 +38,11 @@ for (const p of PAGES) {
 test("Pricing: PRD §10 values are shown", async ({ page }, info) => {
   test.skip(info.project.name !== "w1280", "Checked once, at 1280.");
   await openSite(page, pricing);
+  // The page opens in GBP, as the prototype does; PRD §10 states USD plan prices, so read them with USD chosen.
+  const usd = page.getByRole("button", { name: /\bUSD\b/ }).first();
+  expect(await usd.count(), "Pricing: no USD currency button, so PRD §10 USD prices cannot be shown").toBeGreaterThan(0);
+  await usd.click();
+  await page.waitForTimeout(300);
   const text = await visibleText(page);
   for (const r of gov.required_on_pricing) {
     const present = r.text ? text.includes(r.text) : new RegExp(r.pattern, "i").test(text);
