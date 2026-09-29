@@ -33,7 +33,12 @@
         "type": "object",
         "additionalProperties": false,
         "required": ["op", "collection", "id", "source", "confidence"],
-        "allOf": [{ "$ref": "common.schema.json#/$defs/provenance" }],
+        "allOf": [
+          { "$ref": "common.schema.json#/$defs/provenance" },
+          { "description": "set carries what to change and what it was, so it can be applied and undone (FR-21).", "if": { "properties": { "op": { "const": "set" } } }, "then": { "required": ["field", "value", "before"] } },
+          { "description": "add carries the whole element.", "if": { "properties": { "op": { "const": "add" } } }, "then": { "required": ["value"] } },
+          { "description": "remove carries the removed element, so it can be undone (FR-21).", "if": { "properties": { "op": { "const": "remove" } } }, "then": { "required": ["before"] } }
+        ],
         "properties": {
           "op": { "type": "string", "enum": ["add", "remove", "set"] },
           "collection": { "type": "string", "enum": ["materials", "objects", "connections", "constraints", "dimensions", "annotations", "layers", "schedules"] },

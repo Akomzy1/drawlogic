@@ -2350,6 +2350,12 @@ export interface DdlDiff {
    */
   ops: [
     Provenance & {
+      [k: string]: unknown | undefined;
+    } & {
+      [k: string]: unknown | undefined;
+    } & {
+      [k: string]: unknown | undefined;
+    } & {
       op: "add" | "remove" | "set";
       collection: "materials" | "objects" | "connections" | "constraints" | "dimensions" | "annotations" | "layers" | "schedules";
       /**
@@ -2413,6 +2419,12 @@ export interface DdlDiff {
       source_detail?: unknown;
     },
     ...(Provenance & {
+      [k: string]: unknown | undefined;
+    } & {
+      [k: string]: unknown | undefined;
+    } & {
+      [k: string]: unknown | undefined;
+    } & {
       op: "add" | "remove" | "set";
       collection: "materials" | "objects" | "connections" | "constraints" | "dimensions" | "annotations" | "layers" | "schedules";
       /**
